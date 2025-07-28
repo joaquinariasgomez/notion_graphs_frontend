@@ -1,0 +1,1 @@
+- Create a not found page. When any user goes there it will display a not found
