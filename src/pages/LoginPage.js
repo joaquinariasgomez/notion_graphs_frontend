@@ -1,11 +1,16 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import '../css/LoginPage.css';
 import { useNavigate } from 'react-router-dom';
+import { useCookie } from '../useCookie';
+import { loginToNotionWithCode } from '../RequestUtils';
 
 function LoginPage() {
 
   const authorization_url = process.env.REACT_APP_NOTION_AUTH_URL;
   const navigate = useNavigate();
+
+  const [userJWTCookie, setUserJWTCookie, deleteUserJWTCookie] = useCookie("userJWT");
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   useEffect(() => {
     const params = new URL(window.document.location).searchParams;
@@ -17,6 +22,18 @@ function LoginPage() {
 
   const getLoginDataFromNotion = async (notionCode) => {
     console.log("Getting logging data from Notion with this code ", notionCode);
+    try {
+      setIsLoggingIn(true);
+      const apiResponse = await loginToNotionWithCode(notionCode);
+      if (apiResponse) {
+        console.log(apiResponse);
+        setUserJWTCookie("Bearer " + apiResponse.session_jwt)
+      }
+    } catch (error) {
+      // showAlert() show alert box
+    } finally {
+      setIsLoggingIn(false);
+    }
   }
 
   return (
