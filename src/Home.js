@@ -1,8 +1,11 @@
 import './css/Home.css';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import DashboardPage from './pages/DashboardPage';
 import { useCookie } from './useCookie';
 import LoginPage from './pages/LoginPage';
+import { useGlobalStateValue } from './context/GlobalStateProvider';
+import { actionTypes } from './context/globalReducer';
+import { useSession } from './useSession';
 
 /*
  * Home will be the page that holds the logic to decide if it renders "LoginPage", which is the frontpage
@@ -10,11 +13,26 @@ import LoginPage from './pages/LoginPage';
 */
 function Home() {
 
-  const [userJWTCookie, setUserJWTCookie, deleteUserJWTCookie] = useCookie("userJWT");
+  const [userJWTCookieValue, setUserJWTCookieValue, deleteUserJWTCookieValue] = useCookie("userJWT");
+  const [userSessionDetailsValue, setUserSessionDetailsValue, deleteUserSessionDetailsValue] = useSession("userSessionDetails");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Context
-  //const [{userJWTCookie}] maybe I dont need to store the cookie in the context
+  const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
+
+  useEffect(() => {
+    dispatch({
+      type: actionTypes.SET_USER_JWT_COOKIE,
+      value: userJWTCookieValue
+    })
+  }, [userJWTCookieValue]);
+
+  useEffect(() => {
+    dispatch({
+      type: actionTypes.SET_USER_SESSION_DETAILS,
+      value: userSessionDetailsValue
+    })
+  }, [userSessionDetailsValue]);
 
   useEffect(() => {
     if (userJWTCookie !== "") {

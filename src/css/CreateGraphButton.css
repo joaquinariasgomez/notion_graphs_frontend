@@ -1,0 +1,55 @@
+:root {
+  --matteblack-color: #28282B;
+}
+
+.creategraph__button {
+  width: 200px;
+  height: 50px;
+  border-radius: 15px;
+  border-style: solid;
+  border-color: var(--matteblack-color);
+  border-width: 4px;
+  background-color: white;
+  animation: bubble-out 0.3s ease forwards;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.creategraph__button:hover {
+  cursor: pointer;
+  animation: bubble-in 0.3s ease forwards;
+}
+
+.creategraph__button__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.creategraph__button__container>h2 {
+  margin-left: 5px;
+  font-size: 18px;
+  color: var(--matteblack-color);
+}
+
+/* Animations */
+@keyframes bubble-in {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes bubble-out {
+  100% {
+    transform: scale(1);
+  }
+
+  0% {
+    transform: scale(1.1);
+  }
+}
