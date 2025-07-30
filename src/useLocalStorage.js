@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useGlobalStateValue } from "./context/GlobalStateProvider";
 import { actionTypes } from "./context/globalReducer";
 
-export const useSession = (sessionKey) => {
+export const useLocalStorage = (sessionKey) => {
   const [sessionValue, setSessionValue] = useState({});
   const [{ userSessionDetails }, dispatch] = useGlobalStateValue();
 
@@ -11,7 +11,7 @@ export const useSession = (sessionKey) => {
     setSessionValue(currentValue ? currentValue : {});
   }, [sessionKey]);
 
-  const setSessionStorage = (value) => {
+  const setLocalStorage = (value) => {
     localStorage.setItem(sessionKey, JSON.stringify(value));
     dispatch({
       type: actionTypes.SET_USER_SESSION_DETAILS,
@@ -19,7 +19,7 @@ export const useSession = (sessionKey) => {
     });
   }
 
-  const deleteSessionStorage = () => {
+  const deleteLocalStorage = () => {
     localStorage.removeItem(sessionKey);
     dispatch({
       type: actionTypes.SET_USER_SESSION_DETAILS,
@@ -27,5 +27,5 @@ export const useSession = (sessionKey) => {
     });
   }
 
-  return [sessionValue, setSessionStorage, deleteSessionStorage];
+  return [sessionValue, setLocalStorage, deleteLocalStorage];
 }

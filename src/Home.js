@@ -5,7 +5,7 @@ import { useCookie } from './useCookie';
 import LoginPage from './pages/LoginPage';
 import { useGlobalStateValue } from './context/GlobalStateProvider';
 import { actionTypes } from './context/globalReducer';
-import { useSession } from './useSession';
+import { useLocalStorage } from './useLocalStorage';
 
 /*
  * Home will be the page that holds the logic to decide if it renders "LoginPage", which is the frontpage
@@ -14,7 +14,7 @@ import { useSession } from './useSession';
 function Home() {
 
   const [userJWTCookieValue, setUserJWTCookieValue, deleteUserJWTCookieValue] = useCookie("userJWT");
-  const [userSessionDetailsValue, setUserSessionDetailsValue, deleteUserSessionDetailsValue] = useSession("userSessionDetails");
+  const [userSessionDetailsValue, setUserSessionDetailsValue, deleteUserSessionDetailsValue] = useLocalStorage("userSessionDetails");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Context

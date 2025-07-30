@@ -3,7 +3,7 @@ import '../css/LoginPage.css';
 import { useNavigate } from 'react-router-dom';
 import { useCookie } from '../useCookie';
 import { loginToNotionWithCode } from '../RequestUtils';
-import { useSession } from '../useSession';
+import { useLocalStorage } from '../useLocalStorage';
 
 function LoginPage() {
 
@@ -11,7 +11,7 @@ function LoginPage() {
   const navigate = useNavigate();
 
   const [userJWTCookie, setUserJWTCookie, deleteUserJWTCookie] = useCookie("userJWT");
-  const [userSessionDetailsValue, setUserSessionDetailsValue, deleteUserSessionDetailsValue] = useSession("userSessionDetails");
+  const [userSessionDetailsValue, setUserSessionDetailsValue, deleteUserSessionDetailsValue] = useLocalStorage("userSessionDetails");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   useEffect(() => {
@@ -29,8 +29,8 @@ function LoginPage() {
       const apiResponse = await loginToNotionWithCode(notionCode);
       if (apiResponse) {
         console.log(apiResponse);
-        setUserJWTCookie(apiResponse.session_jwt);
-        setUserSessionDetailsValue(apiResponse.owner);
+        setUserJWTCookie(apiResponse.session_jwt, 1);
+        setUserSessionDetailsValue(apiResponse.owner.user);
       }
     } catch (error) {
       // TODO: showAlert() show alert box
