@@ -1,0 +1,24 @@
+.usercircle__button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border-color: var(--matteblack-color);
+  border-style: solid;
+  border-width: 5px;
+  background-color: white;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bubble-out 0.3s ease forwards;
+}
+
+.usercircle__button:hover {
+  cursor: pointer;
+  animation: bubble-in 0.3s ease forwards;
+}
+
+.usercircle__button>img {
+  width: auto;
+  height: 120%;
+}

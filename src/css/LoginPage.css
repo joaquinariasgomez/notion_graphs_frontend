@@ -14,10 +14,11 @@
   }
 }
 
-:root {
-  --login-card-height: 100px;
-  --login-card-width: 350px;
-  --footer-height: 200px;
+.logging_in {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
 }
 
 .landingpage__backgroundwrapper {

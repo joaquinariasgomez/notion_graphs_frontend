@@ -20,3 +20,14 @@ export async function loginToNotionWithCode(notionCode) {
     });
   return result;
 }
+
+export async function logoutFromNotion(jwtToken) {
+  const auth_url = Config.BackendBaseURL + Config.BackendLogoutURL;
+  await fetch(auth_url, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${jwtToken}`
+    }
+  });
+}

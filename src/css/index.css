@@ -1,3 +1,10 @@
+:root {
+  --login-card-height: 100px;
+  --login-card-width: 350px;
+  --footer-height: 200px;
+  --matteblack-color: #28282B;
+}
+
 body {
   margin: 0;
   font-family: "inter", sans-serif;
