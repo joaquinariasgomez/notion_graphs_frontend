@@ -1,4 +1,5 @@
 import { useGlobalStateValue } from "../../context/GlobalStateProvider";
+import CreateGraphBox from "./CreateGraphBox";
 import ProfileBox from "./ProfileBox";
 
 export default function BoxManager() {
@@ -15,6 +16,10 @@ export default function BoxManager() {
     if (showUserProfileBox) {
       return (
         <ProfileBox />
+      )
+    } else if (showCreateGraphBox) {
+      return (
+        <CreateGraphBox />
       )
     }
   }

@@ -1,0 +1,141 @@
+:root {
+  --darkbutton-color: rgb(99, 99, 99);
+  --darkbutton-hover-color: rgb(236, 236, 236);
+}
+
+.creategraphbox__container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 700px;
+  height: 600px;
+  /* max-width: calc(95vw - 20px);
+  max-height: 95vh; */
+  /* overflow-y: auto; */
+  border-radius: 10px;
+  background-color: white;
+  animation: zoom_100 0.2s ease forwards;
+  z-index: 998;
+}
+
+.creategraphbox__container>h1 {
+  position: absolute;
+  top: 20px;
+  left: 25px;
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  color: var(--matteblack-color);
+}
+
+.creategraphbox__cancelbutton {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 35px;
+  height: 35px;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 0;
+  color: var(--darkbutton-color);
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  transition: background-color 0.25s ease-out;
+}
+
+.creategraphbox__cancelbutton:hover {
+  cursor: pointer;
+  background-color: var(--darkbutton-hover-color);
+}
+
+.creategraphbox__stepcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin-top: 68px;
+}
+
+.creategraphbox__stepcontent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.creategraphbox__arrows {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+  padding: 15px 20px;
+}
+
+.creategraphbox__button {
+  height: 44px;
+  border-style: solid;
+  border-radius: 12px;
+  border-width: 3px;
+  font-weight: 600;
+  font-size: 15px;
+  color: white;
+  padding: 0px 17px;
+}
+
+.creategraphbox__button:hover {
+  cursor: pointer;
+}
+
+.creategraphbox__button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  color: var(--matteblack-color);
+  background-color: white;
+}
+
+.creategraphbox__button.next {
+  margin: 0;
+  border-color: var(--matteblack-color);
+  background-color: var(--matteblack-color);
+}
+
+.creategraphbox__button.next:disabled {
+  background-color: white;
+}
+
+.creategraphbox__button.next:hover {
+  animation: changecolorblack 0.25s ease forwards;
+}
+
+.creategraphbox__button.back {
+  margin-right: 15px;
+  color: var(--matteblack-color);
+  border-color: var(--matteblack-color);
+  background-color: white;
+}
+
+.creategraphbox__button.back:hover {
+  animation: changecolorblack_opposite 0.25s ease forwards;
+}
+
+@keyframes zoom_100 {
+  0% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0.5, 0.5);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1, 1);
+  }
+}

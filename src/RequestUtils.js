@@ -31,3 +31,54 @@ export async function logoutFromNotion(jwtToken) {
     }
   });
 }
+
+export async function getExpensesCategories(jwtToken) {
+  const graphs_url = Config.BackendBaseURL + Config.BackendGraphsURL;
+  return await fetch(graphs_url + "/expenses-categories", {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${jwtToken}`
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json()
+    });
+}
+
+export async function getIncomesBankaccounts(jwtToken) {
+  const graphs_url = Config.BackendBaseURL + Config.BackendGraphsURL;
+  return await fetch(graphs_url + "/incomes-bankaccounts", {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${jwtToken}`
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json()
+    });
+}
+
+export async function getIncomesSources(jwtToken) {
+  const graphs_url = Config.BackendBaseURL + Config.BackendGraphsURL;
+  return await fetch(graphs_url + "/incomes-sources", {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${jwtToken}`
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json()
+    });
+}

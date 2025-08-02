@@ -29,7 +29,6 @@ function LoginPage() {
       setIsLoggingIn(true);
       const apiResponse = await loginToNotionWithCode(notionCode);
       if (apiResponse) {
-        console.log("Actually finishing the request");
         setUserJWTCookie(apiResponse.session_jwt, 1);
         setUserSessionDetailsValue(apiResponse.owner.user);
       }

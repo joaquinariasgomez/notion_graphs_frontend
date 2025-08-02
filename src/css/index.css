@@ -5,6 +5,13 @@
   --matteblack-color: #28282B;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  /* By doing this, I can tell the header to take width and padding into consideration */
+}
+
 body {
   margin: 0;
   font-family: "inter", sans-serif;

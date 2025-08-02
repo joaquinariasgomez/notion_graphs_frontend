@@ -14,8 +14,6 @@
   width: 100%;
   height: 100px;
   padding: 0px 50px;
-  box-sizing: border-box;
-  /* By doing this, I can tell the header to take width and padding into consideration */
 }
 
 .header__item+.header__item {

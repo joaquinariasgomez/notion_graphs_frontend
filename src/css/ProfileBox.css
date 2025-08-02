@@ -1,4 +1,8 @@
-.profilebox__backdrop {
+:root {
+  --cancelred-color: #f14668;
+}
+
+.box__backdrop {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -52,6 +56,39 @@
   justify-content: space-around;
 }
 
+.profilebox__button {
+  height: 44px;
+  width: 90px;
+  border-style: solid;
+  border-radius: 12px;
+  border-width: 3px;
+  font-weight: 600;
+  font-size: 15px;
+  color: white;
+}
+
+.profilebox__button:hover {
+  cursor: pointer;
+}
+
+.profilebox__button.cancel {
+  border-color: var(--cancelred-color);
+  background-color: var(--cancelred-color);
+}
+
+.profilebox__button.cancel:hover {
+  animation: changecolorred 0.25s ease forwards;
+}
+
+.profilebox__button.logout {
+  border-color: var(--matteblack-color);
+  background-color: var(--matteblack-color);
+}
+
+.profilebox__button.logout:hover {
+  animation: changecolorblack 0.25s ease forwards;
+}
+
 @keyframes opacity-bng {
   0% {
     opacity: 0;
@@ -72,5 +109,41 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes changecolorred {
+  0% {
+    color: white;
+    background-color: var(--cancelred-color);
+  }
+
+  100% {
+    color: var(--cancelred-color);
+    background-color: white;
+  }
+}
+
+@keyframes changecolorblack {
+  0% {
+    color: white;
+    background-color: var(--matteblack-color);
+  }
+
+  100% {
+    color: var(--matteblack-color);
+    background-color: white;
+  }
+}
+
+@keyframes changecolorblack_opposite {
+  0% {
+    color: var(--matteblack-color);
+    background-color: white;
+  }
+
+  100% {
+    color: white;
+    background-color: var(--matteblack-color);
   }
 }
