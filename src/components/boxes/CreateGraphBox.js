@@ -10,25 +10,46 @@ import CreateGraphStep2 from '../creategraphstep/CreateGraphStep2';
 export default function CreateGraphBox() {
 
   // Context
-  const [{ userSessionDetails, userJWTCookie }, dispatch] = useGlobalStateValue();
+  const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
 
   // States to manage form data
   const [step, setStep] = useState(1);
   // TODO: do a refactor of this once it is working in prod
-  const [createGraphData, setCreateGraphData] = useState({
-    graphType: 'EXPENSES',
-    graphTag: 'DAILY',
-    filterCategories: {  // 'SUM',    // 'SUM', 'BY CATEGORY', 'BY BANKACCOUNT', 'BY INCOMESOURCE', 'BURNDOWN'
-      type: 'SUM',    // 'SUM' for all expenses/incomes/savings
-      // 'BY CATEGORY' for groupings by category/bankacount/incomesource
-      // 'SPECIFIC CATEGORY' for specific category/bankaccount/incomesource
-      // 'BURNDOWN' for a new expenses graph type which shows it as a burndown
-      category: 'Select category' // Specify the category for 'SPECIFIC CATEGORY' type
+  const [createGraphConfiguration, setCreateGraphConfiguration] = useState({
+    type: 'EXPENSES',     // 'EXPENSES', 'INCOMES', 'SAVINGS'
+    subtype: 'STANDARD',  // 'STANDARD', 'BURNDOWN', 'BUILDUP'
+    expensesStandardConfiguration: {
+      type: 'ALL',        // 'ALL', 'GROUPED BY CATEGORY', 'FILTER BY CATEGORY'
+      filterCategory: 'Select category'
     },
+    incomesStandardConfiguration: {
+      type: 'ALL',        // 'ALL', 'GROUPED BY BANK ACCOUNT', 'GROUPED BY INCOME SOURCE', 'FILTER BY BANK ACCOUNT', 'FILTER BY INCOME SOURCE'
+      filterBankAccount: 'Select bank account',
+      filterIncomeSource: 'Select income source'
+    },
+    expensesBurndownConfiguration: {
+
+    },
+    incomesBuildupConfiguration: {
+
+    },
+    timeConfiguration: {
+      type: 'RELATIVE',           // 'RELATIVE', 'CUSTOM'
+      relativeDate: 'LAST WEEK',  // 'LAST WEEK', 'LAST MONTH', 'LAST YEAR'
+      customStartDate: '',
+      customEndDate: ''
+    }
+    // filterCategories: {  // 'SUM',    // 'SUM', 'BY CATEGORY', 'BY BANKACCOUNT', 'BY INCOMESOURCE', 'BURNDOWN'
+    //   type: 'SUM',    // 'SUM' for all expenses/incomes/savings
+    //   // 'BY CATEGORY' for groupings by category/bankacount/incomesource
+    //   // 'SPECIFIC CATEGORY' for specific category/bankaccount/incomesource
+    //   // 'BURNDOWN' for a new expenses graph type which shows it as a burndown
+    //   category: 'Select category' // Specify the category for 'SPECIFIC CATEGORY' type
+    // },
     groupBy: 'DAY',
-    time: 'LAST WEEK',
-    customStartDate: '',
-    customEndDate: '',
+    // time: 'LAST WEEK',
+    // customStartDate: '',
+    // customEndDate: '',
     plot: 'Select plot', // This will be a customization for certain graphs
     burndownReference: 'TOTAL', // Will be either:
     // 'TOTAL': calculates the reference using the average of every month registered in the system (using some min date).
@@ -39,6 +60,10 @@ export default function CreateGraphBox() {
     burndownTime: 'LAST MONTH', // 'LAST MONTH' or 'CUSTOM MONTH'
     burndownCustomMonth: ''
   });
+
+  // useEffect(() => {
+  //   console.log(createGraphConfiguration.type + " " + createGraphConfiguration.subtype);
+  // }, [createGraphConfiguration]);
 
   const [expensesCategories, setExpensesCategories] = useState([]);
   const [incomesBankAccounts, setIncomesBankAccounts] = useState([]);
@@ -120,7 +145,7 @@ export default function CreateGraphBox() {
   }
 
   const handleUpdateGraphConfiguration = (data) => {
-    setCreateGraphData({ ...createGraphData, ...data });
+    setCreateGraphConfiguration({ ...createGraphConfiguration, ...data });
   }
 
   return (
@@ -130,8 +155,8 @@ export default function CreateGraphBox() {
           <CloseRoundedIcon fontSize='medium' />
         </button>
         <h1>New Graph</h1>
-        {step == 1 && <CreateGraphStep1 graphConfiguration={createGraphData} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoNext={handleNextStep} gotoEnd={handleOnEndStep} />}
-        {step == 2 && <CreateGraphStep2 graphConfiguration={createGraphData} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoNext={handleNextStep} expensesCategoriesLoading={expensesCategoriesLoading} incomesBankAccountsLoading={incomesBankAccountsLoading} incomesSourcesLoading={incomesSourcesLoading} />}
+        {step == 1 && <CreateGraphStep1 graphConfiguration={createGraphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoNext={handleNextStep} gotoEnd={handleOnEndStep} />}
+        {step == 2 && <CreateGraphStep2 graphConfiguration={createGraphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoNext={handleNextStep} expensesCategoriesLoading={expensesCategoriesLoading} incomesBankAccountsLoading={incomesBankAccountsLoading} incomesSourcesLoading={incomesSourcesLoading} />}
       </div>
     </div >
   );

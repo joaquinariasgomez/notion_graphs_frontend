@@ -1,6 +1,7 @@
 :root {
   --darkbutton-color: rgb(99, 99, 99);
   --darkbutton-hover-color: rgb(236, 236, 236);
+  --textp-color: rgb(105, 105, 105);
 }
 
 .creategraphbox__container {
@@ -12,10 +13,8 @@
   flex-direction: column;
   align-items: center;
   width: 700px;
-  height: 600px;
-  /* max-width: calc(95vw - 20px);
-  max-height: 95vh; */
-  /* overflow-y: auto; */
+  max-width: 100vw;
+  /* height: 600px; */
   border-radius: 10px;
   background-color: white;
   animation: zoom_100 0.2s ease forwards;
@@ -81,6 +80,99 @@
   padding: 15px 20px;
 }
 
+.creategraphbox__stepgraycontainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: first;
+  background-color: rgb(240, 240, 240);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.creategraphbox__stepgraycontainer+.creategraphbox__stepgraycontainer {
+  margin-top: 20px;
+}
+
+.creategraphbox__stepgraycontainer>h2 {
+  font-size: 22px;
+  margin: 0;
+  color: var(--matteblack-color);
+}
+
+.creategraphbox__stepgraycontainer>p {
+  margin: 20px 0px 0px 0px;
+  color: var(--textp-color);
+}
+
+.creategraphbox__step__bigbuttons {
+  margin: 20px 0px 0px 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.creategraphbox__step__bigbuttons>button {
+  width: 165px;
+  height: 145px;
+  padding: 20px;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-color: white;
+  background-color: white;
+  color: rgb(144, 144, 144);
+}
+
+.creategraphbox__step__bigbuttons>button.small {
+  height: 80px;
+}
+
+.creategraphbox__step__bigbuttons>button.selected {
+  border-color: var(--matteblack-color);
+  color: var(--matteblack-color);
+  transition: color 0.25s ease;
+}
+
+.creategraphbox__step__bigbuttons>button:hover {
+  cursor: pointer;
+  background-color: rgb(250, 250, 250);
+  border-color: rgb(250, 250, 250);
+}
+
+.creategraphbox__step__bigbuttons>button:active {
+  background-color: rgb(222, 222, 222);
+  border-color: rgb(222, 222, 222);
+}
+
+.creategraphbox__step__bigbuttons>button.selected:hover {
+  border-color: var(--matteblack-color);
+}
+
+.creategraphbox__step__bigbuttons>button>p {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 10px 0px;
+}
+
+.creategraphbox__heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.creategraphbox__heading>h2 {
+  font-size: 22px;
+  margin: 0;
+  margin-right: 5px;
+  color: var(--matteblack-color);
+}
+
 .creategraphbox__button {
   height: 44px;
   border-style: solid;
@@ -138,4 +230,19 @@
     opacity: 1;
     transform: translate(-50%, -50%) scale(1, 1);
   }
+}
+
+/* ============ MEDIA AND CSS REDUCTION ============ */
+
+@media only screen and (max-width: 1000px) {
+  /* .creategraphbox__container {
+    width: 100vw;
+  } */
+}
+
+/* For mobile phones */
+@media only screen and (max-width: 600px) {
+  /* .creategraphbox__container {
+    width: 100vw;
+  } */
 }
