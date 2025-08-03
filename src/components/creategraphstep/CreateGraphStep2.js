@@ -34,7 +34,11 @@ export default function CreateGraphStep2({ graphConfiguration, onUpdateGraphConf
   const renderExpensesButtons = () => {
     return (
       <div className='creategraphbox__step__bigbutton'>
+        <button
+          className=''
+        >
 
+        </button>
       </div>
     );
   }
