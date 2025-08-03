@@ -1,124 +1,67 @@
 import '../../css/CreateGraphBox.css';
 import { useEffect, useState } from 'react';
 import { useGlobalStateValue } from '../../context/GlobalStateProvider';
-import { getExpensesCategories, getIncomesBankaccounts, getIncomesSources } from '../../RequestUtils';
 import { actionTypes } from '../../context/globalReducer';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import CreateGraphStep1 from '../creategraphstep/CreateGraphStep1';
-import CreateGraphStep2 from '../creategraphstep/CreateGraphStep2';
+import CreateCustomGraphStep1 from '../creategraphstep/CreateCustomGraphStep1';
+import CreateSpendingBurndown from '../creategraphstep/CreateSpendingBurndown';
 
 export default function CreateGraphBox() {
 
   // Context
-  const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
+  const [{ }, dispatch] = useGlobalStateValue();
 
   // States to manage form data
   const [step, setStep] = useState(1);
-  // TODO: do a refactor of this once it is working in prod
+
   const [createGraphConfiguration, setCreateGraphConfiguration] = useState({
-    type: 'EXPENSES',     // 'EXPENSES', 'INCOMES', 'SAVINGS'
-    subtype: 'STANDARD',  // 'STANDARD', 'BURNDOWN', 'BUILDUP'
-    expensesStandardConfiguration: {
-      type: 'ALL',        // 'ALL', 'GROUPED BY CATEGORY', 'FILTER BY CATEGORY'
-      filterCategory: 'Select category'
+    requestType: '', // 'CUSTOM_GRAPH', 'BURNDOWN', // In the future: 'BUILDUP',
+    customGraphSettings: {
+      dataSettings: {
+        source: 'EXPENSES',   // 'EXPENSES', 'INCOMES', 'SAVINGS'
+        time: 'LAST_WEEK',    // 'LAST_WEEK', 'LAST_MONTH', 'LAST_YEAR', 'CUSTOM'
+        customStartDate: '',
+        customEndDate: ''
+      },
+      filterSettings: {
+        allExpenses: true,              // For source = 'EXPENSES'
+        includedCategories: [],         // For source = 'EXPENSES', and taken into consideration when allExpenses = false
+        allIncomes: true,               // For source = 'INCOMES'
+        includedIncomeBankAccounts: [], // For source = 'INCOMES', and taken into consideration when allIncomes = false. When this is filled, includedIncomeSources is put to []
+        includedIncomeSources: [],      // For source = 'INCOMES', and taken into consideration when allIncomes = false. When this is filled, includedIncomeBankAccounts is put to []
+      },
+      visualizationSettings: {
+        type: 'LINE',         // 'LINE', 'BAR', depending on the prev configuration we might want to default to BAR or LINE
+        groupByTime: 'DAY',       // 'DAY', 'WEEK', 'MONTH', 'YEAR'
+        groupByCategory: false,           // For source = 'EXPENSES'
+        groupByIncomeBankAccounts: false, // For source = 'INCOMES'
+        groupByIncomeSources: false,      // For source = 'INCOMES'
+        cumulative: false
+      }
     },
-    incomesStandardConfiguration: {
-      type: 'ALL',        // 'ALL', 'GROUPED BY BANK ACCOUNT', 'GROUPED BY INCOME SOURCE', 'FILTER BY BANK ACCOUNT', 'FILTER BY INCOME SOURCE'
-      filterBankAccount: 'Select bank account',
-      filterIncomeSource: 'Select income source'
-    },
-    expensesBurndownConfiguration: {
+    burndownSettings: {
 
-    },
-    incomesBuildupConfiguration: {
-
-    },
-    timeConfiguration: {
-      type: 'RELATIVE',           // 'RELATIVE', 'CUSTOM'
-      relativeDate: 'LAST WEEK',  // 'LAST WEEK', 'LAST MONTH', 'LAST YEAR'
-      customStartDate: '',
-      customEndDate: ''
     }
-    // filterCategories: {  // 'SUM',    // 'SUM', 'BY CATEGORY', 'BY BANKACCOUNT', 'BY INCOMESOURCE', 'BURNDOWN'
-    //   type: 'SUM',    // 'SUM' for all expenses/incomes/savings
-    //   // 'BY CATEGORY' for groupings by category/bankacount/incomesource
-    //   // 'SPECIFIC CATEGORY' for specific category/bankaccount/incomesource
-    //   // 'BURNDOWN' for a new expenses graph type which shows it as a burndown
-    //   category: 'Select category' // Specify the category for 'SPECIFIC CATEGORY' type
-    // },
-    groupBy: 'DAY',
-    // time: 'LAST WEEK',
-    // customStartDate: '',
-    // customEndDate: '',
-    plot: 'Select plot', // This will be a customization for certain graphs
-    burndownReference: 'TOTAL', // Will be either:
-    // 'TOTAL': calculates the reference using the average of every month registered in the system (using some min date).
-    // 'LAST YEAR': calculates the reference using just the last year expenses data.
-    // 'BEST MONTH': calculates the reference using just the month where I spent the less amount.
-    burndownType: 'SUM', // 'SUM' for all expenses and 'SPECIFIC CATEGORY' for a specific expense category
-    burndownCategory: 'Select category', // Specify the category for 'SPECIFIC CATEGORY' type
-    burndownTime: 'LAST MONTH', // 'LAST MONTH' or 'CUSTOM MONTH'
-    burndownCustomMonth: ''
   });
 
   // useEffect(() => {
   //   console.log(createGraphConfiguration.type + " " + createGraphConfiguration.subtype);
   // }, [createGraphConfiguration]);
 
-  const [expensesCategories, setExpensesCategories] = useState([]);
-  const [incomesBankAccounts, setIncomesBankAccounts] = useState([]);
-  const [incomesSources, setIncomesSources] = useState([]);
-
-  const [expensesCategoriesLoading, setExpensesCategoriesLoading] = useState(false);
-  const [incomesBankAccountsLoading, setIncomesBankAccountsLoading] = useState(false);
-  const [incomesSourcesLoading, setIncomesSourcesLoading] = useState(false);
-
-  useEffect(() => {
-    fetchExpensesCategories();
-    fetchIncomesBankAccounts();
-    fetchIncomesSources();
-  }, []);
-
-  const fetchExpensesCategories = async () => {
-    try {
-      setExpensesCategoriesLoading(true);
-      const apiResponse = await getExpensesCategories(userJWTCookie);
-      if (apiResponse) {
-        setExpensesCategories(apiResponse);
-      }
-    } catch (error) {
-      console.log(error); // TODO: remove
-    } finally {
-      setExpensesCategoriesLoading(false);
-    }
+  const handleNextStep = () => {
+    setStep(step + 1);
   }
 
-  const fetchIncomesBankAccounts = async () => {
-    try {
-      setIncomesBankAccountsLoading(true);
-      const apiResponse = await getIncomesBankaccounts(userJWTCookie);
-      if (apiResponse) {
-        setIncomesBankAccounts(apiResponse);
-      }
-    } catch (error) {
-      console.log(error); // TODO: remove
-    } finally {
-      setIncomesBankAccountsLoading(false);
-    }
+  const handleOnEndStep = () => {
+    setStep(4);
   }
 
-  const fetchIncomesSources = async () => {
-    try {
-      setIncomesSourcesLoading(true);
-      const apiResponse = await getIncomesSources(userJWTCookie);
-      if (apiResponse) {
-        setIncomesSources(apiResponse);
-      }
-    } catch (error) {
-      console.log(error); // TODO: remove
-    } finally {
-      setIncomesSourcesLoading(false);
-    }
+  const handleOnBeginStep = () => {
+    setStep(1);
+  }
+
+  const handlePrevStep = () => {
+    setStep(step - 1);
   }
 
   const closeBox = () => {
@@ -128,24 +71,41 @@ export default function CreateGraphBox() {
     })
   }
 
-  const handleNextStep = () => {
-    setStep(step + 1);
-  }
-
-  const handleOnEndStep = () => {
-    setStep(step + 2);
-  }
-
-  const handleOnBeginStep = () => {
-    setStep(step - 2);
-  }
-
-  const handlePrevStep = () => {
-    setStep(step - 1);
+  const handleSelectedRequestType = (requestType) => {
+    handleUpdateGraphConfiguration({ requestType: requestType });
   }
 
   const handleUpdateGraphConfiguration = (data) => {
     setCreateGraphConfiguration({ ...createGraphConfiguration, ...data });
+  }
+
+  const renderCreateGraphStep1Buttons = () => {
+    return (
+      <div className='creategraphbox__step1__content'>
+        <div className='creategraphbox__step__bigbuttons vertical'>
+          <button
+            className={`${createGraphConfiguration.requestType === 'CUSTOM_GRAPH' ? 'selected' : 'not_selected'} wide`}
+            onClick={() => handleSelectedRequestType('CUSTOM_GRAPH')}
+          >
+            <p>Create a Custom Graph</p>
+          </button>
+          <button
+            className={`${createGraphConfiguration.requestType === 'BURNDOWN' ? 'selected' : 'not_selected'} wide`}
+            onClick={() => handleSelectedRequestType('BURNDOWN')}
+          >
+            <p>View Spending Burndown</p>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const renderNextScreen = () => {
+    if (createGraphConfiguration.requestType === 'CUSTOM_GRAPH') {
+      return <CreateCustomGraphStep1 graphConfiguration={createGraphConfiguration} />;
+    } else {
+      return <CreateSpendingBurndown graphConfiguration={createGraphConfiguration} />;
+    }
   }
 
   return (
@@ -155,8 +115,8 @@ export default function CreateGraphBox() {
           <CloseRoundedIcon fontSize='medium' />
         </button>
         <h1>New Graph</h1>
-        {step == 1 && <CreateGraphStep1 graphConfiguration={createGraphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoNext={handleNextStep} gotoEnd={handleOnEndStep} />}
-        {step == 2 && <CreateGraphStep2 graphConfiguration={createGraphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoNext={handleNextStep} expensesCategoriesLoading={expensesCategoriesLoading} incomesBankAccountsLoading={incomesBankAccountsLoading} incomesSourcesLoading={incomesSourcesLoading} />}
+        {step == 1 && renderCreateGraphStep1Buttons()}
+        {step == 2 && renderNextScreen()}
       </div>
     </div >
   );

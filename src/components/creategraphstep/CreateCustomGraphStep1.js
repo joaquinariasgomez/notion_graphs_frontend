@@ -3,7 +3,7 @@ import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
 
-export default function CreateGraphStep1({ graphConfiguration, onUpdateGraphConfig, gotoNext, gotoEnd }) {
+export default function CreateCustomGraphStep1({ graphConfiguration, onUpdateGraphConfig, gotoNext, gotoEnd }) {
 
   const onNextButton = () => {
     if (graphConfiguration.graphType === 'SAVINGS') {

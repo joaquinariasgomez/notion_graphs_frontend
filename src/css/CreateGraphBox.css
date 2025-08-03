@@ -12,7 +12,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 700px;
+  min-width: 300px;
+  /* width: 700px; */
   max-width: 100vw;
   /* height: 600px; */
   border-radius: 10px;
@@ -52,6 +53,14 @@
   background-color: var(--darkbutton-hover-color);
 }
 
+.creategraphbox__step1__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 28px;
+  padding: 20px;
+}
+
 .creategraphbox__stepcontainer {
   display: flex;
   flex-direction: column;
@@ -69,6 +78,7 @@
   padding: 0 20px;
   flex-grow: 1;
   overflow-y: auto;
+  border: 1px solid red;
 }
 
 .creategraphbox__arrows {
@@ -111,6 +121,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
+}
+
+.creategraphbox__step__bigbuttons.vertical {
+  flex-direction: column;
 }
 
 .creategraphbox__step__bigbuttons>button {
@@ -131,6 +146,11 @@
 
 .creategraphbox__step__bigbuttons>button.small {
   height: 80px;
+}
+
+.creategraphbox__step__bigbuttons>button.wide {
+  height: 80px;
+  width: 100%;
 }
 
 .creategraphbox__step__bigbuttons>button.selected {
