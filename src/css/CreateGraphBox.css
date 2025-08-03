@@ -148,9 +148,16 @@
   height: 80px;
 }
 
-.creategraphbox__step__bigbuttons>button.wide {
+/* Step1 buttons are fixed and always show border, a bit different */
+.creategraphbox__step__bigbuttons>button.step1 {
   height: 80px;
   width: 100%;
+  color: var(--matteblack-color);
+  border-color: var(--matteblack-color);
+}
+
+.creategraphbox__step__bigbuttons>button.step1:hover {
+  border-color: var(--matteblack-color);
 }
 
 .creategraphbox__step__bigbuttons>button.selected {

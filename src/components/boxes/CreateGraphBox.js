@@ -73,6 +73,7 @@ export default function CreateGraphBox() {
 
   const handleSelectedRequestType = (requestType) => {
     handleUpdateGraphConfiguration({ requestType: requestType });
+    handleNextStep();
   }
 
   const handleUpdateGraphConfiguration = (data) => {
@@ -84,13 +85,13 @@ export default function CreateGraphBox() {
       <div className='creategraphbox__step1__content'>
         <div className='creategraphbox__step__bigbuttons vertical'>
           <button
-            className={`${createGraphConfiguration.requestType === 'CUSTOM_GRAPH' ? 'selected' : 'not_selected'} wide`}
+            className="step1"
             onClick={() => handleSelectedRequestType('CUSTOM_GRAPH')}
           >
             <p>Create a Custom Graph</p>
           </button>
           <button
-            className={`${createGraphConfiguration.requestType === 'BURNDOWN' ? 'selected' : 'not_selected'} wide`}
+            className='step1'
             onClick={() => handleSelectedRequestType('BURNDOWN')}
           >
             <p>View Spending Burndown</p>
@@ -115,8 +116,8 @@ export default function CreateGraphBox() {
           <CloseRoundedIcon fontSize='medium' />
         </button>
         <h1>New Graph</h1>
-        {step == 1 && renderCreateGraphStep1Buttons()}
-        {step == 2 && renderNextScreen()}
+        {step === 1 && renderCreateGraphStep1Buttons()}
+        {step === 2 && renderNextScreen()}
       </div>
     </div >
   );
