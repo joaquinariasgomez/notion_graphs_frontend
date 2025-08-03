@@ -1,0 +1,248 @@
+:root {
+  --darkbutton-color: rgb(99, 99, 99);
+  --darkbutton-hover-color: rgb(236, 236, 236);
+  --textp-color: rgb(105, 105, 105);
+}
+
+.creategraphbox__container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 700px;
+  max-width: 100vw;
+  /* height: 600px; */
+  border-radius: 10px;
+  background-color: white;
+  animation: zoom_100 0.2s ease forwards;
+  z-index: 998;
+}
+
+.creategraphbox__container>h1 {
+  position: absolute;
+  top: 20px;
+  left: 25px;
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  color: var(--matteblack-color);
+}
+
+.creategraphbox__cancelbutton {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 35px;
+  height: 35px;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 0;
+  color: var(--darkbutton-color);
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  transition: background-color 0.25s ease-out;
+}
+
+.creategraphbox__cancelbutton:hover {
+  cursor: pointer;
+  background-color: var(--darkbutton-hover-color);
+}
+
+.creategraphbox__stepcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin-top: 68px;
+}
+
+.creategraphbox__stepcontent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.creategraphbox__arrows {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+  padding: 15px 20px;
+}
+
+.creategraphbox__stepgraycontainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: first;
+  background-color: rgb(240, 240, 240);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.creategraphbox__stepgraycontainer+.creategraphbox__stepgraycontainer {
+  margin-top: 20px;
+}
+
+.creategraphbox__stepgraycontainer>h2 {
+  font-size: 22px;
+  margin: 0;
+  color: var(--matteblack-color);
+}
+
+.creategraphbox__stepgraycontainer>p {
+  margin: 20px 0px 0px 0px;
+  color: var(--textp-color);
+}
+
+.creategraphbox__step__bigbuttons {
+  margin: 20px 0px 0px 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.creategraphbox__step__bigbuttons>button {
+  width: 165px;
+  height: 145px;
+  padding: 20px;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-color: white;
+  background-color: white;
+  color: rgb(144, 144, 144);
+}
+
+.creategraphbox__step__bigbuttons>button.small {
+  height: 80px;
+}
+
+.creategraphbox__step__bigbuttons>button.selected {
+  border-color: var(--matteblack-color);
+  color: var(--matteblack-color);
+  transition: color 0.25s ease;
+}
+
+.creategraphbox__step__bigbuttons>button:hover {
+  cursor: pointer;
+  background-color: rgb(250, 250, 250);
+  border-color: rgb(250, 250, 250);
+}
+
+.creategraphbox__step__bigbuttons>button:active {
+  background-color: rgb(222, 222, 222);
+  border-color: rgb(222, 222, 222);
+}
+
+.creategraphbox__step__bigbuttons>button.selected:hover {
+  border-color: var(--matteblack-color);
+}
+
+.creategraphbox__step__bigbuttons>button>p {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 10px 0px;
+}
+
+.creategraphbox__heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.creategraphbox__heading>h2 {
+  font-size: 22px;
+  margin: 0;
+  margin-right: 5px;
+  color: var(--matteblack-color);
+}
+
+.creategraphbox__button {
+  height: 44px;
+  border-style: solid;
+  border-radius: 12px;
+  border-width: 3px;
+  font-weight: 600;
+  font-size: 15px;
+  color: white;
+  padding: 0px 17px;
+}
+
+.creategraphbox__button:hover {
+  cursor: pointer;
+}
+
+.creategraphbox__button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  color: var(--matteblack-color);
+  background-color: white;
+}
+
+.creategraphbox__button.next {
+  margin: 0;
+  border-color: var(--matteblack-color);
+  background-color: var(--matteblack-color);
+}
+
+.creategraphbox__button.next:disabled {
+  background-color: white;
+}
+
+.creategraphbox__button.next:hover {
+  animation: changecolorblack 0.25s ease forwards;
+}
+
+.creategraphbox__button.back {
+  margin-right: 15px;
+  color: var(--matteblack-color);
+  border-color: var(--matteblack-color);
+  background-color: white;
+}
+
+.creategraphbox__button.back:hover {
+  animation: changecolorblack_opposite 0.25s ease forwards;
+}
+
+@keyframes zoom_100 {
+  0% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0.5, 0.5);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1, 1);
+  }
+}
+
+/* ============ MEDIA AND CSS REDUCTION ============ */
+
+@media only screen and (max-width: 1000px) {
+  /* .creategraphbox__container {
+    width: 100vw;
+  } */
+}
+
+/* For mobile phones */
+@media only screen and (max-width: 600px) {
+  /* .creategraphbox__container {
+    width: 100vw;
+  } */
+}

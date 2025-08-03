@@ -1,0 +1,28 @@
+:root {
+  --login-card-height: 100px;
+  --login-card-width: 350px;
+  --footer-height: 200px;
+  --matteblack-color: #28282B;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  /* By doing this, I can tell the header to take width and padding into consideration */
+}
+
+body {
+  margin: 0;
+  font-family: "inter", sans-serif;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+}
+
+/* code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+} */
