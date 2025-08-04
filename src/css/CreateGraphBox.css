@@ -78,7 +78,6 @@
   padding: 0 20px;
   flex-grow: 1;
   overflow-y: auto;
-  border: 1px solid red;
 }
 
 .creategraphbox__arrows {
@@ -145,6 +144,8 @@
 }
 
 .creategraphbox__step__bigbuttons>button.small {
+  width: 100%;
+  /* No fixed width */
   height: 80px;
 }
 
@@ -245,6 +246,14 @@
 
 .creategraphbox__button.back:hover {
   animation: changecolorblack_opposite 0.25s ease forwards;
+}
+
+.customdatepicker {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 @keyframes zoom_100 {

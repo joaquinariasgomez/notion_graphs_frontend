@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { useGlobalStateValue } from '../../context/GlobalStateProvider';
 import { actionTypes } from '../../context/globalReducer';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import CreateCustomGraphStep1 from '../creategraphstep/CreateCustomGraphStep1';
 import CreateSpendingBurndown from '../creategraphstep/CreateSpendingBurndown';
+import CreateCustomGraphStep2 from '../creategraphstep/CreateCustomGraphStep2';
 
 export default function CreateGraphBox() {
 
@@ -14,7 +14,7 @@ export default function CreateGraphBox() {
   // States to manage form data
   const [step, setStep] = useState(1);
 
-  const [createGraphConfiguration, setCreateGraphConfiguration] = useState({
+  const [graphConfiguration, setGraphConfiguration] = useState({
     requestType: '', // 'CUSTOM_GRAPH', 'BURNDOWN', // In the future: 'BUILDUP',
     customGraphSettings: {
       dataSettings: {
@@ -45,8 +45,8 @@ export default function CreateGraphBox() {
   });
 
   // useEffect(() => {
-  //   console.log(createGraphConfiguration.type + " " + createGraphConfiguration.subtype);
-  // }, [createGraphConfiguration]);
+  //   console.log(graphConfiguration.customGraphSettings.dataSettings.customStartDate + "" + graphConfiguration.customGraphSettings.dataSettings.customEndDate);
+  // }, [graphConfiguration]);
 
   const handleNextStep = () => {
     setStep(step + 1);
@@ -77,7 +77,7 @@ export default function CreateGraphBox() {
   }
 
   const handleUpdateGraphConfiguration = (data) => {
-    setCreateGraphConfiguration({ ...createGraphConfiguration, ...data });
+    setGraphConfiguration({ ...graphConfiguration, ...data });
   }
 
   const renderCreateGraphStep1Buttons = () => {
@@ -85,7 +85,7 @@ export default function CreateGraphBox() {
       <div className='creategraphbox__step1__content'>
         <div className='creategraphbox__step__bigbuttons vertical'>
           <button
-            className="step1"
+            className='step1'
             onClick={() => handleSelectedRequestType('CUSTOM_GRAPH')}
           >
             <p>Create a Custom Graph</p>
@@ -102,10 +102,10 @@ export default function CreateGraphBox() {
   }
 
   const renderNextScreen = () => {
-    if (createGraphConfiguration.requestType === 'CUSTOM_GRAPH') {
-      return <CreateCustomGraphStep1 graphConfiguration={createGraphConfiguration} />;
+    if (graphConfiguration.requestType === 'CUSTOM_GRAPH') {
+      return <CreateCustomGraphStep2 graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoNext={handleNextStep} />;
     } else {
-      return <CreateSpendingBurndown graphConfiguration={createGraphConfiguration} />;
+      return <CreateSpendingBurndown graphConfiguration={graphConfiguration} />;
     }
   }
 
