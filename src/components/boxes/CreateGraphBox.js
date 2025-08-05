@@ -5,11 +5,21 @@ import { actionTypes } from '../../context/globalReducer';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import CreateSpendingBurndown from '../creategraphstep/CreateSpendingBurndown';
 import CreateCustomGraphStep2 from '../creategraphstep/CreateCustomGraphStep2';
+import CreateCustomGraphStep3 from '../creategraphstep/CreateCustomGraphStep3';
+import { getExpensesCategories, getIncomesBankaccounts, getIncomesSources } from '../../RequestUtils';
 
 export default function CreateGraphBox() {
 
   // Context
-  const [{ }, dispatch] = useGlobalStateValue();
+  const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
+
+  const [expensesCategories, setExpensesCategories] = useState([]);
+  const [incomesBankAccounts, setIncomesBankAccounts] = useState([]);
+  const [incomesSources, setIncomesSources] = useState([]);
+
+  const [expensesCategoriesLoading, setExpensesCategoriesLoading] = useState(false);
+  const [incomesBankAccountsLoading, setIncomesBankAccountsLoading] = useState(false);
+  const [incomesSourcesLoading, setIncomesSourcesLoading] = useState(false);
 
   // States to manage form data
   const [step, setStep] = useState(1);
@@ -44,9 +54,57 @@ export default function CreateGraphBox() {
     }
   });
 
-  // useEffect(() => {
-  //   console.log(graphConfiguration.customGraphSettings.dataSettings.customStartDate + "" + graphConfiguration.customGraphSettings.dataSettings.customEndDate);
-  // }, [graphConfiguration]);
+  useEffect(() => {
+    console.log(graphConfiguration.customGraphSettings.filterSettings);
+  }, [graphConfiguration]);
+
+  useEffect(() => {
+    fetchExpensesCategories();
+    fetchIncomesBankAccounts();
+    fetchIncomesSources();
+  }, []);
+
+  const fetchExpensesCategories = async () => {
+    try {
+      setExpensesCategoriesLoading(true);
+      const apiResponse = await getExpensesCategories(userJWTCookie);
+      if (apiResponse) {
+        setExpensesCategories(apiResponse);
+      }
+    } catch (error) {
+      console.log(error); // TODO: remove
+    } finally {
+      setExpensesCategoriesLoading(false);
+    }
+  }
+
+  const fetchIncomesBankAccounts = async () => {
+    try {
+      setIncomesBankAccountsLoading(true);
+      const apiResponse = await getIncomesBankaccounts(userJWTCookie);
+      if (apiResponse) {
+        setIncomesBankAccounts(apiResponse);
+      }
+    } catch (error) {
+      console.log(error); // TODO: remove
+    } finally {
+      setIncomesBankAccountsLoading(false);
+    }
+  }
+
+  const fetchIncomesSources = async () => {
+    try {
+      setIncomesSourcesLoading(true);
+      const apiResponse = await getIncomesSources(userJWTCookie);
+      if (apiResponse) {
+        setIncomesSources(apiResponse);
+      }
+    } catch (error) {
+      console.log(error); // TODO: remove
+    } finally {
+      setIncomesSourcesLoading(false);
+    }
+  }
 
   const handleNextStep = () => {
     setStep(step + 1);
@@ -118,6 +176,7 @@ export default function CreateGraphBox() {
         <h1>New Graph</h1>
         {step === 1 && renderCreateGraphStep1Buttons()}
         {step === 2 && renderNextScreen()}
+        {step === 3 && <CreateCustomGraphStep3 graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoNext={handleNextStep} expensesCategoriesLoading={expensesCategoriesLoading} incomesBankAccountsLoading={incomesBankAccountsLoading} incomesSourcesLoading={incomesSourcesLoading} expensesCategories={expensesCategories} incomesBankAccounts={incomesBankAccounts} incomesSources={incomesSources} />}
       </div>
     </div >
   );
