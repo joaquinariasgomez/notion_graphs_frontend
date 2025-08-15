@@ -110,7 +110,7 @@ export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGra
       return (
         <button
           className={graphConfiguration.customGraphSettings.filterSettings.allExpenses === false ? 'selected' : 'not_selected'}
-          onClick={() => handleSelectedIncludedCategories('test')}
+          onClick={() => handleSelectedIncludedCategories(['test0', 'test1'])}
         >
           <p>Filter by category</p>
           <div className='creategraphbox__filterbycategory__container' onClick={stopPropagation}>
@@ -126,13 +126,16 @@ export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGra
                   primary: 'black'
                 }
               })}
+              isMulti
+              closeMenuOnSelect={false}
               options={getSelectOptionsFromDatabase(expensesCategories)}
               menuPlacement="auto" // Adjust placement to avoid overflow
               menuPosition="fixed" // Use fixed positioning to handle overflow better
               styles={customStyleForSelectPlacement}
               menuPortalTarget={document.body}
-              onChange={function (selectedCategory) {
-                handleSelectedIncludedCategories(selectedCategory.value)
+              onChange={function (selectedCategories) {
+                const selectedValues = selectedCategories.map(category => category.value);
+                handleSelectedIncludedCategories(selectedValues)
               }}
             />
           </div>
