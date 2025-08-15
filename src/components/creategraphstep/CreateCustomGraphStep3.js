@@ -8,8 +8,13 @@ import { useState } from 'react';
 
 export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGraphConfig, gotoBack, gotoNext, expensesCategoriesLoading, incomesBankAccountsLoading, incomesSourcesLoading, expensesCategories, incomesBankAccounts, incomesSources }) {
 
-  // TODO JOAQUIN: the issue here is that the useState should have the value from filterSettings.includedCategories, instead of []
-  const [selectedIncludedCategories, setSelectedIncludedCategories] = useState([]);
+  const getSelectOptionsFromDatabase = (database) => {
+    return database.map(element => {
+      return { value: element, label: element };
+    });
+  }
+
+  const [selectedIncludedCategories, setSelectedIncludedCategories] = useState(getSelectOptionsFromDatabase(graphConfiguration.customGraphSettings.filterSettings.includedCategories));
 
   const handleSelectedAllExpenses = () => {
     setSelectedIncludedCategories([])
@@ -25,23 +30,21 @@ export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGra
     });
   }
 
-  const getSelectOptionsFromDatabase = (database) => {
-    return database.map(element => {
-      return { value: element, label: element };
-    });
-  }
-
   const handleSelectedIncludedCategories = (includedCategories) => {
-    onUpdateGraphConfig({
-      customGraphSettings: {
-        ...graphConfiguration.customGraphSettings,
-        filterSettings: {
-          ...graphConfiguration.customGraphSettings.filterSettings,
-          allExpenses: false,
-          includedCategories: includedCategories
+    if(includedCategories.length === 0) {
+      handleSelectedAllExpenses()
+    } else {
+      onUpdateGraphConfig({
+        customGraphSettings: {
+          ...graphConfiguration.customGraphSettings,
+          filterSettings: {
+            ...graphConfiguration.customGraphSettings.filterSettings,
+            allExpenses: false,
+            includedCategories: includedCategories
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   const stopPropagation = (event) => {
@@ -113,7 +116,7 @@ export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGra
       );
     } else {
       return (
-        <div className='filterbycategory__bigbutton'>
+        <div className={`filterbycategory__bigbutton ${graphConfiguration.customGraphSettings.filterSettings.allExpenses === false ? 'selected' : 'not_selected'}`}>
           <p>Filter by category</p>
           <div className='filterbycategory__selectcontainer' onClick={stopPropagation}>
             <Select

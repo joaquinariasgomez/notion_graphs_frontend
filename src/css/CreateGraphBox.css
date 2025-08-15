@@ -144,7 +144,7 @@
 }
 
 .filterbycategory__bigbutton {
-  width: 165px;
+  width: 220px; /*165px;*/
   height: 145px;
   padding: 10px;
   border-style: solid;
@@ -157,6 +157,12 @@
   border-color: white;
   background-color: white;
   color: rgb(144, 144, 144);
+}
+
+.filterbycategory__bigbutton.selected {
+  border-color: var(--matteblack-color);
+  color: var(--matteblack-color);
+  transition: color 0.25s ease;
 }
 
 .filterbycategory__bigbutton > p {
