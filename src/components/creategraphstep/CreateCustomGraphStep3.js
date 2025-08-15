@@ -15,6 +15,8 @@ export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGra
   }
 
   const [selectedIncludedCategories, setSelectedIncludedCategories] = useState(getSelectOptionsFromDatabase(graphConfiguration.customGraphSettings.filterSettings.includedCategories));
+  const [selectedIncludedIncomeBankAccounts, setSelectedIncludedIncomeBankAccounts] = useState(getSelectOptionsFromDatabase(graphConfiguration.customGraphSettings.filterSettings.includedIncomeBankAccounts));
+  const [selectedIncludedIncomeSources, setSelectedIncludedIncomeSources] = useState(getSelectOptionsFromDatabase(graphConfiguration.customGraphSettings.filterSettings.includedIncomeSources));
 
   const handleSelectedAllExpenses = () => {
     setSelectedIncludedCategories([])
@@ -25,6 +27,22 @@ export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGra
           ...graphConfiguration.customGraphSettings.filterSettings,
           allExpenses: true,
           includedCategories: []
+        }
+      }
+    });
+  }
+
+  const handleSelectedAllIncomes = () => {
+    setSelectedIncludedIncomeBankAccounts([])
+    setSelectedIncludedIncomeSources([])
+    onUpdateGraphConfig({
+      customGraphSettings: {
+        ...graphConfiguration.customGraphSettings,
+        filterSettings: {
+          ...graphConfiguration.customGraphSettings.filterSettings,
+          allIncomes: true,
+          includedIncomeBankAccounts: [],
+          includedIncomeSources: []
         }
       }
     });
@@ -41,6 +59,40 @@ export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGra
             ...graphConfiguration.customGraphSettings.filterSettings,
             allExpenses: false,
             includedCategories: includedCategories
+          }
+        }
+      });
+    }
+  }
+
+  const handleSelectedIncludedIncomeBankAccounts = (includedIncomeBankAccounts) => {
+    if(includedIncomeBankAccounts.length === 0 && selectedIncludedIncomeSources.length === 0) {
+      handleSelectedAllIncomes()
+    } else {
+      onUpdateGraphConfig({
+        customGraphSettings: {
+          ...graphConfiguration.customGraphSettings,
+          filterSettings: {
+            ...graphConfiguration.customGraphSettings.filterSettings,
+            allIncomes: false,
+            includedIncomeBankAccounts: includedIncomeBankAccounts
+          }
+        }
+      });
+    }
+  }
+
+  const handleSelectedIncludedIncomeSources = (includedIncomeSources) => {
+    if(includedIncomeSources.length === 0 && selectedIncludedIncomeBankAccounts.length === 0) {
+      handleSelectedAllIncomes()
+    } else {
+      onUpdateGraphConfig({
+        customGraphSettings: {
+          ...graphConfiguration.customGraphSettings,
+          filterSettings: {
+            ...graphConfiguration.customGraphSettings.filterSettings,
+            allIncomes: false,
+            includedIncomeSources: includedIncomeSources
           }
         }
       });
@@ -106,13 +158,10 @@ export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGra
   const renderFilterByCategoryButton = () => {
     if (expensesCategoriesLoading) {
       return (
-        <button
-          className='not_selected'
-          disabled={true}
-        >
+        <div className='filterbycategory__bigbutton not_selected'>
           <p>Filter by category</p>
           <SyncLoader size={10} color='#909090' />
-        </button>
+        </div>
       );
     } else {
       return (
@@ -151,10 +200,107 @@ export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGra
     }
   }
 
+  const renderFilterByIncomeBankAccountsButton = () => {
+    if (incomesBankAccountsLoading) {
+      return (
+        <div className='filterbycategory__bigbutton not_selected'>
+          <p>Filter by bank account</p>
+          <SyncLoader size={10} color='#909090' />
+        </div>
+      );
+    } else {
+      return (
+        <div className={`filterbycategory__bigbutton ${graphConfiguration.customGraphSettings.filterSettings.includedIncomeBankAccounts.length === 0 ? 'not_selected' : 'selected'}`}>
+          <p>Filter by bank account</p>
+          <div className='filterbycategory__selectcontainer' onClick={stopPropagation}>
+            <Select
+              className='selectmultipledatabases'
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 5,
+                colors: {
+                  ...theme.colors,
+                  primary25: 'lightgray',
+                  primary50: 'gray',
+                  primary: 'black'
+                }
+              })}
+              isMulti
+              closeMenuOnSelect={false}
+              options={getSelectOptionsFromDatabase(incomesBankAccounts)}
+              menuPlacement="auto" // Adjust placement to avoid overflow
+              menuPosition="fixed" // Use fixed positioning to handle overflow better
+              styles={customStyleForSelectPlacement}
+              menuPortalTarget={document.body}
+              value={selectedIncludedIncomeBankAccounts}
+              onChange={function (selectedIncomeBankAccounts) {
+                setSelectedIncludedIncomeBankAccounts(selectedIncomeBankAccounts);
+                const selectedValues = selectedIncomeBankAccounts.map(category => category.value);
+                handleSelectedIncludedIncomeBankAccounts(selectedValues);
+              }}
+            />
+          </div>
+        </div>
+      );
+    }
+  }
+
+  const renderFilterByIncomeSourcesButton = () => {
+    if (incomesSourcesLoading) {
+      return (
+        <div className='filterbycategory__bigbutton not_selected'>
+          <p>Filter by income source</p>
+          <SyncLoader size={10} color='#909090' />
+        </div>
+      );
+    } else {
+      return (
+        <div className={`filterbycategory__bigbutton ${graphConfiguration.customGraphSettings.filterSettings.includedIncomeSources.length === 0 ? 'not_selected' : 'selected'}`}>
+          <p>Filter by income source</p>
+          <div className='filterbycategory__selectcontainer' onClick={stopPropagation}>
+            <Select
+              className='selectmultipledatabases'
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 5,
+                colors: {
+                  ...theme.colors,
+                  primary25: 'lightgray',
+                  primary50: 'gray',
+                  primary: 'black'
+                }
+              })}
+              isMulti
+              closeMenuOnSelect={false}
+              options={getSelectOptionsFromDatabase(incomesSources)}
+              menuPlacement="auto" // Adjust placement to avoid overflow
+              menuPosition="fixed" // Use fixed positioning to handle overflow better
+              styles={customStyleForSelectPlacement}
+              menuPortalTarget={document.body}
+              value={selectedIncludedIncomeSources}
+              onChange={function (selectedIncomeSources) {
+                setSelectedIncludedIncomeSources(selectedIncomeSources);
+                const selectedValues = selectedIncomeSources.map(category => category.value);
+                handleSelectedIncludedIncomeSources(selectedValues);
+              }}
+            />
+          </div>
+        </div>
+      );
+    }
+  }
+
   const renderIncomesButtons = () => {
     return (
-      <div>
-
+      <div className='creategraphbox__step__bigbuttons'>
+        <button
+          className={graphConfiguration.customGraphSettings.filterSettings.allIncomes === true ? 'selected' : 'not_selected'}
+          onClick={() => handleSelectedAllIncomes()}
+        >
+          <p>All incomes</p>
+        </button>
+        {renderFilterByIncomeBankAccountsButton()}
+        {renderFilterByIncomeSourcesButton()}
       </div>
     );
   }
