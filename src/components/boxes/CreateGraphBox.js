@@ -7,6 +7,7 @@ import CreateSpendingBurndown from '../creategraphstep/CreateSpendingBurndown';
 import CreateCustomGraphStep2 from '../creategraphstep/CreateCustomGraphStep2';
 import CreateCustomGraphStep3 from '../creategraphstep/CreateCustomGraphStep3';
 import { getExpensesCategories, getIncomesBankaccounts, getIncomesSources } from '../../RequestUtils';
+import CreateCustomGraphStep4 from '../creategraphstep/CreateCustomGraphStep4';
 
 export default function CreateGraphBox() {
 
@@ -55,7 +56,7 @@ export default function CreateGraphBox() {
   });
 
   useEffect(() => {
-    console.log(graphConfiguration.customGraphSettings.filterSettings);
+    console.log(graphConfiguration.customGraphSettings.visualizationSettings);
   }, [graphConfiguration]);
 
   useEffect(() => {
@@ -177,6 +178,7 @@ export default function CreateGraphBox() {
         {step === 1 && renderCreateGraphStep1Buttons()}
         {step === 2 && renderNextScreen()}
         {step === 3 && <CreateCustomGraphStep3 graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoNext={handleNextStep} expensesCategoriesLoading={expensesCategoriesLoading} incomesBankAccountsLoading={incomesBankAccountsLoading} incomesSourcesLoading={incomesSourcesLoading} expensesCategories={expensesCategories} incomesBankAccounts={incomesBankAccounts} incomesSources={incomesSources} />}
+        {step === 4 && <CreateCustomGraphStep4 graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoNext={handleNextStep} />}
       </div>
     </div >
   );
