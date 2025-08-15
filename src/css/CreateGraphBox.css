@@ -143,6 +143,32 @@
   color: rgb(144, 144, 144);
 }
 
+.filterbycategory__bigbutton {
+  width: 165px;
+  height: 145px;
+  padding: 10px;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-color: white;
+  background-color: white;
+  color: rgb(144, 144, 144);
+}
+
+.filterbycategory__bigbutton > p {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 15px 0px;
+}
+
+.filterbycategory__selectcontainer {
+  width: 100%;
+}
+
 .creategraphbox__step__bigbuttons>button.small {
   width: 100%;
   /* No fixed width */

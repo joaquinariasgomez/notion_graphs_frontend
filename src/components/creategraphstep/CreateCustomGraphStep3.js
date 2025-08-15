@@ -4,10 +4,14 @@ import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
 import { customStyleForSelectPlacement } from '../../Utils';
 import SyncLoader from "react-spinners/SyncLoader";
 import Select from 'react-select';
+import { useState } from 'react';
 
 export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGraphConfig, gotoBack, gotoNext, expensesCategoriesLoading, incomesBankAccountsLoading, incomesSourcesLoading, expensesCategories, incomesBankAccounts, incomesSources }) {
 
+  const [selectedIncludedCategories, setSelectedIncludedCategories] = useState([]);
+
   const handleSelectedAllExpenses = () => {
+    setSelectedIncludedCategories([])
     onUpdateGraphConfig({
       customGraphSettings: {
         ...graphConfiguration.customGraphSettings,
@@ -108,12 +112,9 @@ export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGra
       );
     } else {
       return (
-        <button
-          className={graphConfiguration.customGraphSettings.filterSettings.allExpenses === false ? 'selected' : 'not_selected'}
-          onClick={() => handleSelectedIncludedCategories(['test0', 'test1'])}
-        >
+        <div className='filterbycategory__bigbutton'>
           <p>Filter by category</p>
-          <div className='creategraphbox__filterbycategory__container' onClick={stopPropagation}>
+          <div className='filterbycategory__selectcontainer' onClick={stopPropagation}>
             <Select
               className='selectmultipledatabases'
               theme={(theme) => ({
@@ -133,13 +134,15 @@ export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGra
               menuPosition="fixed" // Use fixed positioning to handle overflow better
               styles={customStyleForSelectPlacement}
               menuPortalTarget={document.body}
+              value={selectedIncludedCategories}
               onChange={function (selectedCategories) {
+                setSelectedIncludedCategories(selectedCategories);
                 const selectedValues = selectedCategories.map(category => category.value);
-                handleSelectedIncludedCategories(selectedValues)
+                handleSelectedIncludedCategories(selectedValues);
               }}
             />
           </div>
-        </button>
+        </div>
       );
     }
   }
