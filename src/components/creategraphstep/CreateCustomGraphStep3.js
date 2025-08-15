@@ -8,6 +8,7 @@ import { useState } from 'react';
 
 export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGraphConfig, gotoBack, gotoNext, expensesCategoriesLoading, incomesBankAccountsLoading, incomesSourcesLoading, expensesCategories, incomesBankAccounts, incomesSources }) {
 
+  // TODO JOAQUIN: the issue here is that the useState should have the value from filterSettings.includedCategories, instead of []
   const [selectedIncludedCategories, setSelectedIncludedCategories] = useState([]);
 
   const handleSelectedAllExpenses = () => {
