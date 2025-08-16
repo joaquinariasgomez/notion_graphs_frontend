@@ -49,7 +49,7 @@ export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGra
   }
 
   const handleSelectedIncludedCategories = (includedCategories) => {
-    if(includedCategories.length === 0) {
+    if (includedCategories.length === 0) {
       handleSelectedAllExpenses()
     } else {
       onUpdateGraphConfig({
@@ -66,7 +66,7 @@ export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGra
   }
 
   const handleSelectedIncludedIncomeBankAccounts = (includedIncomeBankAccounts) => {
-    if(includedIncomeBankAccounts.length === 0 && selectedIncludedIncomeSources.length === 0) {
+    if (includedIncomeBankAccounts.length === 0 && selectedIncludedIncomeSources.length === 0) {
       handleSelectedAllIncomes()
     } else {
       onUpdateGraphConfig({
@@ -83,7 +83,7 @@ export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGra
   }
 
   const handleSelectedIncludedIncomeSources = (includedIncomeSources) => {
-    if(includedIncomeSources.length === 0 && selectedIncludedIncomeBankAccounts.length === 0) {
+    if (includedIncomeSources.length === 0 && selectedIncludedIncomeBankAccounts.length === 0) {
       handleSelectedAllIncomes()
     } else {
       onUpdateGraphConfig({
@@ -104,7 +104,6 @@ export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGra
   };
 
   const renderStep3Heading = () => {
-    // TODO: think about if SAVINGS can go to this screen
     // For step3, it can only be type = "EXPENSES" or type = "INCOMES"
     if (graphConfiguration.customGraphSettings.dataSettings.source === "EXPENSES") {
       return (
@@ -127,14 +126,14 @@ export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGra
     if (graphConfiguration.customGraphSettings.dataSettings.source === "EXPENSES") {
       return (
         <>
-          <p>Sample text for expenses</p>
+          <p>Select all your expenses or filter them</p>
           {renderExpensesButtons()}
         </>
       );
     } else {
       return (
         <>
-          <p>Sample text for incomes</p>
+          <p>Select all your incomes or filter them</p>
           {renderIncomesButtons()}
         </>
       );
@@ -146,7 +145,7 @@ export default function CreateCustomGraphStep3({ graphConfiguration, onUpdateGra
       <div className='creategraphbox__step__bigbuttons'>
         <button
           className={graphConfiguration.customGraphSettings.filterSettings.allExpenses === true ? 'selected' : 'not_selected'}
-          onClick={() => handleSelectedAllExpenses()}
+          onClick={handleSelectedAllExpenses}
         >
           <p>All expenses</p>
         </button>

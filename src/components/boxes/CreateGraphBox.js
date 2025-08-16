@@ -51,12 +51,23 @@ export default function CreateGraphBox() {
       }
     },
     burndownSettings: {
-
+      referenceSettings: {
+        type: 'TOTAL_AVERAGE', // 'TOTAL_AVERAGE', 'LAST_YEAR_AVERAGE', 'BEST_MONTH', 'CUSTOM'
+        customMonth: ''
+      },
+      filterSettings: {
+        allExpenses: true,
+        includedCategories: []
+      },
+      dataSettings: {
+        time: 'LAST_MONTH', // 'LAST_MONTH', 'CUSTOM'
+        customMonth: ''
+      }
     }
   });
 
   useEffect(() => {
-    console.log(graphConfiguration.customGraphSettings.visualizationSettings);
+    console.log(graphConfiguration.burndownSettings);
   }, [graphConfiguration]);
 
   useEffect(() => {
@@ -164,7 +175,7 @@ export default function CreateGraphBox() {
     if (graphConfiguration.requestType === 'CUSTOM_GRAPH') {
       return <CreateCustomGraphStep2 graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoNext={handleNextStep} gotoEnd={handleOnEndStep} />;
     } else {
-      return <CreateSpendingBurndown graphConfiguration={graphConfiguration} />;
+      return <CreateSpendingBurndown graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} />;
     }
   }
 
@@ -178,7 +189,7 @@ export default function CreateGraphBox() {
         {step === 1 && renderCreateGraphStep1Buttons()}
         {step === 2 && renderNextScreen()}
         {step === 3 && <CreateCustomGraphStep3 graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoNext={handleNextStep} expensesCategoriesLoading={expensesCategoriesLoading} incomesBankAccountsLoading={incomesBankAccountsLoading} incomesSourcesLoading={incomesSourcesLoading} expensesCategories={expensesCategories} incomesBankAccounts={incomesBankAccounts} incomesSources={incomesSources} />}
-        {step === 4 && <CreateCustomGraphStep4 graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoBegin={handleOnBeginStep} />}
+        {step === 4 && <CreateCustomGraphStep4 graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoBegin={handleOnBeginStep} expensesCategoriesLoading={expensesCategoriesLoading} expensesCategories={expensesCategories} />}
       </div>
     </div >
   );

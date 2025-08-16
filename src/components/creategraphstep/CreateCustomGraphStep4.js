@@ -12,7 +12,7 @@ import { actionTypes } from '../../context/globalReducer';
 export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGraphConfig, gotoBack, gotoBegin }) {
 
     // Context
-    const [{ userJWTCookie, }, dispatch] = useGlobalStateValue();
+    const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
 
     const [isCumulative, setIsCumulative] = useState(graphConfiguration.customGraphSettings.visualizationSettings.cumulative);
     const [isGroupByCategory, setIsGroupByCategory] = useState(graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory);
