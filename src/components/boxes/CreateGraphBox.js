@@ -175,7 +175,7 @@ export default function CreateGraphBox() {
     if (graphConfiguration.requestType === 'CUSTOM_GRAPH') {
       return <CreateCustomGraphStep2 graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoNext={handleNextStep} gotoEnd={handleOnEndStep} />;
     } else {
-      return <CreateSpendingBurndown graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} />;
+      return <CreateSpendingBurndown graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} expensesCategoriesLoading={expensesCategoriesLoading} expensesCategories={expensesCategories} />;
     }
   }
 
@@ -189,7 +189,7 @@ export default function CreateGraphBox() {
         {step === 1 && renderCreateGraphStep1Buttons()}
         {step === 2 && renderNextScreen()}
         {step === 3 && <CreateCustomGraphStep3 graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoNext={handleNextStep} expensesCategoriesLoading={expensesCategoriesLoading} incomesBankAccountsLoading={incomesBankAccountsLoading} incomesSourcesLoading={incomesSourcesLoading} expensesCategories={expensesCategories} incomesBankAccounts={incomesBankAccounts} incomesSources={incomesSources} />}
-        {step === 4 && <CreateCustomGraphStep4 graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoBegin={handleOnBeginStep} expensesCategoriesLoading={expensesCategoriesLoading} expensesCategories={expensesCategories} />}
+        {step === 4 && <CreateCustomGraphStep4 graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoBegin={handleOnBeginStep} />}
       </div>
     </div >
   );

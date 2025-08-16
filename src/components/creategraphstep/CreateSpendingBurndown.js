@@ -13,7 +13,6 @@ import { actionTypes } from '../../context/globalReducer';
 export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGraphConfig, gotoBack, expensesCategoriesLoading, expensesCategories }) {
 
   const getSelectOptionsFromDatabase = (database) => {
-    console.log("input: ", database);
     return database.map(element => {
       return { value: element, label: element };
     });
