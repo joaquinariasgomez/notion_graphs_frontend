@@ -21,7 +21,7 @@ export default function CreateCustomGraphStep2({ graphConfiguration, onUpdateGra
   };
 
   const onNextButton = () => {
-    if (graphConfiguration.graphType === 'SAVINGS') {
+    if (graphConfiguration.customGraphSettings.dataSettings.source === 'SAVINGS') {
       gotoEnd()
     } else {
       gotoNext()

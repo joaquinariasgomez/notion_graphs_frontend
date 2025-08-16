@@ -4,12 +4,49 @@ import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
 import SyncLoader from "react-spinners/SyncLoader";
 import { useState } from 'react';
+import { createGraph } from '../../RequestUtils';
+import { useGlobalStateValue } from '../../context/GlobalStateProvider';
+import ClipLoader from 'react-spinners/ClipLoader';
+import { actionTypes } from '../../context/globalReducer';
 
-export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGraphConfig, gotoBack, gotoNext }) {
+export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGraphConfig, gotoBack, gotoBegin }) {
+
+    // Context
+    const [{ userJWTCookie, }, dispatch] = useGlobalStateValue();
 
     const [isCumulative, setIsCumulative] = useState(graphConfiguration.customGraphSettings.visualizationSettings.cumulative);
     const [isGroupByCategory, setIsGroupByCategory] = useState(graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory);
-    // const [isGroupByIncomesCategory, setIsGroupByIncomesCategory] = useState(graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeBankAccounts || graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeSources);
+    const [isCreatingGraph, setIsCreatingGraph] = useState(false);
+
+    const closeCreateGraphBox = () => {
+        dispatch({
+            type: actionTypes.SET_SHOW_CREATE_GRAPH_BOX,
+            value: false
+        })
+    }
+
+    const onBackButton = () => {
+        if (graphConfiguration.customGraphSettings.dataSettings.source === 'SAVINGS') {
+            gotoBegin()
+        } else {
+            gotoBack()
+        }
+    }
+
+    const handleCreateGraph = async () => {
+        try {
+            setIsCreatingGraph(true);
+            const apiResponse = await createGraph(userJWTCookie, graphConfiguration);
+            if (apiResponse) {
+                console.log("DEBUG JOAQUIN response: ", apiResponse);
+            }
+        } catch (error) {
+            // TODO: handle exception
+        } finally {
+            setIsCreatingGraph(false);
+            closeCreateGraphBox()
+        }
+    }
 
     const handleSelectedVisualizationType = (type) => {
         onUpdateGraphConfig({
@@ -116,21 +153,21 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
     const renderStep4Heading = () => {
         if (graphConfiguration.customGraphSettings.dataSettings.source === "EXPENSES") {
             return (
-                <div className='creategraphbox__heading'>
+                <div className='creategraphbox__heading last_step'>
                     <h2>Expenses</h2>
                     <TrendingDownRoundedIcon fontSize='medium' />
                 </div>
             );
         } else if (graphConfiguration.customGraphSettings.dataSettings.source === "INCOMES") {
             return (
-                <div className='creategraphbox__heading'>
+                <div className='creategraphbox__heading last_step'>
                     <h2>Incomes</h2>
                     <AttachMoneyRoundedIcon fontSize='medium' />
                 </div>
             );
         } else {
             return (
-                <div className='creategraphbox__heading'>
+                <div className='creategraphbox__heading last_step'>
                     <h2>Savings</h2>
                     <TrendingUpRoundedIcon fontSize='medium' />
                 </div>
@@ -246,7 +283,7 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
 
     const renderOnOffButtons = () => {
         return (
-            <div className='creategraphbox__step__bigbuttons'>
+            <div className='creategraphbox__step__bigbuttons notitle'>
                 {renderGroupByCategoriesButtons()}
                 <button
                     className={`${isCumulative === true ? 'selected' : 'not_selected'} small`}
@@ -283,11 +320,11 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
                 {renderStep4Content()}
             </div>
             <div className='creategraphbox__arrows'>
-                <button className='creategraphbox__button back' onClick={gotoBack} disabled={false}>
+                <button className='creategraphbox__button back' onClick={onBackButton} disabled={false}>
                     Back
                 </button>
-                <button className='creategraphbox__button next' onClick={gotoNext} disabled={false}>
-                    Next
+                <button className='creategraphbox__button next create_graph' onClick={handleCreateGraph} disabled={false}>
+                    {isCreatingGraph ? <ClipLoader size={15} /> : 'Create graph'}
                 </button>
             </div>
         </div>

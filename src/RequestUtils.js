@@ -82,3 +82,23 @@ export async function getIncomesSources(jwtToken) {
       return response.json()
     });
 }
+
+export async function createGraph(jwtToken, graphConfiguration) {
+  const graphs_url = Config.BackendBaseURL + Config.BackendGraphsURL;
+  const result = await fetch(graphs_url, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${jwtToken}`
+    },
+    body: JSON.stringify(graphConfiguration)
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(response.status);
+      }
+      return response.json()
+    });
+  return result;
+}
