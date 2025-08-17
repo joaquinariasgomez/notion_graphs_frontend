@@ -23,7 +23,6 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
   const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
 
   const [selectedIncludedCategories, setSelectedIncludedCategories] = useState(getSelectOptionsFromDatabase(graphConfiguration.burndownSettings.filterSettings.includedCategories));
-  const [isCreatingGraph, setIsCreatingGraph] = useState(false);
 
   // Month picker
   const [selectedReferenceMonth, setSelectedReferenceMonth] = useState(new Date());
@@ -48,17 +47,14 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
 
   const handleCreateGraph = async () => {
     try {
-      setIsCreatingGraph(true);
+      closeCreateGraphBox()
       const apiResponse = await createGraph(userJWTCookie, graphConfiguration);
       if (apiResponse) {
         console.log("DEBUG JOAQUIN response: ", apiResponse);
       }
     } catch (error) {
       // TODO: handle exception
-    } finally {
-      setIsCreatingGraph(false);
-      closeCreateGraphBox()
-    }
+    } finally { }
   }
 
   const stopPropagation = (event) => {
@@ -306,8 +302,8 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
         <button className='creategraphbox__button back' onClick={gotoBack} disabled={false}>
           Back
         </button>
-        <button className='creategraphbox__button next create_graph' onClick={handleCreateGraph} disabled={false}>
-          {isCreatingGraph ? <ClipLoader size={15} /> : 'Create graph'}
+        <button className='creategraphbox__button next create_graph' onClick={handleCreateGraph} disabled={expensesCategoriesLoading}>
+          Create graph
         </button>
       </div>
     </div>

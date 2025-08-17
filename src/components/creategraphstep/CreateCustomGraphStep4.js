@@ -2,7 +2,6 @@ import '../../css/CreateGraphBox.css';
 import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
-import SyncLoader from "react-spinners/SyncLoader";
 import { useState } from 'react';
 import { createGraph } from '../../RequestUtils';
 import { useGlobalStateValue } from '../../context/GlobalStateProvider';
@@ -16,7 +15,6 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
 
     const [isCumulative, setIsCumulative] = useState(graphConfiguration.customGraphSettings.visualizationSettings.cumulative);
     const [isGroupByCategory, setIsGroupByCategory] = useState(graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory);
-    const [isCreatingGraph, setIsCreatingGraph] = useState(false);
 
     const closeCreateGraphBox = () => {
         dispatch({
@@ -35,17 +33,14 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
 
     const handleCreateGraph = async () => {
         try {
-            setIsCreatingGraph(true);
+            closeCreateGraphBox()
             const apiResponse = await createGraph(userJWTCookie, graphConfiguration);
             if (apiResponse) {
                 console.log("DEBUG JOAQUIN response: ", apiResponse);
             }
         } catch (error) {
             // TODO: handle exception
-        } finally {
-            setIsCreatingGraph(false);
-            closeCreateGraphBox()
-        }
+        } finally { }
     }
 
     const handleSelectedVisualizationType = (type) => {
@@ -324,7 +319,7 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
                     Back
                 </button>
                 <button className='creategraphbox__button next create_graph' onClick={handleCreateGraph} disabled={false}>
-                    {isCreatingGraph ? <ClipLoader size={15} /> : 'Create graph'}
+                    Create graph
                 </button>
             </div>
         </div>
