@@ -19,3 +19,38 @@
 .header__item+.header__item {
   margin-left: 50px;
 }
+
+.dashboard__body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.graphsgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  /* Space between the boxes */
+  padding: 1rem;
+}
+
+.graphbox {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: grab;
+  touch-action: none;
+  /* Prevents scrolling on touch devices when dragging */
+  user-select: none;
+}
+
+.graphbox:active {
+  cursor: grabbing;
+}
+
+.graphbox h4 {
+  margin-top: 0;
+}
