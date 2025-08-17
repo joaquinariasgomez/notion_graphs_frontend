@@ -3,7 +3,7 @@ import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
 import { useState } from 'react';
-import { createGraph } from '../../RequestUtils';
+import { createGraph } from '../../api/RequestUtils';
 import { useGlobalStateValue } from '../../context/GlobalStateProvider';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { actionTypes } from '../../context/globalReducer';

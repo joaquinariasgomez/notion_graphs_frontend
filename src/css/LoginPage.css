@@ -29,8 +29,6 @@
   /* creates a pattern of dark gray dots (#333) with a radius of 1px */
   background-size: 20px 20px, 20px 20px;
   /* Adjust the size for the spacing of the dots */
-  background-color: white;
-  /* filter: blur(10px); */
   background-blend-mode: normal, multiply;
   z-index: 0;
 }

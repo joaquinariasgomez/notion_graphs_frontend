@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from 'date-fns'; // Recommended for easy date formatting
 import { useState } from 'react';
 import Select from 'react-select';
-import { createGraph } from '../../RequestUtils';
+import { createGraph } from '../../api/RequestUtils';
 import { useGlobalStateValue } from '../../context/GlobalStateProvider';
 import { actionTypes } from '../../context/globalReducer';
 

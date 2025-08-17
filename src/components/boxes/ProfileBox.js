@@ -4,7 +4,7 @@ import { actionTypes } from '../../context/globalReducer';
 import { useGlobalStateValue } from '../../context/GlobalStateProvider';
 import { useCookie } from '../../useCookie';
 import { useLocalStorage } from '../../useLocalStorage';
-import { logoutFromNotion } from '../../RequestUtils';
+import { logoutFromNotion } from '../../api/RequestUtils';
 import ClipLoader from "react-spinners/ClipLoader";
 
 function ProfileBox() {

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import '../css/LoginPage.css';
 import { useNavigate } from 'react-router-dom';
 import { useCookie } from '../useCookie';
-import { loginToNotionWithCode } from '../RequestUtils';
+import { loginToNotionWithCode } from '../api/RequestUtils';
 import { useLocalStorage } from '../useLocalStorage';
 import LandingPageFooter from '../components/LandingPageFooter';
 import ClipLoader from "react-spinners/ClipLoader";
