@@ -12,8 +12,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 700px;
+  min-width: 300px;
+  /* width: 700px; */
   max-width: 100vw;
+  /* max-height: 100vh; */
   /* height: 600px; */
   border-radius: 10px;
   background-color: white;
@@ -52,6 +54,14 @@
   background-color: var(--darkbutton-hover-color);
 }
 
+.creategraphbox__step1__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 28px;
+  padding: 20px;
+}
+
 .creategraphbox__stepcontainer {
   display: flex;
   flex-direction: column;
@@ -66,6 +76,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-height: 80vh;
   padding: 0 20px;
   flex-grow: 1;
   overflow-y: auto;
@@ -111,6 +122,15 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
+}
+
+.creategraphbox__step__bigbuttons.notitle {
+  margin: 0;
+}
+
+.creategraphbox__step__bigbuttons.vertical {
+  flex-direction: column;
 }
 
 .creategraphbox__step__bigbuttons>button {
@@ -129,8 +149,56 @@
   color: rgb(144, 144, 144);
 }
 
+.filterbycategory__bigbutton {
+  width: 220px;
+  /*165px;*/
+  height: 145px;
+  padding: 10px;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-color: white;
+  background-color: white;
+  color: rgb(144, 144, 144);
+}
+
+.filterbycategory__bigbutton.selected {
+  border-color: var(--matteblack-color);
+  color: var(--matteblack-color);
+  transition: color 0.25s ease;
+}
+
+.filterbycategory__bigbutton>p {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 15px 0px;
+}
+
+.filterbycategory__selectcontainer {
+  width: 100%;
+}
+
 .creategraphbox__step__bigbuttons>button.small {
+  min-width: 100px;
+  width: 100%;
+  /* No fixed width */
   height: 80px;
+}
+
+/* Step1 buttons are fixed and always show border, a bit different */
+.creategraphbox__step__bigbuttons>button.step1 {
+  height: 80px;
+  width: 100%;
+  color: var(--matteblack-color);
+  border-color: var(--matteblack-color);
+}
+
+.creategraphbox__step__bigbuttons>button.step1:hover {
+  border-color: var(--matteblack-color);
 }
 
 .creategraphbox__step__bigbuttons>button.selected {
@@ -173,6 +241,16 @@
   color: var(--matteblack-color);
 }
 
+.creategraphbox__heading.last_step {
+  width: 100%;
+  margin-bottom: 15px;
+  padding-left: 6px;
+}
+
+/* .creategraphbox__heading.last_step>h2 {
+  font-style: italic;
+} */
+
 .creategraphbox__button {
   height: 44px;
   border-style: solid;
@@ -201,6 +279,11 @@
   background-color: var(--matteblack-color);
 }
 
+.creategraphbox__button.create_graph {
+  /* This is just for the loading spinner */
+  min-width: 132.53px;
+}
+
 .creategraphbox__button.next:disabled {
   background-color: white;
 }
@@ -218,6 +301,14 @@
 
 .creategraphbox__button.back:hover {
   animation: changecolorblack_opposite 0.25s ease forwards;
+}
+
+.customdatepicker {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 @keyframes zoom_100 {
