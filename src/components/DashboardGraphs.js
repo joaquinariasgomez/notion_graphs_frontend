@@ -9,7 +9,7 @@ import {
 import {
     arrayMove,
     SortableContext,
-    rectSortingStrategy, // A good strategy for grids
+    rectSortingStrategy,
 } from "@dnd-kit/sortable";
 import GraphBox from "./GraphBox";
 
@@ -59,7 +59,8 @@ export default function DashboardGraphs({ }) {
     const grabbedGraph = grabbedGraphConfigId ? graphConfigurations.find(g => g.id === grabbedGraphConfigId) : null;
 
     return (
-        <div>
+        <div className="dashboard__graphs">
+            {/* TODO: optimizar esto para que sea una opcion dentro del GraphBox */}
             <DndContext
                 collisionDetection={closestCenter}
                 onDragStart={handleDragStart}

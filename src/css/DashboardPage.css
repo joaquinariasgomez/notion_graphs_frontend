@@ -1,3 +1,7 @@
+:root {
+  --graphbox-height: 268px;
+}
+
 .dashboard__page {
   display: flex;
   flex-direction: column;
@@ -25,17 +29,73 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  padding: 0px 50px;
+}
+
+.dashboard__graphs {
+  width: 100%;
+  border: 1px solid red;
 }
 
 .graphsgrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-  /* Space between the boxes */
-  padding: 1rem;
+  gap: 25px;
 }
 
 .graphbox {
+  height: var(--graphbox-height);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 20px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.25);
+}
+
+.graphbox__moresettings__container {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.graphbox__moresettings__container>button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 2px solid var(--matteblack-color);
+  cursor: pointer;
+  padding: 0;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease-out, transform 0.1s ease;
+  outline: none;
+}
+
+.graphbox__moresettings__container>button:hover {
+  background-color: var(--darkbutton-hover-color);
+}
+
+.graphbox__moresettings__container>button:active {
+  background-color: rgb(222, 222, 222);
+  transform: scale(0.95);
+}
+
+.graphbox__settings {
+  height: 20px;
+  width: 100%;
+  border: 1px solid brown;
+}
+
+.graphbox__graph {
+  flex-grow: 1;
+  border: 1px solid violet;
+}
+
+/* .graphbox {
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
@@ -43,7 +103,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   cursor: grab;
   touch-action: none;
-  /* Prevents scrolling on touch devices when dragging */
   user-select: none;
 }
 
@@ -53,4 +112,4 @@
 
 .graphbox h4 {
   margin-top: 0;
-}
+} */
