@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
-import { getGraphConfigurations } from "../api/RequestUtils";
+import { getGraphConfigurations, getGraphs } from "../api/RequestUtils";
 import {
     DndContext,
     closestCenter,
@@ -18,8 +18,8 @@ export default function DashboardGraphs({ }) {
     // Context
     const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
 
-    const [graphConfigurationsLoading, setGraphConfigurationsLoading] = useState(false);
-    const [graphConfigurations, setGraphConfigurations] = useState([]);
+    const [graphsLoading, setGraphsLoading] = useState(false);
+    const [graphs, setGraphs] = useState([]);
     const [grabbedGraphConfigId, setGrabbedGraphConfigId] = useState(null);
 
     useEffect(() => {
@@ -28,15 +28,15 @@ export default function DashboardGraphs({ }) {
 
     const fetchGraphConfigurations = async () => {
         try {
-            setGraphConfigurationsLoading(true);
-            const apiResponse = await getGraphConfigurations(userJWTCookie);
+            setGraphsLoading(true);
+            const apiResponse = await getGraphs(userJWTCookie);
             if (apiResponse) {
-                setGraphConfigurations(apiResponse);
+                setGraphs(apiResponse);
             }
         } catch (error) {
 
         } finally {
-            setGraphConfigurationsLoading(false);
+            setGraphsLoading(false);
         }
     }
 
@@ -47,7 +47,7 @@ export default function DashboardGraphs({ }) {
     const handleDragEnd = (event) => {
         const { active, over } = event;
         if (active.id !== over.id) {
-            setGraphConfigurations((items) => {
+            setGraphs((items) => {
                 const oldIndex = items.findIndex((item) => item.id === active.id);
                 const newIndex = items.findIndex((item) => item.id === over.id);
                 return arrayMove(items, oldIndex, newIndex); // Utility from dnd-kit
@@ -56,7 +56,7 @@ export default function DashboardGraphs({ }) {
         setGrabbedGraphConfigId(null);
     };
 
-    const grabbedGraph = grabbedGraphConfigId ? graphConfigurations.find(g => g.id === grabbedGraphConfigId) : null;
+    const grabbedGraph = grabbedGraphConfigId ? graphs.find(g => g.id === grabbedGraphConfigId) : null;
 
     return (
         <div className="dashboard__graphs">
@@ -68,10 +68,10 @@ export default function DashboardGraphs({ }) {
             >
                 <div className="graphsgrid">
                     <SortableContext
-                        items={graphConfigurations.map(g => g.id)}
+                        items={graphs.map(g => g.id)}
                         strategy={rectSortingStrategy}
                     >
-                        {graphConfigurations.map((graph) => (
+                        {graphs.map((graph) => (
                             <GraphBox key={graph.id} graph={graph} />
                         ))}
                     </SortableContext>

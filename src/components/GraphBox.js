@@ -10,7 +10,7 @@ export default function GraphBox({ graph }) {
         transform,
         transition,
         isDragging,
-    } = useSortable({ id: graph.id }); // Use a unique ID from my data
+    } = useSortable({ id: graph.graphConfiguration.id }); // Use a unique ID from my data
 
     const style = {
         transform,
@@ -55,7 +55,7 @@ export default function GraphBox({ graph }) {
 
             </div>
             <div className="graphbox__graph">
-                <h4>{graph.id || 'Untitled Graph'}</h4>
+                <h4>{graph.graphConfiguration.id || 'Untitled Graph'}</h4>
             </div>
         </div>
     );

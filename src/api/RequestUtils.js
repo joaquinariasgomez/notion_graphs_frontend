@@ -53,8 +53,8 @@ export async function getIncomesSources(jwtToken) {
   return (await response).data;
 }
 
-export async function getGraphConfigurations(jwtToken) {
-  const url = Config.BackendGraphsURL + "/configurations";
+export async function getGraphs(jwtToken) {
+  const url = Config.BackendGraphsURL;
   const response = getWithJWTToken(url, jwtToken);
   return (await response).data;
 }
