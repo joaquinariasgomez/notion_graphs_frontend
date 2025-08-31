@@ -31,7 +31,7 @@ export default function DashboardGraphs({ }) {
             setGraphsLoading(true);
             const apiResponse = await getGraphs(userJWTCookie);
             if (apiResponse) {
-                setGraphs(apiResponse);
+                setGraphs(apiResponse.data);
             }
         } catch (error) {
 

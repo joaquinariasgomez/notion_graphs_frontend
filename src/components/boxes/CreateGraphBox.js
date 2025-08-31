@@ -66,9 +66,9 @@ export default function CreateGraphBox() {
     }
   });
 
-  useEffect(() => {
-    console.log(graphConfiguration.burndownSettings);
-  }, [graphConfiguration]);
+  // useEffect(() => {
+  //   console.log(graphConfiguration.burndownSettings);
+  // }, [graphConfiguration]);
 
   useEffect(() => {
     fetchExpensesCategories();
