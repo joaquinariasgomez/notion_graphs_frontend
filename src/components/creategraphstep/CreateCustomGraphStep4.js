@@ -171,7 +171,7 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
     }
 
     const renderLineChartText = () => {
-        if (graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory === true || graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeBankAccounts === true || graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeSources === true) {
+        if ((graphConfiguration.customGraphSettings.dataSettings.source === "EXPENSES" && graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory === true) || (graphConfiguration.customGraphSettings.dataSettings.source === "INCOMES" && graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeBankAccounts === true || graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeSources === true)) {
             return (
                 <p>Multiline chart</p>
             );
@@ -183,7 +183,7 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
     }
 
     const renderBarChartText = () => {
-        if (graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory === true || graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeBankAccounts === true || graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeSources === true) {
+        if ((graphConfiguration.customGraphSettings.dataSettings.source === "EXPENSES" && graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory === true) || (graphConfiguration.customGraphSettings.dataSettings.source === "INCOMES" && graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeBankAccounts === true || graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeSources === true)) {
             return (
                 <p>Multibar chart</p>
             );
