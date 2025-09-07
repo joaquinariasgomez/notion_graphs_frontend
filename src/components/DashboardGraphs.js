@@ -48,15 +48,15 @@ export default function DashboardGraphs({ }) {
         const { active, over } = event;
         if (active.id !== over.id) {
             setGraphs((items) => {
-                const oldIndex = items.findIndex((item) => item.id === active.id);
-                const newIndex = items.findIndex((item) => item.id === over.id);
+                const oldIndex = items.findIndex((item) => item.graphConfiguration.id === active.id);
+                const newIndex = items.findIndex((item) => item.graphConfiguration.id === over.id);
                 return arrayMove(items, oldIndex, newIndex); // Utility from dnd-kit
             });
         }
         setGrabbedGraphConfigId(null);
     };
 
-    const grabbedGraph = grabbedGraphConfigId ? graphs.find(g => g.id === grabbedGraphConfigId) : null;
+    const grabbedGraph = grabbedGraphConfigId ? graphs.find(g => g.graphConfiguration.id === grabbedGraphConfigId) : null;
 
     return (
         <div className="dashboard__graphs">
@@ -68,11 +68,11 @@ export default function DashboardGraphs({ }) {
             >
                 <div className="graphsgrid">
                     <SortableContext
-                        items={graphs.map(g => g.id)}
+                        items={graphs.map(g => g.graphConfiguration.id)}
                         strategy={rectSortingStrategy}
                     >
                         {graphs.map((graph) => (
-                            <GraphBox key={graph.id} graph={graph} />
+                            <GraphBox key={graph.graphConfiguration.id} graph={graph} />
                         ))}
                     </SortableContext>
                 </div>

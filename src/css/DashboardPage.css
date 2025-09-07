@@ -39,7 +39,7 @@
 
 .graphsgrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 25px;
 }
 
@@ -58,6 +58,17 @@
   position: absolute;
   top: 5px;
   right: 5px;
+}
+
+.graphbox__drag-handle {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  border: 1px solid purple;
+}
+
+.graphbox__drag-handle:hover {
+  cursor: grab;
 }
 
 .graphbox__moresettings__container>button {
@@ -84,8 +95,8 @@
   transform: scale(0.95);
 }
 
-.graphbox__settings {
-  height: 20px;
+.graphbox__header {
+  height: 30px;
   width: 100%;
   border: 1px solid brown;
 }
