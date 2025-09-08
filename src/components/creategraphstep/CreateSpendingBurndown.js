@@ -1,5 +1,5 @@
 import '../../css/CreateGraphBox.css';
-import { customStyleForSelectPlacement } from '../../Utils';
+import { customStyleForSelectPlacement } from '../../utils/Utils';
 import ClipLoader from 'react-spinners/ClipLoader';
 import SyncLoader from "react-spinners/SyncLoader";
 import DatePicker from 'react-datepicker';

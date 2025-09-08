@@ -1,3 +1,5 @@
+import { getInitialDayFromSettings, getLastDayFromSettings } from "../../utils/DateUtils";
+import { format } from 'date-fns';
 
 /**
    * Processes graph data to create a continuous series from a start to an end date.
@@ -8,22 +10,20 @@
    * @returns {{dates: string[], values: number[]}} - An object with complete dates and values.
    */
 export function processContinuousGraphData(graphConfiguration, graphData) {
-  const { dataSettings } = graphConfiguration.customGraphSettings;
-  const { customStartDate: startDate, customEndDate: endDate } = dataSettings;
   const isCumulative = graphConfiguration.customGraphSettings.visualizationSettings.cumulative;
-  if (!startDate || !endDate || !graphData?.data) {
+  if (!graphData?.data) {
     return { dates: [], values: [] };
   }
 
   const dataMap = new Map(graphData.data.map(item => [item.date, item.totalAmount]));
   const dates = [];
   const values = [];
-  const cumulativeValue = 0;
+  var cumulativeValue = 0;
 
-  const currentDate = new Date(`${startDate}T00:00:00`);
-  const lastDate = new Date(`${endDate}T00:00:00`);
+  const currentDate = getInitialDayFromSettings(graphConfiguration);
+  const lastDate = getLastDayFromSettings(graphConfiguration);
   while (currentDate <= lastDate) {
-    const formattedDate = currentDate.toISOString().split('T')[0];
+    const formattedDate = format(currentDate, 'yyyy-MM-dd');
     dates.push(formattedDate);
     const value = dataMap.get(formattedDate) || 0;
     cumulativeValue = cumulativeValue + value;

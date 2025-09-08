@@ -1,7 +1,7 @@
 import '../../css/CreateGraphBox.css';
 import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
 import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
-import { customStyleForSelectPlacement } from '../../Utils';
+import { customStyleForSelectPlacement } from '../../utils/Utils';
 import SyncLoader from "react-spinners/SyncLoader";
 import Select from 'react-select';
 import { useState } from 'react';
