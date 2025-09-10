@@ -57,6 +57,10 @@ export default function LineGraph({ graphConfiguration, graphData }) {
         text: "Test title"//getGraphTitleFromGraphOptions(desiredGraphOptions)
       }
     },
+    interaction: {
+      mode: 'index',
+      intersect: false
+    },
     scales: {
       x: {
         type: 'time', // Tell Chart.js to use the time scale
