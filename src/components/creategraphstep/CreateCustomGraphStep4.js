@@ -34,9 +34,13 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
     const handleCreateGraph = async () => {
         try {
             closeCreateGraphBox()
+            // TODO JOAQUIN: APPEND GRAPH AS PENDING, THEN OVERRIDE THE CONTENT
             const apiResponse = await createGraph(userJWTCookie, graphConfiguration);
             if (apiResponse) {
-                console.log("DEBUG JOAQUIN response: ", apiResponse);
+                dispatch({
+                    type: actionTypes.APPEND_GRAPH,
+                    value: apiResponse
+                })
             }
         } catch (error) {
             // TODO: handle exception

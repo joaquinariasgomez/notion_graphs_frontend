@@ -3,6 +3,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import { useEffect, useState } from "react";
 import GraphDisplayer from "./graphsdisplay/GraphDisplayer";
+import SyncLoader from "react-spinners/SyncLoader";
 
 export default function GraphBox({ graph }) {
     const {
@@ -39,6 +40,24 @@ export default function GraphBox({ graph }) {
         );
     }
 
+    const renderGraph = (graph) => {
+        const graphCreationStatus = graph.graphConfiguration.graphCreationStatus;
+        switch (graphCreationStatus) {
+            case "CREATED":
+                return (
+                    <GraphDisplayer graphConfiguration={graph.graphConfiguration} graphData={graph.graphData} />
+                );
+            default:
+            case "PENDING":
+                return (
+                    <SyncLoader size={14} style={{ color: '#6d6d6d' }} />
+                );
+            case "ERROR":
+                {/* TODO JOAQUIN - fill */ }
+                return (<></>);
+        }
+    }
+
     return (
         <div
             ref={setNodeRef}
@@ -62,7 +81,7 @@ export default function GraphBox({ graph }) {
                 {/* TODO put more options in this array */}
             </div>
             <div className="graphbox__graph">
-                <GraphDisplayer graphConfiguration={graph.graphConfiguration} graphData={graph.graphData} />
+                {renderGraph(graph)}
             </div>
         </div>
     );

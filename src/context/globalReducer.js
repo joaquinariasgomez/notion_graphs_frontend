@@ -2,14 +2,17 @@ export const initialState = {
   userJWTCookie: "",
   userSessionDetails: {},
   showCreateGraphBox: false,
-  showUserProfileBox: false
+  showUserProfileBox: false,
+  graphs: []
 }
 
 export const actionTypes = {
   SET_USER_JWT_COOKIE: "SET_USER_JWT_COOKIE",
   SET_USER_SESSION_DETAILS: "SET_USER_SESSION_DETAILS",
   SET_SHOW_CREATE_GRAPH_BOX: "SET_SHOW_CREATE_GRAPH_BOX",
-  SET_SHOW_USER_PROFILE_BOX: "SET_SHOW_USER_PROFILE_BOX"
+  SET_SHOW_USER_PROFILE_BOX: "SET_SHOW_USER_PROFILE_BOX",
+  SET_GRAPHS: "SET_GRAPHS",
+  APPEND_GRAPH: "APPEND_GRAPH"
 }
 
 const globalReducer = (state, action) => {
@@ -36,6 +39,18 @@ const globalReducer = (state, action) => {
       return {
         ...state,
         showUserProfileBox: action.value
+      };
+
+    case actionTypes.SET_GRAPHS:
+      return {
+        ...state,
+        graphs: action.value
+      };
+
+    case actionTypes.APPEND_GRAPH:
+      return {
+        ...state,
+        graphs: [...state.graphs, action.value]
       };
 
     default:

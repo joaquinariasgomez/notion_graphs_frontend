@@ -12,14 +12,14 @@ import {
     rectSortingStrategy,
 } from "@dnd-kit/sortable";
 import GraphBox from "./GraphBox";
+import { actionTypes } from "../context/globalReducer";
 
 export default function DashboardGraphs({ }) {
 
     // Context
-    const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
+    const [{ userJWTCookie, graphs }, dispatch] = useGlobalStateValue();
 
     const [graphsLoading, setGraphsLoading] = useState(false);
-    const [graphs, setGraphs] = useState([]);
     const [grabbedGraphConfigId, setGrabbedGraphConfigId] = useState(null);
 
     useEffect(() => {
@@ -31,7 +31,10 @@ export default function DashboardGraphs({ }) {
             setGraphsLoading(true);
             const apiResponse = await getGraphs(userJWTCookie);
             if (apiResponse) {
-                setGraphs(apiResponse.data);
+                dispatch({
+                    type: actionTypes.SET_GRAPHS,
+                    value: [...graphs, ...apiResponse.data]
+                })
             }
         } catch (error) {
 
@@ -47,10 +50,13 @@ export default function DashboardGraphs({ }) {
     const handleDragEnd = (event) => {
         const { active, over } = event;
         if (active.id !== over.id) {
-            setGraphs((items) => {
-                const oldIndex = items.findIndex((item) => item.graphConfiguration.id === active.id);
-                const newIndex = items.findIndex((item) => item.graphConfiguration.id === over.id);
-                return arrayMove(items, oldIndex, newIndex); // Utility from dnd-kit
+            const oldIndex = graphs.findIndex((item) => item.graphConfiguration.id === active.id);
+            const newIndex = graphs.findIndex((item) => item.graphConfiguration.id === over.id);
+            const reorderedGraphs = arrayMove(graphs, oldIndex, newIndex);
+
+            dispatch({
+                type: actionTypes.SET_GRAPHS,
+                value: reorderedGraphs
             });
         }
         setGrabbedGraphConfigId(null);
@@ -60,7 +66,6 @@ export default function DashboardGraphs({ }) {
 
     return (
         <div className="dashboard__graphs">
-            {/* TODO: optimizar esto para que sea una opcion dentro del GraphBox */}
             <DndContext
                 collisionDetection={closestCenter}
                 onDragStart={handleDragStart}
