@@ -33,7 +33,7 @@ export default function DashboardGraphs({ }) {
             if (apiResponse) {
                 dispatch({
                     type: actionTypes.SET_GRAPHS,
-                    value: [...graphs, ...apiResponse.data]
+                    value: apiResponse.data
                 })
             }
         } catch (error) {

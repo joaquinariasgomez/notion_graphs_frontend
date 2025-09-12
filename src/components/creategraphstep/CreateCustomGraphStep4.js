@@ -31,15 +31,34 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
         }
     }
 
+    const createPendingGraphWithConfiguration = (graphConfig) => {
+        const updatedConfig = {
+            ...graphConfig,
+            id: crypto.randomUUID(), // Autogenerate a random id just to be able to reorder it while it loads
+        };
+        return {
+            graphConfiguration: updatedConfig,
+            graphData: null
+        }
+    }
+
     const handleCreateGraph = async () => {
         try {
             closeCreateGraphBox()
-            // TODO JOAQUIN: APPEND GRAPH AS PENDING, THEN OVERRIDE THE CONTENT
+            const pendingGraphConfiguration = createPendingGraphWithConfiguration(graphConfiguration);
+            dispatch({
+                type: actionTypes.APPEND_GRAPH,
+                value: pendingGraphConfiguration
+            })
             const apiResponse = await createGraph(userJWTCookie, graphConfiguration);
+            // Override pending graph that just got created
             if (apiResponse) {
                 dispatch({
-                    type: actionTypes.APPEND_GRAPH,
-                    value: apiResponse
+                    type: actionTypes.UPDATE_GRAPH,
+                    payload: {
+                        id: pendingGraphConfiguration.graphConfiguration.id,
+                        data: apiResponse
+                    }
                 })
             }
         } catch (error) {

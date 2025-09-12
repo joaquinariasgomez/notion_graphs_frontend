@@ -28,6 +28,10 @@ export function processContinuousGraphData(graphConfiguration, graphData) {
   }
 }
 
+export function getGraphTitleFromConfiguration(graphConfiguration) {
+  return "Test graph";
+}
+
 function processDataGroupByDay(graphConfiguration, graphData) {
   const dates = [];
   const values = [];

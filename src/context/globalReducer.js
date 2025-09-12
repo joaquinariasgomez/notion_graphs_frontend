@@ -12,7 +12,8 @@ export const actionTypes = {
   SET_SHOW_CREATE_GRAPH_BOX: "SET_SHOW_CREATE_GRAPH_BOX",
   SET_SHOW_USER_PROFILE_BOX: "SET_SHOW_USER_PROFILE_BOX",
   SET_GRAPHS: "SET_GRAPHS",
-  APPEND_GRAPH: "APPEND_GRAPH"
+  APPEND_GRAPH: "APPEND_GRAPH",
+  UPDATE_GRAPH: "UPDATE_GRAPH"
 }
 
 const globalReducer = (state, action) => {
@@ -51,6 +52,21 @@ const globalReducer = (state, action) => {
       return {
         ...state,
         graphs: [...state.graphs, action.value]
+      };
+
+    case actionTypes.UPDATE_GRAPH:
+      // Updates the element with id "id" by "data"
+      const { id, data } = action.payload;
+      const updatedGraphs = state.graphs.map((graph) => {
+        if (graph.graphConfiguration.id === id) {
+          return data;
+        }
+        return graph;
+      });
+
+      return {
+        ...state,
+        graphs: updatedGraphs
       };
 
     default:

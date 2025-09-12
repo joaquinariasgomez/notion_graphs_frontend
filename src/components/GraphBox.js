@@ -4,6 +4,7 @@ import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import { useEffect, useState } from "react";
 import GraphDisplayer from "./graphsdisplay/GraphDisplayer";
 import SyncLoader from "react-spinners/SyncLoader";
+import { getGraphTitleFromConfiguration } from "./graphsdisplay/GraphsDisplayUtils";
 
 export default function GraphBox({ graph }) {
     const {
@@ -50,7 +51,12 @@ export default function GraphBox({ graph }) {
             default:
             case "PENDING":
                 return (
-                    <SyncLoader size={14} style={{ color: '#6d6d6d' }} />
+                    <div className="loading">
+                        <p className="title">
+                            {getGraphTitleFromConfiguration(graph.graphConfiguration)}
+                        </p>
+                        <SyncLoader size={14} style={{ color: '#6d6d6d' }} />
+                    </div>
                 );
             case "ERROR":
                 {/* TODO JOAQUIN - fill */ }
