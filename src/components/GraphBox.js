@@ -1,10 +1,13 @@
 import { useSortable } from "@dnd-kit/sortable";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useEffect, useState } from "react";
 import GraphDisplayer from "./graphsdisplay/GraphDisplayer";
 import SyncLoader from "react-spinners/SyncLoader";
 import { getGraphTitleFromConfiguration } from "./graphsdisplay/GraphsDisplayUtils";
+import { useGlobalStateValue } from "../context/GlobalStateProvider";
+import { actionTypes } from "../context/globalReducer";
 
 export default function GraphBox({ graph }) {
     const {
@@ -22,6 +25,9 @@ export default function GraphBox({ graph }) {
         opacity: isDragging ? 0.5 : 1,
     };
 
+    // Context
+    const [{ }, dispatch] = useGlobalStateValue();
+
     const [isMoreSettingsOpen, setIsMoreSettingsOpen] = useState(false);
 
     useEffect(() => {
@@ -31,6 +37,15 @@ export default function GraphBox({ graph }) {
     const handleClickMoreSettingsButton = () => {
         console.log("Executing");
         setIsMoreSettingsOpen(!isMoreSettingsOpen);
+    }
+
+    const handleDeleteGraph = (graph) => {
+        console.log("Deleting graph ", graph);
+        dispatch({
+            type: actionTypes.DELETE_GRAPH,
+            value: graph.graphConfiguration.id
+        })
+        // TODO JOAQUIN: make call to backend
     }
 
     const renderMoreSettings = () => {
@@ -81,14 +96,14 @@ export default function GraphBox({ graph }) {
                 </button>
                 {isMoreSettingsOpen && renderMoreSettings()}
                 </div> */}
-                <div className="graphbox__delete">
-
-                </div>
+                <button className="graphbox__delete" title="Delete" onClick={() => handleDeleteGraph(graph)}>
+                    <DeleteIcon style={{ color: '#f14668' }} fontSize="small" />
+                </button>
                 {/* TODO put more options in this array */}
             </div>
             <div className="graphbox__graph">
                 {renderGraph(graph)}
             </div>
-        </div>
+        </div >
     );
 }

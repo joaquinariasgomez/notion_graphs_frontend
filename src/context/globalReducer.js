@@ -13,7 +13,8 @@ export const actionTypes = {
   SET_SHOW_USER_PROFILE_BOX: "SET_SHOW_USER_PROFILE_BOX",
   SET_GRAPHS: "SET_GRAPHS",
   APPEND_GRAPH: "APPEND_GRAPH",
-  UPDATE_GRAPH: "UPDATE_GRAPH"
+  UPDATE_GRAPH: "UPDATE_GRAPH",
+  DELETE_GRAPH: "DELETE_GRAPH"
 }
 
 const globalReducer = (state, action) => {
@@ -67,6 +68,16 @@ const globalReducer = (state, action) => {
       return {
         ...state,
         graphs: updatedGraphs
+      };
+
+    case actionTypes.DELETE_GRAPH:
+      // Updates the element with id "id" by "data"
+      const idToDelete = action.value;
+      const filteredGraphs = state.graphs.filter((graph) => graph.graphConfiguration.id !== idToDelete);
+
+      return {
+        ...state,
+        graphs: filteredGraphs
       };
 
     default:

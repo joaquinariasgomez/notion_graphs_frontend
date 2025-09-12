@@ -34,6 +34,7 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
     const createPendingGraphWithConfiguration = (graphConfig) => {
         const updatedConfig = {
             ...graphConfig,
+            graphCreationStatus: "PENDING",
             id: crypto.randomUUID(), // Autogenerate a random id just to be able to reorder it while it loads
         };
         return {
