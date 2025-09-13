@@ -27,7 +27,7 @@ ChartJS.register(
   Filler
 );
 
-export default function BarGraph({ graphConfiguration, graphData }) {
+export default function MultiBarGraph({ graphConfiguration, graphData }) {
 
   const { dates, values } = processContinuousGraphData(graphConfiguration, graphData);
 

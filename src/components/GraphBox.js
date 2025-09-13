@@ -8,6 +8,7 @@ import SyncLoader from "react-spinners/SyncLoader";
 import { getGraphTitleFromConfiguration } from "./graphsdisplay/GraphsDisplayUtils";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
 import { actionTypes } from "../context/globalReducer";
+import { deleteGraph } from "../api/RequestUtils";
 
 export default function GraphBox({ graph }) {
     const {
@@ -26,7 +27,7 @@ export default function GraphBox({ graph }) {
     };
 
     // Context
-    const [{ }, dispatch] = useGlobalStateValue();
+    const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
 
     const [isMoreSettingsOpen, setIsMoreSettingsOpen] = useState(false);
 
@@ -40,12 +41,15 @@ export default function GraphBox({ graph }) {
     }
 
     const handleDeleteGraph = (graph) => {
-        console.log("Deleting graph ", graph);
         dispatch({
             type: actionTypes.DELETE_GRAPH,
             value: graph.graphConfiguration.id
         })
-        // TODO JOAQUIN: make call to backend
+        try {
+            deleteGraph(userJWTCookie, graph.graphConfiguration.id);
+        } catch (error) {
+            // TODO: think about this
+        }
     }
 
     const renderMoreSettings = () => {

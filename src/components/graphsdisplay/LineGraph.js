@@ -9,10 +9,11 @@ import {
   Tooltip,
   Legend,
   scales,
+  Filler
 } from 'chart.js';
-import { TimeScale } from 'chart.js'; // Import TimeScale
-import { processContinuousGraphData } from "./GraphsDisplayUtils";
-import 'chartjs-adapter-date-fns'; // Import the adapter
+import { TimeScale } from 'chart.js';
+import { getTimeUnitFromConfiguration, processContinuousGraphData } from "./GraphsDisplayUtils";
+import 'chartjs-adapter-date-fns';
 
 ChartJS.register(
   CategoryScale,
@@ -22,7 +23,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 );
 
 export default function LineGraph({ graphConfiguration, graphData }) {
@@ -35,8 +37,9 @@ export default function LineGraph({ graphConfiguration, graphData }) {
       {
         label: 'Total',
         data: values,
-        borderColor: 'rgb(75, 192, 192)',
-        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+        fill: 'origin',
+        borderColor: 'rgb(54, 162, 235)',      // Solid blue for the line
+        backgroundColor: 'rgba(54, 162, 235, 0.3)', // Semi-transparent blue for the area fill
         tension: 0.0 // Configuring this value will make the line straight or a bit curved
       }
     ]
@@ -65,12 +68,11 @@ export default function LineGraph({ graphConfiguration, graphData }) {
       x: {
         type: 'time', // Tell Chart.js to use the time scale
         time: {
-          unit: 'day', // Display labels by day
+          unit: getTimeUnitFromConfiguration(graphConfiguration),
           tooltipFormat: 'MMM d, yyyy' // e.g., 'Sep 7, 2025'
         },
         title: {
-          display: true,
-          text: 'Date'
+          display: false
         }
       },
       y: {

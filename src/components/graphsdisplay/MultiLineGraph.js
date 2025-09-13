@@ -1,10 +1,10 @@
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   PointElement,
-  BarElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
@@ -20,14 +20,14 @@ ChartJS.register(
   LinearScale,
   TimeScale,
   PointElement,
-  BarElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
   Filler
 );
 
-export default function BarGraph({ graphConfiguration, graphData }) {
+export default function MultiLineGraph({ graphConfiguration, graphData }) {
 
   const { dates, values } = processContinuousGraphData(graphConfiguration, graphData);
 
@@ -37,9 +37,10 @@ export default function BarGraph({ graphConfiguration, graphData }) {
       {
         label: 'Total',
         data: values,
+        fill: 'origin',
         borderColor: 'rgb(54, 162, 235)',      // Solid blue for the line
-        borderWidth: 1,
         backgroundColor: 'rgba(54, 162, 235, 0.3)', // Semi-transparent blue for the area fill
+        tension: 0.0 // Configuring this value will make the line straight or a bit curved
       }
     ]
   }
@@ -80,5 +81,5 @@ export default function BarGraph({ graphConfiguration, graphData }) {
     }
   }
 
-  return <Bar options={options} data={data} />;
+  return <Line options={options} data={data} />;
 }

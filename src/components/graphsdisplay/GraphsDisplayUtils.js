@@ -28,6 +28,48 @@ export function processContinuousGraphData(graphConfiguration, graphData) {
   }
 }
 
+/**
+   * Processes graph data to create a continuous series from a start to an end date.
+   * Fills in missing days with a value of 0.
+   *
+   * @param {object} graphConfiguration - Contains startDate and endDate strings ('YYYY-MM-DD').
+   * @param {object} graphData - Contains the sparse data array.
+   * @returns {{labels: string[], datasets: object[]}} - An object with complete dates and values.
+   */
+export function processGroupedGraphData(graphConfiguration, graphData) {
+  const groupByTime = graphConfiguration.customGraphSettings.visualizationSettings.groupByTime;
+  if (!graphData?.data) {
+    return { dates: [], values: [] };
+  }
+
+  switch (groupByTime) {
+    default:
+    case "DAY":
+      return processDataGroupByDay(graphConfiguration, graphData);
+    case "WEEK":
+      return processDataGroupByWeek(graphConfiguration, graphData);
+    case "MONTH":
+      return processDataGroupByMonth(graphConfiguration, graphData);
+    case "YEAR":
+      return processDataGroupByYear(graphConfiguration, graphData);
+  }
+}
+
+export function getTimeUnitFromConfiguration(graphConfiguration) {
+  const groupByTime = graphConfiguration.customGraphSettings.visualizationSettings.groupByTime;
+  switch (groupByTime) {
+    default:
+    case "DAY":
+      return 'day';
+    case "WEEK":
+      return 'week';
+    case "MONTH":
+      return 'month';
+    case "YEAR":
+      return 'year';
+  }
+}
+
 export function getGraphTitleFromConfiguration(graphConfiguration) {
   return "Test graph";
 }
