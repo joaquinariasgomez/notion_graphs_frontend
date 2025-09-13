@@ -65,10 +65,12 @@ export default function MultiLineGraph({ graphConfiguration, graphData }) {
         },
         title: {
           display: false
-        }
+        },
+        stacked: true
       },
       y: {
-        beginAtZero: true
+        beginAtZero: true,
+        stacked: true
       }
     }
   }
