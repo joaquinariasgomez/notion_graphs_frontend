@@ -12,7 +12,7 @@ import {
   Filler
 } from 'chart.js';
 import { TimeScale } from 'chart.js';
-import { getTimeUnitFromConfiguration, processContinuousGraphData } from "./GraphsDisplayUtils";
+import { getTimeUnitFromConfiguration, processGroupedGraphData } from "./GraphsDisplayUtils";
 import 'chartjs-adapter-date-fns';
 
 ChartJS.register(
@@ -29,20 +29,11 @@ ChartJS.register(
 
 export default function MultiLineGraph({ graphConfiguration, graphData }) {
 
-  const { dates, values } = processContinuousGraphData(graphConfiguration, graphData);
+  const { labels, datasets } = processGroupedGraphData(graphConfiguration, graphData);
 
   const data = {
-    labels: dates,
-    datasets: [
-      {
-        label: 'Total',
-        data: values,
-        fill: 'origin',
-        borderColor: 'rgb(54, 162, 235)',      // Solid blue for the line
-        backgroundColor: 'rgba(54, 162, 235, 0.3)', // Semi-transparent blue for the area fill
-        tension: 0.0 // Configuring this value will make the line straight or a bit curved
-      }
-    ]
+    labels: labels,
+    datasets: datasets
   }
 
   const options = {
@@ -50,7 +41,8 @@ export default function MultiLineGraph({ graphConfiguration, graphData }) {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false
+        display: true,
+        position: 'bottom'
       },
       tooltip: {
         enabled: true

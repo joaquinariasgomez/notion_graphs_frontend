@@ -39,19 +39,19 @@ export function processContinuousGraphData(graphConfiguration, graphData) {
 export function processGroupedGraphData(graphConfiguration, graphData) {
   const groupByTime = graphConfiguration.customGraphSettings.visualizationSettings.groupByTime;
   if (!graphData?.data) {
-    return { dates: [], values: [] };
+    return { dates: [], datasets: [] };
   }
 
   switch (groupByTime) {
     default:
     case "DAY":
-      return processDataGroupByDay(graphConfiguration, graphData);
-    case "WEEK":
-      return processDataGroupByWeek(graphConfiguration, graphData);
-    case "MONTH":
-      return processDataGroupByMonth(graphConfiguration, graphData);
-    case "YEAR":
-      return processDataGroupByYear(graphConfiguration, graphData);
+      return processGroupedDataGroupByDay(graphConfiguration, graphData);
+    // case "WEEK":
+    //   return processDataGroupByWeek(graphConfiguration, graphData);
+    // case "MONTH":
+    //   return processDataGroupByMonth(graphConfiguration, graphData);
+    // case "YEAR":
+    //   return processDataGroupByYear(graphConfiguration, graphData);
   }
 }
 
@@ -236,4 +236,60 @@ function processDataGroupByYear(graphConfiguration, graphData) {
   }
 
   return { dates, values };
+}
+
+function processGroupedDataGroupByDay(graphConfiguration, graphData) {
+  const dataMap = new Map();
+  const categories = new Set(); // Could be categories, for example
+
+  const isCumulative = graphConfiguration.customGraphSettings.visualizationSettings.cumulative;
+  var cumulativeValue = 0;  // TODO: adjust for isCumulative
+
+  graphData.data.forEach(dailyData => {
+    const { date, categoryAmounts } = dailyData;  // TODO: adjust also for "incomeBankAccountAmounts" or "incomeSourceAmounts"
+
+    if (!dataMap.has(date)) {
+      dataMap.set(date, new Map());
+    }
+
+    // For each day, iterate through its categories and populate the map
+    categoryAmounts.forEach(categoryEntry => {
+      categories.add(categoryEntry.category);
+      dataMap.get(date).set(categoryEntry.category, categoryEntry.amount);
+    });
+  });
+
+  const labels = [];
+  const firstDate = getInitialDayFromSettings(graphConfiguration);
+  const lastDate = getLastDayFromSettings(graphConfiguration);
+  let currentDate = firstDate;
+
+  while (currentDate <= lastDate) {
+    labels.push(formatToString(currentDate));
+    currentDate = addDays(currentDate, 1);
+  }
+
+  const uniqueCategories = Array.from(categories);
+  let datasets = uniqueCategories.map(category => ({
+    label: category,
+    data: [], // This will be filled next
+  }));
+
+  labels.forEach(date => {
+    datasets.forEach(dataset => {
+      // ...find the corresponding value, or default to 0.
+      const dailyCategoryMap = dataMap.get(date);
+      const value = dailyCategoryMap ? dailyCategoryMap.get(dataset.label) || 0 : 0;
+      dataset.data.push(value);
+    });
+  });
+
+  datasets.forEach((dataset, index) => {
+    // dataset.borderColor = colorPalette[index % colorPalette.length];
+    // dataset.backgroundColor = transparentColorPalette[index % transparentColorPalette.length];
+    dataset.tension = 0.0;
+    dataset.fill = false; // Set to false for lines, or 'origin' for stacked area
+  });
+
+  return { labels, datasets };
 }
