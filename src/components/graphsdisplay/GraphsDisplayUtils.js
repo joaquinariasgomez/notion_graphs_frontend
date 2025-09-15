@@ -42,10 +42,31 @@ export function processGroupedGraphData(graphConfiguration, graphData) {
     return { dates: [], datasets: [] };
   }
 
+  const dataMap = new Map();
+  const categories = new Set(); // Could be categories, for example
+
+  graphData.data.forEach(dailyData => {
+    const { date, categoryAmounts } = dailyData;  // TODO: adjust also for "incomeBankAccountAmounts" or "incomeSourceAmounts"
+    if (!dataMap.has(date)) {
+      dataMap.set(date, new Map());
+    }
+    categoryAmounts.forEach(categoryEntry => {
+      categories.add(categoryEntry.category);
+      dataMap.get(date).set(categoryEntry.category, categoryEntry.amount);
+    });
+  });
+
+  const labels = [];
+  const uniqueCategories = Array.from(categories);
+  let datasets = uniqueCategories.map(category => ({
+    label: category,
+    data: [],
+  }));
+
   switch (groupByTime) {
     default:
     case "DAY":
-      return processGroupedDataGroupByDay(graphConfiguration, graphData);
+      return processGroupedDataGroupByDay(graphConfiguration, labels, datasets, dataMap);
     case "WEEK":
       return processGroupedDataGroupByWeek(graphConfiguration, graphData);
     case "MONTH":
@@ -237,34 +258,9 @@ function processDataGroupByYear(graphConfiguration, graphData) {
   return { dates, values };
 }
 
-function processGroupedDataGroupByDay(graphConfiguration, graphData) {
-  const dataMap = new Map();
-  const categories = new Set(); // Could be categories, for example
-
+function processGroupedDataGroupByDay(graphConfiguration, labels, datasets, dataMap) {
   const isCumulative = graphConfiguration.customGraphSettings.visualizationSettings.cumulative;
-  var cumulativeValue = 0;  // TODO: adjust for isCumulative
-
-  graphData.data.forEach(dailyData => {
-    const { date, categoryAmounts } = dailyData;  // TODO: adjust also for "incomeBankAccountAmounts" or "incomeSourceAmounts"
-
-    if (!dataMap.has(date)) {
-      dataMap.set(date, new Map());
-    }
-
-    // For each day, iterate through its categories and populate the map
-    categoryAmounts.forEach(categoryEntry => {
-      categories.add(categoryEntry.category);
-      dataMap.get(date).set(categoryEntry.category, categoryEntry.amount);
-    });
-  });
-
-  const labels = [];
-  const uniqueCategories = Array.from(categories);
-  let datasets = uniqueCategories.map(category => ({
-    label: category,
-    data: [],
-  }));
-
+  const cumulativesPerCategory = new Map();
   const firstDate = getInitialDayFromSettings(graphConfiguration);
   const lastDate = getLastDayFromSettings(graphConfiguration);
   let currentDate = firstDate;
@@ -276,8 +272,18 @@ function processGroupedDataGroupByDay(graphConfiguration, graphData) {
   labels.forEach(date => {
     datasets.forEach(dataset => {
       const dailyCategoryMap = dataMap.get(date);
-      const value = dailyCategoryMap ? dailyCategoryMap.get(dataset.label) || 0 : 0;
-      dataset.data.push(value);
+      let valueToPush;
+      const dailyAmount = dailyCategoryMap ? dailyCategoryMap.get(dataset.label) || 0 : 0;
+
+      if (isCumulative) {
+        const previousCumulative = cumulativesPerCategory.get(dataset.label) || 0;
+        const newCumulative = previousCumulative + dailyAmount;
+        cumulativesPerCategory.set(dataset.label, newCumulative);
+        valueToPush = newCumulative;
+      } else {
+        valueToPush = dailyAmount;
+      }
+      dataset.data.push(valueToPush);
     });
   });
 
