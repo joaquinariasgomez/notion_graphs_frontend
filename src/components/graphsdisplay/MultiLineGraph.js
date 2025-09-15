@@ -42,6 +42,12 @@ export default function MultiLineGraph({ graphConfiguration, graphData }) {
     plugins: {
       legend: {
         display: true,
+        labels: {
+          font: {
+            size: 10 // Default is 14
+          },
+          boxWidth: 10 // Default is 40
+        },
         position: 'bottom'
       },
       tooltip: {

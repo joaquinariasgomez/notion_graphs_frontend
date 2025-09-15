@@ -48,8 +48,8 @@ export function processGroupedGraphData(graphConfiguration, graphData) {
       return processGroupedDataGroupByDay(graphConfiguration, graphData);
     case "WEEK":
       return processGroupedDataGroupByWeek(graphConfiguration, graphData);
-    // case "MONTH":
-    //   return processDataGroupByMonth(graphConfiguration, graphData);
+    case "MONTH":
+      return processGroupedDataGroupByMonth(graphConfiguration, graphData);
     // case "YEAR":
     //   return processDataGroupByYear(graphConfiguration, graphData);
   }
@@ -159,7 +159,6 @@ function processDataGroupByMonth(graphConfiguration, graphData) {
   const firstDate = getInitialDayFromSettings(graphConfiguration);
   const lastDate = getLastDayFromSettings(graphConfiguration);
   let currentDate = firstDate;
-
   while (currentDate <= lastDate) {
     const monthStart = getFirstDayOfMonthForDate(currentDate);
     const monthEnd = getLastDayOfMonthForDate(currentDate);
@@ -276,7 +275,6 @@ function processGroupedDataGroupByDay(graphConfiguration, graphData) {
 
   labels.forEach(date => {
     datasets.forEach(dataset => {
-      // ...find the corresponding value, or default to 0.
       const dailyCategoryMap = dataMap.get(date);
       const value = dailyCategoryMap ? dailyCategoryMap.get(dataset.label) || 0 : 0;
       dataset.data.push(value);
@@ -292,7 +290,7 @@ function processGroupedDataGroupByWeek(graphConfiguration, graphData) {
   const categories = new Set(); // Could be categories, for example
 
   const isCumulative = graphConfiguration.customGraphSettings.visualizationSettings.cumulative;
-  var cumulativeValue = 0;  // TODO: adjust for isCumulative
+  const cumulativesPerCategory = new Map();
 
   graphData.data.forEach(dailyData => {
     const { date, categoryAmounts } = dailyData;  // TODO: adjust also for "incomeBankAccountAmounts" or "incomeSourceAmounts"
@@ -326,7 +324,6 @@ function processGroupedDataGroupByWeek(graphConfiguration, graphData) {
 
     const weeklyTotals = new Map();
     let dayInWeek = new Date(weekStart);
-    // Iterate through each day within this week to sum up values
     while (dayInWeek <= weekEnd) {
       const isAfterStartDate = dayInWeek >= firstDate;
       const isBeforeEndDate = dayInWeek <= lastDate;
@@ -335,7 +332,6 @@ function processGroupedDataGroupByWeek(graphConfiguration, graphData) {
         const dateString = formatToString(dayInWeek);
         const dailyCategoryMap = dataMap.get(dateString);
         if (dailyCategoryMap) {
-          // Add this day's amounts to our weekly totals
           dailyCategoryMap.forEach((amount, category) => {
             const currentTotal = weeklyTotals.get(category) || 0;
             weeklyTotals.set(category, currentTotal + amount);
@@ -346,11 +342,90 @@ function processGroupedDataGroupByWeek(graphConfiguration, graphData) {
     }
 
     datasets.forEach(dataset => {
-      const total = weeklyTotals.get(dataset.label) || 0;
-      dataset.data.push(total);
+      const categoryLabel = dataset.label;
+      const weeklyAmount = weeklyTotals.get(categoryLabel) || 0;
+
+      let valueToPush;
+      if (isCumulative) {
+        const previousCumulative = cumulativesPerCategory.get(categoryLabel) || 0;
+        const newCumulative = previousCumulative + weeklyAmount;
+        cumulativesPerCategory.set(categoryLabel, newCumulative);
+        valueToPush = newCumulative;
+      } else {
+        valueToPush = weeklyAmount;
+      }
+      dataset.data.push(valueToPush);
     });
     // Jump to start of the next week
     currentDate = addDays(weekEnd, 1);
+  }
+
+  datasets = applyColorToDatasets(datasets);
+  return { labels, datasets };
+}
+
+function processGroupedDataGroupByMonth(graphConfiguration, graphData) {
+  const dataMap = new Map();
+  const categories = new Set(); // Could be categories, for example
+
+  const isCumulative = graphConfiguration.customGraphSettings.visualizationSettings.cumulative;
+  var cumulativeValue = 0;  // TODO: adjust for isCumulative
+
+  graphData.data.forEach(dailyData => {
+    const { date, categoryAmounts } = dailyData;  // TODO: adjust also for "incomeBankAccountAmounts" or "incomeSourceAmounts"
+
+    if (!dataMap.has(date)) {
+      dataMap.set(date, new Map());
+    }
+
+    // For each day, iterate through its categories and populate the map
+    categoryAmounts.forEach(categoryEntry => {
+      categories.add(categoryEntry.category);
+      dataMap.get(date).set(categoryEntry.category, categoryEntry.amount);
+    });
+  });
+
+  const labels = [];
+  const uniqueCategories = Array.from(categories);
+  let datasets = uniqueCategories.map(category => ({
+    label: category,
+    data: [],
+  }));
+
+  const firstDate = getInitialDayFromSettings(graphConfiguration);
+  const lastDate = getLastDayFromSettings(graphConfiguration);
+  let currentDate = firstDate;
+  while (currentDate <= lastDate) {
+    const monthStart = getFirstDayOfMonthForDate(currentDate);
+    const monthEnd = getLastDayOfMonthForDate(currentDate);
+
+    labels.push(formatToString(monthStart));
+
+    const monthlyTotals = new Map();
+    let dayInMonth = new Date(monthStart);
+    while (dayInMonth <= monthEnd) {
+      const isAfterStartDate = dayInMonth >= firstDate;
+      const isBeforeEndDate = dayInMonth <= lastDate;
+
+      if (isAfterStartDate && isBeforeEndDate) {
+        const dateString = formatToString(dayInMonth);
+        const dailyCategoryMap = dataMap.get(dateString);
+        if (dailyCategoryMap) {
+          dailyCategoryMap.forEach((amount, category) => {
+            const currentTotal = monthlyTotals.get(category) || 0;
+            monthlyTotals.set(category, currentTotal + amount);
+          });
+        }
+      }
+      dayInMonth = addDays(dayInMonth, 1);
+    }
+
+    datasets.forEach(dataset => {
+      const total = monthlyTotals.get(dataset.label) || 0;
+      dataset.data.push(total);
+    });
+    // Jump to start of the next month
+    currentDate = addDays(monthEnd, 1);
   }
 
   datasets = applyColorToDatasets(datasets);
@@ -371,13 +446,19 @@ function applyColorToDatasets(datasets) {
     'rgb(100, 100, 230)',     // Light Blue
   ];
   datasets.forEach((dataset, index) => {
-    dataset.borderColor = colorPalette[index % colorPalette.length];
-    dataset.backgroundColor = dataset.borderColor.replace('rgb', 'rgba').replace(')', ', 0.3)');
+    const solidColor = colorPalette[index % colorPalette.length];
+    const transparentColor = solidColor.replace('rgb', 'rgba').replace(')', ', 0.3)');
+
+
+    dataset.backgroundColor = transparentColor;
+    dataset.borderColor = solidColor;
+    dataset.borderWidth = 2; // Make the border visible
+
     dataset.tension = 0.0;
     dataset.borderWidth = 2;
     dataset.fill = 'stack';
     dataset.pointRadius = 0;
-    dataset.pointHitRadius = 5;
+    dataset.pointHitRadius = 10;
   });
   return datasets;
 }
