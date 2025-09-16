@@ -68,11 +68,11 @@ export function processGroupedGraphData(graphConfiguration, graphData) {
     case "DAY":
       return processGroupedDataGroupByDay(graphConfiguration, labels, datasets, dataMap);
     case "WEEK":
-      return processGroupedDataGroupByWeek(graphConfiguration, graphData);
+      return processGroupedDataGroupByWeek(graphConfiguration, labels, datasets, dataMap);
     case "MONTH":
-      return processGroupedDataGroupByMonth(graphConfiguration, graphData);
-    // case "YEAR":
-    //   return processDataGroupByYear(graphConfiguration, graphData);
+      return processGroupedDataGroupByMonth(graphConfiguration, labels, datasets, dataMap);
+    case "YEAR":
+      return processGroupedDataGroupByYear(graphConfiguration, labels, datasets, dataMap);
   }
 }
 
@@ -231,7 +231,6 @@ function processDataGroupByYear(graphConfiguration, graphData) {
 
     let yearlyTotal = 0;
     let dayInYear = new Date(yearStart);
-    // Iterate through each day within this month to sum up values
     while (dayInYear <= yearEnd) {
       const isAfterStartDate = dayInYear >= firstDate;
       const isBeforeEndDate = dayInYear <= lastDate;
@@ -291,34 +290,9 @@ function processGroupedDataGroupByDay(graphConfiguration, labels, datasets, data
   return { labels, datasets };
 }
 
-function processGroupedDataGroupByWeek(graphConfiguration, graphData) {
-  const dataMap = new Map();
-  const categories = new Set(); // Could be categories, for example
-
+function processGroupedDataGroupByWeek(graphConfiguration, labels, datasets, dataMap) {
   const isCumulative = graphConfiguration.customGraphSettings.visualizationSettings.cumulative;
   const cumulativesPerCategory = new Map();
-
-  graphData.data.forEach(dailyData => {
-    const { date, categoryAmounts } = dailyData;  // TODO: adjust also for "incomeBankAccountAmounts" or "incomeSourceAmounts"
-
-    if (!dataMap.has(date)) {
-      dataMap.set(date, new Map());
-    }
-
-    // For each day, iterate through its categories and populate the map
-    categoryAmounts.forEach(categoryEntry => {
-      categories.add(categoryEntry.category);
-      dataMap.get(date).set(categoryEntry.category, categoryEntry.amount);
-    });
-  });
-
-  const labels = [];
-  const uniqueCategories = Array.from(categories);
-  let datasets = uniqueCategories.map(category => ({
-    label: category,
-    data: [],
-  }));
-
   const firstDate = getInitialDayFromSettings(graphConfiguration);
   const lastDate = getLastDayFromSettings(graphConfiguration);
   let currentDate = firstDate;
@@ -370,34 +344,9 @@ function processGroupedDataGroupByWeek(graphConfiguration, graphData) {
   return { labels, datasets };
 }
 
-function processGroupedDataGroupByMonth(graphConfiguration, graphData) {
-  const dataMap = new Map();
-  const categories = new Set(); // Could be categories, for example
-
+function processGroupedDataGroupByMonth(graphConfiguration, labels, datasets, dataMap) {
   const isCumulative = graphConfiguration.customGraphSettings.visualizationSettings.cumulative;
-  var cumulativeValue = 0;  // TODO: adjust for isCumulative
-
-  graphData.data.forEach(dailyData => {
-    const { date, categoryAmounts } = dailyData;  // TODO: adjust also for "incomeBankAccountAmounts" or "incomeSourceAmounts"
-
-    if (!dataMap.has(date)) {
-      dataMap.set(date, new Map());
-    }
-
-    // For each day, iterate through its categories and populate the map
-    categoryAmounts.forEach(categoryEntry => {
-      categories.add(categoryEntry.category);
-      dataMap.get(date).set(categoryEntry.category, categoryEntry.amount);
-    });
-  });
-
-  const labels = [];
-  const uniqueCategories = Array.from(categories);
-  let datasets = uniqueCategories.map(category => ({
-    label: category,
-    data: [],
-  }));
-
+  const cumulativesPerCategory = new Map();
   const firstDate = getInitialDayFromSettings(graphConfiguration);
   const lastDate = getLastDayFromSettings(graphConfiguration);
   let currentDate = firstDate;
@@ -427,11 +376,76 @@ function processGroupedDataGroupByMonth(graphConfiguration, graphData) {
     }
 
     datasets.forEach(dataset => {
-      const total = monthlyTotals.get(dataset.label) || 0;
-      dataset.data.push(total);
+      const categoryLabel = dataset.label;
+      const monthlyAmount = monthlyTotals.get(categoryLabel) || 0;
+
+      let valueToPush;
+      if (isCumulative) {
+        const previousCumulative = cumulativesPerCategory.get(categoryLabel) || 0;
+        const newCumulative = previousCumulative + monthlyAmount;
+        cumulativesPerCategory.set(categoryLabel, newCumulative);
+        valueToPush = newCumulative;
+      } else {
+        valueToPush = monthlyAmount;
+      }
+      dataset.data.push(valueToPush);
     });
     // Jump to start of the next month
     currentDate = addDays(monthEnd, 1);
+  }
+
+  datasets = applyColorToDatasets(datasets);
+  return { labels, datasets };
+}
+
+function processGroupedDataGroupByYear(graphConfiguration, labels, datasets, dataMap) {
+  const isCumulative = graphConfiguration.customGraphSettings.visualizationSettings.cumulative;
+  const cumulativesPerCategory = new Map();
+  const firstDate = getInitialDayFromSettings(graphConfiguration);
+  const lastDate = getLastDayFromSettings(graphConfiguration);
+  let currentDate = firstDate;
+  while (currentDate <= lastDate) {
+    const yearStart = getFirstDayOfYearForDate(currentDate);
+    const yearEnd = getLastDayOfYearForDate(currentDate);
+
+    labels.push(formatToString(yearStart));
+
+    const yearlyTotals = new Map();
+    let dayInYear = new Date(yearStart);
+    while (dayInYear <= yearEnd) {
+      const isAfterStartDate = dayInYear >= firstDate;
+      const isBeforeEndDate = dayInYear <= lastDate;
+
+      if (isAfterStartDate && isBeforeEndDate) {
+        const dateString = formatToString(dayInYear);
+        const dailyCategoryMap = dataMap.get(dateString);
+        if (dailyCategoryMap) {
+          dailyCategoryMap.forEach((amount, category) => {
+            const currentTotal = yearlyTotals.get(category) || 0;
+            yearlyTotals.set(category, currentTotal + amount);
+          });
+        }
+      }
+      dayInYear = addDays(dayInYear, 1);
+    }
+
+    datasets.forEach(dataset => {
+      const categoryLabel = dataset.label;
+      const yearlyAmount = yearlyTotals.get(categoryLabel) || 0;
+
+      let valueToPush;
+      if (isCumulative) {
+        const previousCumulative = cumulativesPerCategory.get(categoryLabel) || 0;
+        const newCumulative = previousCumulative + yearlyAmount;
+        cumulativesPerCategory.set(categoryLabel, newCumulative);
+        valueToPush = newCumulative;
+      } else {
+        valueToPush = yearlyAmount;
+      }
+      dataset.data.push(valueToPush);
+    });
+    // Jump to start of the next month
+    currentDate = addDays(yearEnd, 1);
   }
 
   datasets = applyColorToDatasets(datasets);
