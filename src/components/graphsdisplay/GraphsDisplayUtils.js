@@ -38,22 +38,37 @@ export function processContinuousGraphData(graphConfiguration, graphData) {
    */
 export function processGroupedGraphData(graphConfiguration, graphData) {
   const groupByTime = graphConfiguration.customGraphSettings.visualizationSettings.groupByTime;
+  const groupByCategory = graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory;
+  const groupByIncomeBankAccounts = graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeBankAccounts;
+  const groupByIncomeSources = graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeSources;
   if (!graphData?.data) {
     return { dates: [], datasets: [] };
   }
 
   const dataMap = new Map();
-  const categories = new Set(); // Could be categories, for example
+  const categories = new Set(); // Could be categories, incomeBankAccounts or incomeSources
 
   graphData.data.forEach(dailyData => {
-    const { date, categoryAmounts } = dailyData;  // TODO: adjust also for "incomeBankAccountAmounts" or "incomeSourceAmounts"
+    const { date, categoryAmounts, incomeBankAccountAmounts, incomeSourceAmounts } = dailyData;
     if (!dataMap.has(date)) {
       dataMap.set(date, new Map());
     }
-    categoryAmounts.forEach(categoryEntry => {
-      categories.add(categoryEntry.category);
-      dataMap.get(date).set(categoryEntry.category, categoryEntry.amount);
-    });
+    if (groupByCategory) {
+      categoryAmounts.forEach(categoryEntry => {
+        categories.add(categoryEntry.category);
+        dataMap.get(date).set(categoryEntry.category, categoryEntry.amount);
+      });
+    } else if (groupByIncomeBankAccounts) {
+      incomeBankAccountAmounts.forEach(incomeBankAccountEntry => {
+        categories.add(incomeBankAccountEntry.incomeBankAccount);
+        dataMap.get(date).set(incomeBankAccountEntry.incomeBankAccount, incomeBankAccountEntry.amount);
+      });
+    } else if (groupByIncomeSources) {
+      incomeSourceAmounts.forEach(incomeSourceEntry => {
+        categories.add(incomeSourceEntry.incomeSource);
+        dataMap.get(date).set(incomeSourceEntry.incomeSource, incomeSourceEntry.amount);
+      });
+    }
   });
 
   const labels = [];
