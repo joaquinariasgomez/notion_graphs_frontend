@@ -68,6 +68,12 @@ export async function getGraphs(jwtToken) {
   return (await response).data;
 }
 
+export async function getMoreGraphs(jwtToken, nextCursor) {
+  const url = Config.BackendGraphsURL + "?cursor=" + nextCursor;
+  const response = getWithJWTToken(url, jwtToken);
+  return (await response).data;
+}
+
 export async function createGraph(jwtToken, graphConfiguration) {
   const url = Config.BackendGraphsURL;
   const response = postWithJWTToken(url, graphConfiguration, jwtToken);

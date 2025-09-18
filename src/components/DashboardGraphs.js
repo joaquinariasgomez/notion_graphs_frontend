@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
-import { getGraphConfigurations, getGraphs } from "../api/RequestUtils";
+import { getGraphConfigurations, getGraphs, getMoreGraphs } from "../api/RequestUtils";
 import {
     DndContext,
     closestCenter,
@@ -20,6 +20,7 @@ export default function DashboardGraphs({ }) {
     const [{ userJWTCookie, graphs }, dispatch] = useGlobalStateValue();
 
     const [graphsLoading, setGraphsLoading] = useState(false);
+    const [moreGraphsLoading, setMoreGraphsLoading] = useState(false);
     const [grabbedGraphConfigId, setGrabbedGraphConfigId] = useState(null);
     const [hasNextPage, setHasNextPage] = useState(false);
     const [nextCursor, setNextCursor] = useState(null);
@@ -47,11 +48,32 @@ export default function DashboardGraphs({ }) {
         }
     }
 
+    const loadMoreGraphs = async () => {
+        try {
+            setMoreGraphsLoading(true);
+            const apiResponse = await getMoreGraphs(userJWTCookie, nextCursor);
+            if (apiResponse) {
+                // TODO: I should update this to APPEND_GRAPHS
+
+                // dispatch({
+                //     type: actionTypes.SET_GRAPHS,
+                //     value: apiResponse.data
+                // })
+                setHasNextPage(apiResponse.hasNextPage)
+                setNextCursor(apiResponse.nextCursor)
+            }
+        } catch (error) {
+
+        } finally {
+            setMoreGraphsLoading(false);
+        }
+    }
+
     const renderLoadMoreGraphsButton = () => {
         if (hasNextPage) {
             return (
                 <div className='dashboard__graphs__loadmore'>
-                    <button>
+                    <button onClick={loadMoreGraphs}>
                         <p>Load more</p>
                     </button>
                 </div>
