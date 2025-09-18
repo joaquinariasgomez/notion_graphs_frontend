@@ -12,7 +12,7 @@ import {
   Filler
 } from 'chart.js';
 import { TimeScale } from 'chart.js';
-import { getTimeUnitFromConfiguration, processContinuousGraphData } from "./GraphsDisplayUtils";
+import { getGraphTitleFromConfiguration, getTimeUnitFromConfiguration, processContinuousGraphData } from "./GraphsDisplayUtils";
 import 'chartjs-adapter-date-fns';
 
 ChartJS.register(
@@ -57,7 +57,7 @@ export default function LineGraph({ graphConfiguration, graphData }) {
       },
       title: {
         display: true,
-        text: "Test title"//getGraphTitleFromGraphOptions(desiredGraphOptions)
+        text: getGraphTitleFromConfiguration(graphConfiguration)
       }
     },
     interaction: {
@@ -66,14 +66,19 @@ export default function LineGraph({ graphConfiguration, graphData }) {
     },
     scales: {
       x: {
-        type: 'time', // Tell Chart.js to use the time scale
+        type: 'time',
         time: {
           unit: getTimeUnitFromConfiguration(graphConfiguration),
           tooltipFormat: 'MMM d, yyyy' // e.g., 'Sep 7, 2025'
         },
         title: {
           display: false
-        }
+        },
+        ticks: {
+          font: {
+            size: 11
+          }
+        },
       },
       y: {
         beginAtZero: true

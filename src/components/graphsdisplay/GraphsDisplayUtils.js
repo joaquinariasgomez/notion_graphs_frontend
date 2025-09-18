@@ -107,7 +107,44 @@ export function getTimeUnitFromConfiguration(graphConfiguration) {
 }
 
 export function getGraphTitleFromConfiguration(graphConfiguration) {
-  return "Test graph";
+  let graphTitle = '';
+  if (graphConfiguration.requestType === 'CUSTOM_GRAPH') {
+    // Custom graph
+    const source = graphConfiguration.customGraphSettings.dataSettings.source;
+    const time = graphConfiguration.customGraphSettings.dataSettings.time;
+    graphTitle += sourceToText(source) + ' ' + timeToText(time, graphConfiguration);
+  } else {
+    // Burndown
+  }
+  return graphTitle;
+}
+
+function sourceToText(source) {
+  switch (source) {
+    default:
+    case 'EXPENSES':
+      return 'Expenses';
+    case 'INCOMES':
+      return 'Incomes';
+    case 'SAVINGS':
+      return 'Savings';
+  }
+}
+
+function timeToText(time, graphConfiguration) {
+  switch (time) {
+    default:
+    case 'LAST_WEEK':
+      return 'in the last week';
+    case 'LAST_MONTH':
+      return 'in the last month';
+    case 'LAST_YEAR':
+      return 'in the last year';
+    case 'CUSTOM':
+      const customStartDate = graphConfiguration.customGraphSettings.dataSettings.customStartDate;
+      const customEndDate = graphConfiguration.customGraphSettings.dataSettings.customEndDate;
+      return '(' + customStartDate + ' to ' + customEndDate + ')';
+  }
 }
 
 function processDataGroupByDay(graphConfiguration, graphData) {
@@ -301,7 +338,7 @@ function processGroupedDataGroupByDay(graphConfiguration, labels, datasets, data
     });
   });
 
-  datasets = applyColorToDatasets(datasets);
+  datasets = applyColorToDatasets(datasets, graphConfiguration);
   return { labels, datasets };
 }
 
@@ -355,7 +392,7 @@ function processGroupedDataGroupByWeek(graphConfiguration, labels, datasets, dat
     currentDate = addDays(weekEnd, 1);
   }
 
-  datasets = applyColorToDatasets(datasets);
+  datasets = applyColorToDatasets(datasets, graphConfiguration);
   return { labels, datasets };
 }
 
@@ -409,7 +446,7 @@ function processGroupedDataGroupByMonth(graphConfiguration, labels, datasets, da
     currentDate = addDays(monthEnd, 1);
   }
 
-  datasets = applyColorToDatasets(datasets);
+  datasets = applyColorToDatasets(datasets, graphConfiguration);
   return { labels, datasets };
 }
 
@@ -463,11 +500,12 @@ function processGroupedDataGroupByYear(graphConfiguration, labels, datasets, dat
     currentDate = addDays(yearEnd, 1);
   }
 
-  datasets = applyColorToDatasets(datasets);
+  datasets = applyColorToDatasets(datasets, graphConfiguration);
   return { labels, datasets };
 }
 
-function applyColorToDatasets(datasets) {
+function applyColorToDatasets(datasets, graphConfiguration) {
+  const type = graphConfiguration.customGraphSettings.visualizationSettings.type;
   const colorPalette = [
     'rgb(54, 162, 235)',      // Blue
     'rgb(255, 99, 132)',      // Red
@@ -484,13 +522,15 @@ function applyColorToDatasets(datasets) {
     const solidColor = colorPalette[index % colorPalette.length];
     const transparentColor = solidColor.replace('rgb', 'rgba').replace(')', ', 0.3)');
 
-
     dataset.backgroundColor = transparentColor;
     dataset.borderColor = solidColor;
-    dataset.borderWidth = 2; // Make the border visible
+    if (type === 'LINE') {
+      dataset.borderWidth = 2;
+    } else {
+      dataset.borderWidth = 1.5;
+    }
 
     dataset.tension = 0.0;
-    dataset.borderWidth = 2;
     dataset.fill = 'stack';
     dataset.pointRadius = 0;
     dataset.pointHitRadius = 10;

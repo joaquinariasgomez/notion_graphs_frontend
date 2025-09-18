@@ -12,7 +12,7 @@ import {
   Filler
 } from 'chart.js';
 import { TimeScale } from 'chart.js';
-import { getTimeUnitFromConfiguration, processContinuousGraphData } from "./GraphsDisplayUtils";
+import { getGraphTitleFromConfiguration, getTimeUnitFromConfiguration, processGroupedGraphData } from "./GraphsDisplayUtils";
 import 'chartjs-adapter-date-fns';
 
 ChartJS.register(
@@ -29,19 +29,11 @@ ChartJS.register(
 
 export default function MultiBarGraph({ graphConfiguration, graphData }) {
 
-  const { dates, values } = processContinuousGraphData(graphConfiguration, graphData);
+  const { labels, datasets } = processGroupedGraphData(graphConfiguration, graphData);
 
   const data = {
-    labels: dates,
-    datasets: [
-      {
-        label: 'Total',
-        data: values,
-        borderColor: 'rgb(54, 162, 235)',      // Solid blue for the line
-        borderWidth: 1,
-        backgroundColor: 'rgba(54, 162, 235, 0.3)', // Semi-transparent blue for the area fill
-      }
-    ]
+    labels: labels,
+    datasets: datasets
   }
 
   const options = {
@@ -49,14 +41,21 @@ export default function MultiBarGraph({ graphConfiguration, graphData }) {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false
+        display: true,
+        labels: {
+          font: {
+            size: 10 // Default is 14
+          },
+          boxWidth: 10 // Default is 40
+        },
+        position: 'bottom'
       },
       tooltip: {
         enabled: true
       },
       title: {
         display: true,
-        text: "Test title"//getGraphTitleFromGraphOptions(desiredGraphOptions)
+        text: getGraphTitleFromConfiguration(graphConfiguration)
       }
     },
     interaction: {
@@ -65,17 +64,24 @@ export default function MultiBarGraph({ graphConfiguration, graphData }) {
     },
     scales: {
       x: {
-        type: 'time', // Tell Chart.js to use the time scale
+        type: 'time',
         time: {
           unit: getTimeUnitFromConfiguration(graphConfiguration),
           tooltipFormat: 'MMM d, yyyy' // e.g., 'Sep 7, 2025'
         },
         title: {
           display: false
-        }
+        },
+        ticks: {
+          font: {
+            size: 11
+          }
+        },
+        stacked: true
       },
       y: {
-        beginAtZero: true
+        beginAtZero: true,
+        stacked: true
       }
     }
   }

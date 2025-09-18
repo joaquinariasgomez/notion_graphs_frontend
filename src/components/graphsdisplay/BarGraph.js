@@ -12,7 +12,7 @@ import {
   Filler
 } from 'chart.js';
 import { TimeScale } from 'chart.js';
-import { getTimeUnitFromConfiguration, processContinuousGraphData } from "./GraphsDisplayUtils";
+import { getGraphTitleFromConfiguration, getTimeUnitFromConfiguration, processContinuousGraphData } from "./GraphsDisplayUtils";
 import 'chartjs-adapter-date-fns';
 
 ChartJS.register(
@@ -38,7 +38,7 @@ export default function BarGraph({ graphConfiguration, graphData }) {
         label: 'Total',
         data: values,
         borderColor: 'rgb(54, 162, 235)',      // Solid blue for the line
-        borderWidth: 1,
+        borderWidth: 1.5,
         backgroundColor: 'rgba(54, 162, 235, 0.3)', // Semi-transparent blue for the area fill
       }
     ]
@@ -56,7 +56,7 @@ export default function BarGraph({ graphConfiguration, graphData }) {
       },
       title: {
         display: true,
-        text: "Test title"//getGraphTitleFromGraphOptions(desiredGraphOptions)
+        text: getGraphTitleFromConfiguration(graphConfiguration)
       }
     },
     interaction: {
