@@ -36,7 +36,43 @@
 
 .dashboard__graphs {
   width: 100%;
-  border: 1px solid red;
+  /* border: 1px solid red; */
+}
+
+.dashboard__graphs__loadmore {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.dashboard__graphs__loadmore>button {
+  padding: 0px 36px;
+  background-color: white;
+  border-width: 3px;
+  border-color: var(--matteblack-color);
+  border-style: solid;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard__graphs__loadmore>button:hover {
+  background-color: rgb(250, 250, 250);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard__graphs__loadmore>button:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard__graphs__loadmore>button>p {
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .graphsgrid {

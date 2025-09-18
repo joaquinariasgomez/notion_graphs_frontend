@@ -21,6 +21,8 @@ export default function DashboardGraphs({ }) {
 
     const [graphsLoading, setGraphsLoading] = useState(false);
     const [grabbedGraphConfigId, setGrabbedGraphConfigId] = useState(null);
+    const [hasNextPage, setHasNextPage] = useState(false);
+    const [nextCursor, setNextCursor] = useState(null);
 
     useEffect(() => {
         fetchGraphConfigurations();
@@ -35,11 +37,25 @@ export default function DashboardGraphs({ }) {
                     type: actionTypes.SET_GRAPHS,
                     value: apiResponse.data
                 })
+                setHasNextPage(apiResponse.hasNextPage)
+                setNextCursor(apiResponse.nextCursor)
             }
         } catch (error) {
 
         } finally {
             setGraphsLoading(false);
+        }
+    }
+
+    const renderLoadMoreGraphsButton = () => {
+        if (hasNextPage) {
+            return (
+                <div className='dashboard__graphs__loadmore'>
+                    <button>
+                        <p>Load more</p>
+                    </button>
+                </div>
+            );
         }
     }
 
@@ -81,13 +97,13 @@ export default function DashboardGraphs({ }) {
                         ))}
                     </SortableContext>
                 </div>
-
                 <DragOverlay>
                     {grabbedGraph ? (
                         <GraphBox graph={grabbedGraph} />
                     ) : null}
                 </DragOverlay>
             </DndContext>
+            {renderLoadMoreGraphsButton()}
         </div>
     );
 }
