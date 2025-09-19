@@ -113,6 +113,10 @@ export function getGraphTitleFromConfiguration(graphConfiguration) {
     const source = graphConfiguration.customGraphSettings.dataSettings.source;
     const time = graphConfiguration.customGraphSettings.dataSettings.time;
     graphTitle += sourceToText(source) + ' ' + timeToText(time, graphConfiguration);
+    const isCumulative = graphConfiguration.customGraphSettings.visualizationSettings.cumulative;
+    if (isCumulative) {
+      graphTitle += ' (cumulative)';
+    }
   } else {
     // Burndown
   }

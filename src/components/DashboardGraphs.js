@@ -53,12 +53,10 @@ export default function DashboardGraphs({ }) {
             setMoreGraphsLoading(true);
             const apiResponse = await getMoreGraphs(userJWTCookie, nextCursor);
             if (apiResponse) {
-                // TODO: I should update this to APPEND_GRAPHS
-
-                // dispatch({
-                //     type: actionTypes.SET_GRAPHS,
-                //     value: apiResponse.data
-                // })
+                dispatch({
+                    type: actionTypes.APPEND_GRAPHS,
+                    value: apiResponse.data
+                })
                 setHasNextPage(apiResponse.hasNextPage)
                 setNextCursor(apiResponse.nextCursor)
             }

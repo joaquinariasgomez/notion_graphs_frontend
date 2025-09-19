@@ -1,0 +1,9 @@
+.creategraphbox__button.cancel {
+  margin-right: 15px;
+  border-color: var(--cancelred-color);
+  background-color: var(--cancelred-color);
+}
+
+.creategraphbox__button.cancel:hover {
+  animation: changecolorred 0.25s ease forwards;
+}

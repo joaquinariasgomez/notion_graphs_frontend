@@ -67,10 +67,6 @@ export default function CreateGraphBox() {
   });
 
   useEffect(() => {
-    console.log(graphConfiguration.customGraphSettings.dataSettings);
-  }, [graphConfiguration]);
-
-  useEffect(() => {
     fetchExpensesCategories();
     fetchIncomesBankAccounts();
     fetchIncomesSources();

@@ -2,6 +2,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import DeleteIcon from '@mui/icons-material/Delete';
+import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
 import { useEffect, useState } from "react";
 import GraphDisplayer from "./graphsdisplay/GraphDisplayer";
 import SyncLoader from "react-spinners/SyncLoader";
@@ -40,6 +41,18 @@ export default function GraphBox({ graph }) {
         setIsMoreSettingsOpen(!isMoreSettingsOpen);
     }
 
+    const handleClickUpdateGraphConfiguration = (graph) => {
+        dispatch({
+            type: actionTypes.SET_SHOW_UPDATE_GRAPH_CONFIGURATION_BOX,
+            value: true
+        })
+        console.log("Setting ", graph.graphConfiguration)
+        dispatch({
+            type: actionTypes.SET_EDITING_GRAPH_CONFIGURATION,
+            value: graph.graphConfiguration
+        })
+    }
+
     const handleDeleteGraph = (graph) => {
         dispatch({
             type: actionTypes.DELETE_GRAPH,
@@ -48,16 +61,8 @@ export default function GraphBox({ graph }) {
         try {
             deleteGraph(userJWTCookie, graph.graphConfiguration.id);
         } catch (error) {
-            // TODO: think about this
-        }
-    }
 
-    const renderMoreSettings = () => {
-        return (
-            <div>
-                Hola
-            </div>
-        );
+        }
     }
 
     const renderGraph = (graph) => {
@@ -94,12 +99,9 @@ export default function GraphBox({ graph }) {
                 <DragIndicatorIcon sx={{ cursor: 'grab' }} />
             </div>
             <div className="graphbox__header">
-                {/* <div className="graphbox__moresettings__container">
-                <button onClick={() => handleClickMoreSettingsButton()}>
-                    <MoreHorizIcon sx={{ color: "#28282B" }} fontSize="medium" />
+                <button className="graphbox__updateconfig" title="Update configuration" onClick={() => handleClickUpdateGraphConfiguration(graph)}>
+                    <TuneRoundedIcon style={{ color: '#6d6d6d' }} fontSize="small" />
                 </button>
-                {isMoreSettingsOpen && renderMoreSettings()}
-                </div> */}
                 <button className="graphbox__delete" title="Delete" onClick={() => handleDeleteGraph(graph)}>
                     <DeleteIcon style={{ color: '#f14668' }} fontSize="small" />
                 </button>

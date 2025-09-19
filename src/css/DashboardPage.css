@@ -140,7 +140,22 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+  gap: 10px;
   border: 1px solid brown;
+}
+
+.graphbox__updateconfig {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+}
+
+.graphbox__updateconfig:hover {
+  cursor: pointer;
+  background-color: rgb(244, 244, 244);
 }
 
 .graphbox__delete {
