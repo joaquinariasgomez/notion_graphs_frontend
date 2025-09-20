@@ -10,6 +10,7 @@ import { getGraphTitleFromConfiguration } from "./graphsdisplay/GraphsDisplayUti
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
 import { actionTypes } from "../context/globalReducer";
 import { deleteGraph } from "../api/RequestUtils";
+import { getRelativeTimeFromTimestamp } from "../utils/DateUtils";
 
 export default function GraphBox({ graph }) {
     const {
@@ -33,8 +34,8 @@ export default function GraphBox({ graph }) {
     const [isMoreSettingsOpen, setIsMoreSettingsOpen] = useState(false);
 
     useEffect(() => {
-        console.log(isMoreSettingsOpen);
-    }, [isMoreSettingsOpen]);
+        console.log(graph);
+    }, [graph]);
 
     const handleClickMoreSettingsButton = () => {
         console.log("Executing");
@@ -99,6 +100,9 @@ export default function GraphBox({ graph }) {
                 <DragIndicatorIcon sx={{ cursor: 'grab' }} />
             </div>
             <div className="graphbox__header">
+                <div className="graphbox__updatedAt" title="Last graph update">
+                    <p>{getRelativeTimeFromTimestamp(graph.updatedAt)}</p>
+                </div>
                 <button className="graphbox__updateconfig" title="Update configuration" onClick={() => handleClickUpdateGraphConfiguration(graph)}>
                     <TuneRoundedIcon style={{ color: '#6d6d6d' }} fontSize="small" />
                 </button>

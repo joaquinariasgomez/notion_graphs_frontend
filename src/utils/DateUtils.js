@@ -87,3 +87,51 @@ export function getFirstDayOfYearForDate(date) {
 export function getLastDayOfYearForDate(date) {
   return endOfYear(date);
 }
+
+export function getRelativeTimeFromTimestamp(timestamp) {
+  if (timestamp == null) return '';
+
+  const currentTimestamp = Date.now() / 1000;
+  const timePastInSeconds = Number(currentTimestamp) - Number(timestamp);
+  if (timePastInSeconds < 0) timePastInSeconds = -timePastInSeconds;
+
+  if (timePastInSeconds < 60) {
+    if (Math.round(timePastInSeconds) > 1) {
+      return Math.round(timePastInSeconds) + " secs ago"
+    }
+    else {
+      return Math.round(timePastInSeconds) + " sec ago"
+    }
+  }
+  else {
+    const timePastInMinutes = timePastInSeconds / 60;
+    if (timePastInMinutes < 60) {
+      if (Math.round(timePastInMinutes) > 1) {
+        return Math.round(timePastInMinutes) + " mins ago"
+      }
+      else {
+        return Math.round(timePastInMinutes) + " min ago"
+      }
+    }
+    else {
+      const timePastInHours = timePastInMinutes / 60;
+      if (timePastInHours < 24) {
+        if (Math.round(timePastInHours) > 1) {
+          return Math.round(timePastInHours) + " hours ago"
+        }
+        else {
+          return Math.round(timePastInHours) + " hour ago"
+        }
+      }
+      else {
+        const timePastInDays = timePastInHours / 24;
+        if (Math.round(timePastInDays) > 1) {
+          return Math.round(timePastInDays) + " days ago"
+        }
+        else {
+          return Math.round(timePastInDays) + " day ago"
+        }
+      }
+    }
+  }
+}

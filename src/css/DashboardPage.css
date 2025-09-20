@@ -144,6 +144,17 @@
   border: 1px solid brown;
 }
 
+.graphbox__updatedAt {
+  margin-left: 20px;
+  margin-right: auto;
+}
+
+.graphbox__updatedAt>p {
+  font-weight: 600;
+  font-size: 12px;
+  color: rgb(144, 144, 144);
+}
+
 .graphbox__updateconfig {
   display: flex;
   flex-direction: row;
