@@ -155,6 +155,20 @@
   color: rgb(144, 144, 144);
 }
 
+.graphbox__refresh {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+}
+
+.graphbox__refresh:hover {
+  cursor: pointer;
+  background-color: rgb(244, 244, 244);
+}
+
 .graphbox__updateconfig {
   display: flex;
   flex-direction: row;

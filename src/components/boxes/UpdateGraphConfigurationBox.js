@@ -6,14 +6,12 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
+import { updateGraphConfiguration } from '../../api/RequestUtils';
 
 export default function UpdateGraphConfigurationBox() {
 
   // Context
   const [{ userJWTCookie, editingGraphConfiguration, graphs }, dispatch] = useGlobalStateValue();
-
-  // TODO JOAQUIN: when sending the request, pick the id from 'editingGraphConfiguration'
-  // TODO JOAQUIN: I think it should be just one single Visualization step
 
   useEffect(() => {
     console.log(editingGraphConfiguration);
@@ -27,25 +25,30 @@ export default function UpdateGraphConfigurationBox() {
   }
 
   const handleUpdateGraphConfiguration = async () => {
+    closeBox()
     const graphConfigId = editingGraphConfiguration.id;
-    const updatedGraphs = graphs.map((graph) => {
-      if (graph.graphConfiguration.id === graphConfigId) {
-        return {
-          ...graph,
-          graphConfiguration: editingGraphConfiguration
-        }
-      } else {
-        return graph;
+    const graphToUpdate = graphs.find(
+      (graph) => graph.graphConfiguration.id === graphConfigId
+    );
+
+    if (graphToUpdate) {
+      const updatedGraph = {
+        ...graphToUpdate,
+        graphConfiguration: editingGraphConfiguration
       }
-    });
-    dispatch({
-      type: actionTypes.SET_GRAPHS,
-      value: updatedGraphs
-    })
-    dispatch({
-      type: actionTypes.SET_SHOW_UPDATE_GRAPH_CONFIGURATION_BOX,
-      value: false
-    })
+      dispatch({
+        type: actionTypes.UPDATE_GRAPH,
+        payload: {
+          id: graphConfigId,
+          data: updatedGraph
+        }
+      })
+      try {
+        await updateGraphConfiguration(userJWTCookie, graphConfigId, editingGraphConfiguration);
+      } catch (error) {
+        // TODO: handle exception
+      } finally { }
+    }
   }
 
   const handleSelectedVisualizationType = (type) => {

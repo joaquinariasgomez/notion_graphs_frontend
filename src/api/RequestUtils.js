@@ -14,6 +14,15 @@ export function postWithJWTToken(url, data, jwtToken) {
   return apiClient.post(url, data, config);
 }
 
+export function putWithJWTToken(url, data, jwtToken) {
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${jwtToken}`
+    },
+  };
+  return apiClient.put(url, data, config);
+}
+
 export function deleteWithJWTToken(url, jwtToken) {
   const config = {
     headers: {
@@ -83,4 +92,16 @@ export async function createGraph(jwtToken, graphConfiguration) {
 export async function deleteGraph(jwtToken, graphConfigurationId) {
   const url = Config.BackendGraphsURL + "/" + graphConfigurationId;
   await deleteWithJWTToken(url, jwtToken);
+}
+
+export async function updateGraphConfiguration(jwtToken, graphConfigurationId, graphConfiguration) {
+  const url = Config.BackendGraphsURL + "/configuration/" + graphConfigurationId;
+  const response = putWithJWTToken(url, graphConfiguration, jwtToken);
+  return (await response).data;
+}
+
+export async function refreshGraph(jwtToken, graphConfigurationId) {
+  const url = Config.BackendGraphsURL + "/refresh/" + graphConfigurationId;
+  const response = putWithJWTToken(url, null, jwtToken);
+  return (await response).data;
 }

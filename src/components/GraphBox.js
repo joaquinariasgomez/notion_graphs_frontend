@@ -2,6 +2,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CachedIcon from '@mui/icons-material/Cached';
 import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
 import { useEffect, useState } from "react";
 import GraphDisplayer from "./graphsdisplay/GraphDisplayer";
@@ -9,7 +10,7 @@ import SyncLoader from "react-spinners/SyncLoader";
 import { getGraphTitleFromConfiguration } from "./graphsdisplay/GraphsDisplayUtils";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
 import { actionTypes } from "../context/globalReducer";
-import { deleteGraph } from "../api/RequestUtils";
+import { deleteGraph, refreshGraph } from "../api/RequestUtils";
 import { getRelativeTimeFromTimestamp } from "../utils/DateUtils";
 
 export default function GraphBox({ graph }) {
@@ -32,6 +33,7 @@ export default function GraphBox({ graph }) {
     const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
 
     const [isMoreSettingsOpen, setIsMoreSettingsOpen] = useState(false);
+    const [isRefreshing, setIsRefreshing] = useState(false);
 
     useEffect(() => {
         console.log(graph);
@@ -52,6 +54,21 @@ export default function GraphBox({ graph }) {
             type: actionTypes.SET_EDITING_GRAPH_CONFIGURATION,
             value: graph.graphConfiguration
         })
+    }
+
+    const handleRefreshGraph = async (graph) => {
+        try {
+            setIsRefreshing(true);
+            const apiResponse = await refreshGraph(userJWTCookie, graph.graphConfiguration.id);
+            if (apiResponse) {
+                // TODO: update graph
+                console.log(apiResponse)
+            }
+        } catch (error) {
+            // TODO: handle exception
+        } finally {
+            setIsRefreshing(false);
+        }
     }
 
     const handleDeleteGraph = (graph) => {
@@ -103,6 +120,9 @@ export default function GraphBox({ graph }) {
                 <div className="graphbox__updatedAt" title="Last graph update">
                     <p>{getRelativeTimeFromTimestamp(graph.updatedAt)}</p>
                 </div>
+                <button className="graphbox__refresh" title="Refresh graph" onClick={() => handleRefreshGraph(graph)}>
+                    <CachedIcon style={{ color: '#6d6d6d' }} fontSize="small" />
+                </button>
                 <button className="graphbox__updateconfig" title="Update configuration" onClick={() => handleClickUpdateGraphConfiguration(graph)}>
                     <TuneRoundedIcon style={{ color: '#6d6d6d' }} fontSize="small" />
                 </button>
