@@ -45,12 +45,36 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
     })
   }
 
+  const createPendingGraphWithConfiguration = (graphConfig) => {
+    const updatedConfig = {
+      ...graphConfig,
+      graphCreationStatus: "PENDING",
+      id: crypto.randomUUID(), // Autogenerate a random id just to be able to reorder it while it loads
+    };
+    return {
+      graphConfiguration: updatedConfig,
+      graphData: null
+    }
+  }
+
   const handleCreateGraph = async () => {
     try {
       closeCreateGraphBox()
+      const pendingGraphConfiguration = createPendingGraphWithConfiguration(graphConfiguration);
+      dispatch({
+        type: actionTypes.APPEND_GRAPH,
+        value: pendingGraphConfiguration
+      })
       const apiResponse = await createGraph(userJWTCookie, graphConfiguration);
+      // Override pending graph that just got created
       if (apiResponse) {
-        console.log("DEBUG JOAQUIN response: ", apiResponse);
+        dispatch({
+          type: actionTypes.UPDATE_GRAPH,
+          payload: {
+            id: pendingGraphConfiguration.graphConfiguration.id,
+            data: apiResponse
+          }
+        })
       }
     } catch (error) {
       // TODO: handle exception

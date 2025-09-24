@@ -32,17 +32,7 @@ export default function GraphBox({ graph }) {
     // Context
     const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
 
-    const [isMoreSettingsOpen, setIsMoreSettingsOpen] = useState(false);
-    const [isRefreshing, setIsRefreshing] = useState(false);
-
-    useEffect(() => {
-        console.log(graph);
-    }, [graph]);
-
-    const handleClickMoreSettingsButton = () => {
-        console.log("Executing");
-        setIsMoreSettingsOpen(!isMoreSettingsOpen);
-    }
+    const [isRefreshing, setIsRefreshing] = useState(graph.graphConfiguration.graphCreationStatus === 'UPDATING');
 
     const handleClickUpdateGraphConfiguration = (graph) => {
         dispatch({
@@ -59,10 +49,16 @@ export default function GraphBox({ graph }) {
     const handleRefreshGraph = async (graph) => {
         try {
             setIsRefreshing(true);
-            const apiResponse = await refreshGraph(userJWTCookie, graph.graphConfiguration.id);
+            const graphConfigId = graph.graphConfiguration.id;
+            const apiResponse = await refreshGraph(userJWTCookie, graphConfigId);
             if (apiResponse) {
-                // TODO: update graph
-                console.log(apiResponse)
+                dispatch({
+                    type: actionTypes.UPDATE_GRAPH,
+                    payload: {
+                        id: graphConfigId,
+                        data: apiResponse
+                    }
+                })
             }
         } catch (error) {
             // TODO: handle exception
@@ -83,14 +79,28 @@ export default function GraphBox({ graph }) {
         }
     }
 
+    const isBurndownGraph = (graph) => {
+        return graph.graphConfiguration.requestType === 'BURNDOWN';
+    }
+
+    const renderUpdateConfigButton = (graph) => {
+        if (!isBurndownGraph(graph)) {
+            return (
+                <button className="graphbox__updateconfig" title="Update configuration" onClick={() => handleClickUpdateGraphConfiguration(graph)}>
+                    <TuneRoundedIcon style={{ color: '#6d6d6d' }} fontSize="small" />
+                </button>
+            );
+        }
+    }
+
     const renderGraph = (graph) => {
         const graphCreationStatus = graph.graphConfiguration.graphCreationStatus;
         switch (graphCreationStatus) {
+            case "UPDATING":
             case "CREATED":
                 return (
                     <GraphDisplayer graphConfiguration={graph.graphConfiguration} graphData={graph.graphData} />
                 );
-            default:
             case "PENDING":
                 return (
                     <div className="loading">
@@ -100,6 +110,7 @@ export default function GraphBox({ graph }) {
                         <SyncLoader size={14} style={{ color: '#6d6d6d' }} />
                     </div>
                 );
+            default:
             case "ERROR":
                 {/* TODO JOAQUIN - fill */ }
                 return (<></>);
@@ -114,18 +125,16 @@ export default function GraphBox({ graph }) {
             className="graphbox"
         >
             <div {...listeners} className="graphbox__drag-handle">
-                <DragIndicatorIcon sx={{ cursor: 'grab' }} />
+                <DragIndicatorIcon style={{ color: '#a0a0a0ff' }} sx={{ cursor: 'grab' }} />
             </div>
             <div className="graphbox__header">
                 <div className="graphbox__updatedAt" title="Last graph update">
                     <p>{getRelativeTimeFromTimestamp(graph.updatedAt)}</p>
                 </div>
-                <button className="graphbox__refresh" title="Refresh graph" onClick={() => handleRefreshGraph(graph)}>
-                    <CachedIcon style={{ color: '#6d6d6d' }} fontSize="small" />
+                <button className="graphbox__refresh" title="Refresh graph" onClick={() => handleRefreshGraph(graph)} disabled={isRefreshing}>
+                    <CachedIcon style={{ color: '#6d6d6d' }} fontSize="small" className={isRefreshing ? 'is-refreshing' : ''} />
                 </button>
-                <button className="graphbox__updateconfig" title="Update configuration" onClick={() => handleClickUpdateGraphConfiguration(graph)}>
-                    <TuneRoundedIcon style={{ color: '#6d6d6d' }} fontSize="small" />
-                </button>
+                {renderUpdateConfigButton(graph)}
                 <button className="graphbox__delete" title="Delete" onClick={() => handleDeleteGraph(graph)}>
                     <DeleteIcon style={{ color: '#f14668' }} fontSize="small" />
                 </button>

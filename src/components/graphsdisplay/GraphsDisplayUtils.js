@@ -119,6 +119,11 @@ export function getGraphTitleFromConfiguration(graphConfiguration) {
     }
   } else {
     // Burndown
+    const referenceType = graphConfiguration.burndownSettings.referenceSettings.type;
+    const referenceCustomMonth = graphConfiguration.burndownSettings.referenceSettings.customMonth;
+    const burndownTime = graphConfiguration.burndownSettings.dataSettings.time;
+    const burndownCustomMonth = graphConfiguration.burndownSettings.dataSettings.customMonth;
+    graphTitle += 'Burndown - ' + referenceTypeToText(referenceType, referenceCustomMonth) + " reference - " + burndownTimeToText(burndownTime, burndownCustomMonth) + " data";
   }
   return graphTitle;
 }
@@ -132,6 +137,30 @@ function sourceToText(source) {
       return 'Incomes';
     case 'SAVINGS':
       return 'Savings';
+  }
+}
+
+function referenceTypeToText(referenceType, customMonth) {
+  switch (referenceType) {
+    default:
+    case 'TOTAL_AVERAGE':
+      return "Total average";
+    case 'LAST_YEAR_AVERAGE':
+      return "Last year average";
+    case 'BEST_MONTH':
+      return "Best month";
+    case 'CUSTOM':
+      return customMonth;
+  }
+}
+
+function burndownTimeToText(time, customMonth) {
+  switch (time) {
+    default:
+    case 'LAST_MONTH':
+      return "Last month";
+    case 'CUSTOM':
+      return customMonth;
   }
 }
 

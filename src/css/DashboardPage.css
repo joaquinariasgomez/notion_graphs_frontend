@@ -1,6 +1,6 @@
 :root {
   /* --graphbox-height: 268px; */
-  --graphbox-height: 325px;
+  --graphbox-height: 350px;
 }
 
 .dashboard__page {
@@ -101,8 +101,8 @@
 .graphbox__drag-handle {
   position: absolute;
   top: 5px;
-  left: 5px;
-  border: 1px solid purple;
+  left: 3px;
+  /* border: 1px solid purple; */
 }
 
 .graphbox__drag-handle:hover {
@@ -141,11 +141,11 @@
   align-items: center;
   justify-content: flex-end;
   gap: 10px;
-  border: 1px solid brown;
+  margin-bottom: 7px;
 }
 
 .graphbox__updatedAt {
-  margin-left: 20px;
+  margin-left: 30px;
   margin-right: auto;
 }
 
@@ -167,6 +167,17 @@
 .graphbox__refresh:hover {
   cursor: pointer;
   background-color: rgb(244, 244, 244);
+}
+
+.is-refreshing {
+  animation: pulse 1s linear infinite;
+}
+
+.graphbox__refresh:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  color: var(--matteblack-color);
+  background-color: white;
 }
 
 .graphbox__updateconfig {
@@ -194,12 +205,16 @@
 
 .graphbox__delete:hover {
   cursor: pointer;
-  background-color: rgb(244, 244, 244);
+  background-color: rgba(249, 24, 128, 0.1);
+}
+
+.graphbox__delete:active {
+  background-color: rgba(249, 24, 128, 0.2);
 }
 
 .graphbox__graph {
   flex-grow: 1;
-  border: 1px solid violet;
+  /* border: 1px solid violet; */
 }
 
 .graphbox__graph>.loading {
@@ -220,6 +235,33 @@
   color: rgb(94, 94, 94);
   position: absolute;
   top: 5px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* .graphbox {
