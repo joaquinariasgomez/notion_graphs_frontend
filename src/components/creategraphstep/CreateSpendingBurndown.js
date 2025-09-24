@@ -1,5 +1,5 @@
 import '../../css/CreateGraphBox.css';
-import { customStyleForSelectPlacement } from '../../Utils';
+import { customStyleForSelectPlacement } from '../../utils/Utils';
 import ClipLoader from 'react-spinners/ClipLoader';
 import SyncLoader from "react-spinners/SyncLoader";
 import DatePicker from 'react-datepicker';
@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from 'date-fns'; // Recommended for easy date formatting
 import { useState } from 'react';
 import Select from 'react-select';
-import { createGraph } from '../../RequestUtils';
+import { createGraph } from '../../api/RequestUtils';
 import { useGlobalStateValue } from '../../context/GlobalStateProvider';
 import { actionTypes } from '../../context/globalReducer';
 
@@ -23,7 +23,6 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
   const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
 
   const [selectedIncludedCategories, setSelectedIncludedCategories] = useState(getSelectOptionsFromDatabase(graphConfiguration.burndownSettings.filterSettings.includedCategories));
-  const [isCreatingGraph, setIsCreatingGraph] = useState(false);
 
   // Month picker
   const [selectedReferenceMonth, setSelectedReferenceMonth] = useState(new Date());
@@ -46,19 +45,40 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
     })
   }
 
+  const createPendingGraphWithConfiguration = (graphConfig) => {
+    const updatedConfig = {
+      ...graphConfig,
+      graphCreationStatus: "PENDING",
+      id: crypto.randomUUID(), // Autogenerate a random id just to be able to reorder it while it loads
+    };
+    return {
+      graphConfiguration: updatedConfig,
+      graphData: null
+    }
+  }
+
   const handleCreateGraph = async () => {
     try {
-      setIsCreatingGraph(true);
+      closeCreateGraphBox()
+      const pendingGraphConfiguration = createPendingGraphWithConfiguration(graphConfiguration);
+      dispatch({
+        type: actionTypes.APPEND_GRAPH,
+        value: pendingGraphConfiguration
+      })
       const apiResponse = await createGraph(userJWTCookie, graphConfiguration);
+      // Override pending graph that just got created
       if (apiResponse) {
-        console.log("DEBUG JOAQUIN response: ", apiResponse);
+        dispatch({
+          type: actionTypes.UPDATE_GRAPH,
+          payload: {
+            id: pendingGraphConfiguration.graphConfiguration.id,
+            data: apiResponse
+          }
+        })
       }
     } catch (error) {
       // TODO: handle exception
-    } finally {
-      setIsCreatingGraph(false);
-      closeCreateGraphBox()
-    }
+    } finally { }
   }
 
   const stopPropagation = (event) => {
@@ -306,8 +326,8 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
         <button className='creategraphbox__button back' onClick={gotoBack} disabled={false}>
           Back
         </button>
-        <button className='creategraphbox__button next create_graph' onClick={handleCreateGraph} disabled={false}>
-          {isCreatingGraph ? <ClipLoader size={15} /> : 'Create graph'}
+        <button className='creategraphbox__button next create_graph' onClick={handleCreateGraph} disabled={expensesCategoriesLoading}>
+          Create graph
         </button>
       </div>
     </div>

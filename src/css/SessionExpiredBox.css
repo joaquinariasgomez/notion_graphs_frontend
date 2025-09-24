@@ -1,0 +1,22 @@
+.sessionexpiredbox__container {
+    position: absolute;
+    top: calc(50% - 20px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    height: 190px;
+    border-radius: 10px;
+    background-color: white;
+    animation: drop 0.2s ease forwards;
+    z-index: 998;
+}
+
+.sessionexpiredbox__container>p {
+    margin-top: 20px;
+    margin-bottom: 25px;
+    font-size: 16px;
+    font-style: italic;
+}

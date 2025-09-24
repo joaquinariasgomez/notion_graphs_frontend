@@ -6,7 +6,7 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import CreateSpendingBurndown from '../creategraphstep/CreateSpendingBurndown';
 import CreateCustomGraphStep2 from '../creategraphstep/CreateCustomGraphStep2';
 import CreateCustomGraphStep3 from '../creategraphstep/CreateCustomGraphStep3';
-import { getExpensesCategories, getIncomesBankaccounts, getIncomesSources } from '../../RequestUtils';
+import { getExpensesCategories, getIncomesBankaccounts, getIncomesSources } from '../../api/RequestUtils';
 import CreateCustomGraphStep4 from '../creategraphstep/CreateCustomGraphStep4';
 
 export default function CreateGraphBox() {
@@ -67,7 +67,7 @@ export default function CreateGraphBox() {
   });
 
   useEffect(() => {
-    console.log(graphConfiguration.burndownSettings);
+    console.log("Joaquin: ", graphConfiguration);
   }, [graphConfiguration]);
 
   useEffect(() => {

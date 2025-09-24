@@ -2,9 +2,8 @@ import '../../css/CreateGraphBox.css';
 import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
-import SyncLoader from "react-spinners/SyncLoader";
 import { useState } from 'react';
-import { createGraph } from '../../RequestUtils';
+import { createGraph } from '../../api/RequestUtils';
 import { useGlobalStateValue } from '../../context/GlobalStateProvider';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { actionTypes } from '../../context/globalReducer';
@@ -16,7 +15,6 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
 
     const [isCumulative, setIsCumulative] = useState(graphConfiguration.customGraphSettings.visualizationSettings.cumulative);
     const [isGroupByCategory, setIsGroupByCategory] = useState(graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory);
-    const [isCreatingGraph, setIsCreatingGraph] = useState(false);
 
     const closeCreateGraphBox = () => {
         dispatch({
@@ -33,19 +31,40 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
         }
     }
 
+    const createPendingGraphWithConfiguration = (graphConfig) => {
+        const updatedConfig = {
+            ...graphConfig,
+            graphCreationStatus: "PENDING",
+            id: crypto.randomUUID(), // Autogenerate a random id just to be able to reorder it while it loads
+        };
+        return {
+            graphConfiguration: updatedConfig,
+            graphData: null
+        }
+    }
+
     const handleCreateGraph = async () => {
         try {
-            setIsCreatingGraph(true);
+            closeCreateGraphBox()
+            const pendingGraphConfiguration = createPendingGraphWithConfiguration(graphConfiguration);
+            dispatch({
+                type: actionTypes.APPEND_GRAPH,
+                value: pendingGraphConfiguration
+            })
             const apiResponse = await createGraph(userJWTCookie, graphConfiguration);
+            // Override pending graph that just got created
             if (apiResponse) {
-                console.log("DEBUG JOAQUIN response: ", apiResponse);
+                dispatch({
+                    type: actionTypes.UPDATE_GRAPH,
+                    payload: {
+                        id: pendingGraphConfiguration.graphConfiguration.id,
+                        data: apiResponse
+                    }
+                })
             }
         } catch (error) {
             // TODO: handle exception
-        } finally {
-            setIsCreatingGraph(false);
-            closeCreateGraphBox()
-        }
+        } finally { }
     }
 
     const handleSelectedVisualizationType = (type) => {
@@ -176,7 +195,7 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
     }
 
     const renderLineChartText = () => {
-        if (graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory === true || graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeBankAccounts === true || graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeSources === true) {
+        if ((graphConfiguration.customGraphSettings.dataSettings.source === "EXPENSES" && graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory === true) || (graphConfiguration.customGraphSettings.dataSettings.source === "INCOMES" && graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeBankAccounts === true || graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeSources === true)) {
             return (
                 <p>Multiline chart</p>
             );
@@ -188,7 +207,7 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
     }
 
     const renderBarChartText = () => {
-        if (graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory === true || graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeBankAccounts === true || graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeSources === true) {
+        if ((graphConfiguration.customGraphSettings.dataSettings.source === "EXPENSES" && graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory === true) || (graphConfiguration.customGraphSettings.dataSettings.source === "INCOMES" && graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeBankAccounts === true || graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeSources === true)) {
             return (
                 <p>Multibar chart</p>
             );
@@ -324,7 +343,7 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
                     Back
                 </button>
                 <button className='creategraphbox__button next create_graph' onClick={handleCreateGraph} disabled={false}>
-                    {isCreatingGraph ? <ClipLoader size={15} /> : 'Create graph'}
+                    Create graph
                 </button>
             </div>
         </div>
