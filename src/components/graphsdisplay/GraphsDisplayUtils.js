@@ -123,7 +123,7 @@ export function getGraphTitleFromConfiguration(graphConfiguration) {
     const referenceCustomMonth = graphConfiguration.burndownSettings.referenceSettings.customMonth;
     const burndownTime = graphConfiguration.burndownSettings.dataSettings.time;
     const burndownCustomMonth = graphConfiguration.burndownSettings.dataSettings.customMonth;
-    graphTitle += 'Burndown - ' + referenceTypeToText(referenceType, referenceCustomMonth) + " reference - " + burndownTimeToText(burndownTime, burndownCustomMonth) + " data";
+    graphTitle += 'Burndown - ' + burndownTimeToText(burndownTime, burndownCustomMonth) + " data - " + referenceTypeToText(referenceType, referenceCustomMonth) + " reference";
   }
   return graphTitle;
 }
