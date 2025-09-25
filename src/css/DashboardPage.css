@@ -180,6 +180,54 @@
   background-color: white;
 }
 
+.graphbox__more_settings {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  position: relative;
+}
+
+.graphbox__more_settings:hover {
+  cursor: pointer;
+  background-color: rgb(244, 244, 244);
+}
+
+.graphbox__moresettings__container {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 8px 0;
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  border: 1px solid #dbdbdb;
+
+  /* Animation properties */
+  opacity: 0;
+  transform: translateY(-10px);
+  visibility: hidden;
+  /* Prevent the menu from capturing clicks when hidden */
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out, visibility 0.2s;
+}
+
+/* Styles for when the dropdown is open (when it has the 'is-open' class) */
+.graphbox__moresettings__container.is-open {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
 .graphbox__updateconfig {
   display: flex;
   flex-direction: row;

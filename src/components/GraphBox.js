@@ -1,5 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CachedIcon from '@mui/icons-material/Cached';
@@ -33,17 +34,21 @@ export default function GraphBox({ graph }) {
     const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
 
     const [isRefreshing, setIsRefreshing] = useState(graph.graphConfiguration.graphCreationStatus === 'UPDATING');
+    const [showMoreOptions, setShowMoreOptions] = useState(false);
 
     const handleClickUpdateGraphConfiguration = (graph) => {
         dispatch({
             type: actionTypes.SET_SHOW_UPDATE_GRAPH_CONFIGURATION_BOX,
             value: true
         })
-        console.log("Setting ", graph.graphConfiguration)
         dispatch({
             type: actionTypes.SET_EDITING_GRAPH_CONFIGURATION,
             value: graph.graphConfiguration
         })
+    }
+
+    const handleClickShowMoreOptions = () => {
+        setShowMoreOptions(!showMoreOptions);
     }
 
     const handleRefreshGraph = async (graph) => {
@@ -117,6 +122,27 @@ export default function GraphBox({ graph }) {
         }
     }
 
+    const renderMoreOptionsMenu = () => {
+        return (
+            <div className={`graphbox__moresettings__container ${showMoreOptions ? 'is-open' : ''}`} onClick={e => { e.stopPropagation(); }}>
+                <div className="dropdown-item">
+                    <span>Show legend</span>
+                    <label className="toggle-switch">
+                        <input type="checkbox" />
+                        <span className="slider"></span>
+                    </label>
+                </div>
+                <div className="dropdown-item">
+                    <span>Show averages</span>
+                    <label className="toggle-switch">
+                        <input type="checkbox" />
+                        <span className="slider"></span>
+                    </label>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div
             ref={setNodeRef}
@@ -134,11 +160,14 @@ export default function GraphBox({ graph }) {
                 <button className="graphbox__refresh" title="Refresh graph" onClick={() => handleRefreshGraph(graph)} disabled={isRefreshing}>
                     <CachedIcon style={{ color: '#6d6d6d' }} fontSize="small" className={isRefreshing ? 'is-refreshing' : ''} />
                 </button>
+                <button className="graphbox__more_settings" title="Options" onClick={handleClickShowMoreOptions}>
+                    <MoreHorizIcon style={{ color: '#6d6d6d' }} fontSize="small" />
+                    {renderMoreOptionsMenu()}
+                </button>
                 {renderUpdateConfigButton(graph)}
                 <button className="graphbox__delete" title="Delete" onClick={() => handleDeleteGraph(graph)}>
                     <DeleteIcon style={{ color: '#f14668' }} fontSize="small" />
                 </button>
-                {/* TODO put more options in this array */}
             </div>
             <div className="graphbox__graph">
                 {renderGraph(graph)}
