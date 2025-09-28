@@ -5,7 +5,7 @@ import MultiBarGraph from "./MultiBarGraph";
 import BurndownGraph from "./BurndownGraph";
 
 
-export default function GraphDisplayer({ graphConfiguration, graphData, showLegend, showAverages }) {
+export default function GraphDisplayer({ graphConfiguration, graphData, showLegend, showAverages, showStandardDeviation }) {
 
   const renderCustomGraph = () => {
     const type = graphConfiguration.customGraphSettings.visualizationSettings.type;
@@ -14,21 +14,21 @@ export default function GraphDisplayer({ graphConfiguration, graphData, showLege
       case 'LINE':
         if (isGrouped) {
           return (
-            <MultiLineGraph graphConfiguration={graphConfiguration} graphData={graphData} showLegend={showLegend} showAverages={showAverages} />
+            <MultiLineGraph graphConfiguration={graphConfiguration} graphData={graphData} showLegend={showLegend} showAverages={showAverages} showStandardDeviation={showStandardDeviation} />
           );
         } else {
           return (
-            <LineGraph graphConfiguration={graphConfiguration} graphData={graphData} showAverages={showAverages} />
+            <LineGraph graphConfiguration={graphConfiguration} graphData={graphData} showAverages={showAverages} showStandardDeviation={showStandardDeviation} />
           );
         }
       case 'BAR':
         if (isGrouped) {
           return (
-            <MultiBarGraph graphConfiguration={graphConfiguration} graphData={graphData} showLegend={showLegend} showAverages={showAverages} />
+            <MultiBarGraph graphConfiguration={graphConfiguration} graphData={graphData} showLegend={showLegend} showAverages={showAverages} showStandardDeviation={showStandardDeviation} />
           );
         } else {
           return (
-            <BarGraph graphConfiguration={graphConfiguration} graphData={graphData} showAverages={showAverages} />
+            <BarGraph graphConfiguration={graphConfiguration} graphData={graphData} showAverages={showAverages} showStandardDeviation={showStandardDeviation} />
           );
         }
       default:

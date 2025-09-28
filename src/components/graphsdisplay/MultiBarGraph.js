@@ -12,7 +12,8 @@ import {
   Filler
 } from 'chart.js';
 import { TimeScale } from 'chart.js';
-import { getGraphTitleFromConfiguration, getTimeUnitFromConfiguration, processGroupedGraphData } from "./GraphsDisplayUtils";
+import { computeAverage, computeStandardDeviation, getGraphTitleFromConfiguration, getTimeUnitFromConfiguration, groupDatasetsIntoSingleList, processGroupedGraphData } from "./GraphsDisplayUtils";
+import annotationPlugin from 'chartjs-plugin-annotation';
 import 'chartjs-adapter-date-fns';
 
 ChartJS.register(
@@ -24,17 +25,79 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  Filler
+  Filler,
+  annotationPlugin
 );
 
-export default function MultiBarGraph({ graphConfiguration, graphData, showLegend, showAverages }) {
+export default function MultiBarGraph({ graphConfiguration, graphData, showLegend, showAverages, showStandardDeviation }) {
 
   const { labels, datasets } = processGroupedGraphData(graphConfiguration, graphData);
+
+  // const averageValue = computeAverage(values);
+  // const standardDeviationValue = computeStandardDeviation(values);
+  groupDatasetsIntoSingleList(datasets);
 
   const data = {
     labels: labels,
     datasets: datasets
   }
+
+  // const annotations = {};
+  // if (showAverages) {
+  //   annotations.averageAnnotation = {
+  //     type: 'line',
+  //     borderColor: 'rgb(100, 149, 237)',
+  //     borderDash: [6, 6],
+  //     borderDashOffset: 0,
+  //     borderWidth: 3,
+  //     label: {
+  //       display: true,
+  //       backgroundColor: 'rgb(100, 149, 237)',
+  //       content: 'Average: ' + averageValue.toFixed(2),
+  //     },
+  //     scaleID: 'y',
+  //     value: averageValue
+  //   };
+  // }
+
+  // if (showStandardDeviation) {
+  //   annotations.upperStd = {
+  //     type: 'line',
+  //     borderColor: 'rgba(102, 102, 102, 0.5)',
+  //     borderDash: [6, 6],
+  //     borderDashOffset: 0,
+  //     borderWidth: 3,
+  //     label: {
+  //       display: true,
+  //       backgroundColor: 'rgba(102, 102, 102, 0.5)',
+  //       color: 'black',
+  //       content: (averageValue + standardDeviationValue).toFixed(2),
+  //       position: 'start',
+  //       // rotation: -90,
+  //       yAdjust: -28
+  //     },
+  //     scaleID: 'y',
+  //     value: averageValue + standardDeviationValue
+  //   };
+  //   annotations.lowerStd = {
+  //     type: 'line',
+  //     borderColor: 'rgba(102, 102, 102, 0.5)',
+  //     borderDash: [6, 6],
+  //     borderDashOffset: 0,
+  //     borderWidth: 3,
+  //     label: {
+  //       display: true,
+  //       backgroundColor: 'rgba(102, 102, 102, 0.5)',
+  //       color: 'black',
+  //       content: (averageValue - standardDeviationValue).toFixed(2),
+  //       position: 'end',
+  //       // rotation: 90,
+  //       yAdjust: 28
+  //     },
+  //     scaleID: 'y',
+  //     value: averageValue - standardDeviationValue
+  //   };
+  // }
 
   const options = {
     animation: true,

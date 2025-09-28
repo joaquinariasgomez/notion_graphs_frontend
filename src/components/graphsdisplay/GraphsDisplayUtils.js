@@ -91,6 +91,22 @@ export function processGroupedGraphData(graphConfiguration, graphData) {
   }
 }
 
+export function groupDatasetsIntoSingleList(datasets) {
+  console.log("DEBUG JOAQUIN datasets are this: ", datasets);
+}
+
+export function computeAverage(values) {
+  return values.length > 0
+    ? values.reduce((sum, val) => sum + val, 0) / values.length
+    : 0;
+}
+
+export function computeStandardDeviation(values) {
+  const n = values.length;
+  const mean = computeAverage(values);
+  return Math.sqrt(values.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n);
+}
+
 export function getTimeUnitFromConfiguration(graphConfiguration) {
   const groupByTime = graphConfiguration.customGraphSettings.visualizationSettings.groupByTime;
   switch (groupByTime) {

@@ -12,7 +12,7 @@ import {
   Filler
 } from 'chart.js';
 import { TimeScale } from 'chart.js';
-import { getGraphTitleFromConfiguration, getTimeUnitFromConfiguration, processContinuousGraphData } from "./GraphsDisplayUtils";
+import { getGraphTitleFromConfiguration } from "./GraphsDisplayUtils";
 import 'chartjs-adapter-date-fns';
 
 ChartJS.register(
@@ -63,7 +63,7 @@ export default function BurndownGraph({ graphConfiguration, graphData }) {
     labels: getTagsFromLongestSource(graphData),
     datasets: [
       {
-        label: 'Projected average spend',
+        label: 'Reference spending',
         data: getValuesFromReferenceData(graphData),
         borderColor: 'rgba(201, 203, 207, 1)', // Grey line
         borderWidth: 2.5,

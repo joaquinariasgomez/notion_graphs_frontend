@@ -38,6 +38,7 @@ export default function GraphBox({ graph }) {
     const showMoreOptionsRef = useRef(null);
     const [showLegend, setShowLegend] = useState(true);
     const [showAverages, setShowAverages] = useState(false);
+    const [showStandardDeviation, setShowStandardDeviation] = useState(false);
 
     useEffect(() => {
         const handleOutsideClick = (event) => {
@@ -111,6 +112,10 @@ export default function GraphBox({ graph }) {
         setShowAverages(!showAverages);
     }
 
+    const handleToggleShowStandardDeviation = () => {
+        setShowStandardDeviation(!showStandardDeviation);
+    }
+
     const isBurndownGraph = (graph) => {
         return graph.graphConfiguration.requestType === 'BURNDOWN';
     }
@@ -131,7 +136,7 @@ export default function GraphBox({ graph }) {
             case "UPDATING":
             case "CREATED":
                 return (
-                    <GraphDisplayer graphConfiguration={graph.graphConfiguration} graphData={graph.graphData} showLegend={showLegend} showAverages={showAverages} />
+                    <GraphDisplayer graphConfiguration={graph.graphConfiguration} graphData={graph.graphData} showLegend={showLegend} showAverages={showAverages} showStandardDeviation={showStandardDeviation} />
                 );
             case "PENDING":
                 return (
@@ -180,12 +185,23 @@ export default function GraphBox({ graph }) {
             >
                 {renderShowLegendDropdown()}
                 <div className="dropdown-item">
-                    <p>Show averages</p>
+                    <p>Show average</p>
                     <label className="toggle-switch">
                         <input
                             type="checkbox"
                             checked={showAverages}
                             onChange={handleToggleShowAverages}
+                        />
+                        <span className="slider"></span>
+                    </label>
+                </div>
+                <div className="dropdown-item">
+                    <p>Show standard deviation</p>
+                    <label className="toggle-switch">
+                        <input
+                            type="checkbox"
+                            checked={showStandardDeviation}
+                            onChange={handleToggleShowStandardDeviation}
                         />
                         <span className="slider"></span>
                     </label>
