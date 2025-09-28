@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
-import { getGraphConfigurations, getGraphs, getMoreGraphs } from "../api/RequestUtils";
+import { getGraphConfigurations, getGraphs, getMoreGraphs, reorderGraph } from "../api/RequestUtils";
 import {
     DndContext,
     closestCenter,
@@ -53,9 +53,17 @@ export default function DashboardGraphs({ }) {
             setMoreGraphsLoading(true);
             const apiResponse = await getMoreGraphs(userJWTCookie, nextCursor);
             if (apiResponse) {
+                // This logic removes the already present graphs that might have been created before hitting 
+                // the "load more" button
+                const existingGraphIds = new Set(graphs.map(graph => graph.graphConfiguration.id));
+                const uniqueNewGraphs = apiResponse.data.filter(
+                    (newGraph) => !existingGraphIds.has(newGraph.graphConfiguration.id)
+                );
+                // There is a bug which is that backend can still tell us that we have a nextPage to render,
+                // and it is an item that is existing in the dashboard
                 dispatch({
                     type: actionTypes.APPEND_GRAPHS,
-                    value: apiResponse.data
+                    value: uniqueNewGraphs
                 })
                 setHasNextPage(apiResponse.hasNextPage)
                 setNextCursor(apiResponse.nextCursor)
@@ -83,7 +91,7 @@ export default function DashboardGraphs({ }) {
         setGrabbedGraphConfigId(event.active.id);
     };
 
-    const handleDragEnd = (event) => {
+    const handleDragEnd = async (event) => {
         const { active, over } = event;
         if (active.id !== over.id) {
             const oldIndex = graphs.findIndex((item) => item.graphConfiguration.id === active.id);
@@ -94,6 +102,19 @@ export default function DashboardGraphs({ }) {
                 type: actionTypes.SET_GRAPHS,
                 value: reorderedGraphs
             });
+            try {
+                const reorderRequest = JSON.stringify(
+                    {
+                        "graphConfigurationId": active.id,
+                        "newIndex": newIndex
+                    }
+                );
+                await reorderGraph(userJWTCookie, reorderRequest);
+            } catch (error) {
+
+            } finally {
+
+            }
         }
         setGrabbedGraphConfigId(null);
     };
@@ -116,6 +137,7 @@ export default function DashboardGraphs({ }) {
                             <GraphBox key={graph.graphConfiguration.id} graph={graph} />
                         ))}
                     </SortableContext>
+                    {renderLoadMoreGraphsButton()}
                 </div>
                 <DragOverlay>
                     {grabbedGraph ? (
@@ -123,7 +145,6 @@ export default function DashboardGraphs({ }) {
                     ) : null}
                 </DragOverlay>
             </DndContext>
-            {renderLoadMoreGraphsButton()}
         </div>
     );
 }

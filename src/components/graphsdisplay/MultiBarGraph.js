@@ -12,7 +12,8 @@ import {
   Filler
 } from 'chart.js';
 import { TimeScale } from 'chart.js';
-import { getGraphTitleFromConfiguration, getTimeUnitFromConfiguration, processGroupedGraphData } from "./GraphsDisplayUtils";
+import { addAverageToAnnotations, addStandardDeviationToAnnotations, computeAverage, getGraphTitleFromConfiguration, getTimeUnitFromConfiguration, processGroupedGraphData } from "./GraphsDisplayUtils";
+import annotationPlugin from 'chartjs-plugin-annotation';
 import 'chartjs-adapter-date-fns';
 
 ChartJS.register(
@@ -24,10 +25,11 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  Filler
+  Filler,
+  annotationPlugin
 );
 
-export default function MultiBarGraph({ graphConfiguration, graphData }) {
+export default function MultiBarGraph({ graphConfiguration, graphData, showLegend, showAverages, showStandardDeviation }) {
 
   const { labels, datasets } = processGroupedGraphData(graphConfiguration, graphData);
 
@@ -36,12 +38,20 @@ export default function MultiBarGraph({ graphConfiguration, graphData }) {
     datasets: datasets
   }
 
+  const annotations = {};
+  if (showAverages) {
+    addAverageToAnnotations(annotations, graphConfiguration, graphData);
+  }
+  if (showStandardDeviation) {
+    addStandardDeviationToAnnotations(annotations, graphConfiguration, graphData);
+  }
+
   const options = {
     animation: true,
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: true,
+        display: showLegend,
         labels: {
           font: {
             size: 10 // Default is 14
@@ -56,6 +66,9 @@ export default function MultiBarGraph({ graphConfiguration, graphData }) {
       title: {
         display: true,
         text: getGraphTitleFromConfiguration(graphConfiguration)
+      },
+      annotation: {
+        annotations: annotations
       }
     },
     interaction: {

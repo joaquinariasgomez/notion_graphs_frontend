@@ -1,10 +1,11 @@
 import { useSortable } from "@dnd-kit/sortable";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CachedIcon from '@mui/icons-material/Cached';
 import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import GraphDisplayer from "./graphsdisplay/GraphDisplayer";
 import SyncLoader from "react-spinners/SyncLoader";
 import { getGraphTitleFromConfiguration } from "./graphsdisplay/GraphsDisplayUtils";
@@ -33,17 +34,41 @@ export default function GraphBox({ graph }) {
     const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
 
     const [isRefreshing, setIsRefreshing] = useState(graph.graphConfiguration.graphCreationStatus === 'UPDATING');
+    const [showMoreOptions, setShowMoreOptions] = useState(false);
+    const showMoreOptionsRef = useRef(null);
+    const [showLegend, setShowLegend] = useState(true);
+    const [showAverages, setShowAverages] = useState(false);
+    const [showStandardDeviation, setShowStandardDeviation] = useState(false);
+
+    useEffect(() => {
+        const handleOutsideClick = (event) => {
+            if (showMoreOptions && showMoreOptionsRef.current && !showMoreOptionsRef.current.contains(event.target)) {
+                handleCloseShowMoreOptions();
+            }
+        }
+        document.addEventListener('mousedown', handleOutsideClick);
+        return () => {
+            document.removeEventListener('mousedown', handleOutsideClick);
+        }
+    }, [showMoreOptions]);
 
     const handleClickUpdateGraphConfiguration = (graph) => {
         dispatch({
             type: actionTypes.SET_SHOW_UPDATE_GRAPH_CONFIGURATION_BOX,
             value: true
         })
-        console.log("Setting ", graph.graphConfiguration)
         dispatch({
             type: actionTypes.SET_EDITING_GRAPH_CONFIGURATION,
             value: graph.graphConfiguration
         })
+    }
+
+    const handleClickShowMoreOptions = () => {
+        setShowMoreOptions(!showMoreOptions);
+    }
+
+    const handleCloseShowMoreOptions = () => {
+        setShowMoreOptions(false);
     }
 
     const handleRefreshGraph = async (graph) => {
@@ -79,6 +104,18 @@ export default function GraphBox({ graph }) {
         }
     }
 
+    const handleToggleShowLegend = () => {
+        setShowLegend(!showLegend);
+    }
+
+    const handleToggleShowAverages = () => {
+        setShowAverages(!showAverages);
+    }
+
+    const handleToggleShowStandardDeviation = () => {
+        setShowStandardDeviation(!showStandardDeviation);
+    }
+
     const isBurndownGraph = (graph) => {
         return graph.graphConfiguration.requestType === 'BURNDOWN';
     }
@@ -99,7 +136,7 @@ export default function GraphBox({ graph }) {
             case "UPDATING":
             case "CREATED":
                 return (
-                    <GraphDisplayer graphConfiguration={graph.graphConfiguration} graphData={graph.graphData} />
+                    <GraphDisplayer graphConfiguration={graph.graphConfiguration} graphData={graph.graphData} showLegend={showLegend} showAverages={showAverages} showStandardDeviation={showStandardDeviation} />
                 );
             case "PENDING":
                 return (
@@ -115,6 +152,62 @@ export default function GraphBox({ graph }) {
                 {/* TODO JOAQUIN - fill */ }
                 return (<></>);
         }
+    }
+
+    const renderShowLegendDropdown = () => {
+        // Only will show for grouped charts
+        const isGroupedByCategory = graph.graphConfiguration.requestType === 'CUSTOM_GRAPH' && graph.graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory === true;
+        const isGroupedByIncomeBankAccounts = graph.graphConfiguration.requestType === 'CUSTOM_GRAPH' && graph.graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeBankAccounts === true;
+        const isGroupedByIncomeSources = graph.graphConfiguration.requestType === 'CUSTOM_GRAPH' && graph.graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeSources === true;
+        if (isGroupedByCategory || isGroupedByIncomeBankAccounts || isGroupedByIncomeSources) {
+            return (
+                <div className="dropdown-item">
+                    <p>Show legend</p>
+                    <label className="toggle-switch">
+                        <input
+                            type="checkbox"
+                            checked={showLegend}
+                            onChange={handleToggleShowLegend}
+                        />
+                        <span className="slider"></span>
+                    </label>
+                </div>
+            );
+        }
+    }
+
+    const renderMoreOptionsMenu = () => {
+        return (
+            <div
+                ref={showMoreOptionsRef}
+                className={`graphbox__moresettings__container ${showMoreOptions ? 'is-open' : ''}`}
+                onClick={e => e.stopPropagation()}
+            >
+                {renderShowLegendDropdown()}
+                <div className="dropdown-item">
+                    <p>Show average</p>
+                    <label className="toggle-switch">
+                        <input
+                            type="checkbox"
+                            checked={showAverages}
+                            onChange={handleToggleShowAverages}
+                        />
+                        <span className="slider"></span>
+                    </label>
+                </div>
+                <div className="dropdown-item">
+                    <p>Show standard deviation</p>
+                    <label className="toggle-switch">
+                        <input
+                            type="checkbox"
+                            checked={showStandardDeviation}
+                            onChange={handleToggleShowStandardDeviation}
+                        />
+                        <span className="slider"></span>
+                    </label>
+                </div>
+            </div>
+        );
     }
 
     return (
@@ -134,11 +227,14 @@ export default function GraphBox({ graph }) {
                 <button className="graphbox__refresh" title="Refresh graph" onClick={() => handleRefreshGraph(graph)} disabled={isRefreshing}>
                     <CachedIcon style={{ color: '#6d6d6d' }} fontSize="small" className={isRefreshing ? 'is-refreshing' : ''} />
                 </button>
+                <button className="graphbox__more_settings" title="Options" onClick={handleClickShowMoreOptions}>
+                    <MoreHorizIcon style={{ color: '#6d6d6d' }} fontSize="small" />
+                    {renderMoreOptionsMenu()}
+                </button>
                 {renderUpdateConfigButton(graph)}
                 <button className="graphbox__delete" title="Delete" onClick={() => handleDeleteGraph(graph)}>
                     <DeleteIcon style={{ color: '#f14668' }} fontSize="small" />
                 </button>
-                {/* TODO put more options in this array */}
             </div>
             <div className="graphbox__graph">
                 {renderGraph(graph)}
