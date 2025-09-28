@@ -5,7 +5,7 @@ import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CachedIcon from '@mui/icons-material/Cached';
 import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import GraphDisplayer from "./graphsdisplay/GraphDisplayer";
 import SyncLoader from "react-spinners/SyncLoader";
 import { getGraphTitleFromConfiguration } from "./graphsdisplay/GraphsDisplayUtils";
@@ -35,8 +35,21 @@ export default function GraphBox({ graph }) {
 
     const [isRefreshing, setIsRefreshing] = useState(graph.graphConfiguration.graphCreationStatus === 'UPDATING');
     const [showMoreOptions, setShowMoreOptions] = useState(false);
+    const showMoreOptionsRef = useRef(null);
     const [showLegend, setShowLegend] = useState(true);
     const [showAverages, setShowAverages] = useState(false);
+
+    useEffect(() => {
+        const handleOutsideClick = (event) => {
+            if (showMoreOptions && showMoreOptionsRef.current && !showMoreOptionsRef.current.contains(event.target)) {
+                handleCloseShowMoreOptions();
+            }
+        }
+        document.addEventListener('mousedown', handleOutsideClick);
+        return () => {
+            document.removeEventListener('mousedown', handleOutsideClick);
+        }
+    }, [showMoreOptions]);
 
     const handleClickUpdateGraphConfiguration = (graph) => {
         dispatch({
@@ -51,6 +64,10 @@ export default function GraphBox({ graph }) {
 
     const handleClickShowMoreOptions = () => {
         setShowMoreOptions(!showMoreOptions);
+    }
+
+    const handleCloseShowMoreOptions = () => {
+        setShowMoreOptions(false);
     }
 
     const handleRefreshGraph = async (graph) => {
@@ -156,7 +173,11 @@ export default function GraphBox({ graph }) {
 
     const renderMoreOptionsMenu = () => {
         return (
-            <div className={`graphbox__moresettings__container ${showMoreOptions ? 'is-open' : ''}`}>
+            <div
+                ref={showMoreOptionsRef}
+                className={`graphbox__moresettings__container ${showMoreOptions ? 'is-open' : ''}`}
+                onClick={e => e.stopPropagation()}
+            >
                 {renderShowLegendDropdown()}
                 <div className="dropdown-item">
                     <p>Show averages</p>
