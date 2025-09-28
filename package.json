@@ -1,5 +1,6 @@
 {
   "name": "notion_graphs_frontend",
+  "homepage": "https://joaquinariasgomez.github.io/notion_graphs_frontend/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
