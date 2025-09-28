@@ -91,10 +91,6 @@ export function processGroupedGraphData(graphConfiguration, graphData) {
   }
 }
 
-export function groupDatasetsIntoSingleList(datasets) {
-  console.log("DEBUG JOAQUIN datasets are this: ", datasets);
-}
-
 export function computeAverage(values) {
   return values.length > 0
     ? values.reduce((sum, val) => sum + val, 0) / values.length
@@ -105,6 +101,67 @@ export function computeStandardDeviation(values) {
   const n = values.length;
   const mean = computeAverage(values);
   return Math.sqrt(values.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n);
+}
+
+export function addAverageToAnnotations(annotations, graphConfiguration, graphData) {
+  const { dates, values } = processContinuousGraphData(graphConfiguration, graphData);
+  const averageValue = computeAverage(values);
+  annotations.averageAnnotation = {
+    type: 'line',
+    borderColor: 'rgb(100, 149, 237)',
+    borderDash: [6, 6],
+    borderDashOffset: 0,
+    borderWidth: 3,
+    label: {
+      display: true,
+      backgroundColor: 'rgb(100, 149, 237)',
+      content: 'Average: ' + averageValue.toFixed(2),
+    },
+    scaleID: 'y',
+    value: averageValue
+  };
+}
+
+export function addStandardDeviationToAnnotations(annotations, graphConfiguration, graphData) {
+  const { dates, values } = processContinuousGraphData(graphConfiguration, graphData);
+  const averageValue = computeAverage(values);
+  const standardDeviationValue = computeStandardDeviation(values);
+  annotations.upperStd = {
+    type: 'line',
+    borderColor: 'rgba(102, 102, 102, 0.5)',
+    borderDash: [6, 6],
+    borderDashOffset: 0,
+    borderWidth: 3,
+    label: {
+      display: true,
+      backgroundColor: 'rgba(102, 102, 102, 0.5)',
+      color: 'black',
+      content: (averageValue + standardDeviationValue).toFixed(2),
+      position: 'start',
+      // rotation: -90,
+      yAdjust: -28
+    },
+    scaleID: 'y',
+    value: averageValue + standardDeviationValue
+  };
+  annotations.lowerStd = {
+    type: 'line',
+    borderColor: 'rgba(102, 102, 102, 0.5)',
+    borderDash: [6, 6],
+    borderDashOffset: 0,
+    borderWidth: 3,
+    label: {
+      display: true,
+      backgroundColor: 'rgba(102, 102, 102, 0.5)',
+      color: 'black',
+      content: (averageValue - standardDeviationValue).toFixed(2),
+      position: 'end',
+      // rotation: 90,
+      yAdjust: 28
+    },
+    scaleID: 'y',
+    value: averageValue - standardDeviationValue
+  };
 }
 
 export function getTimeUnitFromConfiguration(graphConfiguration) {

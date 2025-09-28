@@ -12,7 +12,7 @@ import {
   Filler
 } from 'chart.js';
 import { TimeScale } from 'chart.js';
-import { computeAverage, computeStandardDeviation, getGraphTitleFromConfiguration, getTimeUnitFromConfiguration, processContinuousGraphData } from "./GraphsDisplayUtils";
+import { addAverageToAnnotations, addStandardDeviationToAnnotations, getGraphTitleFromConfiguration, getTimeUnitFromConfiguration, processContinuousGraphData } from "./GraphsDisplayUtils";
 import annotationPlugin from 'chartjs-plugin-annotation';
 import 'chartjs-adapter-date-fns';
 
@@ -33,9 +33,6 @@ export default function LineGraph({ graphConfiguration, graphData, showAverages,
 
   const { dates, values } = processContinuousGraphData(graphConfiguration, graphData);
 
-  const averageValue = computeAverage(values);
-  const standardDeviationValue = computeStandardDeviation(values);
-
   const data = {
     labels: dates,
     datasets: [
@@ -52,59 +49,10 @@ export default function LineGraph({ graphConfiguration, graphData, showAverages,
 
   const annotations = {};
   if (showAverages) {
-    annotations.averageAnnotation = {
-      type: 'line',
-      borderColor: 'rgb(100, 149, 237)',
-      borderDash: [6, 6],
-      borderDashOffset: 0,
-      borderWidth: 3,
-      label: {
-        display: true,
-        backgroundColor: 'rgb(100, 149, 237)',
-        content: 'Average: ' + averageValue.toFixed(2),
-      },
-      scaleID: 'y',
-      value: averageValue
-    };
+    addAverageToAnnotations(annotations, graphConfiguration, graphData);
   }
-
   if (showStandardDeviation) {
-    annotations.upperStd = {
-      type: 'line',
-      borderColor: 'rgba(102, 102, 102, 0.5)',
-      borderDash: [6, 6],
-      borderDashOffset: 0,
-      borderWidth: 3,
-      label: {
-        display: true,
-        backgroundColor: 'rgba(102, 102, 102, 0.5)',
-        color: 'black',
-        content: (averageValue + standardDeviationValue).toFixed(2),
-        position: 'start',
-        // rotation: -90,
-        yAdjust: -28
-      },
-      scaleID: 'y',
-      value: averageValue + standardDeviationValue
-    };
-    annotations.lowerStd = {
-      type: 'line',
-      borderColor: 'rgba(102, 102, 102, 0.5)',
-      borderDash: [6, 6],
-      borderDashOffset: 0,
-      borderWidth: 3,
-      label: {
-        display: true,
-        backgroundColor: 'rgba(102, 102, 102, 0.5)',
-        color: 'black',
-        content: (averageValue - standardDeviationValue).toFixed(2),
-        position: 'end',
-        // rotation: 90,
-        yAdjust: 28
-      },
-      scaleID: 'y',
-      value: averageValue - standardDeviationValue
-    };
+    addStandardDeviationToAnnotations(annotations, graphConfiguration, graphData);
   }
 
   const options = {
