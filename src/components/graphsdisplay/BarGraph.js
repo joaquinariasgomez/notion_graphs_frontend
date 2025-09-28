@@ -27,7 +27,7 @@ ChartJS.register(
   Filler
 );
 
-export default function BarGraph({ graphConfiguration, graphData }) {
+export default function BarGraph({ graphConfiguration, graphData, showAverages }) {
 
   const { dates, values } = processContinuousGraphData(graphConfiguration, graphData);
 

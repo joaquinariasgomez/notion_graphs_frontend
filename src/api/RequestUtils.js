@@ -105,3 +105,9 @@ export async function refreshGraph(jwtToken, graphConfigurationId) {
   const response = putWithJWTToken(url, null, jwtToken);
   return (await response).data;
 }
+
+export async function reorderGraph(jwtToken, reorderRequest) {
+  const url = Config.BackendGraphsURL + "/reorder";
+  const response = putWithJWTToken(url, reorderRequest, jwtToken);
+  return (await response).data;
+}

@@ -27,7 +27,7 @@ ChartJS.register(
   Filler
 );
 
-export default function MultiLineGraph({ graphConfiguration, graphData }) {
+export default function MultiLineGraph({ graphConfiguration, graphData, showLegend, showAverages }) {
 
   const { labels, datasets } = processGroupedGraphData(graphConfiguration, graphData);
 
@@ -41,7 +41,7 @@ export default function MultiLineGraph({ graphConfiguration, graphData }) {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: true,
+        display: showLegend,
         labels: {
           font: {
             size: 10 // Default is 14

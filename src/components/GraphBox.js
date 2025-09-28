@@ -35,6 +35,8 @@ export default function GraphBox({ graph }) {
 
     const [isRefreshing, setIsRefreshing] = useState(graph.graphConfiguration.graphCreationStatus === 'UPDATING');
     const [showMoreOptions, setShowMoreOptions] = useState(false);
+    const [showLegend, setShowLegend] = useState(true);
+    const [showAverages, setShowAverages] = useState(false);
 
     const handleClickUpdateGraphConfiguration = (graph) => {
         dispatch({
@@ -84,6 +86,14 @@ export default function GraphBox({ graph }) {
         }
     }
 
+    const handleToggleShowLegend = () => {
+        setShowLegend(!showLegend);
+    }
+
+    const handleToggleShowAverages = () => {
+        setShowAverages(!showAverages);
+    }
+
     const isBurndownGraph = (graph) => {
         return graph.graphConfiguration.requestType === 'BURNDOWN';
     }
@@ -104,7 +114,7 @@ export default function GraphBox({ graph }) {
             case "UPDATING":
             case "CREATED":
                 return (
-                    <GraphDisplayer graphConfiguration={graph.graphConfiguration} graphData={graph.graphData} />
+                    <GraphDisplayer graphConfiguration={graph.graphConfiguration} graphData={graph.graphData} showLegend={showLegend} showAverages={showAverages} />
                 );
             case "PENDING":
                 return (
@@ -122,20 +132,40 @@ export default function GraphBox({ graph }) {
         }
     }
 
-    const renderMoreOptionsMenu = () => {
-        return (
-            <div className={`graphbox__moresettings__container ${showMoreOptions ? 'is-open' : ''}`} onClick={e => { e.stopPropagation(); }}>
+    const renderShowLegendDropdown = () => {
+        // Only will show for grouped charts
+        const isGroupedByCategory = graph.graphConfiguration.requestType === 'CUSTOM_GRAPH' && graph.graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory === true;
+        const isGroupedByIncomeBankAccounts = graph.graphConfiguration.requestType === 'CUSTOM_GRAPH' && graph.graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeBankAccounts === true;
+        const isGroupedByIncomeSources = graph.graphConfiguration.requestType === 'CUSTOM_GRAPH' && graph.graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeSources === true;
+        if (isGroupedByCategory || isGroupedByIncomeBankAccounts || isGroupedByIncomeSources) {
+            return (
                 <div className="dropdown-item">
-                    <span>Show legend</span>
+                    <p>Show legend</p>
                     <label className="toggle-switch">
-                        <input type="checkbox" />
+                        <input
+                            type="checkbox"
+                            checked={showLegend}
+                            onChange={handleToggleShowLegend}
+                        />
                         <span className="slider"></span>
                     </label>
                 </div>
+            );
+        }
+    }
+
+    const renderMoreOptionsMenu = () => {
+        return (
+            <div className={`graphbox__moresettings__container ${showMoreOptions ? 'is-open' : ''}`}>
+                {renderShowLegendDropdown()}
                 <div className="dropdown-item">
-                    <span>Show averages</span>
+                    <p>Show averages</p>
                     <label className="toggle-switch">
-                        <input type="checkbox" />
+                        <input
+                            type="checkbox"
+                            checked={showAverages}
+                            onChange={handleToggleShowAverages}
+                        />
                         <span className="slider"></span>
                     </label>
                 </div>

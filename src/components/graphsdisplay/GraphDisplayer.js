@@ -5,7 +5,7 @@ import MultiBarGraph from "./MultiBarGraph";
 import BurndownGraph from "./BurndownGraph";
 
 
-export default function GraphDisplayer({ graphConfiguration, graphData }) {
+export default function GraphDisplayer({ graphConfiguration, graphData, showLegend, showAverages }) {
 
   const renderCustomGraph = () => {
     const type = graphConfiguration.customGraphSettings.visualizationSettings.type;
@@ -14,21 +14,21 @@ export default function GraphDisplayer({ graphConfiguration, graphData }) {
       case 'LINE':
         if (isGrouped) {
           return (
-            <MultiLineGraph graphConfiguration={graphConfiguration} graphData={graphData} />
+            <MultiLineGraph graphConfiguration={graphConfiguration} graphData={graphData} showLegend={showLegend} showAverages={showAverages} />
           );
         } else {
           return (
-            <LineGraph graphConfiguration={graphConfiguration} graphData={graphData} />
+            <LineGraph graphConfiguration={graphConfiguration} graphData={graphData} showAverages={showAverages} />
           );
         }
       case 'BAR':
         if (isGrouped) {
           return (
-            <MultiBarGraph graphConfiguration={graphConfiguration} graphData={graphData} />
+            <MultiBarGraph graphConfiguration={graphConfiguration} graphData={graphData} showLegend={showLegend} showAverages={showAverages} />
           );
         } else {
           return (
-            <BarGraph graphConfiguration={graphConfiguration} graphData={graphData} />
+            <BarGraph graphConfiguration={graphConfiguration} graphData={graphData} showAverages={showAverages} />
           );
         }
       default:

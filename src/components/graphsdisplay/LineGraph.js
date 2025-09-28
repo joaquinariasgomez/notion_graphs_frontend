@@ -27,7 +27,7 @@ ChartJS.register(
   Filler
 );
 
-export default function LineGraph({ graphConfiguration, graphData }) {
+export default function LineGraph({ graphConfiguration, graphData, showAverages }) {
 
   const { dates, values } = processContinuousGraphData(graphConfiguration, graphData);
 
