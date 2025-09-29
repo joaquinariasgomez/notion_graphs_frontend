@@ -36,13 +36,14 @@ export default function GraphBox({ graph }) {
     const [isRefreshing, setIsRefreshing] = useState(graph.graphConfiguration.graphCreationStatus === 'UPDATING');
     const [showMoreOptions, setShowMoreOptions] = useState(false);
     const showMoreOptionsRef = useRef(null);
+    const moreSettingsButtonRef = useRef(null);
     const [showLegend, setShowLegend] = useState(true);
     const [showAverages, setShowAverages] = useState(false);
     const [showStandardDeviation, setShowStandardDeviation] = useState(false);
 
     useEffect(() => {
         const handleOutsideClick = (event) => {
-            if (showMoreOptions && showMoreOptionsRef.current && !showMoreOptionsRef.current.contains(event.target)) {
+            if (showMoreOptions && showMoreOptionsRef.current && !showMoreOptionsRef.current.contains(event.target) && moreSettingsButtonRef.current && !moreSettingsButtonRef.current.contains(event.target)) {
                 handleCloseShowMoreOptions();
             }
         }
@@ -227,7 +228,7 @@ export default function GraphBox({ graph }) {
                 <button className="graphbox__refresh" title="Refresh graph" onClick={() => handleRefreshGraph(graph)} disabled={isRefreshing}>
                     <CachedIcon style={{ color: '#6d6d6d' }} fontSize="small" className={isRefreshing ? 'is-refreshing' : ''} />
                 </button>
-                <button className="graphbox__more_settings" title="Options" onClick={handleClickShowMoreOptions}>
+                <button ref={moreSettingsButtonRef} className="graphbox__more_settings" title="Options" onClick={handleClickShowMoreOptions} >
                     <MoreHorizIcon style={{ color: '#6d6d6d' }} fontSize="small" />
                     {renderMoreOptionsMenu()}
                 </button>
