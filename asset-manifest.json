@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.5071e108.css",
-    "main.js": "/static/js/main.d6178367.js",
-    "index.html": "/index.html",
-    "main.5071e108.css.map": "/static/css/main.5071e108.css.map",
-    "main.d6178367.js.map": "/static/js/main.d6178367.js.map"
+    "main.css": "https://joaquinariasgomez.github.io/notion_graphs_frontend/static/css/main.5071e108.css",
+    "main.js": "https://joaquinariasgomez.github.io/notion_graphs_frontend/static/js/main.59c985b5.js",
+    "index.html": "https://joaquinariasgomez.github.io/notion_graphs_frontend/index.html",
+    "main.5071e108.css.map": "https://joaquinariasgomez.github.io/notion_graphs_frontend/static/css/main.5071e108.css.map",
+    "main.59c985b5.js.map": "https://joaquinariasgomez.github.io/notion_graphs_frontend/static/js/main.59c985b5.js.map"
   },
   "entrypoints": [
     "static/css/main.5071e108.css",
-    "static/js/main.d6178367.js"
+    "static/js/main.59c985b5.js"
   ]
 }
