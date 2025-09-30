@@ -14,7 +14,7 @@ import globalReducer, { initialState } from './context/globalReducer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 console.log("Hey nigger");
-console.log("This is the url my bitch ", process.env.REACT_APP_PUBLIC_URL);
+console.log("I just added more secrets ", process.env.REACT_APP_PUBLIC_URL);
 root.render(
   <GlobalStateProvider
     initialState={initialState}
