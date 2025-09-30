@@ -13,12 +13,14 @@ import { GlobalStateProvider } from './context/GlobalStateProvider';
 import globalReducer, { initialState } from './context/globalReducer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+console.log("Hey nigger");
+console.log("This is the url ", process.env.REACT_APP_PUBLIC_URL);
 root.render(
   <GlobalStateProvider
     initialState={initialState}
     globalReducer={globalReducer}
   >
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.REACT_APP_PUBLIC_URL}>
       <Routes>
         <Route
           path="/"
