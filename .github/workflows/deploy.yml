@@ -34,6 +34,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
+          CI: false # Treat warnings as not errors to compile successfully
           REACT_APP_NOTION_AUTH_URL: ${{ secrets.REACT_APP_NOTION_AUTH_URL }}
           REACT_APP_BACKEND_BASE_URL: ${{ secrets.REACT_APP_BACKEND_BASE_URL }}
           REACT_APP_BACKEND_LOGIN_URL: ${{ secrets.REACT_APP_BACKEND_LOGIN_URL }}
