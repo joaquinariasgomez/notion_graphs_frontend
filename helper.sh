@@ -27,7 +27,8 @@ run_locally() {
 }
 
 deploy_to_prod() {
-  npm run deploy
+  #npm run deploy
+  # TODO JOAQUIN: aqui deberia hacer un push a "prod" branch, y ver cómo lo hago
 }
 
 # Parse command-line options

@@ -40,7 +40,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy:prep": "npm run build"
+    "deploy:prep": "npm run build && cp build/index.html build/404.html"
   },
   "eslintConfig": {
     "extends": [
