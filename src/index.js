@@ -13,8 +13,6 @@ import { GlobalStateProvider } from './context/GlobalStateProvider';
 import globalReducer, { initialState } from './context/globalReducer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-console.log("Hey nigger");
-console.log("These are new new changes ", process.env.REACT_APP_PUBLIC_URL);
 root.render(
   <GlobalStateProvider
     initialState={initialState}
