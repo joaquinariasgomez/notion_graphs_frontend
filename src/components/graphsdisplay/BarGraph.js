@@ -12,7 +12,7 @@ import {
   Filler
 } from 'chart.js';
 import { TimeScale } from 'chart.js';
-import { addAverageToAnnotations, addStandardDeviationToAnnotations, getGraphTitleFromConfiguration, getTimeUnitFromConfiguration, processContinuousGraphData } from "./GraphsDisplayUtils";
+import { addAverageToAnnotations, addStandardDeviationToAnnotations, getGraphTitle, getGraphTitleFromConfiguration, getTimeUnitFromConfiguration, processContinuousGraphData } from "./GraphsDisplayUtils";
 import annotationPlugin from 'chartjs-plugin-annotation';
 import 'chartjs-adapter-date-fns';
 
@@ -66,7 +66,7 @@ export default function BarGraph({ graphConfiguration, graphData, showAverages, 
       },
       title: {
         display: true,
-        text: getGraphTitleFromConfiguration(graphConfiguration)
+        text: getGraphTitle(graphConfiguration)
       },
       annotation: {
         annotations: annotations

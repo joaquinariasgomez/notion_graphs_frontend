@@ -179,6 +179,14 @@ export function getTimeUnitFromConfiguration(graphConfiguration) {
   }
 }
 
+export function getGraphTitle(graphConfiguration) {
+  if (graphConfiguration.customTitle === null) {
+    return getGraphTitleFromConfiguration(graphConfiguration);
+  } else {
+    return graphConfiguration.customTitle;
+  }
+}
+
 export function getGraphTitleFromConfiguration(graphConfiguration) {
   let graphTitle = '';
   if (graphConfiguration.requestType === 'CUSTOM_GRAPH') {

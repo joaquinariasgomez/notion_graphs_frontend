@@ -26,6 +26,7 @@ export default function CreateGraphBox() {
   const [step, setStep] = useState(1);
 
   const [graphConfiguration, setGraphConfiguration] = useState({
+    customTitle: null,
     requestType: '', // 'CUSTOM_GRAPH', 'BURNDOWN', // In the future: 'BUILDUP',
     customGraphSettings: {
       dataSettings: {

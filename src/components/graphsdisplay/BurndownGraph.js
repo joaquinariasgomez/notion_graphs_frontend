@@ -12,7 +12,7 @@ import {
   Filler
 } from 'chart.js';
 import { TimeScale } from 'chart.js';
-import { getGraphTitleFromConfiguration } from "./GraphsDisplayUtils";
+import { getGraphTitle, getGraphTitleFromConfiguration } from "./GraphsDisplayUtils";
 import 'chartjs-adapter-date-fns';
 
 ChartJS.register(
@@ -96,7 +96,7 @@ export default function BurndownGraph({ graphConfiguration, graphData }) {
       },
       title: {
         display: true,
-        text: getGraphTitleFromConfiguration(graphConfiguration)
+        text: getGraphTitle(graphConfiguration)
       }
     },
     interaction: {

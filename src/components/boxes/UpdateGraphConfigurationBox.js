@@ -10,6 +10,7 @@ import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
 import { updateGraphConfiguration } from '../../api/RequestUtils';
+import { getGraphTitleFromConfiguration } from '../graphsdisplay/GraphsDisplayUtils';
 
 export default function UpdateGraphConfigurationBox() {
 
@@ -17,10 +18,11 @@ export default function UpdateGraphConfigurationBox() {
   const [{ userJWTCookie, editingGraphConfiguration, graphs }, dispatch] = useGlobalStateValue();
 
   const [isEditingCustomTitle, setIsEditingCustomTitle] = useState(false);
+  const [temporalCustomTitle, setTemporalCustomTitle] = useState(null);
 
-  useEffect(() => {
-    console.log(editingGraphConfiguration);
-  }, [editingGraphConfiguration]);
+  // useEffect(() => {
+  //   console.log(editingGraphConfiguration);
+  // }, [editingGraphConfiguration]);
 
   const closeBox = () => {
     dispatch({
@@ -194,19 +196,38 @@ export default function UpdateGraphConfigurationBox() {
     setIsEditingCustomTitle(true);
   }
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleDoneEditClick();
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setTemporalCustomTitle(e.target.value);
+  };
+
   const handleCancelEditClick = () => {
     setIsEditingCustomTitle(false);
   }
 
   const handleDoneEditClick = () => {
     setIsEditingCustomTitle(false);
-    // TODO: put the current value that's being written into the context
+    if (temporalCustomTitle !== null && temporalCustomTitle !== "") {
+      const newEditingGraphConfiguration = {
+        ...editingGraphConfiguration,
+        customTitle: temporalCustomTitle
+      }
+      dispatch({
+        type: actionTypes.SET_EDITING_GRAPH_CONFIGURATION,
+        value: newEditingGraphConfiguration
+      });
+    }
   }
 
   const renderCustomTitleText = () => {
     const textValue = editingGraphConfiguration.customTitle;
     if (textValue === null) {
-      return "Edit title";
+      return getGraphTitleFromConfiguration(editingGraphConfiguration);
     } else {
       return textValue;
     }
@@ -219,9 +240,9 @@ export default function UpdateGraphConfigurationBox() {
           <>
             <input
               type="text"
-              value={editingGraphConfiguration.customTitle}
-              // onChange={handleInputChange}
-              // onKeyDown={handleKeyDown}
+              value={temporalCustomTitle}
+              onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
               placeholder='Edit title...'
               autoFocus // Automatically focus the input field
             />
@@ -231,9 +252,6 @@ export default function UpdateGraphConfigurationBox() {
             <button onClick={handleDoneEditClick}>
               <DoneIcon style={{ color: '#000000' }} />
             </button>
-            {/* <button onClick={handleSaveClick}>
-              <FaCheck color="green" size={20} />
-            </button> */}
           </>
         ) : (
           <>
@@ -261,6 +279,7 @@ export default function UpdateGraphConfigurationBox() {
         <div className='creategraphbox__heading last_step'>
           <h2>Incomes</h2>
           <AttachMoneyRoundedIcon fontSize='medium' />
+          {renderEditCustomTitle()}
         </div>
       );
     } else {
@@ -268,6 +287,7 @@ export default function UpdateGraphConfigurationBox() {
         <div className='creategraphbox__heading last_step'>
           <h2>Savings</h2>
           <TrendingUpRoundedIcon fontSize='medium' />
+          {renderEditCustomTitle()}
         </div>
       );
     }

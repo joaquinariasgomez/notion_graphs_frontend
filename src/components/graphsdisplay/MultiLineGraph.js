@@ -12,7 +12,7 @@ import {
   Filler
 } from 'chart.js';
 import { TimeScale } from 'chart.js';
-import { addAverageToAnnotations, addStandardDeviationToAnnotations, getGraphTitleFromConfiguration, getTimeUnitFromConfiguration, processGroupedGraphData } from "./GraphsDisplayUtils";
+import { addAverageToAnnotations, addStandardDeviationToAnnotations, getGraphTitle, getGraphTitleFromConfiguration, getTimeUnitFromConfiguration, processGroupedGraphData } from "./GraphsDisplayUtils";
 import annotationPlugin from 'chartjs-plugin-annotation';
 import 'chartjs-adapter-date-fns';
 
@@ -65,7 +65,7 @@ export default function MultiLineGraph({ graphConfiguration, graphData, showLege
       },
       title: {
         display: true,
-        text: getGraphTitleFromConfiguration(graphConfiguration)
+        text: getGraphTitle(graphConfiguration)
       },
       annotation: {
         annotations: annotations

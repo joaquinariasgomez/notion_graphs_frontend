@@ -259,6 +259,7 @@
 
 .editcustomtitle__container>h2 {
   font-size: 20px;
+  font-style: italic;
   margin-right: 7px;
   color: var(--matteblack-color);
 }
