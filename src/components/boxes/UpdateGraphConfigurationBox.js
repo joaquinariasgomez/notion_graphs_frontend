@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useGlobalStateValue } from "../../context/GlobalStateProvider";
 import { actionTypes } from "../../context/globalReducer";
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import EditIcon from '@mui/icons-material/Edit';
 import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
@@ -12,6 +13,8 @@ export default function UpdateGraphConfigurationBox() {
 
   // Context
   const [{ userJWTCookie, editingGraphConfiguration, graphs }, dispatch] = useGlobalStateValue();
+
+  const [isEditingCustomTitle, setIsEditingCustomTitle] = useState(false);
 
   useEffect(() => {
     console.log(editingGraphConfiguration);
@@ -185,12 +188,55 @@ export default function UpdateGraphConfigurationBox() {
     });
   }
 
+  const handleClickEditCustomTitle = () => {
+    setIsEditingCustomTitle(true);
+  }
+
+  const renderCustomTitleText = () => {
+    const textValue = editingGraphConfiguration.customTitle;
+    if (textValue === null) {
+      return "Edit title";
+    } else {
+      return textValue;
+    }
+  }
+
+  const renderEditCustomTitle = () => {
+    return (
+      <div className='editcustomtitle__container'>
+        {isEditingCustomTitle ? (
+          <>
+            <input
+              type="text"
+              value={editingGraphConfiguration.customTitle}
+              // onChange={handleInputChange}
+              // onKeyDown={handleKeyDown}
+              placeholder='Edit title...'
+              autoFocus // Automatically focus the input field
+            />
+            {/* <button onClick={handleSaveClick}>
+              <FaCheck color="green" size={20} />
+            </button> */}
+          </>
+        ) : (
+          <>
+            <h2>{renderCustomTitleText()}</h2>
+            <button onClick={handleClickEditCustomTitle}>
+              <EditIcon style={{ color: '#000000' }} />
+            </button>
+          </>
+        )}
+      </div>
+    );
+  }
+
   const renderHeading = () => {
     if (editingGraphConfiguration.customGraphSettings.dataSettings.source === "EXPENSES") {
       return (
         <div className='creategraphbox__heading last_step'>
           <h2>Expenses</h2>
           <TrendingDownRoundedIcon fontSize='medium' />
+          {renderEditCustomTitle()}
         </div>
       );
     } else if (editingGraphConfiguration.customGraphSettings.dataSettings.source === "INCOMES") {

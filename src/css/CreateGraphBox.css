@@ -247,6 +247,57 @@
   padding-left: 6px;
 }
 
+.editcustomtitle__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 35px;
+  margin-left: auto;
+  /* Push to the right */
+}
+
+.editcustomtitle__container>h2 {
+  font-size: 20px;
+  margin-right: 12px;
+  color: var(--matteblack-color);
+}
+
+.editcustomtitle__container>button {
+  width: 35px;
+  height: 35px;
+  border-style: solid;
+  border-radius: 50%;
+  border-width: 0;
+  padding: 5px;
+  cursor: pointer;
+  background-color: #F0F0F0;
+}
+
+.editcustomtitle__container>input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 20px;
+  color: var(--matteblack-color);
+  padding: 4px 6px;
+  width: auto;
+  max-width: 300px;
+  border-bottom: 2px solid #ddd;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  /* border: 1px solid red; */
+}
+
+.editcustomtitle__container>input:focus {
+  border-color: var(--matteblack-color);
+  box-shadow: rgba(82, 82, 82, 0.3);
+}
+
+.editcustomtitle__container>input::placeholder {
+  color: #909090;
+  font-style: italic;
+  font-size: 20px;
+}
+
 /* .creategraphbox__heading.last_step>h2 {
   font-style: italic;
 } */
