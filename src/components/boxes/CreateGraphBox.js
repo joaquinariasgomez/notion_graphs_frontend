@@ -3,11 +3,15 @@ import { useEffect, useState } from 'react';
 import { useGlobalStateValue } from '../../context/GlobalStateProvider';
 import { actionTypes } from '../../context/globalReducer';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import EditIcon from '@mui/icons-material/Edit';
+import CloseIcon from '@mui/icons-material/Close';
+import DoneIcon from '@mui/icons-material/Done';
 import CreateSpendingBurndown from '../creategraphstep/CreateSpendingBurndown';
 import CreateCustomGraphStep2 from '../creategraphstep/CreateCustomGraphStep2';
 import CreateCustomGraphStep3 from '../creategraphstep/CreateCustomGraphStep3';
 import { getExpensesCategories, getIncomesBankaccounts, getIncomesSources } from '../../api/RequestUtils';
 import CreateCustomGraphStep4 from '../creategraphstep/CreateCustomGraphStep4';
+import { getGraphTitleFromConfiguration } from '../graphsdisplay/GraphsDisplayUtils';
 
 export default function CreateGraphBox() {
 
@@ -21,6 +25,9 @@ export default function CreateGraphBox() {
   const [expensesCategoriesLoading, setExpensesCategoriesLoading] = useState(false);
   const [incomesBankAccountsLoading, setIncomesBankAccountsLoading] = useState(false);
   const [incomesSourcesLoading, setIncomesSourcesLoading] = useState(false);
+
+  const [isEditingCustomTitle, setIsEditingCustomTitle] = useState(false);
+  const [temporalCustomTitle, setTemporalCustomTitle] = useState("");
 
   // States to manage form data
   const [step, setStep] = useState(1);
@@ -67,9 +74,9 @@ export default function CreateGraphBox() {
     }
   });
 
-  useEffect(() => {
-    console.log("Joaquin: ", graphConfiguration);
-  }, [graphConfiguration]);
+  // useEffect(() => {
+  //   console.log("Joaquin: ", graphConfiguration);
+  // }, [graphConfiguration]);
 
   useEffect(() => {
     fetchExpensesCategories();
@@ -142,6 +149,44 @@ export default function CreateGraphBox() {
     })
   }
 
+  const renderCustomTitleText = () => {
+    const textValue = graphConfiguration.customTitle;
+    if (textValue === null) {
+      return getGraphTitleFromConfiguration(graphConfiguration);
+    } else {
+      return textValue;
+    }
+  }
+
+  const handleClickEditCustomTitle = () => {
+    setIsEditingCustomTitle(true);
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleDoneEditClick();
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setTemporalCustomTitle(e.target.value);
+  };
+
+  const handleCancelEditClick = () => {
+    setIsEditingCustomTitle(false);
+  }
+
+  const handleDoneEditClick = () => {
+    setIsEditingCustomTitle(false);
+    if (temporalCustomTitle !== null && temporalCustomTitle !== "") {
+      const newEditingGraphConfiguration = {
+        ...graphConfiguration,
+        customTitle: temporalCustomTitle
+      }
+      setGraphConfiguration(newEditingGraphConfiguration);
+    }
+  }
+
   const handleSelectedRequestType = (requestType) => {
     handleUpdateGraphConfiguration({ requestType: requestType });
     handleNextStep();
@@ -172,6 +217,42 @@ export default function CreateGraphBox() {
     );
   }
 
+  const renderEditCustomTitleBox = () => {
+    return (
+      <div className='creategraphbox__editcustomtitlecontainer'>
+        <div className='creategraphbox__editcustomtitlegraycontainer'>
+          <div className='editcustomtitle__container'>
+            {isEditingCustomTitle ? (
+              <>
+                <input
+                  type="text"
+                  value={temporalCustomTitle}
+                  onChange={handleInputChange}
+                  onKeyDown={handleKeyDown}
+                  placeholder='Insert title...'
+                  autoFocus // Automatically focus the input field
+                />
+                <button onClick={handleCancelEditClick}>
+                  <CloseIcon style={{ color: '#000000' }} />
+                </button>
+                <button onClick={handleDoneEditClick}>
+                  <DoneIcon style={{ color: '#000000' }} />
+                </button>
+              </>
+            ) : (
+              <>
+                <h2>{renderCustomTitleText()}</h2>
+                <button onClick={handleClickEditCustomTitle}>
+                  <EditIcon style={{ color: '#000000' }} />
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const renderNextScreen = () => {
     if (graphConfiguration.requestType === 'CUSTOM_GRAPH') {
       return <CreateCustomGraphStep2 graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoNext={handleNextStep} gotoEnd={handleOnEndStep} />;
@@ -188,6 +269,7 @@ export default function CreateGraphBox() {
         </button>
         <h1>New Graph</h1>
         {step === 1 && renderCreateGraphStep1Buttons()}
+        {step > 1 && renderEditCustomTitleBox()}
         {step === 2 && renderNextScreen()}
         {step === 3 && <CreateCustomGraphStep3 graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoNext={handleNextStep} expensesCategoriesLoading={expensesCategoriesLoading} incomesBankAccountsLoading={incomesBankAccountsLoading} incomesSourcesLoading={incomesSourcesLoading} expensesCategories={expensesCategories} incomesBankAccounts={incomesBankAccounts} incomesSources={incomesSources} />}
         {step === 4 && <CreateCustomGraphStep4 graphConfiguration={graphConfiguration} onUpdateGraphConfig={handleUpdateGraphConfiguration} gotoBack={handlePrevStep} gotoBegin={handleOnBeginStep} />}

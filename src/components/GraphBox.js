@@ -8,7 +8,7 @@ import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
 import { useEffect, useRef, useState } from "react";
 import GraphDisplayer from "./graphsdisplay/GraphDisplayer";
 import SyncLoader from "react-spinners/SyncLoader";
-import { getGraphTitleFromConfiguration } from "./graphsdisplay/GraphsDisplayUtils";
+import { getGraphTitle, getGraphTitleFromConfiguration } from "./graphsdisplay/GraphsDisplayUtils";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
 import { actionTypes } from "../context/globalReducer";
 import { deleteGraph, refreshGraph } from "../api/RequestUtils";
@@ -143,7 +143,7 @@ export default function GraphBox({ graph }) {
                 return (
                     <div className="loading">
                         <p className="title">
-                            {getGraphTitleFromConfiguration(graph.graphConfiguration)}
+                            {getGraphTitle(graph.graphConfiguration)}
                         </p>
                         <SyncLoader size={14} style={{ color: '#6d6d6d' }} />
                     </div>

@@ -18,7 +18,7 @@ export default function UpdateGraphConfigurationBox() {
   const [{ userJWTCookie, editingGraphConfiguration, graphs }, dispatch] = useGlobalStateValue();
 
   const [isEditingCustomTitle, setIsEditingCustomTitle] = useState(false);
-  const [temporalCustomTitle, setTemporalCustomTitle] = useState(null);
+  const [temporalCustomTitle, setTemporalCustomTitle] = useState("");
 
   // useEffect(() => {
   //   console.log(editingGraphConfiguration);
