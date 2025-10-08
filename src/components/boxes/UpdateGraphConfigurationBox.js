@@ -4,6 +4,8 @@ import { useGlobalStateValue } from "../../context/GlobalStateProvider";
 import { actionTypes } from "../../context/globalReducer";
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import EditIcon from '@mui/icons-material/Edit';
+import CloseIcon from '@mui/icons-material/Close';
+import DoneIcon from '@mui/icons-material/Done';
 import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
@@ -192,6 +194,15 @@ export default function UpdateGraphConfigurationBox() {
     setIsEditingCustomTitle(true);
   }
 
+  const handleCancelEditClick = () => {
+    setIsEditingCustomTitle(false);
+  }
+
+  const handleDoneEditClick = () => {
+    setIsEditingCustomTitle(false);
+    // TODO: put the current value that's being written into the context
+  }
+
   const renderCustomTitleText = () => {
     const textValue = editingGraphConfiguration.customTitle;
     if (textValue === null) {
@@ -214,6 +225,12 @@ export default function UpdateGraphConfigurationBox() {
               placeholder='Edit title...'
               autoFocus // Automatically focus the input field
             />
+            <button onClick={handleCancelEditClick}>
+              <CloseIcon style={{ color: '#000000' }} />
+            </button>
+            <button onClick={handleDoneEditClick}>
+              <DoneIcon style={{ color: '#000000' }} />
+            </button>
             {/* <button onClick={handleSaveClick}>
               <FaCheck color="green" size={20} />
             </button> */}
