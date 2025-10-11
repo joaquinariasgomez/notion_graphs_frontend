@@ -18,7 +18,7 @@ root.render(
     initialState={initialState}
     globalReducer={globalReducer}
   >
-    <BrowserRouter basename={process.env.REACT_APP_PUBLIC_URL}>
+    <BrowserRouter>
       <Routes>
         <Route
           path="/"

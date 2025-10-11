@@ -42,7 +42,6 @@ jobs:
           REACT_APP_BACKEND_LOGIN_URL: ${{ secrets.REACT_APP_BACKEND_LOGIN_URL }}
           REACT_APP_BACKEND_LOGOUT_URL: ${{ secrets.REACT_APP_BACKEND_LOGOUT_URL }}
           REACT_APP_BACKEND_GRAPHS_URL: ${{ secrets.REACT_APP_BACKEND_GRAPHS_URL }}
-          REACT_APP_PUBLIC_URL: ${{ secrets.REACT_APP_PUBLIC_URL }}
       - name: Configure GitHub pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
