@@ -20,12 +20,12 @@ root.render(
   >
     <BrowserRouter>
       <Routes>
-        <Route
+        {/* <Route
           path="/"
           element={<Navigate to="/welcome" replace />}
-        />
+        /> */}
         <Route
-          path="/welcome"
+          path="/"
           element={<Home />}
         />
         {/* Adding a route for the not-found page */}
