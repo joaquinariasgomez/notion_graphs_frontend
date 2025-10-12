@@ -1,7 +1,7 @@
 {
-  "name": "notion_graphs_frontend",
+  "name": "notion_wallet",
   "version": "0.1.0",
-  "homepage": "https://joaquinariasgomez.github.io/notion_graphs_frontend",
+  "homepage": "https://notionwallet.com",
   "private": true,
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
