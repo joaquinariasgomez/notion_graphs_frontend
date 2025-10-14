@@ -3,7 +3,7 @@ import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
 import { useState } from 'react';
-import { createGraph } from '../../api/RequestUtils';
+import { createGraph, createWalletTemplate } from '../../api/RequestUtils';
 import { useGlobalStateValue } from '../../context/GlobalStateProvider';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { actionTypes } from '../../context/globalReducer';
@@ -62,6 +62,8 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
                     }
                 })
             }
+            // TODO JOAQUIN: DELETE
+            //const apiResponse2 = await createWalletTemplate(userJWTCookie);
         } catch (error) {
             // TODO: handle exception
         } finally { }

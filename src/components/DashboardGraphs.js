@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
-import { getGraphConfigurations, getGraphs, getMoreGraphs, reorderGraph } from "../api/RequestUtils";
+import { checkIntegrationConnection, getGraphConfigurations, getGraphs, getMoreGraphs, reorderGraph } from "../api/RequestUtils";
 import {
     DndContext,
     closestCenter,
@@ -27,6 +27,7 @@ export default function DashboardGraphs({ }) {
 
     useEffect(() => {
         fetchGraphConfigurations();
+        fetchIntegrationConnection();
     }, []);
 
     const fetchGraphConfigurations = async () => {
@@ -45,6 +46,18 @@ export default function DashboardGraphs({ }) {
 
         } finally {
             setGraphsLoading(false);
+        }
+    }
+
+    // TODO JOAQUIN: WIP
+    const fetchIntegrationConnection = async () => {
+        try {
+            const apiResponse = await checkIntegrationConnection(userJWTCookie);
+
+        } catch (error) {
+
+        } finally {
+
         }
     }
 

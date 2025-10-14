@@ -3,6 +3,7 @@ const Config = {
   BackendLoginURL: process.env.REACT_APP_BACKEND_LOGIN_URL,
   BackendLogoutURL: process.env.REACT_APP_BACKEND_LOGOUT_URL,
   BackendGraphsURL: process.env.REACT_APP_BACKEND_GRAPHS_URL,
+  BackendWalletConnectionURL: process.env.REACT_APP_BACKEND_WALLETCONNECTION_URL,
 }
 
 export default Config;

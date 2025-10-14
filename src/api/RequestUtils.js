@@ -111,3 +111,15 @@ export async function reorderGraph(jwtToken, reorderRequest) {
   const response = putWithJWTToken(url, reorderRequest, jwtToken);
   return (await response).data;
 }
+
+export async function checkIntegrationConnection(jwtToken) {
+  const url = Config.BackendWalletConnectionURL;
+  const response = getWithJWTToken(url, jwtToken);
+  return (await response).data;
+}
+
+export async function createWalletTemplate(jwtToken) {
+  const url = Config.BackendWalletConnectionURL;
+  const response = postWithJWTToken(url, null, jwtToken);
+  return (await response).data;
+}
