@@ -28,8 +28,8 @@ function ProfileBox() {
       setIsLoggingOut(true);
       await logoutFromNotion(userJWTCookie);
     } catch (error) {
-      console.log(error); // TODO: remove
-      // TODO: showAlert() show alert box
+      console.log(error); // TODO JOAQUIN: remove
+      // TODO JOAQUIN: showAlert() show alert box
     } finally {
       setIsLoggingOut(false);
     }

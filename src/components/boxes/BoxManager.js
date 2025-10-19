@@ -5,11 +5,12 @@ import ProfileBox from "./ProfileBox";
 import eventBus from "../../utils/eventBus";
 import SessionExpiredBox from "./SessionExpiredBox";
 import UpdateGraphConfigurationBox from "./UpdateGraphConfigurationBox";
+import HowToConnectToIntegrationBox from "./HowToConnectToIntegrationBox";
 
 export default function BoxManager() {
 
   // Context
-  const [{ showCreateGraphBox, showUserProfileBox, showUpdateGraphConfigurationBox }, dispatch] = useGlobalStateValue();
+  const [{ showCreateGraphBox, showUserProfileBox, showUpdateGraphConfigurationBox, showHowToConnectToIntegrationBox }, dispatch] = useGlobalStateValue();
   const [showSessionExpiredBox, setShowSessionExpiredBox] = useState(false);
 
   useEffect(() => {
@@ -39,6 +40,10 @@ export default function BoxManager() {
     } else if (showUserProfileBox) {
       return (
         <ProfileBox />
+      )
+    } else if (showHowToConnectToIntegrationBox) {
+      return (
+        <HowToConnectToIntegrationBox />
       )
     } else if (showCreateGraphBox) {
       return (

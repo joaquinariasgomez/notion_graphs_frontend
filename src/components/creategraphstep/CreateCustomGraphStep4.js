@@ -62,8 +62,6 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
                     }
                 })
             }
-            // TODO JOAQUIN: DELETE
-            //const apiResponse2 = await createWalletTemplate(userJWTCookie);
         } catch (error) {
             // TODO: handle exception
         } finally { }

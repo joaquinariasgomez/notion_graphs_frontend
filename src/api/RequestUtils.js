@@ -118,8 +118,14 @@ export async function checkIntegrationConnection(jwtToken) {
   return (await response).data;
 }
 
-export async function createWalletTemplate(jwtToken) {
-  const url = Config.BackendWalletConnectionURL;
+export async function refreshIntegrationConnection(jwtToken) {
+  const url = Config.BackendWalletConnectionURL + "/refresh";
   const response = postWithJWTToken(url, null, jwtToken);
   return (await response).data;
 }
+
+// export async function createWalletTemplate(jwtToken) {
+//   const url = Config.BackendWalletConnectionURL;
+//   const response = postWithJWTToken(url, null, jwtToken);
+//   return (await response).data;
+// }

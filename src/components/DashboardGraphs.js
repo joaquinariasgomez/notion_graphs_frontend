@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
-import { checkIntegrationConnection, getGraphConfigurations, getGraphs, getMoreGraphs, reorderGraph } from "../api/RequestUtils";
+import { checkIntegrationConnection, getGraphConfigurations, getGraphs, getMoreGraphs, refreshIntegrationConnection, reorderGraph } from "../api/RequestUtils";
 import {
     DndContext,
     closestCenter,
@@ -30,6 +30,13 @@ export default function DashboardGraphs({ }) {
         fetchIntegrationConnection();
     }, []);
 
+    const showHowToConnectToIntegrationBox = () => {
+        dispatch({
+            type: actionTypes.SET_SHOW_HOW_TO_CONNECT_TO_INTEGRATION_BOX,
+            value: true
+        })
+    }
+
     const fetchGraphConfigurations = async () => {
         try {
             setGraphsLoading(true);
@@ -49,11 +56,12 @@ export default function DashboardGraphs({ }) {
         }
     }
 
-    // TODO JOAQUIN: WIP
     const fetchIntegrationConnection = async () => {
         try {
             const apiResponse = await checkIntegrationConnection(userJWTCookie);
-
+            if (apiResponse && apiResponse.hasTemplateConnectedToIntegration === false) {
+                showHowToConnectToIntegrationBox();
+            }
         } catch (error) {
 
         } finally {
@@ -81,6 +89,9 @@ export default function DashboardGraphs({ }) {
                 setHasNextPage(apiResponse.hasNextPage)
                 setNextCursor(apiResponse.nextCursor)
             }
+
+            // TODO JOAQUIN: DELETE
+            // const apiResponse2 = await refreshIntegrationConnection(userJWTCookie);
         } catch (error) {
 
         } finally {

@@ -4,6 +4,7 @@ export const initialState = {
   showCreateGraphBox: false,
   showUpdateGraphConfigurationBox: false,
   showUserProfileBox: false,
+  showHowToConnectToIntegrationBox: false,
   graphs: [],
   editingGraphConfiguration: {} // Data for when customer edits a graph's configuration
 }
@@ -14,6 +15,7 @@ export const actionTypes = {
   SET_SHOW_CREATE_GRAPH_BOX: "SET_SHOW_CREATE_GRAPH_BOX",
   SET_SHOW_UPDATE_GRAPH_CONFIGURATION_BOX: "SET_SHOW_UPDATE_GRAPH_CONFIGURATION_BOX",
   SET_SHOW_USER_PROFILE_BOX: "SET_SHOW_USER_PROFILE_BOX",
+  SET_SHOW_HOW_TO_CONNECT_TO_INTEGRATION_BOX: "SET_SHOW_HOW_TO_CONNECT_TO_INTEGRATION_BOX",
   SET_GRAPHS: "SET_GRAPHS",
   APPEND_GRAPH: "APPEND_GRAPH",
   APPEND_GRAPHS: "APPEND_GRAPHS",
@@ -52,6 +54,12 @@ const globalReducer = (state, action) => {
       return {
         ...state,
         showUserProfileBox: action.value
+      };
+
+    case actionTypes.SET_SHOW_HOW_TO_CONNECT_TO_INTEGRATION_BOX:
+      return {
+        ...state,
+        showHowToConnectToIntegrationBox: action.value
       };
 
     case actionTypes.SET_GRAPHS:
