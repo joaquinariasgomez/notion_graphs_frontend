@@ -24,7 +24,10 @@ function HowToConnectToIntegrationBox() {
       setIsRefreshingIntegrationConnection(true);
       const apiResponse = await refreshIntegrationConnection(userJWTCookie);
       if (apiResponse) {
-        // apiResponse.hasTemplateConnectedToIntegration
+        dispatch({
+          type: actionTypes.SET_HAS_TEMPLATE_CONNECTED_TO_INTEGRATION,
+          value: apiResponse.hasTemplateConnectedToIntegration
+        })
 
       }
     } catch (error) {
@@ -35,8 +38,8 @@ function HowToConnectToIntegrationBox() {
   }
 
   return (
-    <div className="box__backdrop">
-      <div className='howtoconnectbox__container'>
+    <div className="box__backdrop" onClick={closeBox}>
+      <div className='howtoconnectbox__container' onClick={e => { e.stopPropagation(); }}>
         <button className='howtoconnectbox__cancelbutton' onClick={closeBox}>
           <CloseRoundedIcon fontSize='medium' />
         </button>

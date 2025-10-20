@@ -31,6 +31,7 @@
 
 .dashboard__body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -41,6 +42,28 @@
 .dashboard__graphs {
   width: 100%;
   /* border: 1px solid red; */
+}
+
+.dashboard__integrationwarningcontainer {
+  width: 100%;
+  border-width: 1px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: var(--toggle-background-color);
+  background-color: rgb(249, 248, 247);
+  padding: 15px 20px;
+  margin-bottom: 30px;
+  /* border: 1px solid red; */
+}
+
+.dashboard__integrationwarningcontainer:hover {
+  cursor: pointer;
+}
+
+.dashboard__integrationwarningcontainer>p {
+  text-align: left;
+  font-weight: normal;
+  margin: 5px 0px;
 }
 
 .dashboard__graphs__loadmore {
