@@ -1,3 +1,5 @@
+import PersonIcon from '@mui/icons-material/Person';
+
 export const customStyleForSelectPlacement = {
   control: (provided) => ({
     ...provided,
@@ -43,3 +45,16 @@ export const customStyleForSelectPlacement = {
     alignItems: 'flex-start', // Align items to the top
   }),
 };
+
+export function renderUserImage(userSessionDetails) {
+  if (userSessionDetails.avatar_url !== null && userSessionDetails.avatar_url !== "") {
+    // Show user image
+    return (
+      <img src={userSessionDetails.avatar_url} alt=''></img>
+    )
+  } else {
+    return (
+      <PersonIcon fontSize='large' />
+    )
+  }
+}

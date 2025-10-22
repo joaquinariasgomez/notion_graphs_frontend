@@ -24,6 +24,8 @@
   display: flex;
   flex-direction: row;
   width: 600px;
+  max-width: 90vw;
+  min-height: 300px;
   border-radius: 10px;
   background-color: white;
   animation: drop 0.2s ease forwards;
@@ -90,11 +92,8 @@
 }
 
 .profilebox__sidebar-item.active {
-  background-color: #e0e7ff;
-  /* An active state color */
-  color: #4f46e5;
-  /* TODO JOAQUIN: update color */
-  /* A matching text color for the active state */
+  background-color: #e0e0e0;
+  color: #333;
 }
 
 .profilebox__content {
@@ -104,20 +103,40 @@
   flex-direction: column;
 }
 
-.profilebox__header {
-  width: 100%;
-  padding-top: 20px;
-  padding-bottom: 15px;
+.profilebox__content .generalpanel {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+  height: 100%;
 }
 
-.profilebox__header>h2 {
-  margin-top: 0;
+.profilebox__content .generalpanel .userimage {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border-color: var(--matteblack-color);
+  border-style: solid;
+  border-width: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profilebox__content .generalpanel .userimage>img {
+  width: auto;
+  height: 120%;
+}
+
+.profilebox__content .generalpanel .username>h2 {
   font-size: 24px;
   font-weight: 700;
+}
+
+.profilebox__content .generalpanel .logout {
+  margin-top: auto;
+  /* Pushed to the bottom */
 }
 
 .profilebox__footer {
@@ -143,15 +162,6 @@
 
 .profilebox__button:hover {
   cursor: pointer;
-}
-
-.profilebox__button.cancel {
-  border-color: var(--cancelred-color);
-  background-color: var(--cancelred-color);
-}
-
-.profilebox__button.cancel:hover {
-  animation: changecolorred 0.25s ease forwards;
 }
 
 .profilebox__button.logout {

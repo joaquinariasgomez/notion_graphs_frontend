@@ -4,6 +4,7 @@ import { useGlobalStateValue } from "../../../context/GlobalStateProvider";
 import { useCookie } from "../../../useCookie";
 import { useLocalStorage } from "../../../useLocalStorage";
 import ClipLoader from "react-spinners/ClipLoader";
+import { renderUserImage } from "../../../utils/Utils";
 
 export default function GeneralPanel({ onClose }) {
 
@@ -30,18 +31,18 @@ export default function GeneralPanel({ onClose }) {
   }
 
   return (
-    <>
-      <div className='profilebox__header'>
+    <div className="generalpanel">
+      <div className="userimage">
+        {renderUserImage(userSessionDetails)}
+      </div>
+      <div className='username'>
         <h2>👋 {userSessionDetails.name}</h2>
       </div>
-      <div className='profilebox__footer'>
-        <button className='profilebox__button cancel' onClick={onClose}>
-          Cancel
-        </button>
+      <div className='logout'>
         <button className='profilebox__button logout' onClick={logOut}>
           {isLoggingOut ? <ClipLoader size={15} /> : 'Logout'}
         </button>
       </div>
-    </>
+    </div>
   );
 }
