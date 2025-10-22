@@ -30,7 +30,7 @@ function ProfileBox() {
         );
       case 'walletconnection':
         return (
-          <WalletConnectionPanel />
+          <WalletConnectionPanel onClose={closeBox} />
         );
     }
   }
