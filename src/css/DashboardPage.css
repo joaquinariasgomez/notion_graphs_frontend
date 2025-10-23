@@ -53,17 +53,26 @@
   background-color: rgb(249, 248, 247);
   padding: 15px 20px;
   margin-bottom: 30px;
-  /* border: 1px solid red; */
+  box-shadow: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .dashboard__integrationwarningcontainer:hover {
   cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard__integrationwarningcontainer:active {
+  transform: scale(0.98);
+  box-shadow: none;
 }
 
 .dashboard__integrationwarningcontainer>p {
   text-align: left;
   font-weight: normal;
   margin: 5px 0px;
+  color: #2F3437;
+  font-size: 16px;
 }
 
 .dashboard__graphs__loadmore {
@@ -186,8 +195,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   padding: 5px;
   border-radius: 10px;
+  width: 30px;
+  height: 30px;
   border: none;
 }
 
@@ -196,8 +208,14 @@
   background-color: rgb(244, 244, 244);
 }
 
-.is-refreshing {
-  animation: pulse 1s linear infinite;
+.graph-refresh-button__icon {
+  width: 1.2em;
+  height: 1.2em;
+  color: #6d6d6d;
+}
+
+.graph-refresh-button__icon.spinning {
+  animation: spin 1s linear infinite;
 }
 
 .graphbox__refresh:disabled {

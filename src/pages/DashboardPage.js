@@ -43,7 +43,18 @@ function DashboardPage() {
   const renderNotConnectedToIntegrationWarning = () => {
     return (
       <button className='dashboard__integrationwarningcontainer' onClick={showHowToConnectToIntegrationBox}>
-        <p>⚠️ Warning text buddy</p>
+        <p>
+          <span
+            style={{
+              fontSize: '1.2em',
+              marginRight: '0.5em',
+              verticalAlign: 'middle'
+            }}
+          >
+            ⚠️
+          </span>
+          No databases connected to your account. Newly connected databases might take 1-2 minutes to reflect in your account.
+        </p>
       </button>
     );
   }

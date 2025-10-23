@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useGlobalStateValue } from "../../../context/GlobalStateProvider";
 import { refreshIntegrationConnection } from "../../../api/RequestUtils";
 import { actionTypes } from "../../../context/globalReducer";
+import { FaSyncAlt } from 'react-icons/fa';
 
 export default function WalletConnectionPanel({ onClose }) {
 
@@ -23,7 +24,7 @@ export default function WalletConnectionPanel({ onClose }) {
           >
             ✅
           </span>
-          Your databases are successfully connected
+          Your databases are successfully connected.
         </p>
       );
     } else {
@@ -38,7 +39,7 @@ export default function WalletConnectionPanel({ onClose }) {
           >
             ⚠️
           </span>
-          No databases connected to your account
+          No databases connected to your account.
         </p>
       );
     }
@@ -63,11 +64,26 @@ export default function WalletConnectionPanel({ onClose }) {
 
   return (
     <div className="walletconnectionpanel">
-      <div className="checkconnection__container">
+      <div className="info__container">
         {renderConnectionStatusText()}
-        <button onClick={refreshIntegrationCon}>
-          Refresh
+        <button onClick={refreshIntegrationCon} disabled={isRefreshingIntegrationConnection}>
+          <FaSyncAlt className={`refresh-button__icon ${isRefreshingIntegrationConnection ? 'spinning' : ''}`} />
+          <span>Refresh</span>
         </button>
+      </div>
+      <div className="info__container">
+        <p>
+          <span
+            style={{
+              fontSize: '1.2em',
+              marginRight: '0.5em',
+              verticalAlign: 'middle'
+            }}
+          >
+            ℹ️
+          </span>
+          Newly connected databases might take 1-2 minutes to reflect in your account.
+        </p>
       </div>
     </div>
   );
