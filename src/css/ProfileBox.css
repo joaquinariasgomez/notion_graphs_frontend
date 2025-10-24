@@ -171,7 +171,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* margin-top: 10px; */
 
   padding: 8px 16px;
   border: 1px solid #ccc;
@@ -197,6 +196,68 @@
 .profilebox__content .walletconnectionpanel .info__container>button:disabled {
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+.profilebox__content .walletconnectionpanel .dualinfo__container {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  /* border: 1px solid red; */
+}
+
+.profilebox__content .walletconnectionpanel .dualinfo__container .connectwithwallet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 70px;
+  padding: 16px 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+
+  color: #2F3437;
+  font-size: 16px;
+  line-height: 1;
+
+  transition: background-color 0.2s ease;
+}
+
+.profilebox__content .walletconnectionpanel .dualinfo__container .connectwithwallet:hover {
+  background-color: #f1f1f1;
+}
+
+.profilebox__content .walletconnectionpanel .dualinfo__container .connectwithwallet:active {
+  background-color: #ccc;
+}
+
+.profilebox__content .walletconnectionpanel .dualinfo__container .connectwithwallet>img {
+  margin-right: 10px;
+  height: 35px;
+}
+
+.profilebox__content .walletconnectionpanel .dualinfo__container .howtoconnect {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+
+  height: 70px;
+  padding: 16px 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+
+  color: #2F3437;
+  font-size: 16px;
+  line-height: 1;
+
+  transition: background-color 0.2s ease;
 }
 
 .refresh-button__icon {

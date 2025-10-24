@@ -17,13 +17,6 @@ function DashboardPage() {
     fetchIntegrationConnection();
   }, []);
 
-  const showHowToConnectToIntegrationBox = () => {
-    dispatch({
-      type: actionTypes.SET_SHOW_HOW_TO_CONNECT_TO_INTEGRATION_BOX,
-      value: true
-    })
-  }
-
   const fetchIntegrationConnection = async () => {
     try {
       const apiResponse = await checkIntegrationConnection(userJWTCookie);
@@ -40,9 +33,16 @@ function DashboardPage() {
     }
   }
 
+  const showNotionConnectionBox = () => {
+    dispatch({
+      type: actionTypes.SET_SHOW_NOTION_CONNECTION_BOX,
+      value: true
+    })
+  }
+
   const renderNotConnectedToIntegrationWarning = () => {
     return (
-      <button className='dashboard__integrationwarningcontainer' onClick={showHowToConnectToIntegrationBox}>
+      <button className='dashboard__integrationwarningcontainer' onClick={showNotionConnectionBox}>
         <p>
           <span
             style={{

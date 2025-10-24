@@ -6,6 +6,8 @@ import { FaSyncAlt } from 'react-icons/fa';
 
 export default function WalletConnectionPanel({ onClose }) {
 
+  const authorization_url = process.env.REACT_APP_NOTION_AUTH_URL;
+
   // Context
   const [{ userJWTCookie, hasTemplateConnectedToIntegration, userSessionDetails }, dispatch] = useGlobalStateValue();
 
@@ -84,6 +86,15 @@ export default function WalletConnectionPanel({ onClose }) {
           </span>
           Newly connected databases might take 1-2 minutes to reflect in your account.
         </p>
+      </div>
+      <div className="dualinfo__container">
+        <button className="connectwithwallet" onClick={() => { window.location.href = authorization_url; }}>
+          <img src={process.env.PUBLIC_URL + '/notion_logo.png'} alt=''></img>
+          <span>Connect with Wallet</span>
+        </button>
+        <button className="howtoconnect">
+          <span>How connection works</span>
+        </button>
       </div>
     </div>
   );

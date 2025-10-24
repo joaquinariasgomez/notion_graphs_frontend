@@ -7,16 +7,20 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import GeneralPanel from './profilepanels/GeneralPanel';
 import WalletConnectionPanel from './profilepanels/WalletConnectionPanel';
 
-function ProfileBox() {
+function ProfileBox({ defaultActivePanel }) {
 
   // Context
   const [{ }, dispatch] = useGlobalStateValue();
 
-  const [activePanel, setActivePanel] = useState('general');
+  const [activePanel, setActivePanel] = useState(defaultActivePanel);
 
   const closeBox = () => {
     dispatch({
       type: actionTypes.SET_SHOW_USER_PROFILE_BOX,
+      value: false
+    })
+    dispatch({
+      type: actionTypes.SET_SHOW_NOTION_CONNECTION_BOX,
       value: false
     })
   }
