@@ -200,7 +200,7 @@
 
 .profilebox__content .walletconnectionpanel .dualinfo__container {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 5px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -213,7 +213,7 @@
   align-items: center;
   justify-content: center;
 
-  height: 70px;
+  height: 85px;
   padding: 16px 20px;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -244,20 +244,67 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 16px 20px;
   flex-grow: 1;
 
-  height: 70px;
-  padding: 16px 20px;
-  border: 1px solid #ccc;
+  height: 85px;
   border-radius: 6px;
-  background-color: #f9f9f9;
+  border: none;
   cursor: pointer;
 
-  color: #2F3437;
+  position: relative;
+  overflow: hidden;
+
   font-size: 16px;
+  font-weight: 600;
+  /* color: #2F3437; */
+  color: white;
   line-height: 1;
 
-  transition: background-color 0.2s ease;
+  /* Adds a shadow to pop the text */
+  /* text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); */
+
+  transition: all 0.3s ease;
+}
+
+.profilebox__content .walletconnectionpanel .dualinfo__container .howtoconnect:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.profilebox__content .walletconnectionpanel .dualinfo__container .howtoconnect:active {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.profilebox__content .walletconnectionpanel .dualinfo__container .howtoconnect>span {
+  position: relative;
+  z-index: 2;
+}
+
+.profilebox__content .walletconnectionpanel .dualinfo__container .howtoconnect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  /* Replace this with your own image URL */
+  background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800');
+  background-size: cover;
+  background-position: center;
+  filter: blur(3px);
+
+  background-color: rgba(0, 0, 0, 0.3);
+  background-blend-mode: multiply;
+
+  z-index: 1;
+  transition: all 0.4s ease;
+}
+
+.profilebox__content .walletconnectionpanel .dualinfo__container .howtoconnect:hover::before {
+  filter: blur(1px);
+  transform: scale(1.1);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .refresh-button__icon {
