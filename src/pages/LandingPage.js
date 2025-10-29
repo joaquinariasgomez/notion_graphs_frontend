@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
-import '../css/LoginPage.css';
+import '../css/LandingPage.css';
 import { useNavigate } from 'react-router-dom';
 import { useCookie } from '../useCookie';
 import { loginToNotionWithCode } from '../api/RequestUtils';
 import { useLocalStorage } from '../useLocalStorage';
 import LandingPageFooter from '../components/LandingPageFooter';
+import LandingPageHeroSection from '../components/LandingPageHeroSection';
 import ClipLoader from "react-spinners/ClipLoader";
+import LandingPageFeatureSection from '../components/LandingPageFeatureSection';
+import LandingPageCallToAction from '../components/LandingPageCallToAction';
+import LandingPageHeader from '../components/LandingPageHeader';
 
-function LoginPage() {
+function LandingPage() {
 
   const authorization_url = process.env.REACT_APP_NOTION_AUTH_URL;
 
@@ -29,7 +33,7 @@ function LoginPage() {
       setIsLoggingIn(true);
       const apiResponse = await loginToNotionWithCode(notionCode);
       if (apiResponse) {
-        setUserJWTCookie(apiResponse.session_jwt, 1);
+        setUserJWTCookie(apiResponse.session_jwt, 7);
         setUserSessionDetailsValue(apiResponse.owner.user);
       }
     } catch (error) {
@@ -49,25 +53,36 @@ function LoginPage() {
 
   const renderLandingPage = () => {
     return (
-      <div className="landingpage__backgroundwrapper">
-        <div className='landingpage__content'>
-          <div className='landingpage__body'>
-            <a className='landingpage__builtbyjoaquin__button' href='https://www.joaquinariasgomez.com/' target="_blank">
-              Built by Joaquín
-            </a>
-            <h1 className='landingpage__title'>
-              Turn your finance Notion databases
-              <br></br>
-              into insightful graphs
-            </h1>
-            <p className='landingpage__subtitle'>
-              Create automatically-updating graphs from your Notion account with no code.
-            </p>
-            <a className='landingpage__loginbutton' href={authorization_url}>
-              <p>Login with Notion</p>
-              <img src={process.env.PUBLIC_URL + '/notion_logo.png'} alt=''></img>
-            </a>
-          </div>
+      // <div className="landingpage__backgroundwrapper">
+      //   <div className='landingpage__content'>
+      //     <div className='landingpage__body'>
+      //       <a className='landingpage__builtbyjoaquin__button' href='https://www.joaquinariasgomez.com/' target="_blank">
+      //         Built by Joaquín
+      //       </a>
+      //       <h1 className='landingpage__title'>
+      //         Turn your finance Notion databases
+      //         <br></br>
+      //         into insightful graphs
+      //       </h1>
+      //       <p className='landingpage__subtitle'>
+      //         Create automatically-updating graphs from your Notion account with no code.
+      //       </p>
+      //       <a className='landingpage__loginbutton' href={authorization_url}>
+      //         <p>Login with Notion</p>
+      //         <img src={process.env.PUBLIC_URL + '/notion_logo.png'} alt=''></img>
+      //       </a>
+      //     </div>
+      //     <LandingPageFooter />
+      //   </div>
+      // </div>
+      <div className='landingpage__base'>
+        <div className='landingpage__container'>
+          <LandingPageHeader />
+          <main>
+            <LandingPageHeroSection />
+            <LandingPageFeatureSection />
+            <LandingPageCallToAction />
+          </main>
           <LandingPageFooter />
         </div>
       </div>
@@ -85,4 +100,4 @@ function LoginPage() {
   return renderContent();
 }
 
-export default LoginPage;
+export default LandingPage;

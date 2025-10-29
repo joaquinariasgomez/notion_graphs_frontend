@@ -1,0 +1,36 @@
+import '../css/LandingPage.css';
+
+function LandingPageHeader() {
+
+  const handleLoginWithNotion = () => {
+    const authorization_url = process.env.REACT_APP_NOTION_AUTH_URL;
+    window.location.href = authorization_url;
+  }
+
+  return (
+    <header className='landingpage__header'>
+      <div className='header-content'>
+        <div className="app-branding">
+          <button className='app-icon-and-text'>
+            <img src={process.env.PUBLIC_URL + '/NotionWallet_icon.png'} alt=''></img>
+            <div className="app-name">
+              <span>Notion</span>
+              <span className='wallet-part'>Wallet</span>
+            </div>
+          </button>
+          <a href='https://www.notion.so' className="made-for-notion">
+            <img src={process.env.PUBLIC_URL + '/made_for_notion.png'} alt="Notion Icon" />
+          </a>
+        </div>
+        <nav className="header-nav">
+          <button className="login-with-notion" onClick={handleLoginWithNotion}>
+            <img src={process.env.PUBLIC_URL + '/notion_logo.png'} alt=''></img>
+            <span>Login with Notion</span>
+          </button>
+        </nav>
+      </div>
+    </header >
+  );
+}
+
+export default LandingPageHeader;
