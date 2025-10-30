@@ -136,7 +136,7 @@ function LandingPage() {
               </div>
             </div>
           </main>
-          <LandingPageFooter />
+          {/* <LandingPageFooter /> */}
         </div>
       </div>
     );
