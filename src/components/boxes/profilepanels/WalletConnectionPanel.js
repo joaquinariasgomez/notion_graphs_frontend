@@ -90,7 +90,7 @@ export default function WalletConnectionPanel({ onClose }) {
       <div className="dualinfo__container">
         <button className="connectwithwallet" onClick={() => { window.location.href = authorization_url; }}>
           <img src={process.env.PUBLIC_URL + '/notion_logo.png'} alt=''></img>
-          <span>Connect with Wallet</span>
+          <span>Configure Notion integration</span>
         </button>
         <button className="howtoconnect">
           <span>How connection works</span>
