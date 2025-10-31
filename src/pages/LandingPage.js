@@ -8,6 +8,8 @@ import LandingPageFooter from '../components/LandingPageFooter';
 import ClipLoader from "react-spinners/ClipLoader";
 import LandingPageHeader from '../components/LandingPageHeader';
 import LandingPageCarrousel from '../components/LandingPageCarrousel';
+import GraphDisplayer from '../components/graphsdisplay/GraphDisplayer';
+import mockCharts from '../components/LandingPageCarrouselCharts.json';
 
 function LandingPage() {
 
@@ -115,26 +117,9 @@ function LandingPage() {
               </div>
             </div>
             <LandingPageCarrousel>
-              <div>
-                <h3>Item 1</h3>
-                <p>Content for the first div.</p>
-              </div>
-              <div>
-                <h3>Item 2</h3>
-                <p>Content for the second div.</p>
-              </div>
-              <div>
-                <h3>Item 3</h3>
-                <p>Content for the third div.</p>
-              </div>
-              <div>
-                <h3>Item 4</h3>
-                <p>Content for the fourth div.</p>
-              </div>
-              <div>
-                <h3>Item 5</h3>
-                <p>You can put any React component here.</p>
-              </div>
+              {mockCharts.map(chart => (
+                <GraphDisplayer graphConfiguration={chart.graphConfiguration} graphData={chart.graphData} showLegend={false} showAverages={false} showStandardDeviation={false} />
+              ))}
             </LandingPageCarrousel>
           </main>
           <LandingPageFooter />

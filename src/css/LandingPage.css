@@ -258,9 +258,8 @@ main .title>p {
   width: 800px;
   overflow: hidden;
   margin: auto;
-  margin-top: 100px;
-
-  border: 1px solid red;
+  margin-top: 80px;
+  /* border: 1px solid red; */
 }
 
 .carrousel-track {
@@ -279,26 +278,24 @@ main .title>p {
   gap: 10px;
 }
 
-.carousel-item {
-  /* Each item takes up 70% of the container width */
-  /* flex: 0 0 70%; */
-  flex: 0 0 300px;
+.chart-mock-item {
+  min-width: 70%;
+  height: 400px;
 
-  /* Styling for the div containers */
-  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: 1px solid lightgray;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin: 10px;
-  /* Spacing between items */
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.25);
+  margin: 5px;
 
-  /* === The "Faded" Effect === */
   opacity: 0.5;
   transform: scale(0.9);
   transition: all 0.5s ease-in-out;
 }
 
-.carousel-item.active {
+.chart-mock-item.active {
   opacity: 1;
   transform: scale(1);
 }

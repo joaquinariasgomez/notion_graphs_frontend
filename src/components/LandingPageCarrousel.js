@@ -23,9 +23,12 @@ function LandingPageCarrousel({ children }) {
     const containerWidth = container.getBoundingClientRect().width;
 
     // This value MUST match my .carousel-item -> margin value
-    const margin = 10;
+    const margin = 5;
     const itemAdvance = itemWidth + margin * 2;
-    const newOffset = (containerWidth / 2) - (itemWidth / 2) - (currentPage * itemAdvance);
+
+    const newOffset = Math.round(
+      (containerWidth / 2) - (itemWidth / 2) - (currentPage * itemAdvance)
+    );
 
     setOffset(newOffset);
   }
@@ -57,9 +60,10 @@ function LandingPageCarrousel({ children }) {
       >
         {childrenArray.map((child, index) => (
           <div
-            className={`carousel-item ${index === currentPage ? 'active' : ''}`}
+            className={`chart-mock-item ${index === currentPage ? 'active' : ''}`}
             key={index}
           >
+            {/* <></> */}
             {child}
           </div>
         ))}

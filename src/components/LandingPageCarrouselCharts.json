@@ -1,0 +1,1042 @@
+[
+  {
+    "graphConfiguration": {
+      "id": "b71b163a-375f-46e0-ba7b-cafa882ebd0a",
+      "graphCreationStatus": "CREATED",
+      "customTitle": "Bills and subs last month",
+      "requestType": "BURNDOWN",
+      "customGraphSettings": {
+        "dataSettings": {
+          "source": "EXPENSES",
+          "time": "LAST_WEEK",
+          "customStartDate": "",
+          "customEndDate": ""
+        },
+        "filterSettings": {
+          "allExpenses": true,
+          "includedCategories": [],
+          "allIncomes": true,
+          "includedIncomeBankAccounts": [],
+          "includedIncomeSources": []
+        },
+        "visualizationSettings": {
+          "type": "LINE",
+          "groupByTime": "DAY",
+          "groupByCategory": false,
+          "groupByIncomeBankAccounts": false,
+          "groupByIncomeSources": false,
+          "cumulative": false
+        }
+      },
+      "burndownSettings": {
+        "referenceSettings": {
+          "type": "TOTAL_AVERAGE",
+          "customMonth": ""
+        },
+        "filterSettings": {
+          "allExpenses": false,
+          "includedCategories": [
+            "Bills & Subscriptions"
+          ]
+        },
+        "dataSettings": {
+          "time": "LAST_MONTH",
+          "customMonth": ""
+        }
+      },
+      "updatedAt": 1761811852
+    },
+    "graphData": {
+      "data": [
+        {
+          "date": "1",
+          "totalAmount": 780.02,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "2",
+          "totalAmount": 2.99,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "3",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "4",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "5",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "6",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "7",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "8",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "9",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "10",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "11",
+          "totalAmount": 15.5,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "12",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "13",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "14",
+          "totalAmount": 21.23,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "15",
+          "totalAmount": 21.99,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "16",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "17",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "18",
+          "totalAmount": 15.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "19",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "20",
+          "totalAmount": 16.99,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "21",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "22",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "23",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "24",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "25",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "26",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "27",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "28",
+          "totalAmount": 32.33,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "29",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "30",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        }
+      ],
+      "referenceData": [
+        {
+          "date": "1",
+          "totalAmount": 650.03,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "2",
+          "totalAmount": 132.86541666666653,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "3",
+          "totalAmount": 0.6666666666666666,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "4",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "5",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "6",
+          "totalAmount": 2.74875,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "7",
+          "totalAmount": 4.164999999999999,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "8",
+          "totalAmount": 28.680000000000003,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "9",
+          "totalAmount": 15.4425,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "10",
+          "totalAmount": 10.649583333333332,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "11",
+          "totalAmount": 4.451666666666667,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "12",
+          "totalAmount": 16.310833333333335,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "13",
+          "totalAmount": 19.712083333333332,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "14",
+          "totalAmount": 22.095000000000002,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "15",
+          "totalAmount": 7.409999999999999,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "16",
+          "totalAmount": 6.024583333333333,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "17",
+          "totalAmount": 4.480416666666667,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "18",
+          "totalAmount": 6.322083333333334,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "19",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "20",
+          "totalAmount": 17.073333333333338,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "21",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "22",
+          "totalAmount": 0.7083333333333334,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "23",
+          "totalAmount": 2.2758333333333334,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "24",
+          "totalAmount": 1.6645833333333335,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "25",
+          "totalAmount": 48.627916666666664,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "26",
+          "totalAmount": 0.5,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "27",
+          "totalAmount": 7.41125,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "28",
+          "totalAmount": 4.516666666666667,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "29",
+          "totalAmount": 1.3133333333333332,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "30",
+          "totalAmount": 0.5,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "31",
+          "totalAmount": 0.5,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        }
+      ]
+    },
+    "updatedAt": 1761811852
+  },
+  {
+    "graphConfiguration": {
+      "id": "c7954f9d-b6e4-4c3c-b075-ddbc99d491a9",
+      "graphCreationStatus": "CREATED",
+      "customTitle": "Example custom title",
+      "requestType": "CUSTOM_GRAPH",
+      "customGraphSettings": {
+        "dataSettings": {
+          "source": "INCOMES",
+          "time": "LAST_YEAR",
+          "customStartDate": "",
+          "customEndDate": ""
+        },
+        "filterSettings": {
+          "allExpenses": true,
+          "includedCategories": [],
+          "allIncomes": true,
+          "includedIncomeBankAccounts": [],
+          "includedIncomeSources": []
+        },
+        "visualizationSettings": {
+          "type": "BAR",
+          "groupByTime": "MONTH",
+          "groupByCategory": false,
+          "groupByIncomeBankAccounts": false,
+          "groupByIncomeSources": true,
+          "cumulative": false
+        }
+      },
+      "burndownSettings": {
+        "referenceSettings": {
+          "type": "TOTAL_AVERAGE",
+          "customMonth": ""
+        },
+        "filterSettings": {
+          "allExpenses": true,
+          "includedCategories": []
+        },
+        "dataSettings": {
+          "time": "LAST_MONTH",
+          "customMonth": ""
+        }
+      },
+      "updatedAt": 1761924979
+    },
+    "graphData": {
+      "data": [
+        {
+          "date": "2025-01-07",
+          "totalAmount": 201.66,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "ActivoBank",
+              "amount": 201.66
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "ActivoBank",
+              "amount": 114.3
+            },
+            {
+              "incomeSource": "AdvanceCare",
+              "amount": 87.36
+            }
+          ]
+        },
+        {
+          "date": "2025-01-08",
+          "totalAmount": 11.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "BBVA",
+              "amount": 11.0
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Selling",
+              "amount": 11.0
+            }
+          ]
+        },
+        {
+          "date": "2025-01-09",
+          "totalAmount": 82.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "BBVA",
+              "amount": 82.0
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Selling",
+              "amount": 82.0
+            }
+          ]
+        },
+        {
+          "date": "2025-01-24",
+          "totalAmount": 3198.3999999999996,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Coverflex Meal",
+              "amount": 211.2
+            },
+            {
+              "incomeBankAccount": "BBVA",
+              "amount": 2778.87
+            },
+            {
+              "incomeBankAccount": "Coverflex Benefits",
+              "amount": 208.33
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 3198.3999999999996
+            }
+          ]
+        },
+        {
+          "date": "2025-02-24",
+          "totalAmount": 400.33000000000004,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Coverflex Meal",
+              "amount": 192.0
+            },
+            {
+              "incomeBankAccount": "Coverflex Benefits",
+              "amount": 208.33
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 400.33000000000004
+            }
+          ]
+        },
+        {
+          "date": "2025-02-25",
+          "totalAmount": 2455.56,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "BBVA",
+              "amount": 2455.56
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 2455.56
+            }
+          ]
+        },
+        {
+          "date": "2025-03-04",
+          "totalAmount": 8.1,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "BBVA",
+              "amount": 8.1
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Bizum",
+              "amount": 8.1
+            }
+          ]
+        },
+        {
+          "date": "2025-03-13",
+          "totalAmount": 410.47,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Coverflex Meal",
+              "amount": 193.8
+            },
+            {
+              "incomeBankAccount": "Coverflex Benefits",
+              "amount": 216.67
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 410.47
+            }
+          ]
+        },
+        {
+          "date": "2025-03-25",
+          "totalAmount": 6590.57,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "ActivoBank",
+              "amount": 6590.57
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 6590.57
+            }
+          ]
+        },
+        {
+          "date": "2025-04-10",
+          "totalAmount": 162.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "ActivoBank",
+              "amount": 162.0
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "ActivoBank",
+              "amount": 162.0
+            }
+          ]
+        },
+        {
+          "date": "2025-04-24",
+          "totalAmount": 3221.5899999999997,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Coverflex Meal",
+              "amount": 163.2
+            },
+            {
+              "incomeBankAccount": "BBVA",
+              "amount": 2.6
+            },
+            {
+              "incomeBankAccount": "Coverflex Benefits",
+              "amount": 216.67
+            },
+            {
+              "incomeBankAccount": "ActivoBank",
+              "amount": 2839.12
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Bizum",
+              "amount": 2.6
+            },
+            {
+              "incomeSource": "Squarespace",
+              "amount": 3218.99
+            }
+          ]
+        },
+        {
+          "date": "2025-05-13",
+          "totalAmount": 56.7,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "ActivoBank",
+              "amount": 56.7
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "ActivoBank",
+              "amount": 56.7
+            }
+          ]
+        },
+        {
+          "date": "2025-05-23",
+          "totalAmount": 2791.78,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "ActivoBank",
+              "amount": 2791.78
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 2791.78
+            }
+          ]
+        },
+        {
+          "date": "2025-05-24",
+          "totalAmount": 349.27,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Coverflex Meal",
+              "amount": 132.6
+            },
+            {
+              "incomeBankAccount": "Coverflex Benefits",
+              "amount": 216.67
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 349.27
+            }
+          ]
+        },
+        {
+          "date": "2025-06-12",
+          "totalAmount": 216.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "ActivoBank",
+              "amount": 216.0
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "ActivoBank",
+              "amount": 216.0
+            }
+          ]
+        },
+        {
+          "date": "2025-06-24",
+          "totalAmount": 410.47,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Coverflex Meal",
+              "amount": 193.8
+            },
+            {
+              "incomeBankAccount": "Coverflex Benefits",
+              "amount": 216.67
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 410.47
+            }
+          ]
+        },
+        {
+          "date": "2025-06-25",
+          "totalAmount": 8494.51,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "ActivoBank",
+              "amount": 8494.51
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 8494.51
+            }
+          ]
+        },
+        {
+          "date": "2025-07-24",
+          "totalAmount": 2979.64,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "ActivoBank",
+              "amount": 2979.64
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 2979.64
+            }
+          ]
+        },
+        {
+          "date": "2025-07-28",
+          "totalAmount": 451.27,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Coverflex Meal",
+              "amount": 234.6
+            },
+            {
+              "incomeBankAccount": "Coverflex Benefits",
+              "amount": 216.67
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 451.27
+            }
+          ]
+        },
+        {
+          "date": "2025-08-04",
+          "totalAmount": 1639.11,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "ActivoBank",
+              "amount": 1639.11
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "IRS",
+              "amount": 1639.11
+            }
+          ]
+        },
+        {
+          "date": "2025-08-11",
+          "totalAmount": 126.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "ActivoBank",
+              "amount": 126.0
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "ActivoBank",
+              "amount": 126.0
+            }
+          ]
+        },
+        {
+          "date": "2025-08-21",
+          "totalAmount": 410.47,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Coverflex Meal",
+              "amount": 193.8
+            },
+            {
+              "incomeBankAccount": "Coverflex Benefits",
+              "amount": 216.67
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 410.47
+            }
+          ]
+        },
+        {
+          "date": "2025-08-22",
+          "totalAmount": 2771.68,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "ActivoBank",
+              "amount": 2771.68
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 2771.68
+            }
+          ]
+        },
+        {
+          "date": "2025-09-23",
+          "totalAmount": 466.06,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Coverflex Meal",
+              "amount": 224.4
+            },
+            {
+              "incomeBankAccount": "Coverflex Benefits",
+              "amount": 241.66
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 466.06
+            }
+          ]
+        },
+        {
+          "date": "2025-09-25",
+          "totalAmount": 6721.72,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "ActivoBank",
+              "amount": 6721.72
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 6721.72
+            }
+          ]
+        },
+        {
+          "date": "2025-10-24",
+          "totalAmount": 3633.24,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Coverflex Meal",
+              "amount": 234.6
+            },
+            {
+              "incomeBankAccount": "Coverflex Benefits",
+              "amount": 241.66
+            },
+            {
+              "incomeBankAccount": "ActivoBank",
+              "amount": 3156.98
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 3633.24
+            }
+          ]
+        }
+      ],
+      "referenceData": []
+    },
+    "updatedAt": 1761841484
+  }
+]
