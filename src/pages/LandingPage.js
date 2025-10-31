@@ -7,6 +7,7 @@ import { useLocalStorage } from '../useLocalStorage';
 import LandingPageFooter from '../components/LandingPageFooter';
 import ClipLoader from "react-spinners/ClipLoader";
 import LandingPageHeader from '../components/LandingPageHeader';
+import LandingPageCarrousel from '../components/LandingPageCarrousel';
 
 function LandingPage() {
 
@@ -82,28 +83,6 @@ function LandingPage() {
 
   const renderLandingPage = () => {
     return (
-      // <div className="landingpage__backgroundwrapper">
-      //   <div className='landingpage__content'>
-      //     <div className='landingpage__body'>
-      //       <a className='landingpage__builtbyjoaquin__button' href='https://www.joaquinariasgomez.com/' target="_blank">
-      //         Built by Joaquín
-      //       </a>
-      //       <h1 className='landingpage__title'>
-      //         Turn your finance Notion databases
-      //         <br></br>
-      //         into insightful graphs
-      //       </h1>
-      //       <p className='landingpage__subtitle'>
-      //         Create automatically-updating graphs from your Notion account with no code.
-      //       </p>
-      //       <a className='landingpage__loginbutton' href={authorization_url}>
-      //         <p>Login with Notion</p>
-      //         <img src={process.env.PUBLIC_URL + '/notion_logo.png'} alt=''></img>
-      //       </a>
-      //     </div>
-      //     <LandingPageFooter />
-      //   </div>
-      // </div>
       <div className='landingpage__base'>
         <div className='landingpage__container'>
           <LandingPageHeader />
@@ -121,7 +100,7 @@ function LandingPage() {
                   </span>
                 </div>
               </h1>
-              <h1 className='static-title'>into insightful graphs</h1>
+              <h1 className='static-title'>into insightful charts</h1>
               <p>
                 Control your digital wallet through a unified dashboard, using your Notion data.
               </p>
@@ -135,8 +114,30 @@ function LandingPage() {
                 <p>No signup required</p>
               </div>
             </div>
+            <LandingPageCarrousel>
+              <div>
+                <h3>Item 1</h3>
+                <p>Content for the first div.</p>
+              </div>
+              <div>
+                <h3>Item 2</h3>
+                <p>Content for the second div.</p>
+              </div>
+              <div>
+                <h3>Item 3</h3>
+                <p>Content for the third div.</p>
+              </div>
+              <div>
+                <h3>Item 4</h3>
+                <p>Content for the fourth div.</p>
+              </div>
+              <div>
+                <h3>Item 5</h3>
+                <p>You can put any React component here.</p>
+              </div>
+            </LandingPageCarrousel>
           </main>
-          {/* <LandingPageFooter /> */}
+          <LandingPageFooter />
         </div>
       </div>
     );
