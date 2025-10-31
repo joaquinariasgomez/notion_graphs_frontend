@@ -118,7 +118,7 @@ function LandingPage() {
             </div>
             <LandingPageCarrousel>
               {mockCharts.map(chart => (
-                <GraphDisplayer graphConfiguration={chart.graphConfiguration} graphData={chart.graphData} showLegend={false} showAverages={false} showStandardDeviation={false} />
+                <GraphDisplayer graphConfiguration={chart.graphConfiguration} graphData={chart.graphData} showLegend={false} showAverages={false} showStandardDeviation={false} showTitle={false} />
               ))}
             </LandingPageCarrousel>
           </main>

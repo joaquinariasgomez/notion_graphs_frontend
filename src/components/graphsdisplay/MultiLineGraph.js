@@ -29,7 +29,7 @@ ChartJS.register(
   annotationPlugin
 );
 
-export default function MultiLineGraph({ graphConfiguration, graphData, showLegend, showAverages, showStandardDeviation }) {
+export default function MultiLineGraph({ graphConfiguration, graphData, showLegend, showAverages, showStandardDeviation, showTitle }) {
 
   const { labels, datasets } = processGroupedGraphData(graphConfiguration, graphData);
 
@@ -64,7 +64,7 @@ export default function MultiLineGraph({ graphConfiguration, graphData, showLege
         enabled: true
       },
       title: {
-        display: true,
+        display: showTitle,
         text: getGraphTitle(graphConfiguration)
       },
       annotation: {

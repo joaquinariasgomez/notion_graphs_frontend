@@ -57,7 +57,7 @@ function getValuesFromReferenceData(graphData) {
   });
 }
 
-export default function BurndownGraph({ graphConfiguration, graphData }) {
+export default function BurndownGraph({ graphConfiguration, graphData, showTitle }) {
 
   const data = {
     labels: getTagsFromLongestSource(graphData),
@@ -95,7 +95,7 @@ export default function BurndownGraph({ graphConfiguration, graphData }) {
         enabled: true
       },
       title: {
-        display: true,
+        display: showTitle,
         text: getGraphTitle(graphConfiguration)
       }
     },

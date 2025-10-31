@@ -1,4 +1,5 @@
 import { Children, useEffect, useRef, useState } from 'react';
+import mockCharts from '../components/LandingPageCarrouselCharts.json';
 import '../css/LandingPage.css';
 
 function LandingPageCarrousel({ children }) {
@@ -63,8 +64,12 @@ function LandingPageCarrousel({ children }) {
             className={`chart-mock-item ${index === currentPage ? 'active' : ''}`}
             key={index}
           >
-            {/* <></> */}
-            {child}
+            <div className='chart-mock-title'>
+              {mockCharts[index].graphConfiguration.customTitle}
+            </div>
+            <div className='chart-mock-graph'>
+              {child}
+            </div>
           </div>
         ))}
       </div>
