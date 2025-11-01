@@ -6,8 +6,8 @@ import '../css/LandingPage.css';
 
 function LandingPageCarrousel({ children }) {
 
-  const [currentPage, setCurrentPage] = useState(1);  // 0, 1, 2, .. until totalItems
-  const [offset, setOffset] = useState(-450); // -450 corresponds to page 1, 0 would correspond to page 0
+  const [currentPage, setCurrentPage] = useState(0);  // 0, 1, 2, .. until totalItems
+  const [offset, setOffset] = useState(0); // 0 corresponds to page 0, -450 would correspond to page 1
   const trackRef = useRef(null);
 
   // Convert children to an array

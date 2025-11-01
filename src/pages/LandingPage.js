@@ -11,6 +11,8 @@ import LandingPageCarrousel from '../components/LandingPageCarrousel';
 import GraphDisplayer from '../components/graphsdisplay/GraphDisplayer';
 import mockCharts from '../components/LandingPageCarrouselCharts.json';
 import FloatingBackgroundImages from '../components/FloatingBackgroundImages';
+import FeaturesSection from '../components/FeaturesSection';
+import PricingSection from '../components/PricingSection';
 
 function LandingPage() {
 
@@ -54,6 +56,31 @@ function LandingPage() {
     }, ANIMATION_INTERNAL);
 
     return () => clearInterval(interval);
+  }, []);
+
+  // Handle hash navigation
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const element = document.querySelector(hash);
+        if (element) {
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
+        }
+      }
+    };
+
+    // Check hash on mount
+    handleHashChange();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
   }, []);
 
   const handleLoginWithNotion = () => {
@@ -124,6 +151,8 @@ function LandingPage() {
               ))}
             </LandingPageCarrousel>
           </main>
+          <FeaturesSection />
+          <PricingSection />
           <LandingPageFooter />
         </div>
       </div>

@@ -30,6 +30,11 @@
   --background-color: #fcfdfe;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
 .landingpage__base {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -404,7 +409,8 @@ main .title>p {
   overflow: hidden;
   margin: auto;
   margin-top: 70px;
-  padding-bottom: 50px;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
   background-color: var(--background-color);
   /* border: 1px solid red; */
 }
@@ -467,7 +473,6 @@ main .title>p {
   background-color: #ffffff43;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  /* For Safari compatibility */
   color: white;
   display: flex;
   align-items: center;
