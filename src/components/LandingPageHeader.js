@@ -1,17 +1,36 @@
+import { useState, useEffect } from 'react';
 import '../css/LandingPage.css';
 
 function LandingPageHeader() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleLoginWithNotion = () => {
     const authorization_url = process.env.REACT_APP_NOTION_AUTH_URL;
     window.location.href = authorization_url;
   }
 
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
   return (
-    <header className='landingpage__header'>
+    <header className={`landingpage__header ${isScrolled ? 'scrolled' : 'expanded'}`}>
       <div className='header-content'>
         <div className="app-branding">
-          <button className='app-icon-and-text'>
+          <button className='app-icon-and-text' onClick={handleScrollToTop}>
             <img src={process.env.PUBLIC_URL + '/NotionWallet_icon.png'} alt=''></img>
             <div className="app-name">
               <span>Notion</span>

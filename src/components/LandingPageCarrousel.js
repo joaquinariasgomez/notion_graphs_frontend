@@ -45,6 +45,23 @@ function LandingPageCarrousel({ children }) {
     }
   }, [currentPage, totalItems]);
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'ArrowLeft') {
+        handlePrevPage();
+      } else if (event.key === 'ArrowRight') {
+        handleNextPage();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [currentPage, totalItems]);
+
   const handlePrevPage = () => {
     setCurrentPage((prevPage) => (prevPage > 0 ? prevPage - 1 : totalItems - 1));
   }
