@@ -1,11 +1,13 @@
 import { Children, useEffect, useRef, useState } from 'react';
 import mockCharts from '../components/LandingPageCarrouselCharts.json';
+import { FaChevronRight } from "react-icons/fa6";
+import { FaChevronLeft } from "react-icons/fa6";
 import '../css/LandingPage.css';
 
 function LandingPageCarrousel({ children }) {
 
   const [currentPage, setCurrentPage] = useState(1);  // 0, 1, 2, .. until totalItems
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState(-450); // -450 corresponds to page 1, 0 would correspond to page 0
   const trackRef = useRef(null);
 
   // Convert children to an array
@@ -30,7 +32,6 @@ function LandingPageCarrousel({ children }) {
     const newOffset = Math.round(
       (containerWidth / 2) - (itemWidth / 2) - (currentPage * itemAdvance)
     );
-
     setOffset(newOffset);
   }
 
@@ -73,24 +74,22 @@ function LandingPageCarrousel({ children }) {
           </div>
         ))}
       </div>
-      <div className='carrousel-arrows'>
-        <button
-          id="prevBtn"
-          className="carousel-button prev"
-          onClick={handlePrevPage}
-          disabled={currentPage === 0}
-        >
-          &lt;
-        </button>
-        <button
-          id="nextBtn"
-          className="carousel-button next"
-          onClick={handleNextPage}
-          disabled={currentPage === totalItems - 1} // Disable button at end
-        >
-          &gt;
-        </button>
-      </div>
+      <button
+        id="prevBtn"
+        className="carousel-button prev"
+        onClick={handlePrevPage}
+        disabled={currentPage === 0}
+      >
+        <FaChevronLeft color='#333' />
+      </button>
+      <button
+        id="nextBtn"
+        className="carousel-button next"
+        onClick={handleNextPage}
+        disabled={currentPage === totalItems - 1} // Disable button at end
+      >
+        <FaChevronRight color='#333' />
+      </button>
     </div>
   );
 }
