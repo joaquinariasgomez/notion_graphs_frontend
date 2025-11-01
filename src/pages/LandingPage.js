@@ -10,6 +10,7 @@ import LandingPageHeader from '../components/LandingPageHeader';
 import LandingPageCarrousel from '../components/LandingPageCarrousel';
 import GraphDisplayer from '../components/graphsdisplay/GraphDisplayer';
 import mockCharts from '../components/LandingPageCarrouselCharts.json';
+import FloatingBackgroundImages from '../components/FloatingBackgroundImages';
 
 function LandingPage() {
 
@@ -87,6 +88,7 @@ function LandingPage() {
     return (
       <div className='landingpage__base'>
         <div className='landingpage__container'>
+          <FloatingBackgroundImages />
           <LandingPageHeader />
           <main>
             <div className='title'>

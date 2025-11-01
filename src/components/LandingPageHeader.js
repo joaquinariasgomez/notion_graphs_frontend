@@ -44,7 +44,8 @@ function LandingPageHeader() {
         <nav className="header-nav">
           <button className="login-with-notion" onClick={handleLoginWithNotion}>
             <img src={process.env.PUBLIC_URL + '/notion_logo.png'} alt=''></img>
-            <span>Login with Notion</span>
+            <span className="login-text-full">Login with Notion</span>
+            <span className="login-text-short">Login</span>
           </button>
         </nav>
       </div>

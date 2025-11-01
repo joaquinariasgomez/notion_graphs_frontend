@@ -48,9 +48,9 @@ function LandingPageCarrousel({ children }) {
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key === 'ArrowLeft') {
+      if (event.key === 'ArrowLeft' && currentPage > 0) {
         handlePrevPage();
-      } else if (event.key === 'ArrowRight') {
+      } else if (event.key === 'ArrowRight' && currentPage < totalItems - 1) {
         handleNextPage();
       }
     };

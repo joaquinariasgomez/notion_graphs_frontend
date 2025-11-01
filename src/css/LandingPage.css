@@ -27,13 +27,14 @@
   /* Dark for contrast */
   --header-height: 70px;
   --header-height-expanded: 100px;
+  --background-color: #fcfdfe;
 }
 
 .landingpage__base {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-color);
-  background-color: #fcfdfe;
+  background-color: var(--background-color);
   overflow-x: hidden;
 }
 
@@ -41,6 +42,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
 }
 
 main {
@@ -62,6 +65,8 @@ main .title {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  z-index: 10;
 }
 
 main .title>p {
@@ -82,7 +87,7 @@ main .title>p {
 .small-subtext>p {
   font-size: 14px;
   font-style: italic;
-  margin-top: 5px;
+  margin-top: 10px;
   margin-bottom: 5px;
 }
 
@@ -224,6 +229,10 @@ main .title>p {
   margin-right: 10px;
 }
 
+.login-text-short {
+  display: none;
+}
+
 .login-with-notion-2 {
   font-size: 16px;
   font-weight: 600;
@@ -265,6 +274,125 @@ main .title>p {
   aspect-ratio: auto 80 / 36.4;
 }
 
+/* Mobile Responsive Header */
+@media (max-width: 768px) {
+  .landingpage__header {
+    padding: 0px 20px;
+    height: 60px;
+  }
+
+  .landingpage__header.expanded {
+    height: 80px;
+  }
+
+  .landingpage__header.scrolled {
+    height: 60px;
+  }
+
+  .app-icon-and-text {
+    margin-right: 0;
+  }
+
+  .app-icon-and-text>img {
+    height: 30px;
+    margin-right: 8px;
+  }
+
+  .app-name>span {
+    font-size: 1.25rem;
+  }
+
+  .made-for-notion {
+    display: none;
+  }
+
+  .login-with-notion {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .login-with-notion>img {
+    height: 24px;
+    margin-right: 6px;
+  }
+
+  .login-text-full {
+    display: none;
+  }
+
+  .login-text-short {
+    display: inline;
+  }
+
+  main {
+    padding-top: 80px;
+  }
+
+  main .title {
+    margin-top: 60px;
+  }
+
+  main .title>p {
+    width: 100%;
+    font-size: 18px;
+    padding: 0 20px;
+  }
+
+  .dynamic-title,
+  .static-title {
+    font-size: 2rem;
+  }
+
+  .static-title {
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  .login-with-notion-2 {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .login-with-notion-2>img {
+    height: 24px;
+    margin-right: 8px;
+  }
+
+  .carrousel {
+    width: 95vw;
+    margin-top: 60px;
+  }
+
+  .chart-mock-item {
+    min-width: 90%;
+  }
+
+  .chart-mock-title {
+    font-size: 1rem;
+    padding: 6px 20px;
+    margin-bottom: 20px;
+  }
+
+  .chart-mock-graph {
+    height: 320px;
+    padding: 10px;
+  }
+
+  .carousel-button {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .carousel-button.prev {
+    left: 10px;
+  }
+
+  .carousel-button.next {
+    right: 10px;
+  }
+}
+
 .carrousel {
   display: flex;
   flex-direction: column;
@@ -275,7 +403,9 @@ main .title>p {
   width: 800px;
   overflow: hidden;
   margin: auto;
-  margin-top: 80px;
+  margin-top: 70px;
+  padding-bottom: 50px;
+  background-color: var(--background-color);
   /* border: 1px solid red; */
 }
 
