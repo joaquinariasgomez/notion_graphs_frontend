@@ -9,6 +9,7 @@ import {
 import './css/index.css';
 import Home from './Home';
 import NotFoundPage from './pages/NotFoundPage';
+import LoginPage from './pages/LoginPage';
 import { GlobalStateProvider } from './context/GlobalStateProvider';
 import globalReducer, { initialState } from './context/globalReducer';
 
@@ -27,6 +28,11 @@ root.render(
         <Route
           path="/"
           element={<Home />}
+        />
+        {/* Route for the login page */}
+        <Route
+          path="/login"
+          element={<LoginPage />}
         />
         {/* Adding a route for the not-found page */}
         <Route

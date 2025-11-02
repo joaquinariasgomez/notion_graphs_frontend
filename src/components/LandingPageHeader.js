@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/LandingPage.css';
 
 function LandingPageHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,8 +17,7 @@ function LandingPageHeader() {
   }, []);
 
   const handleLoginWithNotion = () => {
-    const authorization_url = process.env.REACT_APP_NOTION_AUTH_URL;
-    window.location.href = authorization_url;
+    navigate('/login');
   }
 
   const handleScrollToTop = () => {
