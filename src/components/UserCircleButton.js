@@ -1,7 +1,7 @@
 import '../css/UserCircleButton.css';
 import { actionTypes } from '../context/globalReducer';
 import { useGlobalStateValue } from '../context/GlobalStateProvider';
-import PersonIcon from '@mui/icons-material/Person';
+import { renderUserImage } from '../utils/Utils';
 
 function UserCircleButton() {
 
@@ -15,22 +15,9 @@ function UserCircleButton() {
     });
   }
 
-  const renderUserImage = () => {
-    if (userSessionDetails.avatar_url !== "") {
-      // Show user image
-      return (
-        <img src={userSessionDetails.avatar_url} alt=''></img>
-      )
-    } else {
-      return (
-        <PersonIcon fontSize='large' />
-      )
-    }
-  }
-
   return (
     <button className='usercircle__button header__item' onClick={showUserProfileBox}>
-      {renderUserImage()}
+      {renderUserImage(userSessionDetails)}
     </button>
   );
 }

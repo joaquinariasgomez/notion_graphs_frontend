@@ -29,7 +29,7 @@ ChartJS.register(
   annotationPlugin
 );
 
-export default function LineGraph({ graphConfiguration, graphData, showAverages, showStandardDeviation }) {
+export default function LineGraph({ graphConfiguration, graphData, showAverages, showStandardDeviation, showTitle }) {
 
   const { dates, values } = processContinuousGraphData(graphConfiguration, graphData);
 
@@ -66,7 +66,7 @@ export default function LineGraph({ graphConfiguration, graphData, showAverages,
         enabled: true
       },
       title: {
-        display: true,
+        display: showTitle,
         text: getGraphTitle(graphConfiguration)
       },
       annotation: {

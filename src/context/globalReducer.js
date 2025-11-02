@@ -4,7 +4,8 @@ export const initialState = {
   showCreateGraphBox: false,
   showUpdateGraphConfigurationBox: false,
   showUserProfileBox: false,
-  showHowToConnectToIntegrationBox: false,
+  showNotionConnectionBox: false,
+  hasTemplateConnectedToIntegration: true,
   graphs: [],
   editingGraphConfiguration: {} // Data for when customer edits a graph's configuration
 }
@@ -15,7 +16,8 @@ export const actionTypes = {
   SET_SHOW_CREATE_GRAPH_BOX: "SET_SHOW_CREATE_GRAPH_BOX",
   SET_SHOW_UPDATE_GRAPH_CONFIGURATION_BOX: "SET_SHOW_UPDATE_GRAPH_CONFIGURATION_BOX",
   SET_SHOW_USER_PROFILE_BOX: "SET_SHOW_USER_PROFILE_BOX",
-  SET_SHOW_HOW_TO_CONNECT_TO_INTEGRATION_BOX: "SET_SHOW_HOW_TO_CONNECT_TO_INTEGRATION_BOX",
+  SET_SHOW_NOTION_CONNECTION_BOX: "SET_SHOW_NOTION_CONNECTION_BOX",
+  SET_HAS_TEMPLATE_CONNECTED_TO_INTEGRATION: "SET_HAS_TEMPLATE_CONNECTED_TO_INTEGRATION",
   SET_GRAPHS: "SET_GRAPHS",
   APPEND_GRAPH: "APPEND_GRAPH",
   APPEND_GRAPHS: "APPEND_GRAPHS",
@@ -56,10 +58,16 @@ const globalReducer = (state, action) => {
         showUserProfileBox: action.value
       };
 
-    case actionTypes.SET_SHOW_HOW_TO_CONNECT_TO_INTEGRATION_BOX:
+    case actionTypes.SET_SHOW_NOTION_CONNECTION_BOX:
       return {
         ...state,
-        showHowToConnectToIntegrationBox: action.value
+        showNotionConnectionBox: action.value
+      };
+
+    case actionTypes.SET_HAS_TEMPLATE_CONNECTED_TO_INTEGRATION:
+      return {
+        ...state,
+        hasTemplateConnectedToIntegration: action.value
       };
 
     case actionTypes.SET_GRAPHS:

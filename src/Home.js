@@ -2,13 +2,13 @@ import './css/Home.css';
 import { useContext, useEffect, useState } from 'react';
 import DashboardPage from './pages/DashboardPage';
 import { useCookie } from './useCookie';
-import LoginPage from './pages/LoginPage';
+import LandingPage from './pages/LandingPage';
 import { useGlobalStateValue } from './context/GlobalStateProvider';
 import { actionTypes } from './context/globalReducer';
 import { useLocalStorage } from './useLocalStorage';
 
 /*
- * Home will be the page that holds the logic to decide if it renders "LoginPage", which is the frontpage
+ * Home will be the page that holds the logic to decide if it renders "LandingPage", which is the frontpage
  * or "Dashboard", which is the page that displays the graphs for users that are logged in.
 */
 function Home() {
@@ -42,21 +42,21 @@ function Home() {
     }
   }, [userJWTCookie]);
 
-  const renderLoginPageOrDashboardPage = () => {
+  const renderLandingPageOrDashboardPage = () => {
     if (isLoggedIn) {
       return (
         <DashboardPage />
       )
     } else {
       return (
-        <LoginPage />
+        <LandingPage />
       )
     }
   }
 
   return (
     <div className="Home">
-      {renderLoginPageOrDashboardPage()}
+      {renderLandingPageOrDashboardPage()}
     </div>
   );
 }

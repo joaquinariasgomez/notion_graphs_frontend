@@ -2,56 +2,69 @@ import '../../css/ProfileBox.css';
 import { useState } from 'react';
 import { actionTypes } from '../../context/globalReducer';
 import { useGlobalStateValue } from '../../context/GlobalStateProvider';
-import { useCookie } from '../../useCookie';
-import { useLocalStorage } from '../../useLocalStorage';
-import { logoutFromNotion } from '../../api/RequestUtils';
-import ClipLoader from "react-spinners/ClipLoader";
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
-function ProfileBox() {
+import GeneralPanel from './profilepanels/GeneralPanel';
+import WalletConnectionPanel from './profilepanels/WalletConnectionPanel';
 
-  const [userJWTCookie, setUserJWTCookie, deleteUserJWTCookie] = useCookie("userJWT");
-  const [userSessionDetailsValue, setUserSessionDetailsValue, deleteUserSessionDetailsValue] = useLocalStorage("userSessionDetails");
-  const [isLoggingOut, setIsLoggingOut] = useState(false);
+function ProfileBox({ defaultActivePanel }) {
 
   // Context
-  const [{ userSessionDetails }, dispatch] = useGlobalStateValue();
+  const [{ }, dispatch] = useGlobalStateValue();
+
+  const [activePanel, setActivePanel] = useState(defaultActivePanel);
 
   const closeBox = () => {
     dispatch({
       type: actionTypes.SET_SHOW_USER_PROFILE_BOX,
       value: false
     })
+    dispatch({
+      type: actionTypes.SET_SHOW_NOTION_CONNECTION_BOX,
+      value: false
+    })
   }
 
-  const logOut = async () => {
-    try {
-      setIsLoggingOut(true);
-      await logoutFromNotion(userJWTCookie);
-    } catch (error) {
-      console.log(error); // TODO JOAQUIN: remove
-      // TODO JOAQUIN: showAlert() show alert box
-    } finally {
-      setIsLoggingOut(false);
+  const renderActivePanel = () => {
+    switch (activePanel) {
+      default:
+      case 'general':
+        return (
+          <GeneralPanel onClose={closeBox} />
+        );
+      case 'walletconnection':
+        return (
+          <WalletConnectionPanel onClose={closeBox} />
+        );
     }
-    // Delete cookie and local storage
-    deleteUserJWTCookie();
-    deleteUserSessionDetailsValue();
   }
 
   return (
     <div className='box__backdrop' onClick={closeBox}>
       <div className='profilebox__container' onClick={e => { e.stopPropagation(); }}>
-        <div className='profilebox__header'>
-          <h2>👋 {userSessionDetails.name}</h2>
+        <button className='profilebox__cancelbutton' onClick={closeBox}>
+          <CloseRoundedIcon fontSize='medium' />
+        </button>
+        <div className='profilebox__sidebar'>
+          <div className='profilebox__sidebar-header'>
+            <h4>Settings</h4>
+          </div>
+          <div
+            className={`profilebox__sidebar-item ${activePanel === 'general' ? 'active' : ''}`}
+            onClick={() => setActivePanel('general')}
+          >
+            General
+          </div>
+          <div
+            className={`profilebox__sidebar-item ${activePanel === 'walletconnection' ? 'active' : ''}`}
+            onClick={() => setActivePanel('walletconnection')}
+          >
+            Notion connection
+          </div>
+          {/* Add more items here like "Billing", "Notifications", etc. */}
         </div>
-        {/* TODO: craft some profilebox__body with some settings */}
-        <div className='profilebox__footer'>
-          <button className='profilebox__button cancel' onClick={closeBox}>
-            Cancel
-          </button>
-          <button className='profilebox__button logout' onClick={logOut}>
-            {isLoggingOut ? <ClipLoader size={15} /> : 'Logout'}
-          </button>
+        <div className='profilebox__content'>
+          {renderActivePanel()}
         </div>
       </div>
     </div >

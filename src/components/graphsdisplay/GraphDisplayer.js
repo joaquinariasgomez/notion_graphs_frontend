@@ -5,7 +5,7 @@ import MultiBarGraph from "./MultiBarGraph";
 import BurndownGraph from "./BurndownGraph";
 
 
-export default function GraphDisplayer({ graphConfiguration, graphData, showLegend, showAverages, showStandardDeviation }) {
+export default function GraphDisplayer({ graphConfiguration, graphData, showLegend, showAverages, showStandardDeviation, showTitle }) {
 
   const renderCustomGraph = () => {
     const type = graphConfiguration.customGraphSettings.visualizationSettings.type;
@@ -14,21 +14,21 @@ export default function GraphDisplayer({ graphConfiguration, graphData, showLege
       case 'LINE':
         if (isGrouped) {
           return (
-            <MultiLineGraph graphConfiguration={graphConfiguration} graphData={graphData} showLegend={showLegend} showAverages={showAverages} showStandardDeviation={showStandardDeviation} />
+            <MultiLineGraph graphConfiguration={graphConfiguration} graphData={graphData} showLegend={showLegend} showAverages={showAverages} showStandardDeviation={showStandardDeviation} showTitle={showTitle} />
           );
         } else {
           return (
-            <LineGraph graphConfiguration={graphConfiguration} graphData={graphData} showAverages={showAverages} showStandardDeviation={showStandardDeviation} />
+            <LineGraph graphConfiguration={graphConfiguration} graphData={graphData} showAverages={showAverages} showStandardDeviation={showStandardDeviation} showTitle={showTitle} />
           );
         }
       case 'BAR':
         if (isGrouped) {
           return (
-            <MultiBarGraph graphConfiguration={graphConfiguration} graphData={graphData} showLegend={showLegend} showAverages={showAverages} showStandardDeviation={showStandardDeviation} />
+            <MultiBarGraph graphConfiguration={graphConfiguration} graphData={graphData} showLegend={showLegend} showAverages={showAverages} showStandardDeviation={showStandardDeviation} showTitle={showTitle} />
           );
         } else {
           return (
-            <BarGraph graphConfiguration={graphConfiguration} graphData={graphData} showAverages={showAverages} showStandardDeviation={showStandardDeviation} />
+            <BarGraph graphConfiguration={graphConfiguration} graphData={graphData} showAverages={showAverages} showStandardDeviation={showStandardDeviation} showTitle={showTitle} />
           );
         }
       default:
@@ -37,7 +37,7 @@ export default function GraphDisplayer({ graphConfiguration, graphData, showLege
   }
 
   const renderBurndownGraph = () => {
-    return <BurndownGraph graphConfiguration={graphConfiguration} graphData={graphData} />;
+    return <BurndownGraph graphConfiguration={graphConfiguration} graphData={graphData} showTitle={showTitle} />;
   }
 
   const renderGraph = () => {

@@ -1,0 +1,162 @@
+.landingpage__footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #e0e0e0;
+  padding: 60px 40px 30px;
+  margin-top: 100px;
+  position: relative;
+  z-index: 10;
+}
+
+.footer__content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer__section {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__brand {
+  padding-right: 40px;
+}
+
+.app-icon-and-text-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0;
+  margin-right: 25px;
+  background: none;
+  border: none;
+  margin-bottom: 16px;
+}
+
+.app-icon-and-text-footer>img {
+  height: 36.4px;
+  margin-right: 10px;
+}
+
+.footer__app-name div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+}
+
+.footer__app-name span {
+  font-family: 'Oleo Script';
+  font-size: 1.5rem;
+  color: var(--text-color);
+}
+
+.footer__app-name .wallet-part {
+  font-weight: 600;
+}
+
+.footer__description {
+  color: var(--text-light);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.footer__section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+.footer__section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer__section ul li {
+  margin-bottom: 12px;
+}
+
+.footer__section ul li a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.footer__section ul li a:hover {
+  color: var(--text-color);
+}
+
+.footer__bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 30px;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__bottom p {
+  color: var(--text-light);
+  font-size: 14px;
+  margin: 0;
+}
+
+.footer__made-with {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer__made-with span {
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+.footer__made-with img {
+  height: 30px;
+  width: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .footer__content {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  .footer__brand {
+    grid-column: 1 / -1;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .landingpage__footer {
+    padding: 40px 20px 20px;
+    margin-top: 60px;
+  }
+
+  .footer__content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .footer__made-with {
+    justify-content: center;
+  }
+}

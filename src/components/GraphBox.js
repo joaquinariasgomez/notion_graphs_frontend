@@ -13,6 +13,7 @@ import { useGlobalStateValue } from "../context/GlobalStateProvider";
 import { actionTypes } from "../context/globalReducer";
 import { deleteGraph, refreshGraph } from "../api/RequestUtils";
 import { getRelativeTimeFromTimestamp } from "../utils/DateUtils";
+import { FaSyncAlt } from 'react-icons/fa';
 
 export default function GraphBox({ graph }) {
     const {
@@ -137,7 +138,7 @@ export default function GraphBox({ graph }) {
             case "UPDATING":
             case "CREATED":
                 return (
-                    <GraphDisplayer graphConfiguration={graph.graphConfiguration} graphData={graph.graphData} showLegend={showLegend} showAverages={showAverages} showStandardDeviation={showStandardDeviation} />
+                    <GraphDisplayer graphConfiguration={graph.graphConfiguration} graphData={graph.graphData} showLegend={showLegend} showAverages={showAverages} showStandardDeviation={showStandardDeviation} showTitle={true} />
                 );
             case "PENDING":
                 return (
@@ -226,7 +227,7 @@ export default function GraphBox({ graph }) {
                     <p>{getRelativeTimeFromTimestamp(graph.updatedAt)}</p>
                 </div>
                 <button className="graphbox__refresh" title="Refresh graph" onClick={() => handleRefreshGraph(graph)} disabled={isRefreshing}>
-                    <CachedIcon style={{ color: '#6d6d6d' }} fontSize="small" className={isRefreshing ? 'is-refreshing' : ''} />
+                    <FaSyncAlt className={`graph-refresh-button__icon ${isRefreshing ? 'spinning' : ''}`} />
                 </button>
                 <button ref={moreSettingsButtonRef} className="graphbox__more_settings" title="Options" onClick={handleClickShowMoreOptions} >
                     <MoreHorizIcon style={{ color: '#6d6d6d' }} fontSize="small" />
