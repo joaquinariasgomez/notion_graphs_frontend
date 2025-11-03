@@ -1,16 +1,33 @@
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import '../css/LoginPage.css';
+import { loginWithGoogle } from '../api/RequestUtils';
+import { useState } from 'react';
 
 function LoginPage() {
   const navigate = useNavigate();
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
-  const handleGoogleLoginSuccess = (credentialResponse) => {
+  const handleGoogleLoginSuccess = async (credentialResponse) => {
     console.log('Google Login Success:', credentialResponse);
-    // TODO: Send the credential to your backend for verification
-    // Example: 
-    // const { credential } = credentialResponse;
-    // Send credential to backend API for verification and JWT token generation
+    try {
+      setIsLoggingIn(true);
+      const googleTokenBody = JSON.stringify(
+        {
+          "token": credentialResponse.credential
+        }
+      );
+      const apiResponse = await loginWithGoogle(googleTokenBody);
+      if (apiResponse) {
+        console.log('API Response:', apiResponse);
+        // setUserJWTCookie(apiResponse.session_jwt, 7);
+        // setUserSessionDetailsValue(apiResponse.owner.user);
+      }
+    } catch (error) {
+      // TODO JAQUIN: do something
+    } finally {
+      setIsLoggingIn(false);
+    }
   };
 
   const handleGoogleLoginError = () => {
