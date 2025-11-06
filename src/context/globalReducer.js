@@ -1,6 +1,24 @@
+// Helper function to read cookie synchronously
+const getCookieValue = (cookieName) => {
+  const cookie = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(`${cookieName}=`));
+  return cookie ? cookie.split("=")[1] : "";
+};
+
+// Helper function to read localStorage synchronously
+const getLocalStorageValue = (key) => {
+  try {
+    const item = window.localStorage.getItem(key);
+    return item ? JSON.parse(item) : {};
+  } catch (error) {
+    return {};
+  }
+};
+
 export const initialState = {
-  userJWTCookie: "",
-  userSessionDetails: {},
+  userJWTCookie: getCookieValue("userJWT"), // Initialize with actual cookie value
+  userSessionDetails: getLocalStorageValue("userSessionDetails"), // Initialize with actual localStorage value
   showCreateGraphBox: false,
   showUpdateGraphConfigurationBox: false,
   showUserProfileBox: false,

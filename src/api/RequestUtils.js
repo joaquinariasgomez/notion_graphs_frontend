@@ -41,9 +41,9 @@ export function getWithJWTToken(url, jwtToken) {
   return apiClient.get(url, config);
 }
 
-export async function loginToNotionWithCode(notionCode) {
-  const url = Config.BackendLoginURL + "/notion-login/" + notionCode;
-  const response = apiClient.post(url);
+export async function connectToNotion(jwtToken, notionCode) {
+  const url = Config.BackendWalletConnectionURL + "/" + notionCode;
+  const response = postWithJWTToken(url, null, jwtToken);
   return (await response).data;
 }
 
@@ -53,7 +53,7 @@ export async function loginWithGoogle(googleTokenBody) {
   return (await response).data;
 }
 
-export async function logoutFromNotion(jwtToken) {
+export async function logoutFromSystem(jwtToken) {
   const url = Config.BackendAuthURL + "/logout";
   const response = postWithJWTToken(url, null, jwtToken);
   return (await response).data;

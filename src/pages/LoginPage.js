@@ -3,13 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import '../css/LoginPage.css';
 import { loginWithGoogle } from '../api/RequestUtils';
 import { useState } from 'react';
+import { useCookie } from '../useCookie';
+import { useLocalStorage } from '../useLocalStorage';
 
 function LoginPage() {
+
+  const [userJWTCookie, setUserJWTCookie, deleteUserJWTCookie] = useCookie("userJWT");
+  const [userSessionDetailsValue, setUserSessionDetailsValue, deleteUserSessionDetailsValue] = useLocalStorage("userSessionDetails");
   const navigate = useNavigate();
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const handleGoogleLoginSuccess = async (credentialResponse) => {
-    console.log('Google Login Success:', credentialResponse);
     try {
       setIsLoggingIn(true);
       const googleTokenBody = JSON.stringify(
@@ -19,9 +23,14 @@ function LoginPage() {
       );
       const apiResponse = await loginWithGoogle(googleTokenBody);
       if (apiResponse) {
-        console.log('API Response:', apiResponse);
-        // setUserJWTCookie(apiResponse.session_jwt, 7);
-        // setUserSessionDetailsValue(apiResponse.owner.user);
+        setUserJWTCookie(apiResponse.session_jwt, 7);
+        const userSessionDetails = {
+          email: apiResponse.email,
+          name: apiResponse.name,
+          pictureUrl: apiResponse.pictureUrl
+        };
+        setUserSessionDetailsValue(userSessionDetails);
+        handleGoToDashboard();
       }
     } catch (error) {
       // TODO JAQUIN: do something
@@ -38,6 +47,10 @@ function LoginPage() {
   const handleBackToHome = () => {
     navigate('/');
   };
+
+  const handleGoToDashboard = () => {
+    navigate('/dashboard');
+  }
 
   return (
     <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}>

@@ -41,11 +41,6 @@ function PricingSection() {
     },
   ];
 
-  const handleLoginWithNotion = () => {
-    const authorization_url = process.env.REACT_APP_NOTION_AUTH_URL;
-    window.location.href = authorization_url;
-  };
-
   return (
     <section className='pricing-section' id='pricing'>
       <div className='pricing-container'>
