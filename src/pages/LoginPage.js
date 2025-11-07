@@ -2,7 +2,7 @@ import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import '../css/LoginPage.css';
 import { loginWithGoogle } from '../api/RequestUtils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCookie } from '../useCookie';
 import { useLocalStorage } from '../useLocalStorage';
 import FirstTimeLoginModal from '../components/FirstTimeLoginModal';
@@ -14,6 +14,10 @@ function LoginPage() {
   const navigate = useNavigate();
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [showFirstTimeModal, setShowFirstTimeModal] = useState(false);
+
+  useEffect(() => {
+    console.log("DEBUG JOAQUIN clientId: ", process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID);
+  }, []);
 
   const handleGoogleLoginSuccess = async (credentialResponse) => {
     try {
