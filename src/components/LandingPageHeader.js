@@ -1,8 +1,15 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/LandingPage.css';
+import { useGlobalStateValue } from '../context/GlobalStateProvider';
 
 function LandingPageHeader() {
+
+  // Context
+  const [{ userJWTCookie }] = useGlobalStateValue();
+
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,9 +21,12 @@ function LandingPageHeader() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleLoginWithNotion = () => {
-    const authorization_url = process.env.REACT_APP_NOTION_AUTH_URL;
-    window.location.href = authorization_url;
+  const handleGoToLoginPage = () => {
+    navigate('/login');
+  }
+
+  const handleGoToDashboard = () => {
+    navigate('/dashboard');
   }
 
   const handleScrollToTop = () => {
@@ -42,11 +52,17 @@ function LandingPageHeader() {
           </a>
         </div>
         <nav className="header-nav">
-          <button className="login-with-notion" onClick={handleLoginWithNotion}>
-            <img src={process.env.PUBLIC_URL + '/notion_logo.png'} alt=''></img>
-            <span className="login-text-full">Login with Notion</span>
-            <span className="login-text-short">Login</span>
-          </button>
+          {userJWTCookie !== "" ? ( // User is logged in
+            <button className="login-button" onClick={handleGoToDashboard}>
+              <span className="login-text-full">My Dashboard</span>
+              <span className="login-text-short">Dashboard</span>
+            </button>
+          ) : (                     // User is not logged in
+            <button className="login-button" onClick={handleGoToLoginPage}>
+              <span className="login-text-full">Login</span>
+              <span className="login-text-short">Login</span>
+            </button>
+          )}
         </nav>
       </div>
     </header >

@@ -202,7 +202,7 @@ main .title>p {
   font-weight: 600;
 }
 
-.login-with-notion {
+.login-button {
   font-size: 16px;
   font-weight: 600;
   color: var(--text-color);
@@ -219,33 +219,28 @@ main .title>p {
   transition: all 0.2s ease-in-out;
 }
 
-.login-with-notion:hover {
+.login-button:hover {
   background-color: #f9f9f9;
   border-color: #e0e0e0;
 }
 
-.login-with-notion:active {
+.login-button:active {
   background-color: #f0f0f0;
   border-color: #d0d0d0;
-}
-
-.login-with-notion>img {
-  height: 30px;
-  margin-right: 10px;
 }
 
 .login-text-short {
   display: none;
 }
 
-.login-with-notion-2 {
+.login-button-2 {
   font-size: 16px;
   font-weight: 600;
   color: var(--text-color);
 
   display: inline-flex;
   align-items: center;
-  padding: 12px 16px;
+  padding: 12px 42px;
 
   border: 1px solid;
   background-color: #f9f9f9;
@@ -256,14 +251,9 @@ main .title>p {
   transition: all 0.2s ease-in-out;
 }
 
-.login-with-notion-2:active {
+.login-button-2:active {
   background-color: #f0f0f0;
   border-color: #d0d0d0;
-}
-
-.login-with-notion-2>img {
-  height: 30px;
-  margin-right: 10px;
 }
 
 .made-for-notion {

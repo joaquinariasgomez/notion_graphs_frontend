@@ -47,10 +47,10 @@ export const customStyleForSelectPlacement = {
 };
 
 export function renderUserImage(userSessionDetails) {
-  if (userSessionDetails.avatar_url !== null && userSessionDetails.avatar_url !== "") {
+  if (userSessionDetails.pictureUrl !== null && userSessionDetails.pictureUrl !== "") {
     // Show user image
     return (
-      <img src={userSessionDetails.avatar_url} alt=''></img>
+      <img src={userSessionDetails.pictureUrl} alt=''></img>
     )
   } else {
     return (

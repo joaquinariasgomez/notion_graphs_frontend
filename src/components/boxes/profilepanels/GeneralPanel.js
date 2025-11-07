@@ -1,34 +1,54 @@
 import { useState } from "react";
-import { logoutFromNotion } from "../../../api/RequestUtils";
+import { logoutFromSystem } from "../../../api/RequestUtils";
 import { useGlobalStateValue } from "../../../context/GlobalStateProvider";
 import { useCookie } from "../../../useCookie";
 import { useLocalStorage } from "../../../useLocalStorage";
 import ClipLoader from "react-spinners/ClipLoader";
 import { renderUserImage } from "../../../utils/Utils";
+import { useNavigate } from "react-router-dom";
+import { actionTypes } from "../../../context/globalReducer";
 
 export default function GeneralPanel({ onClose }) {
 
   // Context
-  const [{ userSessionDetails }, dispatch] = useGlobalStateValue();
+  const [{ userSessionDetails, userJWTCookie }, dispatch] = useGlobalStateValue();
 
-  const [userJWTCookie, setUserJWTCookie, deleteUserJWTCookie] = useCookie("userJWT");
-  const [userSessionDetailsValue, setUserSessionDetailsValue, deleteUserSessionDetailsValue] = useLocalStorage("userSessionDetails");
+  const navigate = useNavigate();
+  const [, , deleteUserJWTCookie] = useCookie("userJWT");
+  const [, , deleteUserSessionDetailsValue] = useLocalStorage("userSessionDetails");
 
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const logOut = async () => {
     try {
       setIsLoggingOut(true);
-      await logoutFromNotion(userJWTCookie);
+      await logoutFromSystem(userJWTCookie);
     } catch (error) {
 
     } finally {
       setIsLoggingOut(false);
+      // Delete cookie and local storage
+      deleteUserJWTCookie();
+      deleteUserSessionDetailsValue();
+      closeBox();
+      handleBackToHome();
     }
-    // Delete cookie and local storage
-    deleteUserJWTCookie();
-    deleteUserSessionDetailsValue();
   }
+
+  const closeBox = () => {
+    dispatch({
+      type: actionTypes.SET_SHOW_USER_PROFILE_BOX,
+      value: false
+    })
+    dispatch({
+      type: actionTypes.SET_SHOW_NOTION_CONNECTION_BOX,
+      value: false
+    })
+  }
+
+  const handleBackToHome = () => {
+    navigate('/');
+  };
 
   return (
     <div className="generalpanel">

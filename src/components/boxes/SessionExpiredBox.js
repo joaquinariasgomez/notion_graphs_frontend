@@ -1,6 +1,7 @@
 import '../../css/SessionExpiredBox.css';
 
 function SessionExpiredBox() {
+    // TODO JOAQUIN: refactor to go to /login page
     const authorization_url = process.env.REACT_APP_NOTION_AUTH_URL;
 
     return (

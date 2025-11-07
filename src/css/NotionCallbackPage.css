@@ -1,0 +1,117 @@
+.notion-callback-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.notion-callback-container {
+  background: white;
+  border-radius: 20px;
+  padding: 60px 40px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.notion-callback-icon {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+}
+
+.notion-callback-icon.error {
+  font-size: 80px;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+.notion-logo-spinner {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.notion-callback-container h1 {
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.notion-callback-message {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.notion-callback-redirect {
+  font-size: 0.95rem;
+  color: #999;
+  margin-top: 20px;
+  font-style: italic;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .notion-callback-container {
+    padding: 40px 30px;
+  }
+
+  .notion-callback-container h1 {
+    font-size: 1.6rem;
+  }
+
+  .notion-callback-message {
+    font-size: 1rem;
+  }
+
+  .notion-logo-spinner {
+    width: 60px;
+    height: 60px;
+  }
+
+  .notion-callback-icon {
+    height: 60px;
+  }
+
+  .notion-callback-icon.error {
+    font-size: 60px;
+  }
+}
+
