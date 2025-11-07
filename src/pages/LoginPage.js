@@ -5,6 +5,7 @@ import { loginWithGoogle } from '../api/RequestUtils';
 import { useState } from 'react';
 import { useCookie } from '../useCookie';
 import { useLocalStorage } from '../useLocalStorage';
+import FirstTimeLoginModal from '../components/FirstTimeLoginModal';
 
 function LoginPage() {
 
@@ -12,6 +13,7 @@ function LoginPage() {
   const [userSessionDetailsValue, setUserSessionDetailsValue, deleteUserSessionDetailsValue] = useLocalStorage("userSessionDetails");
   const navigate = useNavigate();
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [showFirstTimeModal, setShowFirstTimeModal] = useState(false);
 
   const handleGoogleLoginSuccess = async (credentialResponse) => {
     try {
@@ -30,7 +32,13 @@ function LoginPage() {
           pictureUrl: apiResponse.pictureUrl
         };
         setUserSessionDetailsValue(userSessionDetails);
-        handleGoToDashboard();
+
+        // Check if this is the user's first time logging in
+        if (apiResponse.firstTimeLogin) {
+          setShowFirstTimeModal(true);
+        } else {
+          handleGoToDashboard();
+        }
       }
     } catch (error) {
       // TODO JAQUIN: do something
@@ -52,8 +60,18 @@ function LoginPage() {
     navigate('/dashboard');
   }
 
+  const handleCloseFirstTimeModal = () => {
+    setShowFirstTimeModal(false);
+    handleGoToDashboard();
+  }
+
   return (
     <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}>
+      {showFirstTimeModal && (
+        <FirstTimeLoginModal
+          onClose={handleCloseFirstTimeModal}
+        />
+      )}
       <div className="login-page">
         <div className="login-container">
           <button className="back-button" onClick={handleBackToHome}>

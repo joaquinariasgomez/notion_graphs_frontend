@@ -97,7 +97,7 @@ function PricingSection() {
 
               <button
                 className={`cta-button ${plan.popular ? 'primary' : 'secondary'}`}
-                onClick={handleLoginWithNotion}
+              // onClick={ }
               >
                 {plan.cta}
               </button>
