@@ -58,13 +58,14 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
   }
 
   const handleCreateGraph = async () => {
+    let pendingGraphConfiguration = null;
     try {
-      closeCreateGraphBox()
-      const pendingGraphConfiguration = createPendingGraphWithConfiguration(graphConfiguration);
+      closeCreateGraphBox();
+      pendingGraphConfiguration = createPendingGraphWithConfiguration(graphConfiguration);
       dispatch({
         type: actionTypes.APPEND_GRAPH,
         value: pendingGraphConfiguration
-      })
+      });
       const apiResponse = await createGraph(userJWTCookie, graphConfiguration);
       // Override pending graph that just got created
       if (apiResponse) {
@@ -74,10 +75,22 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
             id: pendingGraphConfiguration.graphConfiguration.id,
             data: apiResponse
           }
-        })
+        });
       }
     } catch (error) {
-      // TODO: handle exception
+      // If backend responds with 400 error, show error and remove last appended pending graph
+      if (error && error.response && error.response.status === 400) {
+        let message = "An error occurred while creating the graph: " + error.response.data;
+        if (error.response.data && error.response.data.message) {
+          message = error.response.data.message;
+        }
+        window.alert(message);
+        dispatch({
+          type: actionTypes.DELETE_GRAPH,
+          value: pendingGraphConfiguration.graphConfiguration.id
+        });
+      }
+      // Optionally handle other errors as needed
     } finally { }
   }
 
