@@ -130,6 +130,18 @@ export async function refreshIntegrationConnection(jwtToken) {
   return (await response).data;
 }
 
+export async function getBillingGraphCount(jwtToken) {
+  const url = Config.BackendBillingConnectionURL + "/graphCount";
+  const response = getWithJWTToken(url, jwtToken);
+  return (await response).data;
+}
+
+export async function getBillingPlan(jwtToken) {
+  const url = Config.BackendBillingConnectionURL + "/plan";
+  const response = getWithJWTToken(url, jwtToken);
+  return (await response).data;
+}
+
 // export async function createWalletTemplate(jwtToken) {
 //   const url = Config.BackendWalletConnectionURL;
 //   const response = postWithJWTToken(url, null, jwtToken);

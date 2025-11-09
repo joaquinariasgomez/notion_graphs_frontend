@@ -42,6 +42,7 @@ jobs:
           REACT_APP_BACKEND_AUTH_URL: ${{ secrets.REACT_APP_BACKEND_AUTH_URL }}
           REACT_APP_BACKEND_GRAPHS_URL: ${{ secrets.REACT_APP_BACKEND_GRAPHS_URL }}
           REACT_APP_BACKEND_WALLETCONNECTION_URL: ${{ secrets.REACT_APP_BACKEND_WALLETCONNECTION_URL }}
+          REACT_APP_BACKEND_BILLING_URL: ${{ secrets.REACT_APP_BACKEND_BILLING_URL }}
           REACT_APP_GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.REACT_APP_GOOGLE_OAUTH_CLIENT_ID }}
       - name: Configure GitHub pages
         uses: actions/configure-pages@v5
