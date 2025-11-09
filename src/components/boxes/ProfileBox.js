@@ -6,6 +6,7 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 import GeneralPanel from './profilepanels/GeneralPanel';
 import WalletConnectionPanel from './profilepanels/WalletConnectionPanel';
+import BillingPanel from './profilepanels/BillingPanel';
 
 function ProfileBox({ defaultActivePanel }) {
 
@@ -36,6 +37,10 @@ function ProfileBox({ defaultActivePanel }) {
         return (
           <WalletConnectionPanel onClose={closeBox} />
         );
+      case 'billing':
+        return (
+          <BillingPanel onClose={closeBox} />
+        );
     }
   }
 
@@ -61,7 +66,13 @@ function ProfileBox({ defaultActivePanel }) {
           >
             Notion connection
           </div>
-          {/* Add more items here like "Billing", "Notifications", etc. */}
+          <div
+            className={`profilebox__sidebar-item ${activePanel === 'billing' ? 'active' : ''}`}
+            onClick={() => setActivePanel('billing')}
+          >
+            Billing
+          </div>
+          {/* Add more items here like "Notifications", etc. */}
         </div>
         <div className='profilebox__content'>
           {renderActivePanel()}
