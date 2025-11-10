@@ -15,6 +15,7 @@ export default function BillingPanel({ onClose }) {
 
   const [isLoadingGraphCount, setIsLoadingGraphCount] = useState(false);
   const [isLoadingBillingPlan, setIsLoadingBillingPlan] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
 
   const fetchBillingGraphCount = async () => {
@@ -48,6 +49,20 @@ export default function BillingPanel({ onClose }) {
       console.error("Error fetching billing plan:", error);
     } finally {
       setIsLoadingBillingPlan(false);
+    }
+  }
+
+  const refreshAllBillingData = async () => {
+    setIsRefreshing(true);
+    try {
+      await Promise.all([
+        fetchBillingGraphCount(),
+        fetchBillingPlan()
+      ]);
+    } catch (error) {
+      console.error("Error refreshing billing data:", error);
+    } finally {
+      setIsRefreshing(false);
     }
   }
 
@@ -178,12 +193,18 @@ export default function BillingPanel({ onClose }) {
   return (
     <div className="billingpanel">
       <div className="info__container">
-        <h3 className="billingpanel__section-header">
-          <span className="billingpanel__section-icon">
-            📊
-          </span>
-          Charts Usage
-        </h3>
+        <div className="billingpanel__header-row">
+          <h3 className="billingpanel__section-header">
+            <span className="billingpanel__section-icon">
+              📊
+            </span>
+            Charts Usage
+          </h3>
+          <button onClick={refreshAllBillingData} disabled={isRefreshing}>
+            <FaSyncAlt className={`refresh-button__icon ${isRefreshing ? 'spinning' : ''}`} />
+            <span>Refresh</span>
+          </button>
+        </div>
         <div className="billingpanel__gauges-container">
           {isLoadingGraphCount ? (
             <>
@@ -227,10 +248,6 @@ export default function BillingPanel({ onClose }) {
             <p>Unable to load chart usage data.</p>
           )}
         </div>
-        <button onClick={fetchBillingGraphCount} disabled={isLoadingGraphCount}>
-          <FaSyncAlt className={`refresh-button__icon ${isLoadingGraphCount ? 'spinning' : ''}`} />
-          <span>Refresh</span>
-        </button>
       </div>
 
       {/* Billing Plan Widget */}
@@ -244,18 +261,24 @@ export default function BillingPanel({ onClose }) {
         {isLoadingBillingPlan ? (
           <p>Loading...</p>
         ) : billingPlan ? (
-          <p>
-            <span className="billingpanel__plan-name">
-              {getBillingPlanDisplayName(billingPlan)}
-            </span>
-          </p>
+          <>
+            <p>
+              <span className="billingpanel__plan-name">
+                {getBillingPlanDisplayName(billingPlan)}
+              </span>
+            </p>
+            {billingPlan === BillingPlan.FREE && (
+              <button onClick={() => {
+                // TODO JOAQUIN: Implement upgrade functionality
+                console.log("Upgrade button clicked");
+              }}>
+                Upgrade Plan
+              </button>
+            )}
+          </>
         ) : (
           <p>Unable to load billing plan data.</p>
         )}
-        <button onClick={fetchBillingPlan} disabled={isLoadingBillingPlan}>
-          <FaSyncAlt className={`refresh-button__icon ${isLoadingBillingPlan ? 'spinning' : ''}`} />
-          <span>Refresh</span>
-        </button>
       </div>
     </div>
   );

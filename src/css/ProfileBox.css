@@ -487,8 +487,47 @@
 }
 
 /* Billing Panel Section Styles */
-.billingpanel__section-header {
+.billingpanel__header-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 1em;
+}
+
+.billingpanel__header-row button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+
+  font-size: 14px;
+  line-height: 1;
+  color: #2F3437;
+
+  transition: background-color 0.2s ease;
+}
+
+.billingpanel__header-row button:hover {
+  background-color: #f1f1f1;
+}
+
+.billingpanel__header-row button:active {
+  background-color: #ccc;
+}
+
+.billingpanel__header-row button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.billingpanel__section-header {
+  margin: 0;
 }
 
 .billingpanel__section-icon {
