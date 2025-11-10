@@ -4,18 +4,22 @@ import CreateGraphButton from '../components/CreateGraphButton';
 import DashboardGraphs from '../components/DashboardGraphs';
 import UserCicleButton from '../components/UserCircleButton';
 import '../css/DashboardPage.css';
-import { checkIntegrationConnection } from '../api/RequestUtils';
+import { checkIntegrationConnection, getBillingGraphCount, getBillingPlan } from '../api/RequestUtils';
 import { useGlobalStateValue } from '../context/GlobalStateProvider';
 import { actionTypes } from '../context/globalReducer';
 
 function DashboardPage() {
 
   // Context
-  const [{ userJWTCookie, hasTemplateConnectedToIntegration }, dispatch] = useGlobalStateValue();
+  const [{ userJWTCookie, hasTemplateConnectedToIntegration, billingGraphCountData, billingPlan }, dispatch] = useGlobalStateValue();
 
   useEffect(() => {
     fetchIntegrationConnection();
+    fetchBillingGraphCount();
+    fetchBillingPlan();
   }, []);
+
+  // TODO JOAQUIN: maybe show a warning if your billing resources are getting full
 
   const fetchIntegrationConnection = async () => {
     try {
@@ -24,6 +28,38 @@ function DashboardPage() {
         dispatch({
           type: actionTypes.SET_HAS_TEMPLATE_CONNECTED_TO_INTEGRATION,
           value: apiResponse.hasTemplateConnectedToIntegration
+        })
+      }
+    } catch (error) {
+
+    } finally {
+
+    }
+  }
+
+  const fetchBillingGraphCount = async () => {
+    try {
+      const apiResponse = await getBillingGraphCount(userJWTCookie);
+      if (apiResponse) {
+        dispatch({
+          type: actionTypes.SET_BILLING_GRAPH_COUNT_DATA,
+          value: apiResponse
+        })
+      }
+    } catch (error) {
+
+    } finally {
+
+    }
+  }
+
+  const fetchBillingPlan = async () => {
+    try {
+      const apiResponse = await getBillingPlan(userJWTCookie);
+      if (apiResponse) {
+        dispatch({
+          type: actionTypes.SET_BILLING_PLAN,
+          value: apiResponse.plan
         })
       }
     } catch (error) {

@@ -24,6 +24,8 @@ export const initialState = {
   showUserProfileBox: false,
   showNotionConnectionBox: false,
   hasTemplateConnectedToIntegration: true,
+  billingGraphCountData: null,
+  billingPlan: null,
   graphs: [],
   editingGraphConfiguration: {} // Data for when customer edits a graph's configuration
 }
@@ -36,6 +38,8 @@ export const actionTypes = {
   SET_SHOW_USER_PROFILE_BOX: "SET_SHOW_USER_PROFILE_BOX",
   SET_SHOW_NOTION_CONNECTION_BOX: "SET_SHOW_NOTION_CONNECTION_BOX",
   SET_HAS_TEMPLATE_CONNECTED_TO_INTEGRATION: "SET_HAS_TEMPLATE_CONNECTED_TO_INTEGRATION",
+  SET_BILLING_GRAPH_COUNT_DATA: "SET_BILLING_GRAPH_COUNT_DATA",
+  SET_BILLING_PLAN: "SET_BILLING_PLAN",
   SET_GRAPHS: "SET_GRAPHS",
   APPEND_GRAPH: "APPEND_GRAPH",
   APPEND_GRAPHS: "APPEND_GRAPHS",
@@ -86,6 +90,18 @@ const globalReducer = (state, action) => {
       return {
         ...state,
         hasTemplateConnectedToIntegration: action.value
+      };
+
+    case actionTypes.SET_BILLING_GRAPH_COUNT_DATA:
+      return {
+        ...state,
+        billingGraphCountData: action.value
+      };
+
+    case actionTypes.SET_BILLING_PLAN:
+      return {
+        ...state,
+        billingPlan: action.value
       };
 
     case actionTypes.SET_GRAPHS:

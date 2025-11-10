@@ -372,6 +372,144 @@
   opacity: 0.6;
 }
 
+/* Info Tooltip Styles */
+.info-tooltip__container {
+  position: relative;
+  display: inline-block;
+  margin-left: 6px;
+  cursor: help;
+}
+
+.info-tooltip__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid #999;
+  font-size: 11px;
+  color: #999;
+  font-weight: bold;
+  font-family: serif;
+}
+
+.info-tooltip__popup {
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: normal;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 5px;
+  min-width: 200px;
+  max-width: 300px;
+  text-align: left;
+  line-height: 1.4;
+}
+
+.info-tooltip__arrow {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #333;
+}
+
+/* Semicircular Gauge Styles */
+.gauge__container {
+  margin-bottom: 2em;
+  text-align: center;
+}
+
+.gauge__label {
+  font-size: 0.9em;
+  margin-bottom: 0.5em;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gauge__svg-container {
+  position: relative;
+  display: inline-block;
+}
+
+.gauge__svg {
+  overflow: visible;
+}
+
+.gauge__arc-foreground {
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.gauge__loading-text {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.9em;
+  color: #999;
+}
+
+.gauge__count-text {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.4em;
+  font-weight: bold;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+.gauge__percentage-text {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.85em;
+  color: #666;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+/* Billing Panel Section Styles */
+.billingpanel__section-header {
+  margin-bottom: 1em;
+}
+
+.billingpanel__section-icon {
+  font-size: 1.2em;
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
+
+.billingpanel__gauges-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.billingpanel__plan-name {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #2196F3;
+}
+
 .refresh-button__icon {
   width: 1.2em;
   height: 1.2em;

@@ -1,43 +1,31 @@
 import { useState, useEffect } from "react";
 import { useGlobalStateValue } from "../../../context/GlobalStateProvider";
-import { useNavigate } from "react-router-dom";
-import { actionTypes } from "../../../context/globalReducer";
 import { getBillingGraphCount, getBillingPlan } from "../../../api/RequestUtils";
 import { FaSyncAlt } from 'react-icons/fa';
+import { BillingPlan, mapToBillingPlan, getBillingPlanDisplayName } from "../../../utils/BillingPlanEnum";
+import { actionTypes } from "../../../context/globalReducer";
+
+// Java's Integer.MAX_VALUE constant
+const JAVA_INTEGER_MAX_VALUE = 2147483647;
 
 export default function BillingPanel({ onClose }) {
 
   // Context
-  const [{ userSessionDetails, userJWTCookie }, dispatch] = useGlobalStateValue();
+  const [{ userSessionDetails, userJWTCookie, billingGraphCountData, billingPlan }, dispatch] = useGlobalStateValue();
 
-  const navigate = useNavigate();
-
-  // State for graph count data
-  const [graphCountData, setGraphCountData] = useState(null);
   const [isLoadingGraphCount, setIsLoadingGraphCount] = useState(false);
-
-  // State for billing plan data
-  const [billingPlanData, setBillingPlanData] = useState(null);
   const [isLoadingBillingPlan, setIsLoadingBillingPlan] = useState(false);
 
-  const closeBox = () => {
-    dispatch({
-      type: actionTypes.SET_SHOW_USER_PROFILE_BOX,
-      value: false
-    })
-    dispatch({
-      type: actionTypes.SET_SHOW_NOTION_CONNECTION_BOX,
-      value: false
-    })
-  }
 
-  // Fetch graph count data
-  const fetchGraphCount = async () => {
+  const fetchBillingGraphCount = async () => {
     try {
       setIsLoadingGraphCount(true);
       const apiResponse = await getBillingGraphCount(userJWTCookie);
       if (apiResponse) {
-        setGraphCountData(apiResponse);
+        dispatch({
+          type: actionTypes.SET_BILLING_GRAPH_COUNT_DATA,
+          value: apiResponse
+        })
       }
     } catch (error) {
       console.error("Error fetching graph count:", error);
@@ -46,13 +34,15 @@ export default function BillingPanel({ onClose }) {
     }
   }
 
-  // Fetch billing plan data
   const fetchBillingPlan = async () => {
     try {
       setIsLoadingBillingPlan(true);
       const apiResponse = await getBillingPlan(userJWTCookie);
       if (apiResponse) {
-        setBillingPlanData(apiResponse);
+        dispatch({
+          type: actionTypes.SET_BILLING_PLAN,
+          value: apiResponse.plan
+        })
       }
     } catch (error) {
       console.error("Error fetching billing plan:", error);
@@ -61,17 +51,37 @@ export default function BillingPanel({ onClose }) {
     }
   }
 
-  // Fetch data on component mount
-  useEffect(() => {
-    fetchGraphCount();
-    fetchBillingPlan();
-  }, []);
+  // Info tooltip component
+  const InfoTooltip = ({ text }) => {
+    const [isVisible, setIsVisible] = useState(false);
+
+    return (
+      <div
+        className="info-tooltip__container"
+        onMouseEnter={() => setIsVisible(true)}
+        onMouseLeave={() => setIsVisible(false)}
+      >
+        <span className="info-tooltip__icon">
+          i
+        </span>
+        {isVisible && (
+          <div className="info-tooltip__popup">
+            {text}
+            <div className="info-tooltip__arrow"></div>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   // Semicircular gauge component (half-moon shape)
-  const SemicircularGauge = ({ label, current, max, color = "#4CAF50", isLoading = false }) => {
+  const SemicircularGauge = ({ label, tooltipText, current, max, color = "#4CAF50", isLoading = false }) => {
     const [animatedPercentage, setAnimatedPercentage] = useState(0);
 
-    const percentage = max > 0 ? (current / max) * 100 : 0;
+    // Check if max is Integer.MAX_VALUE from Java backend
+    const isInfinite = max === JAVA_INTEGER_MAX_VALUE;
+
+    const percentage = isInfinite ? 0 : (max > 0 ? (current / max) * 100 : 0);
     const cappedPercentage = Math.min(percentage, 100);
 
     const size = 180;
@@ -84,37 +94,35 @@ export default function BillingPanel({ onClose }) {
 
     // Animate the gauge when data loads
     useEffect(() => {
-      if (!isLoading && cappedPercentage > 0) {
+      if (!isLoading && !isInfinite && cappedPercentage >= 0) {
         // Small delay to ensure the animation is visible
         const timer = setTimeout(() => {
           setAnimatedPercentage(cappedPercentage);
         }, 100);
         return () => clearTimeout(timer);
-      } else if (isLoading) {
+      } else if (isLoading || isInfinite) {
         setAnimatedPercentage(0);
       }
-    }, [cappedPercentage, isLoading]);
+    }, [cappedPercentage, isLoading, isInfinite]);
 
     return (
-      <div style={{ marginBottom: '2em', textAlign: 'center' }}>
-        <div style={{
-          fontSize: '0.9em',
-          marginBottom: '0.5em',
-          fontWeight: '500'
-        }}>
-          {label}
+      <div className="gauge__container">
+        <div className="gauge__label">
+          <span>{label}</span>
+          {tooltipText && <InfoTooltip text={tooltipText} />}
         </div>
 
-        <div style={{
-          position: 'relative',
-          display: 'inline-block',
-          width: `${size}px`,
-          height: `${size / 2 + 20}px`
-        }}>
+        <div
+          className="gauge__svg-container"
+          style={{
+            width: `${size}px`,
+            height: `${size / 2 + 20}px`
+          }}
+        >
           {isLoading ? (
             // Loading state - show empty gauge with loading text
             <>
-              <svg width={size} height={size / 2 + 20} style={{ overflow: 'visible' }}>
+              <svg width={size} height={size / 2 + 20} className="gauge__svg">
                 <path
                   d={`M ${strokeWidth / 2} ${size / 2} A ${radius} ${radius} 0 0 1 ${size - strokeWidth / 2} ${size / 2}`}
                   fill="none"
@@ -123,21 +131,14 @@ export default function BillingPanel({ onClose }) {
                   strokeLinecap="round"
                 />
               </svg>
-              <div style={{
-                position: 'absolute',
-                bottom: '10px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                fontSize: '0.9em',
-                color: '#999'
-              }}>
+              <div className="gauge__loading-text">
                 Loading...
               </div>
             </>
           ) : (
             <>
               {/* Background arc */}
-              <svg width={size} height={size / 2 + 20} style={{ overflow: 'visible' }}>
+              <svg width={size} height={size / 2 + 20} className="gauge__svg">
                 <path
                   d={`M ${strokeWidth / 2} ${size / 2} A ${radius} ${radius} 0 0 1 ${size - strokeWidth / 2} ${size / 2}`}
                   fill="none"
@@ -154,40 +155,18 @@ export default function BillingPanel({ onClose }) {
                   strokeLinecap="round"
                   strokeDasharray={circumference}
                   strokeDashoffset={offset}
-                  style={{
-                    transition: 'stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                    transformOrigin: 'center',
-                  }}
+                  className="gauge__arc-foreground"
                 />
               </svg>
 
               {/* Center text showing count */}
-              <div style={{
-                position: 'absolute',
-                bottom: '10px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                fontSize: '1.4em',
-                fontWeight: 'bold',
-                color: color,
-                transition: 'opacity 0.3s ease',
-                opacity: animatedPercentage > 0 ? 1 : 0
-              }}>
-                {current} / {max}
+              <div className="gauge__count-text" style={{ color: color }}>
+                {current} / {isInfinite ? '∞' : max}
               </div>
 
-              {/* Percentage text */}
-              <div style={{
-                position: 'absolute',
-                bottom: '-5px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                fontSize: '0.85em',
-                color: '#666',
-                transition: 'opacity 0.3s ease',
-                opacity: animatedPercentage > 0 ? 1 : 0
-              }}>
-                {Math.round(animatedPercentage)}%
+              {/* Percentage or Unlimited text */}
+              <div className="gauge__percentage-text">
+                {isInfinite ? 'Unlimited' : `${Math.round(animatedPercentage)}%`}
               </div>
             </>
           )}
@@ -198,60 +177,57 @@ export default function BillingPanel({ onClose }) {
 
   return (
     <div className="billingpanel">
-      {/* Graph Count Widget */}
       <div className="info__container">
-        <h3 style={{ marginBottom: '1em' }}>
-          <span
-            style={{
-              fontSize: '1.2em',
-              marginRight: '0.5em',
-              verticalAlign: 'middle'
-            }}
-          >
+        <h3 className="billingpanel__section-header">
+          <span className="billingpanel__section-icon">
             📊
           </span>
-          Graph Usage
+          Charts Usage
         </h3>
-        <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: '1em' }}>
+        <div className="billingpanel__gauges-container">
           {isLoadingGraphCount ? (
             <>
               <SemicircularGauge
-                label="Graph Count"
+                label="Chart creations"
+                tooltipText="The total amount of charts that you can create since registering the account"
                 current={0}
                 max={100}
                 color="#4CAF50"
                 isLoading={true}
               />
               <SemicircularGauge
-                label="Graph List"
+                label="Charts in dashboard"
+                tooltipText="The total amount of charts that you can have in your dashboard"
                 current={0}
                 max={100}
                 color="#2196F3"
                 isLoading={true}
               />
             </>
-          ) : graphCountData ? (
+          ) : billingGraphCountData ? (
             <>
               <SemicircularGauge
-                label="Graph Count"
-                current={graphCountData.currentCount || 0}
-                max={graphCountData.maxCount || 0}
+                label="Chart creations"
+                tooltipText="The total amount of charts that you can create since registering the account"
+                current={billingGraphCountData.currentCount || 0}
+                max={billingGraphCountData.maxCount || 0}
                 color="#4CAF50"
                 isLoading={false}
               />
               <SemicircularGauge
-                label="Graph List"
-                current={graphCountData.currentGraphList || 0}
-                max={graphCountData.maxGraphList || 0}
+                label="Charts in dashboard"
+                tooltipText="The total amount of charts that you can have in your dashboard"
+                current={billingGraphCountData.currentGraphList || 0}
+                max={billingGraphCountData.maxGraphList || 0}
                 color="#2196F3"
                 isLoading={false}
               />
             </>
           ) : (
-            <p>Unable to load graph usage data.</p>
+            <p>Unable to load chart usage data.</p>
           )}
         </div>
-        <button onClick={fetchGraphCount} disabled={isLoadingGraphCount}>
+        <button onClick={fetchBillingGraphCount} disabled={isLoadingGraphCount}>
           <FaSyncAlt className={`refresh-button__icon ${isLoadingGraphCount ? 'spinning' : ''}`} />
           <span>Refresh</span>
         </button>
@@ -259,30 +235,18 @@ export default function BillingPanel({ onClose }) {
 
       {/* Billing Plan Widget */}
       <div className="info__container">
-        <h3 style={{ marginBottom: '1em' }}>
-          <span
-            style={{
-              fontSize: '1.2em',
-              marginRight: '0.5em',
-              verticalAlign: 'middle'
-            }}
-          >
+        <h3 className="billingpanel__section-header">
+          <span className="billingpanel__section-icon">
             💳
           </span>
           Current Plan
         </h3>
         {isLoadingBillingPlan ? (
           <p>Loading...</p>
-        ) : billingPlanData ? (
+        ) : billingPlan ? (
           <p>
-            <span
-              style={{
-                fontSize: '1.5em',
-                fontWeight: 'bold',
-                color: '#2196F3'
-              }}
-            >
-              {billingPlanData.plan || 'N/A'}
+            <span className="billingpanel__plan-name">
+              {getBillingPlanDisplayName(billingPlan)}
             </span>
           </p>
         ) : (
