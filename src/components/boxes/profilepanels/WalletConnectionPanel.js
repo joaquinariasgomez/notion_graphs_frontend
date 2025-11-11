@@ -26,7 +26,7 @@ export default function WalletConnectionPanel({ onClose }) {
           >
             ✅
           </span>
-          Your databases are successfully connected.
+          Your integration is successfully connected.
         </p>
       );
     } else {
@@ -84,7 +84,7 @@ export default function WalletConnectionPanel({ onClose }) {
           >
             ℹ️
           </span>
-          Newly connected databases might take 1-2 minutes to reflect in your account.
+          Newly connected integrations might take 1-2 minutes to reflect in your account.
         </p>
       </div>
       <div className="dualinfo__container">
