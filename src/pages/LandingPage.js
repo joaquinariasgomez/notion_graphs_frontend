@@ -108,25 +108,34 @@ function LandingPage() {
               Control your digital wallet through a unified dashboard, using your Notion data.
             </p>
             <div>
-              <button className="login-button-2" onClick={handleGoToLoginPage}>
-                <span>Login</span>
-              </button>
+              {userJWTCookieValue !== "" ? (
+                <button className="dashboard-button" onClick={handleGoToLoginPage}>
+                  <span>Access your dashboard</span>
+                </button>
+              ) : (
+                <>
+                  <button className="login-button-2" onClick={handleGoToLoginPage}>
+                    <span>Login</span>
+                  </button>
+                  <div className='small-subtext'>
+                    <p>No signup required</p>
+                  </div>
+                </>
+              )}
             </div>
-            <div className='small-subtext'>
-              <p>No signup required</p>
-            </div>
+
           </div>
           <LandingPageCarrousel>
             {mockCharts.map(chart => (
               <GraphDisplayer graphConfiguration={chart.graphConfiguration} graphData={chart.graphData} showLegend={false} showAverages={false} showStandardDeviation={false} showTitle={false} />
             ))}
           </LandingPageCarrousel>
-        </main>
+        </main >
         <FeaturesSection />
         <PricingSection />
         <LandingPageFooter />
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 

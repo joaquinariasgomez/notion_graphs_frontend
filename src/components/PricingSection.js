@@ -24,7 +24,7 @@ function PricingSection() {
     },
     {
       name: 'Pro',
-      price: billingCycle === 'monthly' ? '5' : '50',
+      price: billingCycle === 'monthly' ? '2.99' : '29.99',
       period: billingCycle === 'monthly' ? 'month' : 'year',
       description: 'For serious financial tracking with unlimited possibilities',
       features: [
@@ -37,7 +37,7 @@ function PricingSection() {
       ],
       cta: 'Start Pro Trial',
       popular: true,
-      savings: billingCycle === 'yearly' ? 'Save €10/year' : null,
+      savings: billingCycle === 'yearly' ? 'Save €5.89/year' : null,
     },
   ];
 
@@ -61,7 +61,7 @@ function PricingSection() {
             onClick={() => setBillingCycle('yearly')}
           >
             Yearly
-            <span className='savings-badge'>Save 17%</span>
+            <span className='savings-badge'>Save 16%</span>
           </button>
         </div>
 
