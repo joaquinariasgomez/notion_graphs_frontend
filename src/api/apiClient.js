@@ -17,9 +17,14 @@ apiClient.interceptors.response.use(
     },
     (error) => {
         // Any error response will go through here
-        if (error.response && error.response.status === 401) {
-            // Dispatch the event for the UI to handle
-            eventBus.dispatch('sessionExpired');
+        if (error.response) {
+            if (error.response.status === 401) {
+                // Session expired or invalid credentials
+                eventBus.dispatch('sessionExpired');
+            } else if (error.response.status === 500) {
+                // Server error
+                eventBus.dispatch('unknownError');
+            }
         }
         return Promise.reject(error);
     }

@@ -3,28 +3,35 @@ import { useGlobalStateValue } from "../../context/GlobalStateProvider";
 import CreateGraphBox from "./CreateGraphBox";
 import ProfileBox from "./ProfileBox";
 import eventBus from "../../utils/eventBus";
-import SessionExpiredBox from "./SessionExpiredBox";
+import UnknownErrorBox from "./UnknownErrorBox";
 import UpdateGraphConfigurationBox from "./UpdateGraphConfigurationBox";
 
 export default function BoxManager() {
 
   // Context
   const [{ showCreateGraphBox, showUserProfileBox, showNotionConnectionBox, showUpdateGraphConfigurationBox }, dispatch] = useGlobalStateValue();
-  const [showSessionExpiredBox, setShowSessionExpiredBox] = useState(false);
+  const [showUnknownErrorBox, setShowUnknownErrorBox] = useState(false);
 
   useEffect(() => {
-    const handleSessionExpired = () => {
-      setShowSessionExpiredBox(true);
+    const handleUnknownError = () => {
+      setShowUnknownErrorBox(true);
     };
 
     // Subscribe to the event when the component mounts
-    eventBus.on('sessionExpired', handleSessionExpired);
+    eventBus.on('unknownError', handleUnknownError);
 
     // Unsubscribe from the event when the component unmounts
     return () => {
-      eventBus.off('sessionExpired', handleSessionExpired);
+      eventBus.off('unknownError', handleUnknownError);
     };
   }, []);
+
+  // Hide UnknownErrorBox when NotionConnectionBox is shown
+  useEffect(() => {
+    if (showNotionConnectionBox) {
+      setShowUnknownErrorBox(false);
+    }
+  }, [showNotionConnectionBox]);
 
   // TODO: if it is an alert box, render it before the other boxes
   const isAlertBox = () => {
@@ -32,9 +39,9 @@ export default function BoxManager() {
   }
 
   const renderBox = () => {
-    if (showSessionExpiredBox) {
+    if (showUnknownErrorBox) {
       return (
-        <SessionExpiredBox />
+        <UnknownErrorBox onClose={() => setShowUnknownErrorBox(false)} />
       );
     } else if (showUserProfileBox) {
       return (
