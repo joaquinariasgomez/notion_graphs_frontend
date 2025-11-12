@@ -61,6 +61,13 @@ function ProtectedRoute({ children }) {
       <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}>
         <div className="protected-route-overlay">
           <div className="protected-route-popup">
+            {isLoggingIn && (
+              <div className="protected-route-loading-overlay">
+                <div className="protected-route-spinner"></div>
+                <p className="protected-route-loading-text">Logging in...</p>
+              </div>
+            )}
+
             <button className="protected-route-close" onClick={handleBackToHome}>
               ✕
             </button>

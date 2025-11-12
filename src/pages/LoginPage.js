@@ -79,6 +79,13 @@ function LoginPage() {
           </button>
 
           <div className="login-content">
+            {isLoggingIn && (
+              <div className="login-loading-overlay">
+                <div className="login-spinner"></div>
+                <p className="login-loading-text">Logging in...</p>
+              </div>
+            )}
+
             <div className="login-header">
               <img
                 src={process.env.PUBLIC_URL + '/NotionWallet_icon.png'}
@@ -101,6 +108,7 @@ function LoginPage() {
                   size="large"
                   text="signin_with"
                   shape="rectangular"
+                  disabled={isLoggingIn}
                 />
               </div>
             </div>
