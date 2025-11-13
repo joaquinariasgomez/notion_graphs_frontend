@@ -84,6 +84,10 @@ function LandingPage() {
     navigate('/login');
   }
 
+  const handleGoToDashboardPage = () => {
+    navigate('/dashboard');
+  }
+
   return (
     <div className='landingpage__base'>
       <div className='landingpage__container'>
@@ -109,7 +113,7 @@ function LandingPage() {
             </p>
             <div>
               {userJWTCookieValue !== "" ? (
-                <button className="dashboard-button" onClick={handleGoToLoginPage}>
+                <button className="dashboard-button" onClick={handleGoToDashboardPage}>
                   <span>Access your dashboard</span>
                 </button>
               ) : (

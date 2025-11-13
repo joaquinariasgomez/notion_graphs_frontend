@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useGlobalStateValue } from "../../../context/GlobalStateProvider";
-import { getBillingGraphCount, getBillingPlan } from "../../../api/RequestUtils";
+import { createStripeCheckoutSession, getBillingGraphCount, getBillingPlan } from "../../../api/RequestUtils";
 import { FaSyncAlt } from 'react-icons/fa';
 import { BillingPlan, getBillingPlanDisplayName } from "../../../utils/BillingPlanEnum";
 import { actionTypes } from "../../../context/globalReducer";
@@ -16,6 +16,7 @@ export default function BillingPanel({ onClose }) {
   const [isLoadingGraphCount, setIsLoadingGraphCount] = useState(false);
   const [isLoadingBillingPlan, setIsLoadingBillingPlan] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isCreatingStripePage, setIsCreatingStripePage] = useState(false);
 
 
   const fetchBillingGraphCount = async () => {
@@ -63,6 +64,20 @@ export default function BillingPanel({ onClose }) {
       console.error("Error refreshing billing data:", error);
     } finally {
       setIsRefreshing(false);
+    }
+  }
+
+  const upgradePlan = async () => {
+    try {
+      setIsCreatingStripePage(true);
+      const apiResponse = await createStripeCheckoutSession(userJWTCookie);
+      if (apiResponse) {
+        console.log(apiResponse)
+      }
+    } catch (error) {
+
+    } finally {
+      setIsCreatingStripePage(false);
     }
   }
 
@@ -237,7 +252,7 @@ export default function BillingPanel({ onClose }) {
             <>
               <SemicircularGauge
                 label="Chart creations"
-                tooltipText="The total amount of charts that you can create since registering the account"
+                tooltipText="The total amount of charts that you can create since registering your account"
                 current={billingGraphCountData.currentCount || 0}
                 max={billingGraphCountData.maxCount || 0}
                 color="#4CAF50"
@@ -284,10 +299,7 @@ export default function BillingPanel({ onClose }) {
               </span>
             </p>
             {billingPlan === BillingPlan.FREE && (
-              <button onClick={() => {
-                // TODO JOAQUIN: Implement upgrade functionality
-                console.log("Upgrade button clicked");
-              }}>
+              <button onClick={upgradePlan}>
                 Upgrade Plan
               </button>
             )}

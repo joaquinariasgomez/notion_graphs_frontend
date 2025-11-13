@@ -19,7 +19,7 @@ function FirstTimeLoginModal({ onClose, onConnectNotion }) {
             🎉
           </div>
 
-          <h2 className="first-time-modal-title">Welcome to NotionWallet!</h2>
+          <h2 className="first-time-modal-title">Welcome to Notion Wallet!</h2>
 
           <p className="first-time-modal-message">
             To get started, you'll need to connect your Notion workspace.

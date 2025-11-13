@@ -142,6 +142,12 @@ export async function getBillingPlan(jwtToken) {
   return (await response).data;
 }
 
+export async function createStripeCheckoutSession(jwtToken) {
+  const url = Config.BackendBillingConnectionURL + "/stripe/create-checkout-session";
+  const response = postWithJWTToken(url, null, jwtToken);
+  return (await response).data;
+}
+
 // export async function createWalletTemplate(jwtToken) {
 //   const url = Config.BackendWalletConnectionURL;
 //   const response = postWithJWTToken(url, null, jwtToken);
