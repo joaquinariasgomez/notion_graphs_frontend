@@ -148,6 +148,12 @@ export async function createStripeCheckoutSession(jwtToken) {
   return (await response).data;
 }
 
+export async function createStripeCustomerPortalSession(jwtToken) {
+  const url = Config.BackendBillingConnectionURL + "/stripe/create-customer-portal-session";
+  const response = postWithJWTToken(url, null, jwtToken);
+  return (await response).data;
+}
+
 // export async function createWalletTemplate(jwtToken) {
 //   const url = Config.BackendWalletConnectionURL;
 //   const response = postWithJWTToken(url, null, jwtToken);

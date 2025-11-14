@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useGlobalStateValue } from "../../../context/GlobalStateProvider";
-import { createStripeCheckoutSession, getBillingGraphCount, getBillingPlan } from "../../../api/RequestUtils";
+import { createStripeAccountSession, createStripeCheckoutSession, createStripeCustomerPortalSession, getBillingGraphCount, getBillingPlan } from "../../../api/RequestUtils";
 import { FaSyncAlt } from 'react-icons/fa';
 import { BillingPlan, getBillingPlanDisplayName } from "../../../utils/BillingPlanEnum";
 import { actionTypes } from "../../../context/globalReducer";
@@ -16,7 +16,8 @@ export default function BillingPanel({ onClose }) {
   const [isLoadingGraphCount, setIsLoadingGraphCount] = useState(false);
   const [isLoadingBillingPlan, setIsLoadingBillingPlan] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [isCreatingStripePage, setIsCreatingStripePage] = useState(false);
+  const [isCreatingStripeCheckoutPage, setIsCreatingStripeCheckoutPage] = useState(false);
+  const [isCreatingStripeAccountPage, setIsCreatingStripeAccountPage] = useState(false);
 
 
   const fetchBillingGraphCount = async () => {
@@ -69,7 +70,7 @@ export default function BillingPanel({ onClose }) {
 
   const upgradePlan = async () => {
     try {
-      setIsCreatingStripePage(true);
+      setIsCreatingStripeCheckoutPage(true);
       const apiResponse = await createStripeCheckoutSession(userJWTCookie);
       if (apiResponse && apiResponse.checkoutUrl) {
         // Redirect to Stripe Checkout page
@@ -80,7 +81,24 @@ export default function BillingPanel({ onClose }) {
     } catch (error) {
       console.error('Error creating Stripe checkout session:', error);
     } finally {
-      setIsCreatingStripePage(false);
+      setIsCreatingStripeCheckoutPage(false);
+    }
+  }
+
+  const managePlan = async () => {
+    try {
+      setIsCreatingStripeAccountPage(true);
+      const apiResponse = await createStripeCustomerPortalSession(userJWTCookie);
+      if (apiResponse && apiResponse.checkoutUrl) {
+        // Redirect to Stripe Account page
+        window.location.href = apiResponse.checkoutUrl;
+      } else {
+        console.error('No checkout URL received from backend');
+      }
+    } catch (error) {
+      console.error('Error creating Stripe account session:', error);
+    } finally {
+      setIsCreatingStripeAccountPage(true);
     }
   }
 
@@ -304,6 +322,11 @@ export default function BillingPanel({ onClose }) {
             {billingPlan === BillingPlan.FREE && (
               <button onClick={upgradePlan}>
                 Upgrade Plan
+              </button>
+            )}
+            {billingPlan !== BillingPlan.FREE && (
+              <button onClick={managePlan}>
+                Manage billing account
               </button>
             )}
           </>
