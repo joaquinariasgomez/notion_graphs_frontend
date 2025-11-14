@@ -71,11 +71,14 @@ export default function BillingPanel({ onClose }) {
     try {
       setIsCreatingStripePage(true);
       const apiResponse = await createStripeCheckoutSession(userJWTCookie);
-      if (apiResponse) {
-        console.log(apiResponse)
+      if (apiResponse && apiResponse.checkoutUrl) {
+        // Redirect to Stripe Checkout page
+        window.location.href = apiResponse.checkoutUrl;
+      } else {
+        console.error('No checkout URL received from backend');
       }
     } catch (error) {
-
+      console.error('Error creating Stripe checkout session:', error);
     } finally {
       setIsCreatingStripePage(false);
     }

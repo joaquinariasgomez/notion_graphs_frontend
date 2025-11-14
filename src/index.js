@@ -11,6 +11,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import DashboardPage from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
 import NotionCallbackPage from './pages/NotionCallbackPage';
+import StripeCheckoutPage from './pages/StripeCheckoutPage';
 import LandingPage from './pages/LandingPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import SessionManager from './components/SessionManager';
@@ -42,6 +43,15 @@ root.render(
             element={
               <ProtectedRoute>
                 <NotionCallbackPage />
+              </ProtectedRoute>
+            }
+          />
+          {/* Route for Stripe checkout page callback - requires authentication */}
+          <Route
+            path="/stripe-checkout-page"
+            element={
+              <ProtectedRoute>
+                <StripeCheckoutPage />
               </ProtectedRoute>
             }
           />
