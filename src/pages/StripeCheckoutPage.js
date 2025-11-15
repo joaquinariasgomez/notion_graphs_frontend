@@ -62,10 +62,8 @@ function StripeCheckoutPage() {
 
       // Handle cancel scenario
       if (cancel === "true") {
-        setStatus('cancel');
-        setMessage("Payment cancelled. You can try again anytime.");
-        // Redirect to dashboard after 2 seconds
-        setTimeout(() => navigate('/dashboard'), 4000);
+        // Redirect to billing plans page
+        navigate('/billing-plans');
         return;
       }
 
@@ -123,19 +121,6 @@ function StripeCheckoutPage() {
           >
             Go to my dashboard
           </button>
-        </div>
-      </div>
-    );
-  }
-
-  // Render cancel state
-  if (status === 'cancel') {
-    return (
-      <div className="notion-callback-page">
-        <div className="notion-callback-container">
-          <h1>Payment Cancelled ℹ️</h1>
-          <p className="notion-callback-message">{message}</p>
-          <p className="notion-callback-redirect">Redirecting to dashboard...</p>
         </div>
       </div>
     );

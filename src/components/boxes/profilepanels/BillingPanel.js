@@ -4,6 +4,8 @@ import { createStripeAccountSession, createStripeCheckoutSession, createStripeCu
 import { FaSyncAlt } from 'react-icons/fa';
 import { BillingPlan, getBillingPlanDisplayName } from "../../../utils/BillingPlanEnum";
 import { actionTypes } from "../../../context/globalReducer";
+import BillingConstants from "../../../BillingConstants";
+import { useNavigate } from "react-router-dom";
 
 // Java's Integer.MAX_VALUE constant
 const JAVA_INTEGER_MAX_VALUE = 2147483647;
@@ -16,9 +18,8 @@ export default function BillingPanel({ onClose }) {
   const [isLoadingGraphCount, setIsLoadingGraphCount] = useState(false);
   const [isLoadingBillingPlan, setIsLoadingBillingPlan] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [isCreatingStripeCheckoutPage, setIsCreatingStripeCheckoutPage] = useState(false);
   const [isCreatingStripeAccountPage, setIsCreatingStripeAccountPage] = useState(false);
-
+  const navigate = useNavigate();
 
   const fetchBillingGraphCount = async () => {
     try {
@@ -68,21 +69,8 @@ export default function BillingPanel({ onClose }) {
     }
   }
 
-  const upgradePlan = async () => {
-    try {
-      setIsCreatingStripeCheckoutPage(true);
-      const apiResponse = await createStripeCheckoutSession(userJWTCookie);
-      if (apiResponse && apiResponse.checkoutUrl) {
-        // Redirect to Stripe Checkout page
-        window.location.href = apiResponse.checkoutUrl;
-      } else {
-        console.error('No checkout URL received from backend');
-      }
-    } catch (error) {
-      console.error('Error creating Stripe checkout session:', error);
-    } finally {
-      setIsCreatingStripeCheckoutPage(false);
-    }
+  const handleNavitageToBillingPlans = () => {
+    navigate('/billing-plans');
   }
 
   const managePlan = async () => {
@@ -320,7 +308,7 @@ export default function BillingPanel({ onClose }) {
               </span>
             </p>
             {billingPlan === BillingPlan.FREE && (
-              <button onClick={upgradePlan}>
+              <button onClick={handleNavitageToBillingPlans}>
                 Upgrade Plan
               </button>
             )}

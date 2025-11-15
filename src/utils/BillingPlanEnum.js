@@ -1,14 +1,14 @@
 
 export const BillingPlan = Object.freeze({
   FREE: 'FREE',
-  BASIC: 'BASIC',
+  PLUS: 'PLUS',
   PRO: 'PRO'
 });
 
 export const getBillingPlanDisplayName = (plan) => {
   const displayNames = {
     [BillingPlan.FREE]: 'FREE',
-    [BillingPlan.BASIC]: 'PAID',
+    [BillingPlan.PLUS]: 'PLUS',
     [BillingPlan.PRO]: 'PRO'
   };
 

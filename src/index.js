@@ -12,6 +12,7 @@ import DashboardPage from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
 import NotionCallbackPage from './pages/NotionCallbackPage';
 import StripeCheckoutPage from './pages/StripeCheckoutPage';
+import BillingPlansPage from './pages/BillingPlansPage';
 import LandingPage from './pages/LandingPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import SessionManager from './components/SessionManager';
@@ -61,6 +62,15 @@ root.render(
             element={
               <ProtectedRoute>
                 <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          {/* Route for the billing plans page */}
+          <Route
+            path="/billing-plans"
+            element={
+              <ProtectedRoute>
+                <BillingPlansPage />
               </ProtectedRoute>
             }
           />

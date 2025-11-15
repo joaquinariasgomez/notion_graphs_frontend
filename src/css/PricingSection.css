@@ -118,6 +118,26 @@
   box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 }
 
+.current-plan-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #1E8E3E 0%, #15692E 100%);
+  color: white;
+  padding: 6px 20px;
+  border-radius: 20px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(30, 142, 62, 0.3);
+}
+
+.pricing-card.current-plan {
+  border-color: #1E8E3E;
+  border-width: 2px;
+  box-shadow: 0 8px 24px rgba(30, 142, 62, 0.15);
+}
+
 .pricing-card-header {
   text-align: center;
   margin-bottom: 32px;
