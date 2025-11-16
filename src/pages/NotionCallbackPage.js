@@ -50,7 +50,6 @@ function NotionCallbackPage() {
       }
 
       // Exchange code with backend
-      console.log('Processing Notion authorization code...');
       const apiResponse = await connectToNotion(userJWTCookie, code);
       if (apiResponse) {
         // TODO JOAQUIN: save some Notion user data maybe in the Session
