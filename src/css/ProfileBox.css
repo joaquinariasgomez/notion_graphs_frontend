@@ -134,9 +134,37 @@
   font-weight: 700;
 }
 
-.profilebox__content .generalpanel .logout {
+.profilebox__content .generalpanel .actions {
   margin-top: auto;
   /* Pushed to the bottom */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+}
+
+.profilebox__content .generalpanel .danger-zone {
+  width: 100%;
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: rgba(241, 70, 104, 0.05);
+  border: 1px solid rgba(241, 70, 104, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+
+.profilebox__content .generalpanel .danger-zone__warning {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cancelred-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .profilebox__content .walletconnectionpanel {
@@ -680,6 +708,219 @@
 
 .profilebox__button.logout:hover {
   animation: changecolorblack 0.25s ease forwards;
+}
+
+.profilebox__button.delete {
+  border-color: var(--cancelred-color);
+  background-color: var(--cancelred-color);
+}
+
+.profilebox__button.delete:hover {
+  animation: changecolorred 0.25s ease forwards;
+}
+
+/* Confirmation Modal Styles */
+.confirmation-modal__backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: opacity-bng 0.2s ease forwards;
+}
+
+.confirmation-modal__container {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  animation: modal-slide-in 0.3s ease forwards;
+}
+
+.confirmation-modal__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.confirmation-modal__icon {
+  font-size: 32px;
+}
+
+.confirmation-modal__header h3 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #2F3437;
+}
+
+.confirmation-modal__body {
+  margin-bottom: 24px;
+}
+
+.confirmation-modal__body p {
+  margin: 0 0 12px 0;
+  font-size: 15px;
+  color: #2F3437;
+  line-height: 1.5;
+}
+
+.confirmation-modal__warning {
+  font-size: 14px !important;
+  color: var(--cancelred-color) !important;
+  font-weight: 500;
+  background-color: rgba(241, 70, 104, 0.1);
+  padding: 10px 12px;
+  border-radius: 6px;
+  border-left: 3px solid var(--cancelred-color);
+}
+
+.confirmation-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.confirmation-modal__button {
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 3px solid;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirmation-modal__button.cancel {
+  background-color: var(--matteblack-color);
+  border-color: var(--matteblack-color);
+  color: white;
+}
+
+.confirmation-modal__button.cancel:hover {
+  background-color: white;
+  border-color: var(--matteblack-color);
+  color: var(--matteblack-color);
+}
+
+.confirmation-modal__button.cancel:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.confirmation-modal__button.confirm {
+  background-color: var(--cancelred-color);
+  border-color: var(--cancelred-color);
+  color: white;
+}
+
+.confirmation-modal__button.confirm:hover {
+  background-color: white;
+  border-color: var(--cancelred-color);
+  color: var(--cancelred-color);
+}
+
+.confirmation-modal__button.confirm:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+@keyframes modal-slide-in {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Info Modal Styles */
+.info-modal__container {
+  background-color: white;
+  border-radius: 12px;
+  padding: 28px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  animation: modal-slide-in 0.3s ease forwards;
+}
+
+.info-modal__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.info-modal__icon {
+  font-size: 32px;
+}
+
+.info-modal__header h3 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #2F3437;
+}
+
+.info-modal__body {
+  margin-bottom: 28px;
+}
+
+.info-modal__body>p {
+  margin: 0 0 20px 0;
+  font-size: 16px;
+  color: #2F3437;
+  line-height: 1.6;
+}
+
+.info-modal__section {
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border-left: 3px solid #2196F3;
+}
+
+.info-modal__section:last-child {
+  margin-bottom: 0;
+  border-left-color: #4CAF50;
+}
+
+.info-modal__section h4 {
+  margin: 0 0 8px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2F3437;
+}
+
+.info-modal__section p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.info-modal__actions {
+  display: flex;
+  justify-content: center;
 }
 
 @keyframes opacity-bng {

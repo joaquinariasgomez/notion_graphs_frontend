@@ -159,3 +159,9 @@ export async function createStripeCustomerPortalSession(jwtToken) {
   const response = postWithJWTToken(url, null, jwtToken);
   return (await response).data;
 }
+
+export async function deleteAccount(jwtToken) {
+  const url = Config.BackendAccountConnectionURL;
+  const response = deleteWithJWTToken(url, jwtToken);
+  return (await response).data;
+}

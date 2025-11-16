@@ -7,9 +7,9 @@ export const BillingPlan = Object.freeze({
 
 export const getBillingPlanDisplayName = (plan) => {
   const displayNames = {
-    [BillingPlan.FREE]: 'FREE',
-    [BillingPlan.PLUS]: 'PLUS',
-    [BillingPlan.PRO]: 'PRO'
+    [BillingPlan.FREE]: 'Notion Wallet Free',
+    [BillingPlan.PLUS]: 'Notion Wallet Plus',
+    [BillingPlan.PRO]: 'Notion Wallet Pro'
   };
 
   return displayNames[plan] || 'UNKNOWN';
