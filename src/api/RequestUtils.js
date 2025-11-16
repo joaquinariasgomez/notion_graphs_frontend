@@ -130,6 +130,12 @@ export async function refreshIntegrationConnection(jwtToken) {
   return (await response).data;
 }
 
+export async function deleteIntegrationConnection(jwtToken) {
+  const url = Config.BackendWalletConnectionURL;
+  const response = deleteWithJWTToken(url, jwtToken);
+  return (await response).data;
+}
+
 export async function getBillingGraphCount(jwtToken) {
   const url = Config.BackendBillingConnectionURL + "/graphCount";
   const response = getWithJWTToken(url, jwtToken);

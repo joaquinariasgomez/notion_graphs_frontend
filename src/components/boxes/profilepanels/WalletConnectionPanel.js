@@ -9,12 +9,12 @@ export default function WalletConnectionPanel({ onClose }) {
   const authorization_url = process.env.REACT_APP_NOTION_AUTH_URL;
 
   // Context
-  const [{ userJWTCookie, hasTemplateConnectedToIntegration, userSessionDetails }, dispatch] = useGlobalStateValue();
+  const [{ userJWTCookie, templateConnectedToIntegrationData, userSessionDetails }, dispatch] = useGlobalStateValue();
 
   const [isRefreshingIntegrationConnection, setIsRefreshingIntegrationConnection] = useState(false);
 
   const renderConnectionStatusText = () => {
-    if (hasTemplateConnectedToIntegration) {
+    if (templateConnectedToIntegrationData.hasTemplateConnectedToIntegration) {
       return (
         <p>
           <span
@@ -47,14 +47,22 @@ export default function WalletConnectionPanel({ onClose }) {
     }
   }
 
+  const renderConfigureNotionIntegrationText = () => {
+    if (templateConnectedToIntegrationData.hasTemplateConnectedToIntegration) {
+      return (<span>Configure Notion integration</span>);
+    } else {
+      return (<span>Connect Notion integration</span>);
+    }
+  }
+
   const refreshIntegrationCon = async () => {
     try {
       setIsRefreshingIntegrationConnection(true);
       const apiResponse = await refreshIntegrationConnection(userJWTCookie);
       if (apiResponse) {
         dispatch({
-          type: actionTypes.SET_HAS_TEMPLATE_CONNECTED_TO_INTEGRATION,
-          value: apiResponse.hasTemplateConnectedToIntegration
+          type: actionTypes.SET_TEMPLATE_CONNECTED_TO_INTEGRATION_DATA,
+          value: apiResponse
         })
       }
     } catch (error) {
@@ -90,7 +98,7 @@ export default function WalletConnectionPanel({ onClose }) {
       <div className="dualinfo__container">
         <button className="connectwithwallet" onClick={() => { window.location.href = authorization_url; }}>
           <img src={process.env.PUBLIC_URL + '/notion_logo.png'} alt=''></img>
-          <span>Configure Notion integration</span>
+          {renderConfigureNotionIntegrationText()}
         </button>
         <button className="howtoconnect">
           <span>How connection works</span>

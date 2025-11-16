@@ -11,7 +11,7 @@ import { actionTypes } from '../context/globalReducer';
 function DashboardPage() {
 
   // Context
-  const [{ userJWTCookie, hasTemplateConnectedToIntegration, billingGraphCountData, billingPlan }, dispatch] = useGlobalStateValue();
+  const [{ userJWTCookie, templateConnectedToIntegrationData, billingGraphCountData, billingPlan }, dispatch] = useGlobalStateValue();
 
   useEffect(() => {
     fetchIntegrationConnection();
@@ -26,8 +26,8 @@ function DashboardPage() {
       const apiResponse = await checkIntegrationConnection(userJWTCookie);
       if (apiResponse) {
         dispatch({
-          type: actionTypes.SET_HAS_TEMPLATE_CONNECTED_TO_INTEGRATION,
-          value: apiResponse.hasTemplateConnectedToIntegration
+          type: actionTypes.SET_TEMPLATE_CONNECTED_TO_INTEGRATION_DATA,
+          value: apiResponse
         })
       }
     } catch (error) {
@@ -103,7 +103,7 @@ function DashboardPage() {
         <UserCicleButton />
       </div>
       <div className='dashboard__body'>
-        {!hasTemplateConnectedToIntegration && renderNotConnectedToIntegrationWarning()}
+        {!templateConnectedToIntegrationData.hasTemplateConnectedToIntegration && renderNotConnectedToIntegrationWarning()}
         <DashboardGraphs />
       </div>
     </div>
