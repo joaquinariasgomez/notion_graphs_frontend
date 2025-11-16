@@ -43,7 +43,7 @@ export default function WalletConnectionPanel({ onClose }) {
           >
             ⚠️
           </span>
-          No databases connected to your account.
+          No integration connected to your account.
         </p>
       );
     }

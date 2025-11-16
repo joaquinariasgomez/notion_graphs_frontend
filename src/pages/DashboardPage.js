@@ -89,7 +89,7 @@ function DashboardPage() {
           >
             ⚠️
           </span>
-          No databases connected to your account. Newly connected databases might take 1-2 minutes to reflect in your account.
+          No integration connected to your account. Newly connected integrations might take 1-2 minutes to reflect in your account.
         </p>
       </button>
     );
