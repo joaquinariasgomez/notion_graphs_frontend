@@ -158,6 +158,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
 }
 
@@ -172,7 +173,7 @@
   align-items: center;
   justify-content: center;
 
-  padding: 8px 16px;
+  padding: 10px 16px;
   border: 1px solid #ccc;
   border-radius: 6px;
   background-color: #f9f9f9;
@@ -194,6 +195,93 @@
 }
 
 .profilebox__content .walletconnectionpanel .info__container>button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.profilebox__content .walletconnectionpanel .userinfo__container {
+  width: 100%;
+  background-color: rgb(249, 248, 247);
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profilebox__content .walletconnectionpanel .userinfo__avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0e0e0;
+  border: 2px solid #2F3437;
+}
+
+.profilebox__content .walletconnectionpanel .userinfo__avatar>img {
+  /* width: 100%;
+  height: 100%;
+  object-fit: cover; */
+  width: auto;
+  height: 120%;
+}
+
+.profilebox__content .walletconnectionpanel .userinfo__details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.profilebox__content .walletconnectionpanel .userinfo__name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2F3437;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profilebox__content .walletconnectionpanel .userinfo__email {
+  font-size: 14px;
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profilebox__content .walletconnectionpanel .userinfo__unlink-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-left: auto;
+  padding: 10px 16px;
+  border: 1px solid #f14668;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  color: #f14668;
+  font-size: 14px;
+  line-height: 1;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.profilebox__content .walletconnectionpanel .userinfo__unlink-button:hover {
+  background-color: rgba(249, 24, 128, 0.1);
+}
+
+.profilebox__content .walletconnectionpanel .userinfo__unlink-button:active {
+  background-color: rgba(249, 24, 128, 0.2);
+}
+
+.profilebox__content .walletconnectionpanel .userinfo__unlink-button:disabled {
   cursor: not-allowed;
   opacity: 0.6;
 }
@@ -561,6 +649,15 @@
   animation: spin 1s linear infinite;
 }
 
+.unlink-button__icon {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.unlink-button__icon.unlinking {
+  animation: shake_icon 1s ease-in-out infinite;
+}
+
 .profilebox__button {
   height: 44px;
   width: 90px;
@@ -665,5 +762,27 @@
 
   100% {
     stroke-dashoffset: 0;
+  }
+}
+
+@keyframes shake_icon {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-30deg);
+  }
+
+  50% {
+    transform: rotate(0deg);
+  }
+
+  75% {
+    transform: rotate(30deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
   }
 }

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useGlobalStateValue } from "../../../context/GlobalStateProvider";
-import { refreshIntegrationConnection } from "../../../api/RequestUtils";
+import { refreshIntegrationConnection, unlinkIntegrationConnection } from "../../../api/RequestUtils";
 import { actionTypes } from "../../../context/globalReducer";
-import { FaSyncAlt } from 'react-icons/fa';
+import { FaSyncAlt, FaTrashAlt } from 'react-icons/fa';
+import PersonIcon from '@mui/icons-material/Person';
 
 export default function WalletConnectionPanel({ onClose }) {
 
@@ -12,9 +13,10 @@ export default function WalletConnectionPanel({ onClose }) {
   const [{ userJWTCookie, templateConnectedToIntegrationData, userSessionDetails }, dispatch] = useGlobalStateValue();
 
   const [isRefreshingIntegrationConnection, setIsRefreshingIntegrationConnection] = useState(false);
+  const [isUnlinkingIntegrationConnection, setIsUnlinkingIntegrationConnection] = useState(false);
 
   const renderConnectionStatusText = () => {
-    if (templateConnectedToIntegrationData.hasTemplateConnectedToIntegration) {
+    if (templateConnectedToIntegrationData?.hasTemplateConnectedToIntegration) {
       return (
         <p>
           <span
@@ -48,7 +50,7 @@ export default function WalletConnectionPanel({ onClose }) {
   }
 
   const renderConfigureNotionIntegrationText = () => {
-    if (templateConnectedToIntegrationData.hasTemplateConnectedToIntegration) {
+    if (templateConnectedToIntegrationData?.hasTemplateConnectedToIntegration) {
       return (<span>Configure Notion integration</span>);
     } else {
       return (<span>Connect Notion integration</span>);
@@ -69,6 +71,38 @@ export default function WalletConnectionPanel({ onClose }) {
 
     } finally {
       setIsRefreshingIntegrationConnection(false);
+    }
+  }
+
+  const unlinkNotionIntegration = async () => {
+    try {
+      setIsUnlinkingIntegrationConnection(true);
+      await unlinkIntegrationConnection(userJWTCookie);
+      // If no error is thrown, the unlink was successful - update state
+      dispatch({
+        type: actionTypes.SET_TEMPLATE_CONNECTED_TO_INTEGRATION_DATA,
+        value: {}
+      })
+    } catch (error) {
+
+    } finally {
+      setIsUnlinkingIntegrationConnection(false);
+    }
+  }
+
+  const renderNotionAvatar = () => {
+    if (templateConnectedToIntegrationData.notionAvatarUrl == null || templateConnectedToIntegrationData.notionAvatarUrl == undefined) {
+      return (
+        <PersonIcon fontSize='large' />
+      );
+    } else {
+      return (
+        <img
+          src={templateConnectedToIntegrationData.notionAvatarUrl}
+          alt="Notion Avatar"
+          onError={(e) => { e.target.style.display = 'none'; }}
+        />
+      );
     }
   }
 
@@ -95,6 +129,21 @@ export default function WalletConnectionPanel({ onClose }) {
           Newly connected integrations might take 1-2 minutes to reflect in your account.
         </p>
       </div>
+      {templateConnectedToIntegrationData?.hasTemplateConnectedToIntegration && (
+        <div className="userinfo__container">
+          <div className="userinfo__avatar">
+            {renderNotionAvatar()}
+          </div>
+          <div className="userinfo__details">
+            <div className="userinfo__name">{templateConnectedToIntegrationData.notionName}</div>
+            <div className="userinfo__email">{templateConnectedToIntegrationData.notionEmail}</div>
+          </div>
+          <button className="userinfo__unlink-button" onClick={unlinkNotionIntegration} disabled={isUnlinkingIntegrationConnection}>
+            <FaTrashAlt className={`unlink-button__icon ${isUnlinkingIntegrationConnection ? 'unlinking' : ''}`} />
+            <span>Unlink integration</span>
+          </button>
+        </div>
+      )}
       <div className="dualinfo__container">
         <button className="connectwithwallet" onClick={() => { window.location.href = authorization_url; }}>
           <img src={process.env.PUBLIC_URL + '/notion_logo.png'} alt=''></img>

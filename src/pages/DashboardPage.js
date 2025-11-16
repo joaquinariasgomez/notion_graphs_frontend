@@ -103,7 +103,7 @@ function DashboardPage() {
         <UserCicleButton />
       </div>
       <div className='dashboard__body'>
-        {!templateConnectedToIntegrationData.hasTemplateConnectedToIntegration && renderNotConnectedToIntegrationWarning()}
+        {!templateConnectedToIntegrationData?.hasTemplateConnectedToIntegration && renderNotConnectedToIntegrationWarning()}
         <DashboardGraphs />
       </div>
     </div>

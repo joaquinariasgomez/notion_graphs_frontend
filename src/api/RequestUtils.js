@@ -130,7 +130,7 @@ export async function refreshIntegrationConnection(jwtToken) {
   return (await response).data;
 }
 
-export async function deleteIntegrationConnection(jwtToken) {
+export async function unlinkIntegrationConnection(jwtToken) {
   const url = Config.BackendWalletConnectionURL;
   const response = deleteWithJWTToken(url, jwtToken);
   return (await response).data;
