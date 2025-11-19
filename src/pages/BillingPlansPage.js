@@ -6,6 +6,7 @@ import BillingConstants from '../BillingConstants';
 import { BillingPlan } from '../utils/BillingPlanEnum';
 import '../css/PricingSection.css';
 import { useGlobalStateValue } from '../context/GlobalStateProvider';
+import { actionTypes, BOX_TYPES } from '../context/globalReducer';
 
 function BillingPlansPage() {
 
@@ -57,6 +58,14 @@ function BillingPlansPage() {
   };
 
   const handleBackToDashboard = () => {
+    // Set the active box to Profile with billing panel before navigating
+    dispatch({
+      type: actionTypes.SET_ACTIVE_BOX,
+      value: {
+        type: BOX_TYPES.PROFILE,
+        data: { panel: 'billing' }
+      }
+    });
     navigate('/dashboard');
   };
 

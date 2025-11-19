@@ -144,8 +144,7 @@ export default function CreateGraphBox() {
 
   const closeBox = () => {
     dispatch({
-      type: actionTypes.SET_SHOW_CREATE_GRAPH_BOX,
-      value: false
+      type: actionTypes.CLOSE_ACTIVE_BOX
     })
   }
 

@@ -6,7 +6,7 @@ import UserCicleButton from '../components/UserCircleButton';
 import '../css/DashboardPage.css';
 import { checkIntegrationConnection, getBillingGraphCount, getBillingPlan } from '../api/RequestUtils';
 import { useGlobalStateValue } from '../context/GlobalStateProvider';
-import { actionTypes } from '../context/globalReducer';
+import { actionTypes, BOX_TYPES } from '../context/globalReducer';
 
 function DashboardPage() {
 
@@ -71,8 +71,11 @@ function DashboardPage() {
 
   const showNotionConnectionBox = () => {
     dispatch({
-      type: actionTypes.SET_SHOW_NOTION_CONNECTION_BOX,
-      value: true
+      type: actionTypes.SET_ACTIVE_BOX,
+      value: {
+        type: BOX_TYPES.PROFILE,
+        data: { panel: 'walletconnection' }
+      }
     })
   }
 

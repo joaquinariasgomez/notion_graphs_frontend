@@ -1,16 +1,18 @@
 import '../../css/UnknownErrorBox.css';
 import { useGlobalStateValue } from '../../context/GlobalStateProvider';
-import { actionTypes } from '../../context/globalReducer';
+import { actionTypes, BOX_TYPES } from '../../context/globalReducer';
 
 function UnknownErrorBox({ onClose }) {
     const authorization_url = process.env.REACT_APP_NOTION_AUTH_URL;
     const [, dispatch] = useGlobalStateValue();
 
     const handleOpenNotionConnectionPanel = () => {
-        onClose(); // Hide the box before opening the connection panel
         dispatch({
-            type: actionTypes.SET_SHOW_NOTION_CONNECTION_BOX,
-            value: true
+            type: actionTypes.SET_ACTIVE_BOX,
+            value: {
+                type: BOX_TYPES.PROFILE,
+                data: { panel: 'walletconnection' }
+            }
         });
     };
 
@@ -24,12 +26,12 @@ function UnknownErrorBox({ onClose }) {
             <div className="unknownerrorbox__container" onClick={e => { e.stopPropagation(); }}>
                 <div className="unknownerrorbox__header">
                     <span className="unknownerrorbox__icon">⚠️</span>
-                    <h2>Connection Issue</h2>
+                    <h2>Unknown error</h2>
                 </div>
 
                 <div className="unknownerrorbox__content">
                     <p className="unknownerrorbox__message">
-                        We're having trouble connecting to your Notion integration. This could be because:
+                        We had an unknown error. This could be because:
                     </p>
                     <ul className="unknownerrorbox__reasons">
                         <li>Your session has expired</li>
@@ -50,12 +52,12 @@ function UnknownErrorBox({ onClose }) {
                         className="unknownerrorbox__button unknownerrorbox__button--secondary"
                         onClick={handleOpenNotionConnectionPanel}
                     >
-                        <span>Check Connection Status</span>
+                        <span>Check Notion Connection Status</span>
                     </button>
                 </div>
 
                 <p className="unknownerrorbox__footer">
-                    Need help? Check your connection status for more options.
+                    Need help? Try refreshing the page.
                 </p>
             </div>
         </div>

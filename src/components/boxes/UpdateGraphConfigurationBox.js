@@ -26,8 +26,7 @@ export default function UpdateGraphConfigurationBox() {
 
   const closeBox = () => {
     dispatch({
-      type: actionTypes.SET_SHOW_UPDATE_GRAPH_CONFIGURATION_BOX,
-      value: false
+      type: actionTypes.CLOSE_ACTIVE_BOX
     })
   }
 

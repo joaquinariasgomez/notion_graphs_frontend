@@ -10,7 +10,7 @@ import GraphDisplayer from "./graphsdisplay/GraphDisplayer";
 import SyncLoader from "react-spinners/SyncLoader";
 import { getGraphTitle, getGraphTitleFromConfiguration } from "./graphsdisplay/GraphsDisplayUtils";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
-import { actionTypes } from "../context/globalReducer";
+import { actionTypes, BOX_TYPES } from "../context/globalReducer";
 import { deleteGraph, refreshGraph } from "../api/RequestUtils";
 import { getRelativeTimeFromTimestamp } from "../utils/DateUtils";
 import { FaSyncAlt } from 'react-icons/fa';
@@ -56,12 +56,12 @@ export default function GraphBox({ graph }) {
 
     const handleClickUpdateGraphConfiguration = (graph) => {
         dispatch({
-            type: actionTypes.SET_SHOW_UPDATE_GRAPH_CONFIGURATION_BOX,
-            value: true
-        })
-        dispatch({
             type: actionTypes.SET_EDITING_GRAPH_CONFIGURATION,
             value: graph.graphConfiguration
+        })
+        dispatch({
+            type: actionTypes.SET_ACTIVE_BOX,
+            value: { type: BOX_TYPES.UPDATE_GRAPH }
         })
     }
 

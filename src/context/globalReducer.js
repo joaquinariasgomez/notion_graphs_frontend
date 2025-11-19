@@ -19,10 +19,7 @@ const getLocalStorageValue = (key) => {
 export const initialState = {
   userJWTCookie: getCookieValue("userJWT"), // Initialize with actual cookie value
   userSessionDetails: getLocalStorageValue("userSessionDetails"), // Initialize with actual localStorage value
-  showCreateGraphBox: false,
-  showUpdateGraphConfigurationBox: false,
-  showUserProfileBox: false,
-  showNotionConnectionBox: false,
+  activeBox: null, // null or { type: 'PROFILE' | 'CREATE_GRAPH' | 'UPDATE_GRAPH' | 'BILLING_LIMIT_ERROR' | 'UNKNOWN_ERROR', data: {...} }
   templateConnectedToIntegrationData: {},
   billingGraphCountData: null,
   billingPlan: null,
@@ -33,10 +30,8 @@ export const initialState = {
 export const actionTypes = {
   SET_USER_JWT_COOKIE: "SET_USER_JWT_COOKIE",
   SET_USER_SESSION_DETAILS: "SET_USER_SESSION_DETAILS",
-  SET_SHOW_CREATE_GRAPH_BOX: "SET_SHOW_CREATE_GRAPH_BOX",
-  SET_SHOW_UPDATE_GRAPH_CONFIGURATION_BOX: "SET_SHOW_UPDATE_GRAPH_CONFIGURATION_BOX",
-  SET_SHOW_USER_PROFILE_BOX: "SET_SHOW_USER_PROFILE_BOX",
-  SET_SHOW_NOTION_CONNECTION_BOX: "SET_SHOW_NOTION_CONNECTION_BOX",
+  SET_ACTIVE_BOX: "SET_ACTIVE_BOX",
+  CLOSE_ACTIVE_BOX: "CLOSE_ACTIVE_BOX",
   SET_TEMPLATE_CONNECTED_TO_INTEGRATION_DATA: "SET_TEMPLATE_CONNECTED_TO_INTEGRATION_DATA",
   SET_BILLING_GRAPH_COUNT_DATA: "SET_BILLING_GRAPH_COUNT_DATA",
   SET_BILLING_PLAN: "SET_BILLING_PLAN",
@@ -46,6 +41,15 @@ export const actionTypes = {
   UPDATE_GRAPH: "UPDATE_GRAPH",
   DELETE_GRAPH: "DELETE_GRAPH",
   SET_EDITING_GRAPH_CONFIGURATION: "SET_EDITING_GRAPH_CONFIGURATION"
+}
+
+// Box type constants for better type safety and consistency
+export const BOX_TYPES = {
+  PROFILE: "PROFILE",
+  CREATE_GRAPH: "CREATE_GRAPH",
+  UPDATE_GRAPH: "UPDATE_GRAPH",
+  BILLING_LIMIT_ERROR: "BILLING_LIMIT_ERROR",
+  UNKNOWN_ERROR: "UNKNOWN_ERROR"
 }
 
 const globalReducer = (state, action) => {
@@ -62,28 +66,16 @@ const globalReducer = (state, action) => {
         userSessionDetails: action.value
       };
 
-    case actionTypes.SET_SHOW_CREATE_GRAPH_BOX:
+    case actionTypes.SET_ACTIVE_BOX:
       return {
         ...state,
-        showCreateGraphBox: action.value
+        activeBox: action.value // { type: BOX_TYPES.*, data: {...} }
       };
 
-    case actionTypes.SET_SHOW_UPDATE_GRAPH_CONFIGURATION_BOX:
+    case actionTypes.CLOSE_ACTIVE_BOX:
       return {
         ...state,
-        showUpdateGraphConfigurationBox: action.value
-      };
-
-    case actionTypes.SET_SHOW_USER_PROFILE_BOX:
-      return {
-        ...state,
-        showUserProfileBox: action.value
-      };
-
-    case actionTypes.SET_SHOW_NOTION_CONNECTION_BOX:
-      return {
-        ...state,
-        showNotionConnectionBox: action.value
+        activeBox: null
       };
 
     case actionTypes.SET_TEMPLATE_CONNECTED_TO_INTEGRATION_DATA:

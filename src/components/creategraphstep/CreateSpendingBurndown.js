@@ -40,8 +40,7 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
 
   const closeCreateGraphBox = () => {
     dispatch({
-      type: actionTypes.SET_SHOW_CREATE_GRAPH_BOX,
-      value: false
+      type: actionTypes.CLOSE_ACTIVE_BOX
     })
   }
 
@@ -78,19 +77,10 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
         });
       }
     } catch (error) {
-      // If backend responds with 400 error, show error and remove last appended pending graph
-      if (error && error.response && error.response.status === 400) {
-        let message = "An error occurred while creating the graph: " + error.response.data;
-        if (error.response.data && error.response.data.message) {
-          message = error.response.data.message;
-        }
-        window.alert(message);
-        dispatch({
-          type: actionTypes.DELETE_GRAPH,
-          value: pendingGraphConfiguration.graphConfiguration.id
-        });
-      }
-      // Optionally handle other errors as needed
+      dispatch({
+        type: actionTypes.DELETE_GRAPH,
+        value: pendingGraphConfiguration.graphConfiguration.id
+      });
     } finally { }
   }
 

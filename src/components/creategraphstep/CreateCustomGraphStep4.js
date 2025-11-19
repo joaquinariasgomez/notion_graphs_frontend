@@ -18,8 +18,7 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
 
     const closeCreateGraphBox = () => {
         dispatch({
-            type: actionTypes.SET_SHOW_CREATE_GRAPH_BOX,
-            value: false
+            type: actionTypes.CLOSE_ACTIVE_BOX
         })
     }
 
@@ -44,9 +43,10 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
     }
 
     const handleCreateGraph = async () => {
+        let pendingGraphConfiguration = null;
         try {
             closeCreateGraphBox()
-            const pendingGraphConfiguration = createPendingGraphWithConfiguration(graphConfiguration);
+            pendingGraphConfiguration = createPendingGraphWithConfiguration(graphConfiguration);
             dispatch({
                 type: actionTypes.APPEND_GRAPH,
                 value: pendingGraphConfiguration
@@ -63,7 +63,10 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
                 })
             }
         } catch (error) {
-            // TODO: handle exception
+            dispatch({
+                type: actionTypes.DELETE_GRAPH,
+                value: pendingGraphConfiguration.graphConfiguration.id
+            });
         } finally { }
     }
 

@@ -77,12 +77,7 @@ export default function GeneralPanel({ onClose }) {
 
   const closeBox = () => {
     dispatch({
-      type: actionTypes.SET_SHOW_USER_PROFILE_BOX,
-      value: false
-    })
-    dispatch({
-      type: actionTypes.SET_SHOW_NOTION_CONNECTION_BOX,
-      value: false
+      type: actionTypes.CLOSE_ACTIVE_BOX
     })
   }
 

@@ -1,5 +1,5 @@
 import '../css/CreateGraphButton.css';
-import { actionTypes } from "../context/globalReducer";
+import { actionTypes, BOX_TYPES } from "../context/globalReducer";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 
@@ -10,8 +10,8 @@ function CreateGraphButton() {
 
   const showCreateGraphBox = () => {
     dispatch({
-      type: actionTypes.SET_SHOW_CREATE_GRAPH_BOX,
-      value: true
+      type: actionTypes.SET_ACTIVE_BOX,
+      value: { type: BOX_TYPES.CREATE_GRAPH }
     })
   }
 

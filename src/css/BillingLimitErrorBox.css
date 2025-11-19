@@ -1,0 +1,134 @@
+.billinglimiterrorbox__container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 480px;
+    max-width: 90vw;
+    border-radius: 12px;
+    background-color: white;
+    animation: drop 0.2s ease forwards;
+    z-index: 998;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.billinglimiterrorbox__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.billinglimiterrorbox__icon {
+    font-size: 32px;
+}
+
+.billinglimiterrorbox__header h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.billinglimiterrorbox__content {
+    margin-bottom: 25px;
+}
+
+.billinglimiterrorbox__message {
+    margin: 0 0 15px 0;
+    font-size: 15px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.billinglimiterrorbox__upgrade-message {
+    margin: 15px 0 10px 0;
+    font-size: 15px;
+    color: #555;
+    font-weight: 500;
+}
+
+.billinglimiterrorbox__benefits {
+    margin: 0;
+    padding-left: 25px;
+    list-style-type: disc;
+}
+
+.billinglimiterrorbox__benefits li {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+}
+
+.billinglimiterrorbox__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.billinglimiterrorbox__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.billinglimiterrorbox__button--primary {
+    background-color: #000;
+    color: white;
+}
+
+.billinglimiterrorbox__button--primary:hover {
+    background-color: #333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.billinglimiterrorbox__button--secondary {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.billinglimiterrorbox__button--secondary:hover {
+    background-color: #e8e8e8;
+    border-color: #ccc;
+}
+
+.billinglimiterrorbox__button:active {
+    transform: translateY(0);
+}
+
+.billinglimiterrorbox__footer {
+    margin: 0;
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+    font-style: italic;
+}
+
+@keyframes drop {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        top: 50%;
+        left: 50%;
+    }
+}
+

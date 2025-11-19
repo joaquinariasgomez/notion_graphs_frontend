@@ -28,6 +28,7 @@ root.render(
     <BrowserRouter>
       <SessionManager>
         <Routes>
+          {/* TODO JOAQUIN: create https://www.notionwallet.com/privacy-policy and https://www.notionwallet.com/terms-of-service */}
           {/* Route for the landing page */}
           <Route
             path="/"

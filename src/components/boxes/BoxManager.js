@@ -1,66 +1,89 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useGlobalStateValue } from "../../context/GlobalStateProvider";
 import CreateGraphBox from "./CreateGraphBox";
 import ProfileBox from "./ProfileBox";
 import eventBus from "../../utils/eventBus";
 import UnknownErrorBox from "./UnknownErrorBox";
+import BillingLimitErrorBox from "./BillingLimitErrorBox";
 import UpdateGraphConfigurationBox from "./UpdateGraphConfigurationBox";
+import { actionTypes, BOX_TYPES } from "../../context/globalReducer";
 
 export default function BoxManager() {
 
   // Context
-  const [{ showCreateGraphBox, showUserProfileBox, showNotionConnectionBox, showUpdateGraphConfigurationBox }, dispatch] = useGlobalStateValue();
-  const [showUnknownErrorBox, setShowUnknownErrorBox] = useState(false);
+  const [{ activeBox }, dispatch] = useGlobalStateValue();
 
   useEffect(() => {
     const handleUnknownError = () => {
-      setShowUnknownErrorBox(true);
+      dispatch({
+        type: actionTypes.SET_ACTIVE_BOX,
+        value: { type: BOX_TYPES.UNKNOWN_ERROR }
+      });
     };
 
-    // Subscribe to the event when the component mounts
-    eventBus.on('unknownError', handleUnknownError);
+    const handleBillingLimitError = (limitType) => {
+      dispatch({
+        type: actionTypes.SET_ACTIVE_BOX,
+        value: {
+          type: BOX_TYPES.BILLING_LIMIT_ERROR,
+          data: { limitType }
+        }
+      });
+    };
 
-    // Unsubscribe from the event when the component unmounts
+    // Subscribe to the events when the component mounts
+    eventBus.on('unknownError', handleUnknownError);
+    eventBus.on('billingLimitError', handleBillingLimitError);
+
+    // Unsubscribe from the events when the component unmounts
     return () => {
       eventBus.off('unknownError', handleUnknownError);
+      eventBus.off('billingLimitError', handleBillingLimitError);
     };
-  }, []);
+  }, [dispatch]);
 
-  // Hide UnknownErrorBox when NotionConnectionBox is shown
-  useEffect(() => {
-    if (showNotionConnectionBox) {
-      setShowUnknownErrorBox(false);
-    }
-  }, [showNotionConnectionBox]);
-
-  // TODO: if it is an alert box, render it before the other boxes
-  const isAlertBox = () => {
-
-  }
+  const handleCloseBox = () => {
+    dispatch({ type: actionTypes.CLOSE_ACTIVE_BOX });
+  };
 
   const renderBox = () => {
-    if (showUnknownErrorBox) {
-      return (
-        <UnknownErrorBox onClose={() => setShowUnknownErrorBox(false)} />
-      );
-    } else if (showUserProfileBox) {
-      return (
-        <ProfileBox defaultActivePanel={'general'} />
-      )
-    } else if (showNotionConnectionBox) {
-      return (
-        <ProfileBox defaultActivePanel={'walletconnection'} />
-      )
-    } else if (showCreateGraphBox) {
-      return (
-        <CreateGraphBox />
-      )
-    } else if (showUpdateGraphConfigurationBox) {
-      return (
-        <UpdateGraphConfigurationBox />
-      )
+    if (!activeBox) return null;
+
+    switch (activeBox.type) {
+      case BOX_TYPES.BILLING_LIMIT_ERROR:
+        return (
+          <BillingLimitErrorBox
+            onClose={handleCloseBox}
+            limitType={activeBox.data?.limitType}
+          />
+        );
+
+      case BOX_TYPES.UNKNOWN_ERROR:
+        return (
+          <UnknownErrorBox onClose={handleCloseBox} />
+        );
+
+      case BOX_TYPES.PROFILE:
+        return (
+          <ProfileBox
+            defaultActivePanel={activeBox.data?.panel || 'general'}
+          />
+        );
+
+      case BOX_TYPES.CREATE_GRAPH:
+        return (
+          <CreateGraphBox />
+        );
+
+      case BOX_TYPES.UPDATE_GRAPH:
+        return (
+          <UpdateGraphConfigurationBox />
+        );
+
+      default:
+        return null;
     }
-  }
+  };
 
   return renderBox();
 }
