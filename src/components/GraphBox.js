@@ -152,11 +152,37 @@ export default function GraphBox({ graph }) {
             default:
             case "ERROR":
                 return (
-                    <div className="loading">
+                    <div className="showingerror">
                         <p className="title">
                             {getGraphTitle(graph.graphConfiguration)}
                         </p>
-
+                        <p className="warning-sign">
+                            ⚠️
+                        </p>
+                        <p className="error-message">
+                            We couldn't load this chart due to an error with your Notion integration.<br></br><br></br>Please try reconnecting or logging in again to refresh the cookies.
+                        </p>
+                        <button
+                            className="error-button"
+                            onClick={() => {
+                                dispatch({
+                                    type: actionTypes.SET_ACTIVE_BOX,
+                                    value: {
+                                        type: BOX_TYPES.PROFILE,
+                                        data: { panel: 'walletconnection' }
+                                    }
+                                })
+                            }}
+                        >
+                            Check Notion Connection
+                        </button>
+                        <button
+                            className="refresh-button"
+                            onClick={() => handleRefreshGraph(graph)} disabled={isRefreshing}
+                        >
+                            <FaSyncAlt className={`graph-refresh-button__icon ${isRefreshing ? 'spinning' : ''}`} />
+                            Refresh Chart
+                        </button>
                     </div>
                 );
         }
