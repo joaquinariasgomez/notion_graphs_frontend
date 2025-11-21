@@ -249,8 +249,8 @@ export default function BillingPanel({ onClose }) {
                 isLoading={true}
               />
               <SemicircularGauge
-                label="Chart refreshes"
-                tooltipText="The total amount of charts that you can refresh since registering your account"
+                label="Chart updates"
+                tooltipText="The total amount of charts that you can update since registering your account"
                 current={0}
                 max={100}
                 color="#FF9800"
@@ -276,8 +276,8 @@ export default function BillingPanel({ onClose }) {
                 isLoading={false}
               />
               <SemicircularGauge
-                label="Chart refreshes"
-                tooltipText="The total amount of charts that you can refresh since registering your account"
+                label="Chart updates"
+                tooltipText="The total amount of charts that you can update since registering your account"
                 current={billingGraphCountData.currentRefreshCount || 0}
                 max={billingGraphCountData.maxRefreshCount || 0}
                 color="#FF9800"

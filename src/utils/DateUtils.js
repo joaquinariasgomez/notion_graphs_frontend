@@ -89,7 +89,7 @@ export function getLastDayOfYearForDate(date) {
 }
 
 export function getRelativeTimeFromTimestamp(timestamp) {
-  if (timestamp == null) return '';
+  if (timestamp == null || timestamp == 0) return '';
 
   const currentTimestamp = Date.now() / 1000;
   const timePastInSeconds = Number(currentTimestamp) - Number(timestamp);

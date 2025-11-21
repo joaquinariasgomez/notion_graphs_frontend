@@ -1,9 +1,11 @@
 import '../../css/BillingLimitErrorBox.css';
 import { useGlobalStateValue } from '../../context/GlobalStateProvider';
 import { actionTypes, BOX_TYPES } from '../../context/globalReducer';
+import { useNavigate } from 'react-router-dom';
 
 function BillingLimitErrorBox({ onClose, limitType }) {
     const [, dispatch] = useGlobalStateValue();
+    const navigate = useNavigate();
 
     const handleOpenBillingPanel = () => {
         dispatch({
@@ -14,6 +16,10 @@ function BillingLimitErrorBox({ onClose, limitType }) {
             }
         });
     };
+
+    const handleNavigateToBillingPlans = () => {
+        navigate('/billing-plans');
+    }
 
     const getLimitMessage = () => {
         switch (limitType) {
@@ -34,6 +40,12 @@ function BillingLimitErrorBox({ onClose, limitType }) {
                     title: 'Refresh Limit Reached',
                     description: 'You\'ve reached the maximum number of graph refreshes allowed for your current plan this billing period.',
                     icon: '🔄'
+                };
+            case 'BURNDOWN_GRAPH_NOT_ALLOWED':
+                return {
+                    title: 'Burndown Charts Not Allowed',
+                    description: 'In order to create burndown charts, you must upgrade your subscription to Notion Wallet Plus.',
+                    icon: '🔥'
                 };
             default:
                 return {
@@ -71,9 +83,9 @@ function BillingLimitErrorBox({ onClose, limitType }) {
                 <div className="billinglimiterrorbox__actions">
                     <button
                         className="billinglimiterrorbox__button billinglimiterrorbox__button--primary"
-                        onClick={handleOpenBillingPanel}
+                        onClick={handleNavigateToBillingPlans}
                     >
-                        <span>View Plans & Upgrade</span>
+                        <span>Upgrade plan</span>
                     </button>
 
                     <button

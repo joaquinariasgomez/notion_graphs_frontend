@@ -151,8 +151,14 @@ export default function GraphBox({ graph }) {
                 );
             default:
             case "ERROR":
-                {/* TODO JOAQUIN - fill */ }
-                return (<></>);
+                return (
+                    <div className="loading">
+                        <p className="title">
+                            {getGraphTitle(graph.graphConfiguration)}
+                        </p>
+
+                    </div>
+                );
         }
     }
 

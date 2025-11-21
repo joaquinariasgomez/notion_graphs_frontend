@@ -1,5 +1,5 @@
 import '../../css/ProfileBox.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { actionTypes } from '../../context/globalReducer';
 import { useGlobalStateValue } from '../../context/GlobalStateProvider';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
@@ -7,11 +7,12 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import GeneralPanel from './profilepanels/GeneralPanel';
 import WalletConnectionPanel from './profilepanels/WalletConnectionPanel';
 import BillingPanel from './profilepanels/BillingPanel';
+import { getBillingGraphCount, getBillingPlan } from '../../api/RequestUtils';
 
 function ProfileBox({ defaultActivePanel }) {
 
   // Context
-  const [{ }, dispatch] = useGlobalStateValue();
+  const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
 
   const [activePanel, setActivePanel] = useState(defaultActivePanel);
 
@@ -19,6 +20,49 @@ function ProfileBox({ defaultActivePanel }) {
     dispatch({
       type: actionTypes.CLOSE_ACTIVE_BOX
     });
+  }
+
+  useEffect(() => {
+    refreshAllBillingData();
+  }, []);
+
+  const refreshAllBillingData = async () => {
+    try {
+      await Promise.all([
+        fetchBillingGraphCount(),
+        fetchBillingPlan()
+      ]);
+    } catch (error) {
+
+    }
+  }
+
+  const fetchBillingGraphCount = async () => {
+    try {
+      const apiResponse = await getBillingGraphCount(userJWTCookie);
+      if (apiResponse) {
+        dispatch({
+          type: actionTypes.SET_BILLING_GRAPH_COUNT_DATA,
+          value: apiResponse
+        })
+      }
+    } catch (error) {
+
+    }
+  }
+
+  const fetchBillingPlan = async () => {
+    try {
+      const apiResponse = await getBillingPlan(userJWTCookie);
+      if (apiResponse) {
+        dispatch({
+          type: actionTypes.SET_BILLING_PLAN,
+          value: apiResponse.plan
+        })
+      }
+    } catch (error) {
+
+    }
   }
 
   const renderActivePanel = () => {
