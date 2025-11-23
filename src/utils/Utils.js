@@ -1,5 +1,8 @@
 import PersonIcon from '@mui/icons-material/Person';
 
+// Cache for profile images to prevent rate limiting (429 errors)
+const imageCache = new Map();
+
 export const customStyleForSelectPlacement = {
   control: (provided) => ({
     ...provided,
@@ -47,14 +50,46 @@ export const customStyleForSelectPlacement = {
 };
 
 export function renderUserImage(userSessionDetails) {
-  if (userSessionDetails.pictureUrl !== null && userSessionDetails.pictureUrl !== "") {
-    // Show user image
-    return (
-      <img src={userSessionDetails.pictureUrl} alt=''></img>
-    )
-  } else {
-    return (
-      <PersonIcon fontSize='large' />
-    )
+
+  const pictureUrl = userSessionDetails.pictureUrl;
+
+  // If no picture URL or it's empty, show fallback immediately
+  if (!pictureUrl || pictureUrl === "") {
+    return <PersonIcon fontSize='large' />;
   }
+
+  // Check if this URL has previously failed to load (to prevent rate limiting)
+  if (imageCache.has(pictureUrl) && imageCache.get(pictureUrl) === 'failed') {
+    return <PersonIcon fontSize='large' />;
+  }
+
+  // Show user image with error fallback
+  return (
+    <>
+      <img
+        src={pictureUrl}
+        alt='User profile'
+        onLoad={(e) => {
+          // Mark as successfully loaded in cache
+          imageCache.set(pictureUrl, 'success');
+        }}
+        onError={(e) => {
+          // Cache this URL as failed to prevent future requests
+          imageCache.set(pictureUrl, 'failed');
+
+          // Hide the broken image and show the fallback icon
+          e.target.style.display = 'none';
+          const fallbackIcon = e.target.parentElement.querySelector('.fallback-icon');
+          if (fallbackIcon) {
+            fallbackIcon.style.display = 'block';
+          }
+        }}
+      />
+      <PersonIcon
+        fontSize='large'
+        className='fallback-icon'
+        style={{ display: 'none' }}
+      />
+    </>
+  );
 }

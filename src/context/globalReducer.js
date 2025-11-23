@@ -19,7 +19,7 @@ const getLocalStorageValue = (key) => {
 export const initialState = {
   userJWTCookie: getCookieValue("userJWT"), // Initialize with actual cookie value
   userSessionDetails: getLocalStorageValue("userSessionDetails"), // Initialize with actual localStorage value
-  activeBox: null, // null or { type: 'PROFILE' | 'CREATE_GRAPH' | 'UPDATE_GRAPH' | 'BILLING_LIMIT_ERROR' | 'UNKNOWN_ERROR', data: {...} }
+  activeBox: null, // null or { type: 'PROFILE' | 'CREATE_GRAPH' | 'UPDATE_GRAPH' | 'BILLING_LIMIT_ERROR' | 'UNKNOWN_ERROR' | 'CLIENT_ERROR', data: {...} }
   templateConnectedToIntegrationData: {},
   billingGraphCountData: null,
   billingPlan: null,
@@ -49,7 +49,8 @@ export const BOX_TYPES = {
   CREATE_GRAPH: "CREATE_GRAPH",
   UPDATE_GRAPH: "UPDATE_GRAPH",
   BILLING_LIMIT_ERROR: "BILLING_LIMIT_ERROR",
-  UNKNOWN_ERROR: "UNKNOWN_ERROR"
+  UNKNOWN_ERROR: "UNKNOWN_ERROR",
+  CLIENT_ERROR: "CLIENT_ERROR"
 }
 
 const globalReducer = (state, action) => {

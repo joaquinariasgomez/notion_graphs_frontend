@@ -167,6 +167,18 @@
   letter-spacing: 0.5px;
 }
 
+.profilebox__content .generalpanel .danger-zone__button-container {
+  position: relative;
+  display: inline-block;
+}
+
+.profilebox__content .generalpanel .danger-zone__button-container .info-tooltip__container {
+  position: absolute;
+  top: 0px;
+  right: -24px;
+  margin-left: 0;
+}
+
 .profilebox__content .walletconnectionpanel {
   display: flex;
   flex-direction: column;

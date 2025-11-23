@@ -85,6 +85,29 @@ export default function GeneralPanel({ onClose }) {
     navigate('/');
   };
 
+  // Info tooltip component
+  const InfoTooltip = ({ text }) => {
+    const [isVisible, setIsVisible] = useState(false);
+
+    return (
+      <div
+        className="info-tooltip__container"
+        onMouseEnter={() => setIsVisible(true)}
+        onMouseLeave={() => setIsVisible(false)}
+      >
+        <span className="info-tooltip__icon">
+          i
+        </span>
+        {isVisible && (
+          <div className="info-tooltip__popup">
+            {text}
+            <div className="info-tooltip__arrow"></div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <>
       <div className="generalpanel">
@@ -100,9 +123,12 @@ export default function GeneralPanel({ onClose }) {
           </button>
           <div className='danger-zone'>
             <p className='danger-zone__warning'>⚠️ Danger Zone</p>
-            <button className='profilebox__button delete' onClick={deleteUserAccount}>
-              Delete account
-            </button>
+            <div className="danger-zone__button-container">
+              <button className='profilebox__button delete' onClick={deleteUserAccount}>
+                Delete account
+              </button>
+              <InfoTooltip text="Deleting your account will permanently remove all your user data, charts, and settings." />
+            </div>
           </div>
         </div>
       </div>

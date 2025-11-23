@@ -27,8 +27,8 @@ apiClient.interceptors.response.use(
                     // This is a billing limit error
                     eventBus.dispatch('billingLimitError', responseData);
                 } else {
-                    // Generic client error
-                    eventBus.dispatch('clientError');
+                    // Generic client error - pass the response data
+                    eventBus.dispatch('clientError', responseData);
                 }
             } else if (error.response.status === 401) {
                 // Session expired or invalid credentials
