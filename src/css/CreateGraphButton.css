@@ -49,3 +49,31 @@
     transform: scale(1.1);
   }
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .creategraph__button {
+    width: 160px;
+    height: 45px;
+    border-radius: 12px;
+    border-width: 4px;
+  }
+
+  .creategraph__button__container>h2 {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .creategraph__button {
+    width: 140px;
+    height: 40px;
+    border-radius: 10px;
+    border-width: 3px;
+  }
+
+  .creategraph__button__container>h2 {
+    font-size: 14px;
+    margin-left: 3px;
+  }
+}

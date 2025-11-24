@@ -149,3 +149,28 @@
         max-width: 30px;
     }
 }
+
+@media (max-width: 480px) {
+    .skeleton-graphbox {
+        height: auto;
+        min-height: 300px;
+    }
+
+    .skeleton-graph-bars {
+        gap: 6px;
+        height: 150px;
+    }
+
+    .skeleton-bar {
+        max-width: 25px;
+    }
+
+    .skeleton-graphbox__header {
+        margin-bottom: 5px;
+    }
+
+    .skeleton-graphbox__button {
+        width: 26px;
+        height: 26px;
+    }
+}
