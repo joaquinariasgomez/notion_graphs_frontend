@@ -343,7 +343,7 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
                     Back
                 </button>
                 <button className='creategraphbox__button next create_graph' onClick={handleCreateGraph} disabled={false}>
-                    Create graph
+                    Create chart
                 </button>
             </div>
         </div>

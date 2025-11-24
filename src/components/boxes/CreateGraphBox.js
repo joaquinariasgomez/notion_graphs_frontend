@@ -204,7 +204,7 @@ export default function CreateGraphBox() {
             className='step1'
             onClick={() => handleSelectedRequestType('CUSTOM_GRAPH')}
           >
-            <p>Create a Custom Graph</p>
+            <p>Create a Custom Chart</p>
           </button>
           <button
             className='step1'

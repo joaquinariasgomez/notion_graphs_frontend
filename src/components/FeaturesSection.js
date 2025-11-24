@@ -7,7 +7,7 @@ function FeaturesSection() {
     {
       icon: <HiChartBar />,
       title: 'Multiple Chart Types',
-      description: 'Create beautiful bar charts, line graphs, burndown charts, and more. Visualize your financial data exactly how you want.'
+      description: 'Create beautiful bar charts, line charts, burndown charts, and more. Visualize your financial data exactly how you want.'
     },
     {
       icon: <HiLightningBolt />,
