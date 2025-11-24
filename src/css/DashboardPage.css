@@ -436,3 +436,142 @@ input:checked+.slider:before {
 .graphbox h4 {
   margin-top: 0;
 } */
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .dashboard__header {
+    height: 80px;
+    padding: 0px 20px;
+  }
+
+  .header__item+.header__item {
+    margin-left: 20px;
+  }
+
+  .dashboard__body {
+    padding: 0px 20px;
+    margin-bottom: 30px;
+  }
+
+  .graphsgrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .dashboard__integrationwarningcontainer {
+    padding: 12px 15px;
+    margin-bottom: 20px;
+  }
+
+  .dashboard__integrationwarningcontainer>p {
+    font-size: 14px;
+  }
+
+  .dashboard__graphs__loadmore {
+    margin-top: 20px;
+  }
+
+  .dashboard__graphs__loadmore>button {
+    padding: 0px 28px;
+  }
+
+  .dashboard__graphs__loadmore>button>p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard__header {
+    height: 80px;
+    padding: 0px 15px;
+  }
+
+  .header__item+.header__item {
+    margin-left: 15px;
+  }
+
+  .dashboard__body {
+    padding: 0px 15px;
+    margin-bottom: 20px;
+  }
+
+  .graphsgrid {
+    gap: 15px;
+  }
+
+  .graphbox {
+    height: auto;
+    min-height: 300px;
+  }
+
+  .dashboard__integrationwarningcontainer {
+    padding: 10px 12px;
+    margin-bottom: 15px;
+  }
+
+  .dashboard__integrationwarningcontainer>p {
+    font-size: 13px;
+  }
+
+  .dashboard__graphs__loadmore {
+    margin-top: 15px;
+  }
+
+  .dashboard__graphs__loadmore>button {
+    padding: 0px 24px;
+  }
+
+  .dashboard__graphs__loadmore>button>p {
+    font-size: 13px;
+  }
+
+  /* Adjust graphbox elements for very small screens */
+  .graphbox__header {
+    margin-bottom: 5px;
+  }
+
+  .graphbox__updatedAt {
+    margin-left: 5px;
+    margin-right: auto;
+  }
+
+  .graphbox__updatedAt>p {
+    font-size: 10px;
+  }
+
+  .graphbox__refresh,
+  .graphbox__more_settings,
+  .graphbox__updateconfig,
+  .graphbox__delete {
+    padding: 3px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .graphbox__drag-handle {
+    display: none;
+  }
+}
+
+/* Tablets and medium screens */
+@media (min-width: 481px) and (max-width: 768px) {
+  .graphsgrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Small tablets and large phones in landscape */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .dashboard__header {
+    padding: 0px 30px;
+  }
+
+  .dashboard__body {
+    padding: 0px 30px;
+  }
+
+  .graphsgrid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+}
