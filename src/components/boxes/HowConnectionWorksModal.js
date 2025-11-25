@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { FaChevronRight } from "react-icons/fa6";
 import { FaChevronLeft } from "react-icons/fa6";
 import '../../css/HowConnectionWorksModal.css';
@@ -19,7 +20,7 @@ export default function HowConnectionWorksModal({ onClose }) {
     }
   };
 
-  return (
+  const modalContent = (
     <div className="how-connection-works-modal__overlay" onClick={onClose}>
       <div className="how-connection-works-modal__content" onClick={(e) => e.stopPropagation()}>
         <button className="how-connection-works-modal__close" onClick={onClose}>
@@ -57,5 +58,7 @@ export default function HowConnectionWorksModal({ onClose }) {
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 }
 
