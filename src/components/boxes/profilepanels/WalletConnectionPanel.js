@@ -3,6 +3,7 @@ import { useGlobalStateValue } from "../../../context/GlobalStateProvider";
 import { refreshIntegrationConnection } from "../../../api/RequestUtils";
 import { actionTypes } from "../../../context/globalReducer";
 import { FaSyncAlt } from 'react-icons/fa';
+import HowConnectionWorksModal from "../HowConnectionWorksModal";
 
 export default function WalletConnectionPanel({ onClose }) {
 
@@ -12,6 +13,7 @@ export default function WalletConnectionPanel({ onClose }) {
   const [{ userJWTCookie, hasTemplateConnectedToIntegration, userSessionDetails }, dispatch] = useGlobalStateValue();
 
   const [isRefreshingIntegrationConnection, setIsRefreshingIntegrationConnection] = useState(false);
+  const [showHowConnectionWorksModal, setShowHowConnectionWorksModal] = useState(false);
 
   const renderConnectionStatusText = () => {
     if (hasTemplateConnectedToIntegration) {
@@ -92,10 +94,14 @@ export default function WalletConnectionPanel({ onClose }) {
           <img src={process.env.PUBLIC_URL + '/notion_logo.png'} alt=''></img>
           <span>Configure Notion integration</span>
         </button>
-        <button className="howtoconnect">
+        <button className="howtoconnect" onClick={() => setShowHowConnectionWorksModal(true)}>
           <span>How connection works</span>
         </button>
       </div>
+
+      {showHowConnectionWorksModal && (
+        <HowConnectionWorksModal onClose={() => setShowHowConnectionWorksModal(false)} />
+      )}
     </div>
   );
 }
