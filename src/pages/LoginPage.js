@@ -74,9 +74,9 @@ function LoginPage() {
       )}
       <div className="login-page">
         <div className="login-container">
-          <button className="back-button" onClick={handleBackToHome}>
+          {/* <button className="back-button" onClick={handleBackToHome}>
             ← Back to Home
-          </button>
+          </button> */}
 
           <div className="login-content">
             {isLoggingIn && (

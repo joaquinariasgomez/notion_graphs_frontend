@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: rgba(0, 0, 0, 0.7);
   padding: 20px;
   position: relative;
   overflow: hidden;
@@ -98,17 +98,14 @@
 .login-title {
   font-size: 2.5rem;
   font-weight: normal;
-  margin: 0 0 12px 0;
+  margin: 0;
   color: var(--text-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
   font-family: 'Oleo Script', cursive;
 }
 
 .login-title .wallet-part {
   font-weight: bold;
+  margin-left: 5px;
 }
 
 .login-subtitle {
@@ -149,11 +146,11 @@
   }
 
   .login-title {
-    font-size: 28px;
+    font-size: 2rem;
   }
 
   .login-subtitle {
-    font-size: 14px;
+    font-size: 1rem;
   }
 
   .login-logo {
@@ -178,14 +175,16 @@
   }
 
   .login-title {
-    font-size: 24px;
-    flex-direction: column;
-    gap: 4px;
+    font-size: 2rem;
+  }
+
+  .login-subtitle {
+    font-size: 1rem;
   }
 
   .login-logo {
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
     margin-bottom: 16px;
   }
 

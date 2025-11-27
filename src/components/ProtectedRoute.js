@@ -18,6 +18,7 @@ function ProtectedRoute({ children }) {
   useEffect(() => {
     // Check if user is authenticated
     if (!userJWTCookie || userJWTCookie === "") {
+      console.log("Not auth nigga");
       setShowLoginPopup(true);
     } else {
       setShowLoginPopup(false);
@@ -84,7 +85,7 @@ function ProtectedRoute({ children }) {
                   <span className="wallet-part">Wallet</span>
                 </h1>
                 <p className="protected-route-subtitle">
-                  Please sign in to access the dashboard
+                  Sign in to access the dashboard
                 </p>
               </div>
 

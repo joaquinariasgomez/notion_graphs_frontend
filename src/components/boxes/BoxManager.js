@@ -61,7 +61,6 @@ export default function BoxManager() {
   // Lock body scroll when any box is open
   useEffect(() => {
     const isAnyBoxOpen = activeBox != null;
-    console.log("DEBUG JOAQUIN: ", isAnyBoxOpen);
 
     if (isAnyBoxOpen) {
       // Lock scroll
