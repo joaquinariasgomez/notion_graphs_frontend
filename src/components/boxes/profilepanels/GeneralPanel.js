@@ -33,8 +33,9 @@ export default function GeneralPanel({ onClose }) {
       // Delete cookie and local storage
       deleteUserJWTCookie();
       deleteUserSessionDetailsValue();
-      closeBox();
-      handleBackToHome();
+      // Force a full page reload to home page
+      // This bypasses React Router and ProtectedRoute's redirect logic
+      window.location.href = '/';
     }
   }
 
@@ -49,10 +50,12 @@ export default function GeneralPanel({ onClose }) {
       if (apiResponse) {
         const canDeleteAccount = apiResponse.canDeleteAccount;
         if (canDeleteAccount) {
+          // Delete cookie and local storage
           deleteUserJWTCookie();
           deleteUserSessionDetailsValue();
-          closeBox();
-          handleBackToHome();
+          // Force a full page reload to home page
+          // This bypasses React Router and ProtectedRoute's redirect logic
+          window.location.href = '/';
         } else {
           // Show info modal explaining why account can't be deleted due to billing subscription
           setShowDeleteConfirmation(false);

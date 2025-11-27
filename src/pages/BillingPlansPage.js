@@ -20,7 +20,7 @@ function BillingPlansPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // fetchCurrentPlan();
+    fetchCurrentPlan();
   }, []);
 
   const fetchCurrentPlan = async () => {
