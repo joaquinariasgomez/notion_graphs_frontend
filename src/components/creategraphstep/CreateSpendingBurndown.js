@@ -330,7 +330,7 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
           Back
         </button>
         <button className='creategraphbox__button next create_graph' onClick={handleCreateGraph} disabled={expensesCategoriesLoading}>
-          Create graph
+          Create chart
         </button>
       </div>
     </div>

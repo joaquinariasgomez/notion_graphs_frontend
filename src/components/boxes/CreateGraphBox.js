@@ -203,7 +203,7 @@ export default function CreateGraphBox() {
             className='step1'
             onClick={() => handleSelectedRequestType('CUSTOM_GRAPH')}
           >
-            <p>Create a Custom Graph</p>
+            <p>Create a Custom Chart</p>
           </button>
           <button
             className='step1'
@@ -266,7 +266,7 @@ export default function CreateGraphBox() {
         <button className='creategraphbox__cancelbutton' onClick={closeBox}>
           <CloseRoundedIcon fontSize='medium' />
         </button>
-        <h1>New Graph</h1>
+        <h1>New Chart</h1>
         {step === 1 && renderCreateGraphStep1Buttons()}
         {step > 1 && renderEditCustomTitleBox()}
         {step === 2 && renderNextScreen()}

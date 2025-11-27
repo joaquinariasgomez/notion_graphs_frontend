@@ -12,6 +12,7 @@ import {
     rectSortingStrategy,
 } from "@dnd-kit/sortable";
 import GraphBox from "./GraphBox";
+import SkeletonGraphBox from "./SkeletonGraphBox";
 import { actionTypes } from "../context/globalReducer";
 
 export default function DashboardGraphs({ }) {
@@ -76,7 +77,7 @@ export default function DashboardGraphs({ }) {
     }
 
     const renderLoadMoreGraphsButton = () => {
-        if (hasNextPage) {
+        if (hasNextPage && !moreGraphsLoading) {
             return (
                 <div className='dashboard__graphs__loadmore'>
                     <button onClick={loadMoreGraphs}>
@@ -121,6 +122,19 @@ export default function DashboardGraphs({ }) {
 
     const grabbedGraph = grabbedGraphConfigId ? graphs.find(g => g.graphConfiguration.id === grabbedGraphConfigId) : null;
 
+    // Render skeleton loading state
+    if (graphsLoading) {
+        return (
+            <div className="dashboard__graphs">
+                <div className="graphsgrid">
+                    {[...Array(6)].map((_, index) => (
+                        <SkeletonGraphBox key={`skeleton-${index}`} />
+                    ))}
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="dashboard__graphs">
             <DndContext
@@ -137,6 +151,13 @@ export default function DashboardGraphs({ }) {
                             <GraphBox key={graph.graphConfiguration.id} graph={graph} />
                         ))}
                     </SortableContext>
+                    {moreGraphsLoading && (
+                        <>
+                            {[...Array(3)].map((_, index) => (
+                                <SkeletonGraphBox key={`skeleton-more-${index}`} />
+                            ))}
+                        </>
+                    )}
                     {renderLoadMoreGraphsButton()}
                 </div>
                 <DragOverlay>

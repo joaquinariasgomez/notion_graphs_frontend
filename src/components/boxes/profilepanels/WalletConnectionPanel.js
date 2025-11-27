@@ -4,6 +4,8 @@ import { refreshIntegrationConnection, unlinkIntegrationConnection } from "../..
 import { actionTypes } from "../../../context/globalReducer";
 import { FaSyncAlt, FaTrashAlt } from 'react-icons/fa';
 import PersonIcon from '@mui/icons-material/Person';
+import { FaSyncAlt } from 'react-icons/fa';
+import HowConnectionWorksModal from "../HowConnectionWorksModal";
 
 export default function WalletConnectionPanel({ onClose }) {
 
@@ -14,6 +16,7 @@ export default function WalletConnectionPanel({ onClose }) {
 
   const [isRefreshingIntegrationConnection, setIsRefreshingIntegrationConnection] = useState(false);
   const [isUnlinkingIntegrationConnection, setIsUnlinkingIntegrationConnection] = useState(false);
+  const [showHowConnectionWorksModal, setShowHowConnectionWorksModal] = useState(false);
 
   const renderConnectionStatusText = () => {
     if (templateConnectedToIntegrationData?.hasTemplateConnectedToIntegration) {
@@ -149,10 +152,14 @@ export default function WalletConnectionPanel({ onClose }) {
           <img src={process.env.PUBLIC_URL + '/notion_logo.png'} alt=''></img>
           {renderConfigureNotionIntegrationText()}
         </button>
-        <button className="howtoconnect">
+        <button className="howtoconnect" onClick={() => setShowHowConnectionWorksModal(true)}>
           <span>How connection works</span>
         </button>
       </div>
+
+      {showHowConnectionWorksModal && (
+        <HowConnectionWorksModal onClose={() => setShowHowConnectionWorksModal(false)} />
+      )}
     </div>
   );
 }

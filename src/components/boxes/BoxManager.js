@@ -58,6 +58,24 @@ export default function BoxManager() {
   const handleCloseBox = () => {
     dispatch({ type: actionTypes.CLOSE_ACTIVE_BOX });
   };
+  // Lock body scroll when any box is open
+  useEffect(() => {
+    const isAnyBoxOpen = activeBox != null;
+    console.log("DEBUG JOAQUIN: ", isAnyBoxOpen);
+
+    if (isAnyBoxOpen) {
+      // Lock scroll
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Restore scroll
+      document.body.style.overflow = '';
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [activeBox]);
 
   const renderBox = () => {
     if (!activeBox) return null;
