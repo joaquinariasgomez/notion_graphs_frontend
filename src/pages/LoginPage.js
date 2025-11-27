@@ -77,15 +77,14 @@ function LoginPage() {
           {/* <button className="back-button" onClick={handleBackToHome}>
             ← Back to Home
           </button> */}
+          {isLoggingIn && (
+            <div className="login-loading-overlay">
+              <div className="login-spinner"></div>
+              <p className="login-loading-text">Logging in...</p>
+            </div>
+          )}
 
-          <div className="login-content">
-            {isLoggingIn && (
-              <div className="login-loading-overlay">
-                <div className="login-spinner"></div>
-                <p className="login-loading-text">Logging in...</p>
-              </div>
-            )}
-
+          <div className='login-content'>
             <div className="login-header">
               <img
                 src={process.env.PUBLIC_URL + '/NotionWallet_icon.png'}
@@ -110,13 +109,19 @@ function LoginPage() {
                   shape="rectangular"
                   disabled={isLoggingIn}
                 />
-              </div>
-            </div>
 
-            <div className="login-footer">
+              </div>
               <p className="login-footer-text">
                 By signing in, you agree to our Terms of Service and Privacy Policy
               </p>
+            </div>
+            <div className="login-footer">
+              <button
+                className="login-footer-back-button"
+                onClick={handleBackToHome}
+              >
+                ← Back to Home
+              </button>
             </div>
           </div>
         </div>
