@@ -29,7 +29,7 @@ function BillingPlansPage() {
       const response = await getBillingPlan(userJWTCookie);
       setCurrentPlan(response.plan);
     } catch (error) {
-      console.error('Error fetching billing plan:', error);
+
     } finally {
       setIsLoading(false);
     }
@@ -58,14 +58,8 @@ function BillingPlansPage() {
   };
 
   const handleBackToDashboard = () => {
-    // Set the active box to Profile with billing panel before navigating
-    dispatch({
-      type: actionTypes.SET_ACTIVE_BOX,
-      value: {
-        type: BOX_TYPES.PROFILE,
-        data: { panel: 'billing' }
-      }
-    });
+    // Close any active boxes and back to dashboard
+    dispatch({ type: actionTypes.CLOSE_ACTIVE_BOX });
     navigate('/dashboard');
   };
 

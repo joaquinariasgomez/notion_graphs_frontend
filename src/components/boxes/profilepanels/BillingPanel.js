@@ -230,58 +230,31 @@ export default function BillingPanel({ onClose }) {
           </button>
         </div>
         <div className="billingpanel__gauges-container">
-          {isLoadingGraphCount ? (
+          {billingGraphCountData ? (
             <>
               <SemicircularGauge
                 label="Chart creations"
-                tooltipText="The total amount of charts that you can create since registering your account"
-                current={0}
-                max={100}
-                color="#4CAF50"
-                isLoading={true}
-              />
-              <SemicircularGauge
-                label="Charts in dashboard"
-                tooltipText="The total amount of charts that you can have in your dashboard"
-                current={0}
-                max={100}
-                color="#2196F3"
-                isLoading={true}
-              />
-              <SemicircularGauge
-                label="Chart updates"
-                tooltipText="The total amount of charts that you can update since registering your account"
-                current={0}
-                max={100}
-                color="#FF9800"
-                isLoading={true}
-              />
-            </>
-          ) : billingGraphCountData ? (
-            <>
-              <SemicircularGauge
-                label="Chart creations"
-                tooltipText="The total amount of charts that you can create since registering your account"
+                tooltipText="The total amount of charts that you successfully created since registering your account"
                 current={billingGraphCountData.currentCount || 0}
-                max={billingGraphCountData.maxCount || 0}
+                max={billingGraphCountData.maxCount || 100}
                 color="#4CAF50"
-                isLoading={false}
+                isLoading={isLoadingGraphCount}
               />
               <SemicircularGauge
                 label="Charts in dashboard"
-                tooltipText="The total amount of charts that you can have in your dashboard"
+                tooltipText="The total amount of charts that you have in your dashboard"
                 current={billingGraphCountData.currentGraphList || 0}
-                max={billingGraphCountData.maxGraphList || 0}
+                max={billingGraphCountData.maxGraphList || 100}
                 color="#2196F3"
-                isLoading={false}
+                isLoading={isLoadingGraphCount}
               />
               <SemicircularGauge
                 label="Chart updates"
-                tooltipText="The total amount of charts that you can update since registering your account"
+                tooltipText="The total amount of charts that you successfully updated since registering your account"
                 current={billingGraphCountData.currentRefreshCount || 0}
-                max={billingGraphCountData.maxRefreshCount || 0}
+                max={billingGraphCountData.maxRefreshCount || 100}
                 color="#FF9800"
-                isLoading={false}
+                isLoading={isLoadingGraphCount}
               />
             </>
           ) : (

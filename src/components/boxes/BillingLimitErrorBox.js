@@ -25,31 +25,31 @@ function BillingLimitErrorBox({ onClose, limitType }) {
         switch (limitType) {
             case 'MAXIMUM_GRAPH_COUNT':
                 return {
-                    title: 'Graph Limit Reached',
-                    description: 'You\'ve reached the maximum number of graphs allowed for your current plan.',
+                    title: 'Chart creations limit reached',
+                    description: 'You\'ve created the maximum number of charts allowed for your current plan.',
                     icon: '📊'
                 };
             case 'MAXIMUM_GRAPH_LIST':
                 return {
-                    title: 'Graph List Limit Reached',
-                    description: 'You\'ve reached the maximum number of graphs you can have in your list for your current plan.',
-                    icon: '📋'
+                    title: 'Charts in dashboard limit reached',
+                    description: 'You\'ve reached the maximum number of charts you can have in your dashboard for your current plan.',
+                    icon: '📊'
                 };
             case 'MAXIMUM_GRAPH_REFRESH_COUNT':
                 return {
-                    title: 'Refresh Limit Reached',
-                    description: 'You\'ve reached the maximum number of graph refreshes allowed for your current plan this billing period.',
+                    title: 'Chart updates limit reached',
+                    description: 'You\'ve reached the maximum number of chart refreshes allowed for your current plan this billing period.',
                     icon: '🔄'
                 };
             case 'BURNDOWN_GRAPH_NOT_ALLOWED':
                 return {
-                    title: 'Burndown Charts Not Allowed',
+                    title: 'Burndown charts not allowed',
                     description: 'In order to create burndown charts, you must upgrade your subscription to Notion Wallet Plus.',
                     icon: '🔥'
                 };
             default:
                 return {
-                    title: 'Billing Limit Reached',
+                    title: 'Billing limit reached',
                     description: 'You\'ve reached a billing limit for your current plan.',
                     icon: '⚠️'
                 };
@@ -71,12 +71,12 @@ function BillingLimitErrorBox({ onClose, limitType }) {
                         {limitInfo.description}
                     </p>
                     <p className="billinglimiterrorbox__upgrade-message">
-                        Upgrade your plan to get:
+                        Upgrade to Notion Wallet Plus to get:
                     </p>
                     <ul className="billinglimiterrorbox__benefits">
-                        <li>More graphs and refreshes</li>
-                        <li>Advanced analytics features</li>
-                        <li>Priority support</li>
+                        <li>📊 Unlimited chart creations and updates</li>
+                        <li>🔥 Burndown charts</li>
+                        <li>✉️ Priority email support</li>
                     </ul>
                 </div>
 
