@@ -63,47 +63,48 @@ function BillingPlansPage() {
     navigate('/dashboard');
   };
 
+  // TODO JOAQUIN: spceify that the monthly plan has a free trial.
+  // TODO JOAQUIN: specify the above in the billing plans and other screens.
+
   const plans = [
     {
-      name: 'Notion Wallet',
+      name: 'Notion Wallet Free',
       billingPlan: BillingPlan.FREE,
       price: '0',
       period: 'forever',
       description: 'Perfect for getting started with basic financial tracking',
       features: [
-        { text: 'Up to 3 charts', included: true },
-        { text: 'Bar & Line charts', included: true },
-        { text: 'Basic customization', included: true },
-        { text: 'Notion sync', included: true },
-        { text: 'Unlimited charts', included: false },
-        { text: 'Burndown charts', included: false },
-        { text: 'Multi-bar & Multi-line charts', included: false },
-        { text: 'Advanced customization', included: false },
-        { text: 'Priority support', included: false },
+        { text: 'Up to 3 charts in your dashboard' },
+        { text: 'Bar & Line charts' },
+        { text: 'Basic customization' },
+        { text: 'Notion sync' },
+        { text: 'Unlimited charts', },
+        { text: 'Burndown charts', },
+        { text: 'Multi-bar & Multi-line charts', },
+        { text: 'Advanced customization', },
+        { text: 'Priority support', },
       ],
-      cta: 'Current Plan',
-      popular: false,
+      cta: 'Current Plan'
     },
     {
       name: 'Notion Wallet Plus',
       billingPlan: BillingPlan.PLUS,
-      price: billingCycle === 'monthly' ? '4.99' : '49.99',
+      price: billingCycle === 'monthly' ? '4.99' : '49.90',
       period: billingCycle === 'monthly' ? 'month' : 'year',
       description: 'For serious financial tracking with unlimited possibilities',
       features: [
-        { text: 'Up to 3 charts', included: true },
-        { text: 'Bar & Line charts', included: true },
-        { text: 'Basic customization', included: true },
-        { text: 'Notion sync', included: true },
-        { text: 'Unlimited charts', included: true },
-        { text: 'Burndown charts', included: true },
-        { text: 'Multi-bar & Multi-line charts', included: true },
-        { text: 'Advanced customization', included: true },
-        { text: 'Priority email support', included: true },
+        { text: 'Up to 3 charts' },
+        { text: 'Bar & Line charts' },
+        { text: 'Basic customization' },
+        { text: 'Notion sync' },
+        { text: 'Unlimited charts' },
+        { text: 'Burndown charts' },
+        { text: 'Multi-bar & Multi-line charts' },
+        { text: 'Advanced customization' },
+        { text: 'Priority email support' },
       ],
       cta: 'Upgrade to Plus',
-      popular: true,
-      savings: billingCycle === 'yearly' ? 'Save €9.89/year' : null,
+      savings: billingCycle === 'yearly' ? 'Save €9.98 / year' : null,
     },
   ];
 
