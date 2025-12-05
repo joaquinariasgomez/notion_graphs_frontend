@@ -13,16 +13,19 @@ function DashboardPage() {
   // Context
   const [{ userJWTCookie, templateConnectedToIntegrationData, billingGraphCountData, billingPlan }, dispatch] = useGlobalStateValue();
 
+  const [integrationConnectionLoading, setIntegrationConnectionLoading] = useState(true);
+
   useEffect(() => {
     fetchIntegrationConnection();
     fetchBillingGraphCount();
     fetchBillingPlan();
   }, []);
 
-  // TODO JOAQUIN: maybe show a warning if your billing resources are getting full
+  // TODO JOAQUIN: show a warning if your billing resources are getting full
 
   const fetchIntegrationConnection = async () => {
     try {
+      setIntegrationConnectionLoading(true);
       const apiResponse = await checkIntegrationConnection(userJWTCookie);
       if (apiResponse) {
         dispatch({
@@ -33,7 +36,7 @@ function DashboardPage() {
     } catch (error) {
 
     } finally {
-
+      setIntegrationConnectionLoading(false);
     }
   }
 
@@ -106,7 +109,8 @@ function DashboardPage() {
         <UserCicleButton />
       </div>
       <div className='dashboard__body'>
-        {!templateConnectedToIntegrationData?.hasTemplateConnectedToIntegration && renderNotConnectedToIntegrationWarning()}
+        {!integrationConnectionLoading && !templateConnectedToIntegrationData?.hasTemplateConnectedToIntegration && renderNotConnectedToIntegrationWarning()}
+        {/* {graphs.length === 0 && renderCreateYourFirstGraphPicture()} */}
         <DashboardGraphs />
       </div>
     </div>

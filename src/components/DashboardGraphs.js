@@ -20,7 +20,7 @@ export default function DashboardGraphs({ }) {
     // Context
     const [{ userJWTCookie, graphs }, dispatch] = useGlobalStateValue();
 
-    const [graphsLoading, setGraphsLoading] = useState(false);
+    const [graphsLoading, setGraphsLoading] = useState(true);
     const [moreGraphsLoading, setMoreGraphsLoading] = useState(false);
     const [grabbedGraphConfigId, setGrabbedGraphConfigId] = useState(null);
     const [hasNextPage, setHasNextPage] = useState(false);
@@ -120,6 +120,16 @@ export default function DashboardGraphs({ }) {
         setGrabbedGraphConfigId(null);
     };
 
+    const renderCreateYourFirstGraphPicture = () => {
+        return (
+            <img
+                src={process.env.PUBLIC_URL + '/create_your_first_chart.png'}
+                alt=""
+                className="create-your-first-chart"
+            />
+        );
+    }
+
     const grabbedGraph = grabbedGraphConfigId ? graphs.find(g => g.graphConfiguration.id === grabbedGraphConfigId) : null;
 
     // Render skeleton loading state
@@ -137,6 +147,7 @@ export default function DashboardGraphs({ }) {
 
     return (
         <div className="dashboard__graphs">
+            {!graphsLoading && graphs.length === 0 && renderCreateYourFirstGraphPicture()}
             <DndContext
                 collisionDetection={closestCenter}
                 onDragStart={handleDragStart}

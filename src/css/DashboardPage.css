@@ -44,6 +44,14 @@
   /* border: 1px solid red; */
 }
 
+.create-your-first-chart {
+  display: block;
+  margin-left: auto;
+  margin-right: 200px;
+  max-width: 500px;
+  height: auto;
+}
+
 .dashboard__integrationwarningcontainer {
   width: 100%;
   border-width: 1px;
@@ -514,6 +522,12 @@ input:checked+.slider:before {
 
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
+  .create-your-first-chart {
+    margin-right: 140px;
+    max-width: 400px;
+    height: auto;
+  }
+
   .dashboard__header {
     height: 80px;
     padding: 0px 20px;
@@ -552,6 +566,14 @@ input:checked+.slider:before {
 
   .dashboard__graphs__loadmore>button>p {
     font-size: 14px;
+  }
+}
+
+@media (max-width: 570px) {
+  .create-your-first-chart {
+    margin-right: 120px;
+    max-width: 250px;
+    height: auto;
   }
 }
 

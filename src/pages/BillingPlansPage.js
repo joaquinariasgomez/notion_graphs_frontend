@@ -74,17 +74,12 @@ function BillingPlansPage() {
       period: 'forever',
       description: 'Perfect for getting started with basic financial tracking',
       features: [
-        { text: 'Up to 3 charts in your dashboard' },
-        { text: 'Bar & Line charts' },
-        { text: 'Basic customization' },
-        { text: 'Notion sync' },
-        { text: 'Unlimited charts', },
-        { text: 'Burndown charts', },
-        { text: 'Multi-bar & Multi-line charts', },
-        { text: 'Advanced customization', },
-        { text: 'Priority support', },
-      ],
-      cta: 'Current Plan'
+        { text: '📊\u00A0\u00A0Up to 3 charts in your dashboard' },
+        { text: '📊\u00A0\u00A0Up to 20 chart creations' },
+        { text: '🔄\u00A0\u00A0Up to 50 chart updates' },
+        { text: '📈\u00A0\u00A0Show statistics (average, standard deviation) in your charts' },
+        { text: '⚙️\u00A0\u00A0Advanced chart customization' }
+      ]
     },
     {
       name: 'Notion Wallet Plus',
@@ -93,15 +88,14 @@ function BillingPlansPage() {
       period: billingCycle === 'monthly' ? 'month' : 'year',
       description: 'For serious financial tracking with unlimited possibilities',
       features: [
-        { text: 'Up to 3 charts' },
-        { text: 'Bar & Line charts' },
-        { text: 'Basic customization' },
-        { text: 'Notion sync' },
-        { text: 'Unlimited charts' },
-        { text: 'Burndown charts' },
-        { text: 'Multi-bar & Multi-line charts' },
-        { text: 'Advanced customization' },
-        { text: 'Priority email support' },
+        { text: '📊\u00A0\u00A0Up to 50 charts in your dashboard' },
+        { text: '📊\u00A0\u00A0Unlimited chart creations' },
+        { text: '🔄\u00A0\u00A0Unlimited chart updates' },
+        { text: '📈\u00A0\u00A0Show statistics (average, standard deviation) in your charts' },
+        { text: '⚙️\u00A0\u00A0Advanced chart customization' },
+        { text: '🔥\u00A0\u00A0Burndown charts' },
+        { text: '✉️\u00A0\u00A0Priority email support' },
+        // TODO JOAQUIN: add Coming soon section
       ],
       cta: 'Upgrade to Plus',
       savings: billingCycle === 'yearly' ? 'Save €9.98 / year' : null,
