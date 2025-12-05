@@ -110,7 +110,6 @@ function DashboardPage() {
       </div>
       <div className='dashboard__body'>
         {!integrationConnectionLoading && !templateConnectedToIntegrationData?.hasTemplateConnectedToIntegration && renderNotConnectedToIntegrationWarning()}
-        {/* {graphs.length === 0 && renderCreateYourFirstGraphPicture()} */}
         <DashboardGraphs />
       </div>
     </div>

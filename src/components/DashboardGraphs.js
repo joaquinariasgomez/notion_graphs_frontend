@@ -130,6 +130,16 @@ export default function DashboardGraphs({ }) {
         );
     }
 
+    const renderYourSettingsAreHerePicture = () => {
+        return (
+            <img
+                src={process.env.PUBLIC_URL + '/your_settings_are_here.png'}
+                alt=""
+                className="your-settings-are-here"
+            />
+        );
+    }
+
     const grabbedGraph = grabbedGraphConfigId ? graphs.find(g => g.graphConfiguration.id === grabbedGraphConfigId) : null;
 
     // Render skeleton loading state
@@ -147,7 +157,12 @@ export default function DashboardGraphs({ }) {
 
     return (
         <div className="dashboard__graphs">
-            {!graphsLoading && graphs.length === 0 && renderCreateYourFirstGraphPicture()}
+            {!graphsLoading && graphs.length === 0 && (
+                <div className="empty-state-images">
+                    {renderCreateYourFirstGraphPicture()}
+                    {renderYourSettingsAreHerePicture()}
+                </div>
+            )}
             <DndContext
                 collisionDetection={closestCenter}
                 onDragStart={handleDragStart}
