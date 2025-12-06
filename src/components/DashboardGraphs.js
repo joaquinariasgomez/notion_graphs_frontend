@@ -122,11 +122,17 @@ export default function DashboardGraphs({ }) {
 
     const renderCreateYourFirstGraphPicture = () => {
         return (
-            <img
-                src={process.env.PUBLIC_URL + '/create_your_first_chart.png'}
-                alt=""
-                className="create-your-first-chart"
-            />
+            <picture>
+                <source
+                    media="(max-width: 570px)"
+                    srcSet={process.env.PUBLIC_URL + '/create_your_first_chart_short.png'}
+                />
+                <img
+                    src={process.env.PUBLIC_URL + '/create_your_first_chart.png'}
+                    alt=""
+                    className="create-your-first-chart"
+                />
+            </picture>
         );
     }
 

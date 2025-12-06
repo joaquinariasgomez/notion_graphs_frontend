@@ -26,7 +26,7 @@
 }
 
 .header__item+.header__item {
-  margin-left: 50px;
+  margin-left: 40px;
 }
 
 .dashboard__body {
@@ -49,7 +49,7 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  padding-right: 200px;
+  padding-right: 330px;
 }
 
 .create-your-first-chart {
@@ -536,7 +536,7 @@ input:checked+.slider:before {
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
   .empty-state-images {
-    padding-right: 140px;
+    padding-right: 240px;
   }
 
   .create-your-first-chart {
@@ -590,11 +590,11 @@ input:checked+.slider:before {
 
 @media (max-width: 570px) {
   .empty-state-images {
-    padding-right: 120px;
+    padding-right: 170px;
   }
 
   .create-your-first-chart {
-    max-width: 250px;
+    max-width: 200px;
   }
 
   .your-settings-are-here {

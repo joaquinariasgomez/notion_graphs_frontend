@@ -7,6 +7,7 @@ import '../css/DashboardPage.css';
 import { checkIntegrationConnection, getBillingGraphCount, getBillingPlan } from '../api/RequestUtils';
 import { useGlobalStateValue } from '../context/GlobalStateProvider';
 import { actionTypes, BOX_TYPES } from '../context/globalReducer';
+import GetPlusButton from '../components/GetPlusButton';
 
 function DashboardPage() {
 
@@ -106,6 +107,7 @@ function DashboardPage() {
       <BoxManager />
       <div className="dashboard__header">
         <CreateGraphButton />
+        <GetPlusButton billingPlan={billingPlan} />
         <UserCicleButton />
       </div>
       <div className='dashboard__body'>
