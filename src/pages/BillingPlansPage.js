@@ -63,43 +63,42 @@ function BillingPlansPage() {
     navigate('/dashboard');
   };
 
-  // TODO JOAQUIN: spceify that the monthly plan has a free trial.
-  // TODO JOAQUIN: specify the above in the billing plans and other screens.
-
   const plans = [
     {
       name: 'Notion Wallet Free',
       billingPlan: BillingPlan.FREE,
       price: '0',
-      period: 'forever',
-      description: 'Perfect for getting started with basic financial tracking',
+      period: 'month',
       features: [
         { text: '📊\u00A0\u00A0Up to 3 charts in your dashboard' },
         { text: '📊\u00A0\u00A0Up to 20 chart creations' },
         { text: '🔄\u00A0\u00A0Up to 50 chart updates' },
         { text: '📈\u00A0\u00A0Show statistics (average, standard deviation) in your charts' },
         { text: '⚙️\u00A0\u00A0Advanced chart customization' }
-      ]
+      ],
+      isSuggested: false,
+      cta: 'Basic plan',
     },
     {
       name: 'Notion Wallet Plus',
       billingPlan: BillingPlan.PLUS,
       price: billingCycle === 'monthly' ? '4.99' : '49.90',
       period: billingCycle === 'monthly' ? 'month' : 'year',
-      description: 'For serious financial tracking with unlimited possibilities',
       features: [
-        { text: '📊\u00A0\u00A0Up to 50 charts in your dashboard' },
-        { text: '📊\u00A0\u00A0Unlimited chart creations' },
-        { text: '🔄\u00A0\u00A0Unlimited chart updates' },
+        { text: '📊\u00A0\u00A0<i>Up to 50</i> charts in your dashboard' },
+        { text: '📊\u00A0\u00A0<i>Unlimited</i> chart creations' },
+        { text: '🔄\u00A0\u00A0<i>Unlimited</i> chart updates' },
         { text: '📈\u00A0\u00A0Show statistics (average, standard deviation) in your charts' },
         { text: '⚙️\u00A0\u00A0Advanced chart customization' },
         { text: '🔥\u00A0\u00A0Burndown charts' },
         { text: '✉️\u00A0\u00A0Priority email support' },
         // TODO JOAQUIN: add Coming soon section
       ],
+      isSuggested: true,
       cta: 'Upgrade to Plus',
       savings: billingCycle === 'yearly' ? 'Save €9.98 / year' : null,
-    },
+      trialInfo: '7-day free trial · Cancel anytime',
+    }
   ];
 
   if (isLoading) {
@@ -132,7 +131,7 @@ function BillingPlansPage() {
 
         <div className="pricing-header">
           <h2>Upgrade Your Plan</h2>
-          <p>Choose the plan that fits your needs. Upgrade anytime to unlock more features.</p>
+          <p>Choose the plan that fits your needs. Upgrade or cancel your plan anytime.</p>
         </div>
 
         <div className="billing-toggle">
@@ -157,11 +156,10 @@ function BillingPlansPage() {
 
             return (
               <div
-                className={`pricing-card ${plan.popular ? 'popular' : ''} ${isCurrentPlan ? 'current-plan' : ''}`}
+                className={`pricing-card ${plan.isSuggested ? 'suggested-plan' : ''}`}
                 key={index}
               >
-                {plan.popular && <div className="popular-badge">Recommended</div>}
-                {isCurrentPlan && <div className="current-plan-badge">Current Plan</div>}
+                {plan.isSuggested && <div className="suggested-plan-badge">Suggested</div>}
 
                 <div className="pricing-card-header">
                   <h3>{plan.name}</h3>
@@ -171,32 +169,23 @@ function BillingPlansPage() {
                     <span className="period">/{plan.period}</span>
                   </div>
                   {plan.savings && <div className="savings-text">{plan.savings}</div>}
-                  <p className="plan-description">{plan.description}</p>
                 </div>
 
-                {/* Only show button for non-Free plans */}
-                {plan.billingPlan !== BillingPlan.FREE && (
-                  <button
-                    className={`cta-button ${plan.popular ? 'primary' : 'secondary'}`}
-                    onClick={isCurrentPlan ? undefined : handleUpgrade}
-                    disabled={isCurrentPlan || isCreatingStripeCheckoutPage}
-                    style={{
-                      opacity: isCurrentPlan ? 0.6 : 1,
-                      cursor: isCurrentPlan ? 'not-allowed' : 'pointer',
-                      marginBottom: '24px'
-                    }}
-                  >
-                    {isCreatingStripeCheckoutPage && !isCurrentPlan ? 'Processing...' : plan.cta}
-                  </button>
+                <button
+                  className={`cta-button primary ${isCurrentPlan ? 'current-plan' : ''}`}
+                  onClick={isCurrentPlan ? undefined : handleUpgrade}
+                  disabled={isCurrentPlan || isCreatingStripeCheckoutPage || plan.billingPlan === BillingPlan.FREE}
+                >
+                  {isCreatingStripeCheckoutPage && !isCurrentPlan ? 'Processing...' : (isCurrentPlan ? 'Your current plan' : plan.cta)}
+                </button>
+                {plan.trialInfo && !isCurrentPlan && (
+                  <p className="trial-info">{plan.trialInfo}</p>
                 )}
 
                 <ul className="features-list">
                   {plan.features.map((feature, idx) => (
-                    <li key={idx} className={feature.included ? 'included' : 'not-included'}>
-                      <span className="feature-icon">
-                        {feature.included ? <HiCheck /> : <HiX />}
-                      </span>
-                      <span>{feature.text}</span>
+                    <li key={idx}>
+                      <span dangerouslySetInnerHTML={{ __html: feature.text }} />
                     </li>
                   ))}
                 </ul>

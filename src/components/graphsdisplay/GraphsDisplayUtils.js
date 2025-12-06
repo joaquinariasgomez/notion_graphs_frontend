@@ -134,12 +134,10 @@ export function addStandardDeviationToAnnotations(annotations, graphConfiguratio
     borderWidth: 3,
     label: {
       display: true,
-      backgroundColor: 'rgba(102, 102, 102, 0.5)',
-      color: 'black',
+      backgroundColor: 'rgba(102, 102, 102, 0.75)',
+      color: 'white',
       content: (averageValue + standardDeviationValue).toFixed(2),
-      position: 'start',
-      // rotation: -90,
-      yAdjust: -28
+      position: 'start'
     },
     scaleID: 'y',
     value: averageValue + standardDeviationValue
@@ -152,12 +150,10 @@ export function addStandardDeviationToAnnotations(annotations, graphConfiguratio
     borderWidth: 3,
     label: {
       display: true,
-      backgroundColor: 'rgba(102, 102, 102, 0.5)',
-      color: 'black',
+      backgroundColor: 'rgba(102, 102, 102, 0.75)',
+      color: 'white',
       content: (averageValue - standardDeviationValue).toFixed(2),
-      position: 'end',
-      // rotation: 90,
-      yAdjust: 28
+      position: 'end'
     },
     scaleID: 'y',
     value: averageValue - standardDeviationValue

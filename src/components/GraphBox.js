@@ -122,6 +122,17 @@ export default function GraphBox({ graph }) {
         return graph.graphConfiguration.requestType === 'BURNDOWN';
     }
 
+    const renderMoreOptionsButton = (graph) => {
+        if (!isBurndownGraph(graph)) {
+            return (
+                <button ref={moreSettingsButtonRef} className="graphbox__more_settings" title="Options" onClick={handleClickShowMoreOptions} >
+                    <MoreHorizIcon style={{ color: '#6d6d6d' }} fontSize="small" />
+                    {renderMoreOptionsMenu()}
+                </button>
+            );
+        }
+    }
+
     const renderUpdateConfigButton = (graph) => {
         if (!isBurndownGraph(graph)) {
             return (
@@ -261,10 +272,7 @@ export default function GraphBox({ graph }) {
                 <button className="graphbox__refresh" title="Refresh graph" onClick={() => handleRefreshGraph(graph)} disabled={isRefreshing}>
                     <FaSyncAlt className={`graph-refresh-button__icon ${isRefreshing ? 'spinning' : ''}`} />
                 </button>
-                <button ref={moreSettingsButtonRef} className="graphbox__more_settings" title="Options" onClick={handleClickShowMoreOptions} >
-                    <MoreHorizIcon style={{ color: '#6d6d6d' }} fontSize="small" />
-                    {renderMoreOptionsMenu()}
-                </button>
+                {renderMoreOptionsButton(graph)}
                 {renderUpdateConfigButton(graph)}
                 <button className="graphbox__delete" title="Delete" onClick={() => handleDeleteGraph(graph)}>
                     <DeleteIcon style={{ color: '#f14668' }} fontSize="small" />
