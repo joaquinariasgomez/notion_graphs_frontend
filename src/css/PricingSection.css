@@ -1,11 +1,13 @@
 .pricing-section {
   width: 100%;
   padding: 60px 16px;
-  background-color: var(--background-color);
+  background-color: transparent;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .pricing-container {
@@ -116,7 +118,6 @@
   flex-direction: column;
   transition: all 0.3s ease;
   position: relative;
-  z-index: 10;
 }
 
 .pricing-card.suggested-plan {

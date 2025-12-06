@@ -7,7 +7,6 @@ import LandingPageHeader from '../components/LandingPageHeader';
 import LandingPageCarrousel from '../components/LandingPageCarrousel';
 import GraphDisplayer from '../components/graphsdisplay/GraphDisplayer';
 import mockCharts from '../components/LandingPageCarrouselCharts.json';
-import FloatingBackgroundImages from '../components/FloatingBackgroundImages';
 import FeaturesSection from '../components/FeaturesSection';
 import PricingSection from '../components/PricingSection';
 import { useGlobalStateValue } from '../context/GlobalStateProvider';
@@ -90,8 +89,8 @@ function LandingPage() {
 
   return (
     <div className='landingpage__base'>
+      <div className='grid-background' />
       <div className='landingpage__container'>
-        <FloatingBackgroundImages />
         <LandingPageHeader />
         <main>
           <div className='title'>
