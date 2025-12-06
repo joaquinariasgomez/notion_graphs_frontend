@@ -105,6 +105,7 @@ export default function BoxManager() {
         return (
           <ProfileBox
             defaultActivePanel={activeBox.data?.panel || 'general'}
+            showHowConnectionModal={activeBox.data?.showHowConnectionModal || false}
           />
         );
 

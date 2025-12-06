@@ -6,7 +6,7 @@ import { FaSyncAlt, FaTrashAlt } from 'react-icons/fa';
 import PersonIcon from '@mui/icons-material/Person';
 import HowConnectionWorksModal from "../HowConnectionWorksModal";
 
-export default function WalletConnectionPanel({ onClose }) {
+export default function WalletConnectionPanel({ onClose, autoShowHowConnectionModal = false }) {
 
   const authorization_url = process.env.REACT_APP_NOTION_AUTH_URL;
 
@@ -15,7 +15,7 @@ export default function WalletConnectionPanel({ onClose }) {
 
   const [isRefreshingIntegrationConnection, setIsRefreshingIntegrationConnection] = useState(false);
   const [isUnlinkingIntegrationConnection, setIsUnlinkingIntegrationConnection] = useState(false);
-  const [showHowConnectionWorksModal, setShowHowConnectionWorksModal] = useState(false);
+  const [showHowConnectionWorksModal, setShowHowConnectionWorksModal] = useState(autoShowHowConnectionModal);
 
   const renderConnectionStatusText = () => {
     if (templateConnectedToIntegrationData?.hasTemplateConnectedToIntegration) {

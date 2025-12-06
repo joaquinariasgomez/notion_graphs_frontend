@@ -111,7 +111,7 @@
 .step-number {
   width: 32px;
   height: 32px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -142,7 +142,7 @@
   justify-content: center;
   gap: 12px;
   padding: 16px 32px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
   color: white;
   border: none;
   border-radius: 12px;
@@ -150,12 +150,12 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
 }
 
 .connect-notion-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+  box-shadow: 0 6px 20px rgba(74, 144, 226, 0.6);
 }
 
 .connect-notion-button:active {
@@ -166,6 +166,29 @@
   width: 24px;
   height: 24px;
   object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.learn-how-button {
+  padding: 14px 32px;
+  background: transparent;
+  color: #4A90E2;
+  border: 2px solid #4A90E2;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.learn-how-button:hover {
+  background: rgba(74, 144, 226, 0.08);
+  border-color: #357ABD;
+  color: #357ABD;
+}
+
+.learn-how-button:active {
+  background: rgba(74, 144, 226, 0.15);
 }
 
 .skip-button {
@@ -227,5 +250,10 @@
   .button-notion-icon {
     width: 20px;
     height: 20px;
+  }
+
+  .learn-how-button {
+    font-size: 0.95rem;
+    padding: 12px 24px;
   }
 }

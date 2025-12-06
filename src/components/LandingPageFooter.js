@@ -24,8 +24,8 @@ function LandingPageFooter() {
           <h3>Product</h3>
           <ul>
             <li><a href="/#features">Features</a></li>
+            <li><a href="/#how-connection-works">How to connect to Notion</a></li>
             <li><a href="/#pricing">Pricing</a></li>
-            <li><a href="/#get-started">Get Started</a></li>
           </ul>
         </div>
 
@@ -41,9 +41,8 @@ function LandingPageFooter() {
         <div className='footer__section'>
           <h3>Legal</h3>
           <ul>
-            <li><a href="#terms">Terms of Service</a></li>
-            <li><a href="#privacy">Privacy Policy</a></li>
-            <li><a href="#cookies">Cookie Policy</a></li>
+            <li><a href="/terms-of-service">Terms of Service</a></li>
+            <li><a href="/privacy-policy">Privacy Policy</a></li>
           </ul>
         </div>
       </div>

@@ -9,7 +9,7 @@ import WalletConnectionPanel from './profilepanels/WalletConnectionPanel';
 import BillingPanel from './profilepanels/BillingPanel';
 import { getBillingGraphCount, getBillingPlan } from '../../api/RequestUtils';
 
-function ProfileBox({ defaultActivePanel }) {
+function ProfileBox({ defaultActivePanel, showHowConnectionModal = false }) {
 
   // Context
   const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
@@ -74,7 +74,7 @@ function ProfileBox({ defaultActivePanel }) {
         );
       case 'walletconnection':
         return (
-          <WalletConnectionPanel onClose={closeBox} />
+          <WalletConnectionPanel onClose={closeBox} autoShowHowConnectionModal={showHowConnectionModal} />
         );
       case 'billing':
         return (

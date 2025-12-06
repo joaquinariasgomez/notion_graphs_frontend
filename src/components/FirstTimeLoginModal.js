@@ -1,10 +1,28 @@
 import '../css/FirstTimeLoginModal.css';
+import { useGlobalStateValue } from '../context/GlobalStateProvider';
+import { actionTypes, BOX_TYPES } from '../context/globalReducer';
 
 function FirstTimeLoginModal({ onClose, onConnectNotion }) {
+
+  const [, dispatch] = useGlobalStateValue();
 
   const handleConnectNotion = () => {
     const authorization_url = process.env.REACT_APP_NOTION_AUTH_URL;
     window.location.href = authorization_url;
+  };
+
+  const handleLearnHowToConnect = () => {
+    onClose();
+    dispatch({
+      type: actionTypes.SET_ACTIVE_BOX,
+      value: {
+        type: BOX_TYPES.PROFILE,
+        data: {
+          panel: 'walletconnection',
+          showHowConnectionModal: true
+        }
+      }
+    });
   };
 
   const handleSkip = () => {
@@ -52,6 +70,13 @@ function FirstTimeLoginModal({ onClose, onConnectNotion }) {
                 className="button-notion-icon"
               />
               <span>Connect with Notion</span>
+            </button>
+
+            <button
+              className="learn-how-button"
+              onClick={handleLearnHowToConnect}
+            >
+              Learn how to Connect
             </button>
 
             <button

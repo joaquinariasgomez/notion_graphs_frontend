@@ -29,7 +29,7 @@ function HowConnectionWorksSection() {
   };
 
   return (
-    <section className='how-connection-works-section' id='how-it-works'>
+    <section className='how-connection-works-section' id='how-connection-works'>
       <div className='how-connection-works-container'>
         <div className='how-connection-works-header'>
           <h2>Connect to Notion in 3 simple steps</h2>

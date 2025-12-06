@@ -14,6 +14,8 @@ import NotionCallbackPage from './pages/NotionCallbackPage';
 import StripeCheckoutPage from './pages/StripeCheckoutPage';
 import BillingPlansPage from './pages/BillingPlansPage';
 import LandingPage from './pages/LandingPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsOfServicePage from './pages/TermsOfServicePage';
 import ProtectedRoute from './components/ProtectedRoute';
 import SessionManager from './components/SessionManager';
 import { GlobalStateProvider } from './context/GlobalStateProvider';
@@ -28,11 +30,20 @@ root.render(
     <BrowserRouter>
       <SessionManager>
         <Routes>
-          {/* TODO JOAQUIN: create https://www.notionwallet.com/privacy-policy and https://www.notionwallet.com/terms-of-service */}
           {/* Route for the landing page */}
           <Route
             path="/"
             element={<LandingPage />}
+          />
+          {/* Route for Privacy Policy */}
+          <Route
+            path="/privacy-policy"
+            element={<PrivacyPolicyPage />}
+          />
+          {/* Route for Terms of Service */}
+          <Route
+            path="/terms-of-service"
+            element={<TermsOfServicePage />}
           />
           {/* Route for the login page */}
           <Route
