@@ -1,0 +1,247 @@
+.how-connection-works-section {
+  padding: 80px 20px;
+  background: linear-gradient(180deg, transparent 0%, rgba(74, 144, 226, 0.03) 50%, transparent 100%);
+}
+
+.how-connection-works-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.how-connection-works-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.how-connection-works-header h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.how-connection-works-header p {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.how-connection-works-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+}
+
+.how-connection-works-image-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+}
+
+.how-connection-works-step-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+}
+
+.how-connection-works-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 500px;
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  padding: 20px;
+}
+
+.how-connection-works-image-container img {
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 8px;
+}
+
+.how-connection-works-step-description {
+  margin-top: 24px;
+  font-size: 1.1rem;
+  color: #555;
+  text-align: center;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.how-connection-works-link {
+  color: #4A90E2;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.how-connection-works-link:hover {
+  color: #357ABD;
+  text-decoration: underline;
+}
+
+.how-connection-works-nav-button {
+  background-color: white;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.how-connection-works-nav-button:hover:not(:disabled) {
+  background-color: #f8f8f8;
+  border-color: #d0d0d0;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.how-connection-works-nav-button:active:not(:disabled) {
+  transform: scale(0.95);
+  background-color: #f0f0f0;
+}
+
+.how-connection-works-nav-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.how-connection-works-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.how-connection-works-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background-color: #d0d0d0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.how-connection-works-dot:hover {
+  background-color: #a0a0a0;
+}
+
+.how-connection-works-dot.active {
+  background-color: #4A90E2;
+  transform: scale(1.2);
+}
+
+/* Tablet responsive */
+@media (max-width: 768px) {
+  .how-connection-works-section {
+    padding: 60px 15px;
+  }
+
+  .how-connection-works-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .how-connection-works-header p {
+    font-size: 1rem;
+  }
+
+  .how-connection-works-content {
+    gap: 10px;
+  }
+
+  .how-connection-works-image-container {
+    height: 400px;
+    padding: 15px;
+  }
+
+  .how-connection-works-nav-button {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .how-connection-works-step-description {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .how-connection-works-section {
+    padding: 50px 10px;
+  }
+
+  .how-connection-works-header {
+    margin-bottom: 30px;
+  }
+
+  .how-connection-works-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .how-connection-works-header p {
+    font-size: 0.9rem;
+  }
+
+  .how-connection-works-content {
+    gap: 5px;
+  }
+
+  .how-connection-works-image-container {
+    height: 300px;
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  .how-connection-works-nav-button {
+    width: 35px;
+    height: 35px;
+    font-size: 12px;
+  }
+
+  .how-connection-works-step-badge {
+    font-size: 0.8rem;
+    padding: 6px 16px;
+  }
+
+  .how-connection-works-step-description {
+    font-size: 0.9rem;
+    margin-top: 16px;
+  }
+
+  .how-connection-works-dots {
+    margin-top: 20px;
+  }
+
+  .how-connection-works-dot {
+    width: 10px;
+    height: 10px;
+  }
+}

@@ -12,17 +12,17 @@ function FeaturesSection() {
     {
       icon: <HiLightningBolt />,
       title: 'Real-time Notion Sync',
-      description: 'Seamlessly connect to your Notion databases. Updates reflect instantly, keeping your insights always up-to-date.'
+      description: 'Seamlessly connect to your Notion workspace. Updates reflect instantly, keeping your insights always up-to-date.'
     },
     {
       icon: <HiSparkles />,
       title: 'Fully Customizable',
-      description: 'Customize colors, time ranges, categories, and display options. Make every chart perfectly match your needs.'
+      description: 'Customize time ranges, filter by categories, and display statistics. Make every chart perfectly match your needs.'
     },
     {
       icon: <HiShieldCheck />,
       title: 'Privacy First',
-      description: 'Your financial data stays secure. We never store your data permanently—everything syncs directly with your Notion.'
+      description: 'Your financial data stays secure. We never store your data or credit card information.'
     }
   ];
 

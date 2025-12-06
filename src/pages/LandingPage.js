@@ -8,6 +8,7 @@ import LandingPageCarrousel from '../components/LandingPageCarrousel';
 import GraphDisplayer from '../components/graphsdisplay/GraphDisplayer';
 import mockCharts from '../components/LandingPageCarrouselCharts.json';
 import FeaturesSection from '../components/FeaturesSection';
+import HowConnectionWorksSection from '../components/HowConnectionWorksSection';
 import PricingSection from '../components/PricingSection';
 import { useGlobalStateValue } from '../context/GlobalStateProvider';
 import { actionTypes } from '../context/globalReducer';
@@ -135,6 +136,7 @@ function LandingPage() {
           </LandingPageCarrousel>
         </main >
         <FeaturesSection />
+        <HowConnectionWorksSection />
         <PricingSection />
         <LandingPageFooter />
       </div >
