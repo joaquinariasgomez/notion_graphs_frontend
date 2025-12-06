@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { HiCheck, HiX } from 'react-icons/hi';
 import { getBillingPlan, createStripeCheckoutSession } from '../api/RequestUtils';
 import BillingConstants from '../BillingConstants';
 import { BillingPlan } from '../utils/BillingPlanEnum';
 import '../css/PricingSection.css';
 import { useGlobalStateValue } from '../context/GlobalStateProvider';
-import { actionTypes, BOX_TYPES } from '../context/globalReducer';
+import { actionTypes } from '../context/globalReducer';
 
 function BillingPlansPage() {
 
@@ -97,7 +96,7 @@ function BillingPlansPage() {
       isSuggested: true,
       cta: 'Upgrade to Plus',
       savings: billingCycle === 'yearly' ? 'Save €9.98 / year' : null,
-      trialInfo: '7-day free trial · Cancel anytime',
+      trialInfo: '7-day free trial · Cancel anytime'
     }
   ];
 
@@ -131,7 +130,7 @@ function BillingPlansPage() {
 
         <div className="pricing-header">
           <h2>Upgrade Your Plan</h2>
-          <p>Choose the plan that fits your needs. Upgrade or cancel your plan anytime.</p>
+          <p>Choose the plan that fits your needs. Upgrade or cancel anytime.</p>
         </div>
 
         <div className="billing-toggle">
