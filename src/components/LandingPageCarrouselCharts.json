@@ -3,14 +3,14 @@
     "graphConfiguration": {
       "id": "2323f084-9ed1-4269-b848-6ca8dc2e9613",
       "graphCreationStatus": "CREATED",
-      "customTitle": "Expenses in the last year",
+      "customTitle": "Expenses from January to June",
       "requestType": "CUSTOM_GRAPH",
       "customGraphSettings": {
         "dataSettings": {
           "source": "EXPENSES",
           "time": "CUSTOM",
-          "customStartDate": "2025-04-01",
-          "customEndDate": "2025-09-30"
+          "customStartDate": "2025-01-01",
+          "customEndDate": "2025-06-30"
         },
         "filterSettings": {
           "allExpenses": false,
@@ -53,7 +53,7 @@
     "graphData": {
       "data": [
         {
-          "date": "2025-04-01",
+          "date": "2025-01-01",
           "totalAmount": 780.0,
           "categoryAmounts": [
             {
@@ -65,7 +65,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-02",
+          "date": "2025-01-02",
           "totalAmount": 2.99,
           "categoryAmounts": [
             {
@@ -77,7 +77,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-03",
+          "date": "2025-01-03",
           "totalAmount": 7.18,
           "categoryAmounts": [
             {
@@ -89,7 +89,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-04",
+          "date": "2025-01-04",
           "totalAmount": 244.13,
           "categoryAmounts": [
             {
@@ -105,7 +105,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-05",
+          "date": "2025-01-05",
           "totalAmount": 3.65,
           "categoryAmounts": [
             {
@@ -117,7 +117,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-07",
+          "date": "2025-01-07",
           "totalAmount": 82.58,
           "categoryAmounts": [
             {
@@ -133,7 +133,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-08",
+          "date": "2025-01-08",
           "totalAmount": 29.64,
           "categoryAmounts": [
             {
@@ -149,7 +149,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-09",
+          "date": "2025-01-09",
           "totalAmount": 5.26,
           "categoryAmounts": [
             {
@@ -161,7 +161,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-10",
+          "date": "2025-01-10",
           "totalAmount": 11.57,
           "categoryAmounts": [
             {
@@ -173,7 +173,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-11",
+          "date": "2025-01-11",
           "totalAmount": 57.58,
           "categoryAmounts": [
             {
@@ -189,7 +189,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-12",
+          "date": "2025-01-12",
           "totalAmount": 35.95,
           "categoryAmounts": [
             {
@@ -205,7 +205,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-13",
+          "date": "2025-01-13",
           "totalAmount": 39.59,
           "categoryAmounts": [
             {
@@ -225,7 +225,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-14",
+          "date": "2025-01-14",
           "totalAmount": 98.16,
           "categoryAmounts": [
             {
@@ -245,7 +245,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-15",
+          "date": "2025-01-15",
           "totalAmount": 49.34,
           "categoryAmounts": [
             {
@@ -261,7 +261,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-16",
+          "date": "2025-01-16",
           "totalAmount": 41.959999999999994,
           "categoryAmounts": [
             {
@@ -277,7 +277,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-17",
+          "date": "2025-01-17",
           "totalAmount": 24.36,
           "categoryAmounts": [
             {
@@ -293,7 +293,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-18",
+          "date": "2025-01-18",
           "totalAmount": 18.68,
           "categoryAmounts": [
             {
@@ -309,7 +309,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-19",
+          "date": "2025-01-19",
           "totalAmount": 27.740000000000002,
           "categoryAmounts": [
             {
@@ -329,7 +329,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-20",
+          "date": "2025-01-20",
           "totalAmount": 61.79,
           "categoryAmounts": [
             {
@@ -345,7 +345,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-21",
+          "date": "2025-01-21",
           "totalAmount": 30.89,
           "categoryAmounts": [
             {
@@ -361,7 +361,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-22",
+          "date": "2025-01-22",
           "totalAmount": 35.35,
           "categoryAmounts": [
             {
@@ -377,7 +377,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-23",
+          "date": "2025-01-23",
           "totalAmount": 99.1,
           "categoryAmounts": [
             {
@@ -397,7 +397,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-24",
+          "date": "2025-01-24",
           "totalAmount": 158.92,
           "categoryAmounts": [
             {
@@ -417,7 +417,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-25",
+          "date": "2025-01-25",
           "totalAmount": 10.62,
           "categoryAmounts": [
             {
@@ -433,7 +433,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-26",
+          "date": "2025-01-26",
           "totalAmount": 47.28,
           "categoryAmounts": [
             {
@@ -449,7 +449,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-27",
+          "date": "2025-01-27",
           "totalAmount": 10.71,
           "categoryAmounts": [
             {
@@ -461,7 +461,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-28",
+          "date": "2025-01-28",
           "totalAmount": 31.51,
           "categoryAmounts": [
             {
@@ -473,7 +473,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-29",
+          "date": "2025-01-29",
           "totalAmount": 34.97,
           "categoryAmounts": [
             {
@@ -489,7 +489,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-04-30",
+          "date": "2025-01-30",
           "totalAmount": 16.85,
           "categoryAmounts": [
             {
@@ -501,7 +501,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-01",
+          "date": "2025-02-01",
           "totalAmount": 787.06,
           "categoryAmounts": [
             {
@@ -517,7 +517,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-02",
+          "date": "2025-02-02",
           "totalAmount": 15.809999999999999,
           "categoryAmounts": [
             {
@@ -533,7 +533,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-03",
+          "date": "2025-02-03",
           "totalAmount": 19.19,
           "categoryAmounts": [
             {
@@ -545,7 +545,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-04",
+          "date": "2025-02-04",
           "totalAmount": 8.04,
           "categoryAmounts": [
             {
@@ -557,7 +557,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-05",
+          "date": "2025-02-05",
           "totalAmount": 15.79,
           "categoryAmounts": [
             {
@@ -573,7 +573,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-06",
+          "date": "2025-02-06",
           "totalAmount": 4.0,
           "categoryAmounts": [
             {
@@ -585,7 +585,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-07",
+          "date": "2025-02-07",
           "totalAmount": 18.869999999999997,
           "categoryAmounts": [
             {
@@ -597,7 +597,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-08",
+          "date": "2025-02-08",
           "totalAmount": 101.15,
           "categoryAmounts": [
             {
@@ -613,7 +613,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-09",
+          "date": "2025-02-09",
           "totalAmount": 28.04,
           "categoryAmounts": [
             {
@@ -629,7 +629,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-10",
+          "date": "2025-02-10",
           "totalAmount": 8.9,
           "categoryAmounts": [
             {
@@ -641,7 +641,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-11",
+          "date": "2025-02-11",
           "totalAmount": 153.63,
           "categoryAmounts": [
             {
@@ -657,7 +657,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-12",
+          "date": "2025-02-12",
           "totalAmount": 12.0,
           "categoryAmounts": [
             {
@@ -669,7 +669,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-13",
+          "date": "2025-02-13",
           "totalAmount": 22.380000000000003,
           "categoryAmounts": [
             {
@@ -685,7 +685,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-16",
+          "date": "2025-02-16",
           "totalAmount": 38.34,
           "categoryAmounts": [
             {
@@ -705,7 +705,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-17",
+          "date": "2025-02-17",
           "totalAmount": 47.3,
           "categoryAmounts": [
             {
@@ -721,7 +721,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-18",
+          "date": "2025-02-18",
           "totalAmount": 61.3,
           "categoryAmounts": [
             {
@@ -741,7 +741,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-19",
+          "date": "2025-02-19",
           "totalAmount": 56.22,
           "categoryAmounts": [
             {
@@ -761,7 +761,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-20",
+          "date": "2025-02-20",
           "totalAmount": 67.79,
           "categoryAmounts": [
             {
@@ -781,7 +781,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-21",
+          "date": "2025-02-21",
           "totalAmount": 47.02,
           "categoryAmounts": [
             {
@@ -801,7 +801,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-22",
+          "date": "2025-02-22",
           "totalAmount": 44.800000000000004,
           "categoryAmounts": [
             {
@@ -817,7 +817,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-23",
+          "date": "2025-02-23",
           "totalAmount": 58.5,
           "categoryAmounts": [
             {
@@ -833,7 +833,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-24",
+          "date": "2025-02-24",
           "totalAmount": 79.5,
           "categoryAmounts": [
             {
@@ -849,7 +849,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-25",
+          "date": "2025-02-25",
           "totalAmount": 52.2,
           "categoryAmounts": [
             {
@@ -865,7 +865,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-26",
+          "date": "2025-02-26",
           "totalAmount": 54.8,
           "categoryAmounts": [
             {
@@ -877,7 +877,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-27",
+          "date": "2025-02-27",
           "totalAmount": 71.29,
           "categoryAmounts": [
             {
@@ -897,7 +897,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-28",
+          "date": "2025-02-28",
           "totalAmount": 5.47,
           "categoryAmounts": [
             {
@@ -909,7 +909,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-29",
+          "date": "2025-02-29",
           "totalAmount": 18.42,
           "categoryAmounts": [
             {
@@ -921,7 +921,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-05-31",
+          "date": "2025-02-31",
           "totalAmount": 13.08,
           "categoryAmounts": [
             {
@@ -933,7 +933,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-01",
+          "date": "2025-03-01",
           "totalAmount": 831.47,
           "categoryAmounts": [
             {
@@ -953,7 +953,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-02",
+          "date": "2025-03-02",
           "totalAmount": 2.99,
           "categoryAmounts": [
             {
@@ -965,7 +965,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-03",
+          "date": "2025-03-03",
           "totalAmount": 13.27,
           "categoryAmounts": [
             {
@@ -977,7 +977,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-05",
+          "date": "2025-03-05",
           "totalAmount": 14.07,
           "categoryAmounts": [
             {
@@ -989,7 +989,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-06",
+          "date": "2025-03-06",
           "totalAmount": 41.32,
           "categoryAmounts": [
             {
@@ -1005,7 +1005,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-07",
+          "date": "2025-03-07",
           "totalAmount": 10.86,
           "categoryAmounts": [
             {
@@ -1017,7 +1017,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-08",
+          "date": "2025-03-08",
           "totalAmount": 14.73,
           "categoryAmounts": [
             {
@@ -1029,7 +1029,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-09",
+          "date": "2025-03-09",
           "totalAmount": 17.35,
           "categoryAmounts": [
             {
@@ -1045,7 +1045,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-10",
+          "date": "2025-03-10",
           "totalAmount": 60.54,
           "categoryAmounts": [
             {
@@ -1061,7 +1061,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-12",
+          "date": "2025-03-12",
           "totalAmount": 23.25,
           "categoryAmounts": [
             {
@@ -1073,7 +1073,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-14",
+          "date": "2025-03-14",
           "totalAmount": 84.39,
           "categoryAmounts": [
             {
@@ -1089,7 +1089,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-15",
+          "date": "2025-03-15",
           "totalAmount": 53.64,
           "categoryAmounts": [
             {
@@ -1105,7 +1105,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-16",
+          "date": "2025-03-16",
           "totalAmount": 4.2,
           "categoryAmounts": [
             {
@@ -1117,7 +1117,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-18",
+          "date": "2025-03-18",
           "totalAmount": 30.23,
           "categoryAmounts": [
             {
@@ -1133,7 +1133,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-19",
+          "date": "2025-03-19",
           "totalAmount": 28.15,
           "categoryAmounts": [
             {
@@ -1145,7 +1145,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-20",
+          "date": "2025-03-20",
           "totalAmount": 35.43,
           "categoryAmounts": [
             {
@@ -1161,7 +1161,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-21",
+          "date": "2025-03-21",
           "totalAmount": 15.82,
           "categoryAmounts": [
             {
@@ -1173,7 +1173,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-22",
+          "date": "2025-03-22",
           "totalAmount": 14.79,
           "categoryAmounts": [
             {
@@ -1185,7 +1185,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-23",
+          "date": "2025-03-23",
           "totalAmount": 6.2,
           "categoryAmounts": [
             {
@@ -1197,7 +1197,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-25",
+          "date": "2025-03-25",
           "totalAmount": 5.63,
           "categoryAmounts": [
             {
@@ -1209,7 +1209,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-26",
+          "date": "2025-03-26",
           "totalAmount": 0.89,
           "categoryAmounts": [
             {
@@ -1221,7 +1221,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-27",
+          "date": "2025-03-27",
           "totalAmount": 32.55,
           "categoryAmounts": [
             {
@@ -1233,7 +1233,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-28",
+          "date": "2025-03-28",
           "totalAmount": 23.46,
           "categoryAmounts": [
             {
@@ -1245,7 +1245,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-29",
+          "date": "2025-03-29",
           "totalAmount": 18.43,
           "categoryAmounts": [
             {
@@ -1257,7 +1257,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-06-30",
+          "date": "2025-03-30",
           "totalAmount": 36.75,
           "categoryAmounts": [
             {
@@ -1277,7 +1277,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-01",
+          "date": "2025-04-01",
           "totalAmount": 796.88,
           "categoryAmounts": [
             {
@@ -1293,7 +1293,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-02",
+          "date": "2025-04-02",
           "totalAmount": 7.19,
           "categoryAmounts": [
             {
@@ -1309,7 +1309,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-03",
+          "date": "2025-04-03",
           "totalAmount": 20.4,
           "categoryAmounts": [
             {
@@ -1325,7 +1325,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-04",
+          "date": "2025-04-04",
           "totalAmount": 69.66,
           "categoryAmounts": [
             {
@@ -1345,7 +1345,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-05",
+          "date": "2025-04-05",
           "totalAmount": 66.97999999999999,
           "categoryAmounts": [
             {
@@ -1361,7 +1361,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-06",
+          "date": "2025-04-06",
           "totalAmount": 89.09,
           "categoryAmounts": [
             {
@@ -1381,7 +1381,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-07",
+          "date": "2025-04-07",
           "totalAmount": 4.84,
           "categoryAmounts": [
             {
@@ -1393,7 +1393,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-08",
+          "date": "2025-04-08",
           "totalAmount": 32.64,
           "categoryAmounts": [
             {
@@ -1409,7 +1409,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-09",
+          "date": "2025-04-09",
           "totalAmount": 60.08,
           "categoryAmounts": [
             {
@@ -1421,7 +1421,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-10",
+          "date": "2025-04-10",
           "totalAmount": 5.68,
           "categoryAmounts": [
             {
@@ -1433,7 +1433,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-11",
+          "date": "2025-04-11",
           "totalAmount": 23.1,
           "categoryAmounts": [
             {
@@ -1445,7 +1445,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-12",
+          "date": "2025-04-12",
           "totalAmount": 40.31,
           "categoryAmounts": [
             {
@@ -1461,7 +1461,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-13",
+          "date": "2025-04-13",
           "totalAmount": 38.44,
           "categoryAmounts": [
             {
@@ -1473,7 +1473,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-14",
+          "date": "2025-04-14",
           "totalAmount": 3.53,
           "categoryAmounts": [
             {
@@ -1485,7 +1485,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-15",
+          "date": "2025-04-15",
           "totalAmount": 8.25,
           "categoryAmounts": [
             {
@@ -1497,7 +1497,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-16",
+          "date": "2025-04-16",
           "totalAmount": 87.78,
           "categoryAmounts": [
             {
@@ -1513,7 +1513,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-17",
+          "date": "2025-04-17",
           "totalAmount": 20.009999999999998,
           "categoryAmounts": [
             {
@@ -1529,7 +1529,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-18",
+          "date": "2025-04-18",
           "totalAmount": 15.81,
           "categoryAmounts": [
             {
@@ -1541,7 +1541,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-19",
+          "date": "2025-04-19",
           "totalAmount": 17.96,
           "categoryAmounts": [
             {
@@ -1557,7 +1557,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-20",
+          "date": "2025-04-20",
           "totalAmount": 15.68,
           "categoryAmounts": [
             {
@@ -1573,7 +1573,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-21",
+          "date": "2025-04-21",
           "totalAmount": 8.3,
           "categoryAmounts": [
             {
@@ -1585,7 +1585,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-22",
+          "date": "2025-04-22",
           "totalAmount": 21.74,
           "categoryAmounts": [
             {
@@ -1597,7 +1597,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-23",
+          "date": "2025-04-23",
           "totalAmount": 2.81,
           "categoryAmounts": [
             {
@@ -1609,7 +1609,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-25",
+          "date": "2025-04-25",
           "totalAmount": 10.19,
           "categoryAmounts": [
             {
@@ -1621,7 +1621,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-26",
+          "date": "2025-04-26",
           "totalAmount": 2.26,
           "categoryAmounts": [
             {
@@ -1633,7 +1633,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-27",
+          "date": "2025-04-27",
           "totalAmount": 24.18,
           "categoryAmounts": [
             {
@@ -1645,7 +1645,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-28",
+          "date": "2025-04-28",
           "totalAmount": 29.56,
           "categoryAmounts": [
             {
@@ -1657,7 +1657,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-29",
+          "date": "2025-04-29",
           "totalAmount": 54.36,
           "categoryAmounts": [
             {
@@ -1673,7 +1673,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-07-31",
+          "date": "2025-04-31",
           "totalAmount": 5.75,
           "categoryAmounts": [
             {
@@ -1685,7 +1685,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-01",
+          "date": "2025-05-01",
           "totalAmount": 796.7,
           "categoryAmounts": [
             {
@@ -1701,7 +1701,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-02",
+          "date": "2025-05-02",
           "totalAmount": 13.49,
           "categoryAmounts": [
             {
@@ -1717,7 +1717,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-03",
+          "date": "2025-05-03",
           "totalAmount": 34.71,
           "categoryAmounts": [
             {
@@ -1729,7 +1729,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-05",
+          "date": "2025-05-05",
           "totalAmount": 13.71,
           "categoryAmounts": [
             {
@@ -1741,7 +1741,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-06",
+          "date": "2025-05-06",
           "totalAmount": 2.2,
           "categoryAmounts": [
             {
@@ -1753,7 +1753,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-07",
+          "date": "2025-05-07",
           "totalAmount": 12.92,
           "categoryAmounts": [
             {
@@ -1765,7 +1765,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-08",
+          "date": "2025-05-08",
           "totalAmount": 176.55,
           "categoryAmounts": [
             {
@@ -1785,7 +1785,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-09",
+          "date": "2025-05-09",
           "totalAmount": 52.260000000000005,
           "categoryAmounts": [
             {
@@ -1805,7 +1805,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-10",
+          "date": "2025-05-10",
           "totalAmount": 66.1,
           "categoryAmounts": [
             {
@@ -1825,7 +1825,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-11",
+          "date": "2025-05-11",
           "totalAmount": 24.54,
           "categoryAmounts": [
             {
@@ -1841,7 +1841,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-12",
+          "date": "2025-05-12",
           "totalAmount": 12.3,
           "categoryAmounts": [
             {
@@ -1853,7 +1853,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-13",
+          "date": "2025-05-13",
           "totalAmount": 11.13,
           "categoryAmounts": [
             {
@@ -1869,7 +1869,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-14",
+          "date": "2025-05-14",
           "totalAmount": 61.9,
           "categoryAmounts": [
             {
@@ -1885,7 +1885,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-15",
+          "date": "2025-05-15",
           "totalAmount": 16.4,
           "categoryAmounts": [
             {
@@ -1897,7 +1897,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-16",
+          "date": "2025-05-16",
           "totalAmount": 39.400000000000006,
           "categoryAmounts": [
             {
@@ -1913,7 +1913,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-17",
+          "date": "2025-05-17",
           "totalAmount": 7.77,
           "categoryAmounts": [
             {
@@ -1929,7 +1929,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-18",
+          "date": "2025-05-18",
           "totalAmount": 52.44,
           "categoryAmounts": [
             {
@@ -1949,7 +1949,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-19",
+          "date": "2025-05-19",
           "totalAmount": 16.900000000000002,
           "categoryAmounts": [
             {
@@ -1961,7 +1961,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-20",
+          "date": "2025-05-20",
           "totalAmount": 25.93,
           "categoryAmounts": [
             {
@@ -1977,7 +1977,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-21",
+          "date": "2025-05-21",
           "totalAmount": 26.78,
           "categoryAmounts": [
             {
@@ -1993,7 +1993,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-22",
+          "date": "2025-05-22",
           "totalAmount": 54.06,
           "categoryAmounts": [
             {
@@ -2009,7 +2009,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-23",
+          "date": "2025-05-23",
           "totalAmount": 47.739999999999995,
           "categoryAmounts": [
             {
@@ -2025,7 +2025,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-24",
+          "date": "2025-05-24",
           "totalAmount": 66.2,
           "categoryAmounts": [
             {
@@ -2041,7 +2041,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-25",
+          "date": "2025-05-25",
           "totalAmount": 22.01,
           "categoryAmounts": [
             {
@@ -2053,7 +2053,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-26",
+          "date": "2025-05-26",
           "totalAmount": 8.1,
           "categoryAmounts": [
             {
@@ -2065,7 +2065,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-27",
+          "date": "2025-05-27",
           "totalAmount": 15.46,
           "categoryAmounts": [
             {
@@ -2077,7 +2077,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-28",
+          "date": "2025-05-28",
           "totalAmount": 12.73,
           "categoryAmounts": [
             {
@@ -2089,7 +2089,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-29",
+          "date": "2025-05-29",
           "totalAmount": 97.47,
           "categoryAmounts": [
             {
@@ -2109,7 +2109,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-30",
+          "date": "2025-05-30",
           "totalAmount": 58.99,
           "categoryAmounts": [
             {
@@ -2125,7 +2125,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-08-31",
+          "date": "2025-05-31",
           "totalAmount": 65.96,
           "categoryAmounts": [
             {
@@ -2145,7 +2145,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-01",
+          "date": "2025-06-01",
           "totalAmount": 811.32,
           "categoryAmounts": [
             {
@@ -2161,7 +2161,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-02",
+          "date": "2025-06-02",
           "totalAmount": 11.17,
           "categoryAmounts": [
             {
@@ -2177,7 +2177,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-03",
+          "date": "2025-06-03",
           "totalAmount": 6.25,
           "categoryAmounts": [
             {
@@ -2189,7 +2189,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-04",
+          "date": "2025-06-04",
           "totalAmount": 13.53,
           "categoryAmounts": [
             {
@@ -2201,7 +2201,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-05",
+          "date": "2025-06-05",
           "totalAmount": 4.0,
           "categoryAmounts": [
             {
@@ -2213,7 +2213,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-06",
+          "date": "2025-06-06",
           "totalAmount": 20.81,
           "categoryAmounts": [
             {
@@ -2225,7 +2225,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-07",
+          "date": "2025-06-07",
           "totalAmount": 36.160000000000004,
           "categoryAmounts": [
             {
@@ -2237,7 +2237,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-08",
+          "date": "2025-06-08",
           "totalAmount": 33.23,
           "categoryAmounts": [
             {
@@ -2253,7 +2253,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-09",
+          "date": "2025-06-09",
           "totalAmount": 13.1,
           "categoryAmounts": [
             {
@@ -2265,7 +2265,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-10",
+          "date": "2025-06-10",
           "totalAmount": 11.18,
           "categoryAmounts": [
             {
@@ -2277,7 +2277,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-12",
+          "date": "2025-06-12",
           "totalAmount": 21.57,
           "categoryAmounts": [
             {
@@ -2289,7 +2289,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-13",
+          "date": "2025-06-13",
           "totalAmount": 25.75,
           "categoryAmounts": [
             {
@@ -2301,7 +2301,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-14",
+          "date": "2025-06-14",
           "totalAmount": 13.850000000000001,
           "categoryAmounts": [
             {
@@ -2313,7 +2313,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-15",
+          "date": "2025-06-15",
           "totalAmount": 7.529999999999999,
           "categoryAmounts": [
             {
@@ -2325,7 +2325,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-16",
+          "date": "2025-06-16",
           "totalAmount": 18.72,
           "categoryAmounts": [
             {
@@ -2341,7 +2341,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-17",
+          "date": "2025-06-17",
           "totalAmount": 18.94,
           "categoryAmounts": [
             {
@@ -2353,7 +2353,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-18",
+          "date": "2025-06-18",
           "totalAmount": 2.39,
           "categoryAmounts": [
             {
@@ -2365,7 +2365,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-20",
+          "date": "2025-06-20",
           "totalAmount": 16.99,
           "categoryAmounts": [
             {
@@ -2377,7 +2377,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-21",
+          "date": "2025-06-21",
           "totalAmount": 44.26,
           "categoryAmounts": [
             {
@@ -2389,7 +2389,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-22",
+          "date": "2025-06-22",
           "totalAmount": 6.45,
           "categoryAmounts": [
             {
@@ -2401,7 +2401,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-24",
+          "date": "2025-06-24",
           "totalAmount": 14.08,
           "categoryAmounts": [
             {
@@ -2413,7 +2413,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-26",
+          "date": "2025-06-26",
           "totalAmount": 7.18,
           "categoryAmounts": [
             {
@@ -2425,7 +2425,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-27",
+          "date": "2025-06-27",
           "totalAmount": 141.53,
           "categoryAmounts": [
             {
@@ -2445,7 +2445,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-28",
+          "date": "2025-06-28",
           "totalAmount": 30.490000000000002,
           "categoryAmounts": [
             {
@@ -2461,7 +2461,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-29",
+          "date": "2025-06-29",
           "totalAmount": 4.71,
           "categoryAmounts": [
             {
@@ -2473,7 +2473,7 @@
           "incomeSourceAmounts": []
         },
         {
-          "date": "2025-09-30",
+          "date": "2025-06-30",
           "totalAmount": 1.0,
           "categoryAmounts": [
             {
@@ -2491,25 +2491,510 @@
   },
   {
     "graphConfiguration": {
-      "id": "d37c00a4-4659-47b6-8088-6e9b57fef244",
+      "id": "7aebeccb-fc8b-461e-bd48-d1dd55587d36",
       "graphCreationStatus": "CREATED",
-      "customTitle": "Incomes from Google in 2025",
-      "requestType": "CUSTOM_GRAPH",
+      "customTitle": "Expenses burndown for August",
+      "requestType": "BURNDOWN",
       "customGraphSettings": {
         "dataSettings": {
-          "source": "INCOMES",
-          "time": "LAST_YEAR",
+          "source": "EXPENSES",
+          "time": "LAST_WEEK",
           "customStartDate": "",
           "customEndDate": ""
         },
         "filterSettings": {
           "allExpenses": true,
           "includedCategories": [],
-          "allIncomes": false,
+          "allIncomes": true,
           "includedIncomeBankAccounts": [],
-          "includedIncomeSources": [
-            "Google"
-          ]
+          "includedIncomeSources": []
+        },
+        "visualizationSettings": {
+          "type": "LINE",
+          "groupByTime": "DAY",
+          "groupByCategory": false,
+          "groupByIncomeBankAccounts": false,
+          "groupByIncomeSources": false,
+          "cumulative": false
+        }
+      },
+      "burndownSettings": {
+        "referenceSettings": {
+          "type": "TOTAL_AVERAGE",
+          "customMonth": ""
+        },
+        "filterSettings": {
+          "allExpenses": true,
+          "includedCategories": []
+        },
+        "dataSettings": {
+          "time": "CUSTOM",
+          "customMonth": "2025-07"
+        }
+      },
+      "updatedAt": 1765095675
+    },
+    "graphData": {
+      "data": [
+        {
+          "date": "1",
+          "totalAmount": 798.13,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "2",
+          "totalAmount": 8.690000000000001,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "3",
+          "totalAmount": 29.5,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "4",
+          "totalAmount": 69.66,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "5",
+          "totalAmount": 67.97999999999999,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "6",
+          "totalAmount": 89.09,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "7",
+          "totalAmount": 4.84,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "8",
+          "totalAmount": 59.06,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "9",
+          "totalAmount": 60.08,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "10",
+          "totalAmount": 86.37,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "11",
+          "totalAmount": 23.1,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "12",
+          "totalAmount": 55.66,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "13",
+          "totalAmount": 38.44,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "14",
+          "totalAmount": 14.01,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "15",
+          "totalAmount": 8.25,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "16",
+          "totalAmount": 87.78,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "17",
+          "totalAmount": 20.009999999999998,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "18",
+          "totalAmount": 23.810000000000002,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "19",
+          "totalAmount": 19.96,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "20",
+          "totalAmount": 16.98,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "21",
+          "totalAmount": 8.3,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "22",
+          "totalAmount": 34.339999999999996,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "23",
+          "totalAmount": 2.81,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "24",
+          "totalAmount": 74.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "25",
+          "totalAmount": 10.19,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "26",
+          "totalAmount": 29.86,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "27",
+          "totalAmount": 24.18,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "28",
+          "totalAmount": 29.56,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "29",
+          "totalAmount": 54.36,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "30",
+          "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "31",
+          "totalAmount": 5.75,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        }
+      ],
+      "referenceData": [
+        {
+          "date": "1",
+          "totalAmount": 706.7965384615384,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "2",
+          "totalAmount": 164.81499999999994,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "3",
+          "totalAmount": 29.04692307692307,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "4",
+          "totalAmount": 44.138461538461534,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "5",
+          "totalAmount": 43.90846153846154,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "6",
+          "totalAmount": 38.15576923076923,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "7",
+          "totalAmount": 43.49230769230769,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "8",
+          "totalAmount": 195.43269230769238,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "9",
+          "totalAmount": 58.428076923076915,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "10",
+          "totalAmount": 38.74115384615384,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "11",
+          "totalAmount": 37.54153846153846,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "12",
+          "totalAmount": 33.053076923076915,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "13",
+          "totalAmount": 40.75961538461539,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "14",
+          "totalAmount": 51.06346153846155,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "15",
+          "totalAmount": 52.120769230769234,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "16",
+          "totalAmount": 23.431923076923077,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "17",
+          "totalAmount": 30.129615384615384,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "18",
+          "totalAmount": 74.73384615384616,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "19",
+          "totalAmount": 30.393076923076926,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "20",
+          "totalAmount": 50.38846153846154,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "21",
+          "totalAmount": 60.41961538461537,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "22",
+          "totalAmount": 40.1023076923077,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "23",
+          "totalAmount": 38.76653846153845,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "24",
+          "totalAmount": 71.06807692307692,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "25",
+          "totalAmount": 71.84384615384616,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "26",
+          "totalAmount": 56.1026923076923,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "27",
+          "totalAmount": 46.89961538461539,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "28",
+          "totalAmount": 28.643846153846155,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "29",
+          "totalAmount": 70.43,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "30",
+          "totalAmount": 52.245769230769234,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "31",
+          "totalAmount": 19.729615384615386,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        }
+      ]
+    },
+    "updatedAt": 1765095675
+  },
+  {
+    "graphConfiguration": {
+      "id": "8552a98e-e130-4ef7-81c5-9523c39da95f",
+      "graphCreationStatus": "CREATED",
+      "customTitle": "Cumulative incomes in 2025",
+      "requestType": "CUSTOM_GRAPH",
+      "customGraphSettings": {
+        "dataSettings": {
+          "source": "INCOMES",
+          "time": "CUSTOM",
+          "customStartDate": "2025-01-01",
+          "customEndDate": "2025-12-31"
+        },
+        "filterSettings": {
+          "allExpenses": true,
+          "includedCategories": [],
+          "allIncomes": true,
+          "includedIncomeBankAccounts": [],
+          "includedIncomeSources": []
         },
         "visualizationSettings": {
           "type": "BAR",
@@ -2517,7 +3002,7 @@
           "groupByCategory": false,
           "groupByIncomeBankAccounts": true,
           "groupByIncomeSources": false,
-          "cumulative": false
+          "cumulative": true
         }
       },
       "burndownSettings": {
@@ -2534,10 +3019,65 @@
           "customMonth": ""
         }
       },
-      "updatedAt": 1761929367
+      "updatedAt": 1765094413
     },
     "graphData": {
       "data": [
+        {
+          "date": "2025-01-07",
+          "totalAmount": 201.66,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Citibank",
+              "amount": 201.66
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Citibank",
+              "amount": 114.3
+            },
+            {
+              "incomeSource": "AdvanceCare",
+              "amount": 87.36
+            }
+          ]
+        },
+        {
+          "date": "2025-01-08",
+          "totalAmount": 11.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Bank of America",
+              "amount": 11.0
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Selling",
+              "amount": 11.0
+            }
+          ]
+        },
+        {
+          "date": "2025-01-09",
+          "totalAmount": 82.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Bank of America",
+              "amount": 82.0
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Selling",
+              "amount": 82.0
+            }
+          ]
+        },
         {
           "date": "2025-01-24",
           "totalAmount": 3198.3999999999996,
@@ -2548,8 +3088,8 @@
               "amount": 211.2
             },
             {
-              "incomeBankAccount": "Citibank",
-              "amount": 2778.87
+              "incomeBankAccount": "Bank of America",
+              "amount": 1600.87
             },
             {
               "incomeBankAccount": "Coverflex Benefits",
@@ -2558,7 +3098,7 @@
           ],
           "incomeSourceAmounts": [
             {
-              "incomeSource": "Google",
+              "incomeSource": "Squarespace",
               "amount": 3198.3999999999996
             }
           ]
@@ -2579,25 +3119,42 @@
           ],
           "incomeSourceAmounts": [
             {
-              "incomeSource": "Google",
+              "incomeSource": "Squarespace",
               "amount": 400.33000000000004
             }
           ]
         },
         {
           "date": "2025-02-25",
-          "totalAmount": 2455.56,
+          "totalAmount": 1900.4,
           "categoryAmounts": [],
           "incomeBankAccountAmounts": [
             {
-              "incomeBankAccount": "Citibank",
-              "amount": 2455.56
+              "incomeBankAccount": "Bank of America",
+              "amount": 1900.4
             }
           ],
           "incomeSourceAmounts": [
             {
-              "incomeSource": "Google",
-              "amount": 2455.56
+              "incomeSource": "Squarespace",
+              "amount": 1900.4
+            }
+          ]
+        },
+        {
+          "date": "2025-03-04",
+          "totalAmount": 8.1,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Bank of America",
+              "amount": 8.1
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Bizum",
+              "amount": 8.1
             }
           ]
         },
@@ -2617,31 +3174,48 @@
           ],
           "incomeSourceAmounts": [
             {
-              "incomeSource": "Google",
+              "incomeSource": "Squarespace",
               "amount": 410.47
             }
           ]
         },
         {
           "date": "2025-03-25",
-          "totalAmount": 4590.57,
+          "totalAmount": 3590.57,
           "categoryAmounts": [],
           "incomeBankAccountAmounts": [
             {
-              "incomeBankAccount": "Capital One",
-              "amount": 4590.57
+              "incomeBankAccount": "Citibank",
+              "amount": 3590.57
             }
           ],
           "incomeSourceAmounts": [
             {
-              "incomeSource": "Google",
-              "amount": 4590.57
+              "incomeSource": "Squarespace",
+              "amount": 3590.57
+            }
+          ]
+        },
+        {
+          "date": "2025-04-10",
+          "totalAmount": 162.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Citibank",
+              "amount": 162.0
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Citibank",
+              "amount": 162.0
             }
           ]
         },
         {
           "date": "2025-04-24",
-          "totalAmount": 3218.99,
+          "totalAmount": 3221.5899999999997,
           "categoryAmounts": [],
           "incomeBankAccountAmounts": [
             {
@@ -2649,35 +3223,60 @@
               "amount": 163.2
             },
             {
+              "incomeBankAccount": "Bank of America",
+              "amount": 2.6
+            },
+            {
               "incomeBankAccount": "Coverflex Benefits",
               "amount": 216.67
             },
             {
-              "incomeBankAccount": "Capital One",
-              "amount": 2839.12
+              "incomeBankAccount": "Citibank",
+              "amount": 1839.12
             }
           ],
           "incomeSourceAmounts": [
             {
-              "incomeSource": "Google",
-              "amount": 3218.99
+              "incomeSource": "Bizum",
+              "amount": 2.6
+            },
+            {
+              "incomeSource": "Squarespace",
+              "amount": 2218.99
+            }
+          ]
+        },
+        {
+          "date": "2025-05-13",
+          "totalAmount": 56.7,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Citibank",
+              "amount": 56.7
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Citibank",
+              "amount": 56.7
             }
           ]
         },
         {
           "date": "2025-05-23",
-          "totalAmount": 2791.78,
+          "totalAmount": 2400.7,
           "categoryAmounts": [],
           "incomeBankAccountAmounts": [
             {
-              "incomeBankAccount": "Capital One",
-              "amount": 2791.78
+              "incomeBankAccount": "Citibank",
+              "amount": 2400.7
             }
           ],
           "incomeSourceAmounts": [
             {
-              "incomeSource": "Google",
-              "amount": 2791.78
+              "incomeSource": "Squarespace",
+              "amount": 2400.7
             }
           ]
         },
@@ -2697,8 +3296,25 @@
           ],
           "incomeSourceAmounts": [
             {
-              "incomeSource": "Google",
+              "incomeSource": "Squarespace",
               "amount": 349.27
+            }
+          ]
+        },
+        {
+          "date": "2025-06-12",
+          "totalAmount": 216.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Citibank",
+              "amount": 216.0
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Citibank",
+              "amount": 216.0
             }
           ]
         },
@@ -2718,42 +3334,42 @@
           ],
           "incomeSourceAmounts": [
             {
-              "incomeSource": "Google",
+              "incomeSource": "Squarespace",
               "amount": 410.47
             }
           ]
         },
         {
           "date": "2025-06-25",
-          "totalAmount": 4494.51,
+          "totalAmount": 3700.89,
           "categoryAmounts": [],
           "incomeBankAccountAmounts": [
             {
-              "incomeBankAccount": "Capital One",
-              "amount": 4494.51
+              "incomeBankAccount": "Citibank",
+              "amount": 3700.89
             }
           ],
           "incomeSourceAmounts": [
             {
-              "incomeSource": "Google",
-              "amount": 4494.51
+              "incomeSource": "Squarespace",
+              "amount": 3700.89
             }
           ]
         },
         {
           "date": "2025-07-24",
-          "totalAmount": 2979.64,
+          "totalAmount": 2600,
           "categoryAmounts": [],
           "incomeBankAccountAmounts": [
             {
-              "incomeBankAccount": "Capital One",
-              "amount": 2979.64
+              "incomeBankAccount": "Citibank",
+              "amount": 2600
             }
           ],
           "incomeSourceAmounts": [
             {
-              "incomeSource": "Google",
-              "amount": 2979.64
+              "incomeSource": "Squarespace",
+              "amount": 2600
             }
           ]
         },
@@ -2773,8 +3389,42 @@
           ],
           "incomeSourceAmounts": [
             {
-              "incomeSource": "Google",
+              "incomeSource": "Squarespace",
               "amount": 451.27
+            }
+          ]
+        },
+        {
+          "date": "2025-08-04",
+          "totalAmount": 2100,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Citibank",
+              "amount": 2100
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "IRS",
+              "amount": 2100
+            }
+          ]
+        },
+        {
+          "date": "2025-08-11",
+          "totalAmount": 126.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Citibank",
+              "amount": 126.0
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Citibank",
+              "amount": 126.0
             }
           ]
         },
@@ -2794,25 +3444,25 @@
           ],
           "incomeSourceAmounts": [
             {
-              "incomeSource": "Google",
+              "incomeSource": "Squarespace",
               "amount": 410.47
             }
           ]
         },
         {
           "date": "2025-08-22",
-          "totalAmount": 2771.68,
+          "totalAmount": 2100,
           "categoryAmounts": [],
           "incomeBankAccountAmounts": [
             {
-              "incomeBankAccount": "Capital One",
-              "amount": 2771.68
+              "incomeBankAccount": "Citibank",
+              "amount": 2100
             }
           ],
           "incomeSourceAmounts": [
             {
-              "incomeSource": "Google",
-              "amount": 2771.68
+              "incomeSource": "Squarespace",
+              "amount": 2100
             }
           ]
         },
@@ -2832,25 +3482,25 @@
           ],
           "incomeSourceAmounts": [
             {
-              "incomeSource": "Google",
+              "incomeSource": "Squarespace",
               "amount": 466.06
             }
           ]
         },
         {
           "date": "2025-09-25",
-          "totalAmount": 4721.72,
+          "totalAmount": 4200,
           "categoryAmounts": [],
           "incomeBankAccountAmounts": [
             {
-              "incomeBankAccount": "Capital One",
-              "amount": 4721.72
+              "incomeBankAccount": "Citibank",
+              "amount": 4200
             }
           ],
           "incomeSourceAmounts": [
             {
-              "incomeSource": "Google",
-              "amount": 4721.72
+              "incomeSource": "Squarespace",
+              "amount": 4200
             }
           ]
         },
@@ -2868,27 +3518,2457 @@
               "amount": 241.66
             },
             {
-              "incomeBankAccount": "Capital One",
+              "incomeBankAccount": "Citibank",
               "amount": 3156.98
             }
           ],
           "incomeSourceAmounts": [
             {
-              "incomeSource": "Google",
+              "incomeSource": "Squarespace",
               "amount": 3633.24
+            }
+          ]
+        },
+        {
+          "date": "2025-11-11",
+          "totalAmount": 132.3,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Citibank",
+              "amount": 132.3
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Citibank",
+              "amount": 132.3
+            }
+          ]
+        },
+        {
+          "date": "2025-11-24",
+          "totalAmount": 353.86,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Coverflex Meal",
+              "amount": 112.2
+            },
+            {
+              "incomeBankAccount": "Coverflex Benefits",
+              "amount": 241.66
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 353.86
+            }
+          ]
+        },
+        {
+          "date": "2025-11-25",
+          "totalAmount": 5737.32,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Citibank",
+              "amount": 5737.32
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 5737.32
+            }
+          ]
+        },
+        {
+          "date": "2025-12-11",
+          "totalAmount": 132.3,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Citibank",
+              "amount": 132.3
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Citibank",
+              "amount": 132.3
+            }
+          ]
+        },
+        {
+          "date": "2025-12-24",
+          "totalAmount": 353.86,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Coverflex Meal",
+              "amount": 112.2
+            },
+            {
+              "incomeBankAccount": "Coverflex Benefits",
+              "amount": 241.66
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 353.86
+            }
+          ]
+        },
+        {
+          "date": "2025-12-25",
+          "totalAmount": 1800,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [
+            {
+              "incomeBankAccount": "Citibank",
+              "amount": 1800
+            }
+          ],
+          "incomeSourceAmounts": [
+            {
+              "incomeSource": "Squarespace",
+              "amount": 1800
             }
           ]
         }
       ],
       "referenceData": []
     },
-    "updatedAt": 1761929361
+    "updatedAt": 1765094413
   },
   {
     "graphConfiguration": {
-      "id": "b71b163a-375f-46e0-ba7b-cafa882ebd0a",
+      "id": "a3721523-9403-4d0d-80c5-5d48e0e0cf13",
       "graphCreationStatus": "CREATED",
-      "customTitle": "Bills and subs last month",
+      "customTitle": "Savings in 2025",
+      "requestType": "CUSTOM_GRAPH",
+      "customGraphSettings": {
+        "dataSettings": {
+          "source": "SAVINGS",
+          "time": "CUSTOM",
+          "customStartDate": "2025-01-01",
+          "customEndDate": "2025-12-31"
+        },
+        "filterSettings": {
+          "allExpenses": true,
+          "includedCategories": [],
+          "allIncomes": true,
+          "includedIncomeBankAccounts": [],
+          "includedIncomeSources": []
+        },
+        "visualizationSettings": {
+          "type": "BAR",
+          "groupByTime": "MONTH",
+          "groupByCategory": false,
+          "groupByIncomeBankAccounts": false,
+          "groupByIncomeSources": false,
+          "cumulative": false
+        }
+      },
+      "burndownSettings": {
+        "referenceSettings": {
+          "type": "TOTAL_AVERAGE",
+          "customMonth": ""
+        },
+        "filterSettings": {
+          "allExpenses": true,
+          "includedCategories": []
+        },
+        "dataSettings": {
+          "time": "LAST_MONTH",
+          "customMonth": ""
+        }
+      },
+      "updatedAt": 1765096223
+    },
+    "graphData": {
+      "data": [
+        {
+          "date": "2025-01-01",
+          "totalAmount": -187.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-02",
+          "totalAmount": -37.31,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-03",
+          "totalAmount": -24.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-04",
+          "totalAmount": -96.93,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-05",
+          "totalAmount": -36.66,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-06",
+          "totalAmount": -21.8,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-07",
+          "totalAmount": 183.53,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-08",
+          "totalAmount": -1911.38,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-09",
+          "totalAmount": 48.96,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-10",
+          "totalAmount": -31.979999999999997,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-11",
+          "totalAmount": -28.759999999999994,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-12",
+          "totalAmount": -49.88,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-13",
+          "totalAmount": -76.56,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-14",
+          "totalAmount": -107.4,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-15",
+          "totalAmount": -32.35,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-16",
+          "totalAmount": -42.239999999999995,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-17",
+          "totalAmount": -30.150000000000002,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-18",
+          "totalAmount": -17.27,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-19",
+          "totalAmount": -21.9,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-20",
+          "totalAmount": -44.03999999999999,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-21",
+          "totalAmount": -148.35999999999999,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-22",
+          "totalAmount": -18.33,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-23",
+          "totalAmount": -43.22,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-24",
+          "totalAmount": 2497.8799999999997,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-25",
+          "totalAmount": -48.21,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-27",
+          "totalAmount": -2.19,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-28",
+          "totalAmount": -14.59,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-29",
+          "totalAmount": -6.6,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-01-30",
+          "totalAmount": -13.18,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-01",
+          "totalAmount": -855.02,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-02",
+          "totalAmount": -51.04,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-03",
+          "totalAmount": -15.91,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-04",
+          "totalAmount": -8.93,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-05",
+          "totalAmount": -14.57,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-06",
+          "totalAmount": -79.35000000000001,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-07",
+          "totalAmount": -65.63,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-08",
+          "totalAmount": -32.17,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-09",
+          "totalAmount": -135.2,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-10",
+          "totalAmount": -18.830000000000002,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-11",
+          "totalAmount": -90.15,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-12",
+          "totalAmount": -8.94,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-13",
+          "totalAmount": -32.88,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-14",
+          "totalAmount": -26.12,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-15",
+          "totalAmount": -152.68999999999997,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-16",
+          "totalAmount": -52.48,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-17",
+          "totalAmount": -0.48,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-18",
+          "totalAmount": -5.15,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-19",
+          "totalAmount": -3.06,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-20",
+          "totalAmount": -33.45,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-21",
+          "totalAmount": -15.760000000000002,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-22",
+          "totalAmount": -15.870000000000001,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-23",
+          "totalAmount": -49.16,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-24",
+          "totalAmount": 391.13000000000005,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-25",
+          "totalAmount": 1900.86,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-26",
+          "totalAmount": -4.32,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-27",
+          "totalAmount": -6.83,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-02-28",
+          "totalAmount": -23.64,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-01",
+          "totalAmount": -838.59,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-02",
+          "totalAmount": -24.119999999999997,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-03",
+          "totalAmount": -6.28,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-04",
+          "totalAmount": -1.1899999999999995,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-05",
+          "totalAmount": -7.89,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-06",
+          "totalAmount": -3.3,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-07",
+          "totalAmount": -24.779999999999998,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-08",
+          "totalAmount": -54.92999999999999,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-09",
+          "totalAmount": -26.25,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-11",
+          "totalAmount": -60.730000000000004,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-12",
+          "totalAmount": -74.81,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-13",
+          "totalAmount": 208.47,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-14",
+          "totalAmount": -19.61,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-15",
+          "totalAmount": -118.42000000000002,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-16",
+          "totalAmount": -50.6,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-17",
+          "totalAmount": -34.13,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-18",
+          "totalAmount": -45.38,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-20",
+          "totalAmount": -53.3,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-21",
+          "totalAmount": -27.45,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-22",
+          "totalAmount": -326.31,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-23",
+          "totalAmount": -55.39,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-24",
+          "totalAmount": -49.690000000000005,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-25",
+          "totalAmount": 3090.4400000000005,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-27",
+          "totalAmount": -83.05,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-28",
+          "totalAmount": -17.79,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-29",
+          "totalAmount": -347.8,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-30",
+          "totalAmount": -30.36,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-03-31",
+          "totalAmount": -53.96,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-01",
+          "totalAmount": -780.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-02",
+          "totalAmount": -11.11,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-03",
+          "totalAmount": -31.52,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-04",
+          "totalAmount": -244.13,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-05",
+          "totalAmount": -13.649999999999999,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-06",
+          "totalAmount": -1.5,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-07",
+          "totalAmount": -82.58,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-08",
+          "totalAmount": -29.64,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-09",
+          "totalAmount": -5.26,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-10",
+          "totalAmount": 120.44000000000001,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-11",
+          "totalAmount": -61.48,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-12",
+          "totalAmount": -35.95,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-13",
+          "totalAmount": -48.13999999999999,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-14",
+          "totalAmount": -127.31,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-15",
+          "totalAmount": -55.84,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-16",
+          "totalAmount": -41.959999999999994,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-17",
+          "totalAmount": -28.36,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-18",
+          "totalAmount": -18.68,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-19",
+          "totalAmount": -27.740000000000002,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-20",
+          "totalAmount": -69.78999999999999,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-21",
+          "totalAmount": -56.040000000000006,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-22",
+          "totalAmount": -37.1,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-23",
+          "totalAmount": -112.44999999999999,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-24",
+          "totalAmount": 2262.67,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-25",
+          "totalAmount": -14.12,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-26",
+          "totalAmount": -47.28,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-27",
+          "totalAmount": -10.71,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-28",
+          "totalAmount": -37.010000000000005,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-29",
+          "totalAmount": -54.07,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-04-30",
+          "totalAmount": -34.28,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-01",
+          "totalAmount": -789.06,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-02",
+          "totalAmount": -19.81,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-03",
+          "totalAmount": -33.09,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-04",
+          "totalAmount": -8.04,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-05",
+          "totalAmount": -15.79,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-06",
+          "totalAmount": -4.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-07",
+          "totalAmount": -18.869999999999997,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-08",
+          "totalAmount": -101.15,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-09",
+          "totalAmount": -44.04,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-10",
+          "totalAmount": -23.29,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-11",
+          "totalAmount": -153.63,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-12",
+          "totalAmount": -19.06,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-13",
+          "totalAmount": 34.32,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-16",
+          "totalAmount": -55.39,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-17",
+          "totalAmount": -59.099999999999994,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-18",
+          "totalAmount": -71.8,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-19",
+          "totalAmount": -90.97,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-20",
+          "totalAmount": -108.66,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-21",
+          "totalAmount": -52.32,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-22",
+          "totalAmount": -86.60000000000001,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-23",
+          "totalAmount": 2306.6300000000006,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-24",
+          "totalAmount": 252.36999999999995,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-25",
+          "totalAmount": -71.29999999999998,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-26",
+          "totalAmount": -82.69,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-27",
+          "totalAmount": -171.56,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-28",
+          "totalAmount": -5.47,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-29",
+          "totalAmount": -18.42,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-30",
+          "totalAmount": -35.57,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-31",
+          "totalAmount": -69.52,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-01",
+          "totalAmount": -831.47,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-02",
+          "totalAmount": -17.46,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-03",
+          "totalAmount": -13.27,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-05",
+          "totalAmount": -16.47,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-06",
+          "totalAmount": -41.32,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-07",
+          "totalAmount": -26.259999999999998,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-08",
+          "totalAmount": -31.23,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-09",
+          "totalAmount": -17.35,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-10",
+          "totalAmount": -74.28999999999999,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-12",
+          "totalAmount": 192.75,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-14",
+          "totalAmount": -84.39,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-15",
+          "totalAmount": -55.14,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-16",
+          "totalAmount": -4.2,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-18",
+          "totalAmount": -30.23,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-19",
+          "totalAmount": -28.15,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-20",
+          "totalAmount": -35.43,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-21",
+          "totalAmount": -15.82,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-22",
+          "totalAmount": -14.79,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-23",
+          "totalAmount": -20.1,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-24",
+          "totalAmount": 410.47,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-25",
+          "totalAmount": 1488.880000000001,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-26",
+          "totalAmount": -0.89,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-27",
+          "totalAmount": -34.8,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-28",
+          "totalAmount": -27.96,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-29",
+          "totalAmount": -20.93,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-06-30",
+          "totalAmount": -38.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-01",
+          "totalAmount": -798.13,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-02",
+          "totalAmount": -8.690000000000001,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-03",
+          "totalAmount": -29.5,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-04",
+          "totalAmount": -69.66,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-05",
+          "totalAmount": -67.97999999999999,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-06",
+          "totalAmount": -89.09,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-07",
+          "totalAmount": -4.84,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-08",
+          "totalAmount": -59.06,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-09",
+          "totalAmount": -60.08,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-10",
+          "totalAmount": -86.37,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-11",
+          "totalAmount": -23.1,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-12",
+          "totalAmount": -55.66,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-13",
+          "totalAmount": -38.44,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-14",
+          "totalAmount": -14.01,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-15",
+          "totalAmount": -8.25,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-16",
+          "totalAmount": -87.78,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-17",
+          "totalAmount": -20.009999999999998,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-18",
+          "totalAmount": -23.810000000000002,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-19",
+          "totalAmount": -19.96,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-20",
+          "totalAmount": -16.98,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-21",
+          "totalAmount": -8.3,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-22",
+          "totalAmount": -34.339999999999996,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-23",
+          "totalAmount": -2.81,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-24",
+          "totalAmount": 1900.64,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-25",
+          "totalAmount": -10.19,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-26",
+          "totalAmount": -29.86,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-27",
+          "totalAmount": -24.18,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-28",
+          "totalAmount": 421.71,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-29",
+          "totalAmount": -54.36,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-07-31",
+          "totalAmount": -5.75,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-01",
+          "totalAmount": -805.2800000000001,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-02",
+          "totalAmount": -17.54,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-03",
+          "totalAmount": -34.71,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-04",
+          "totalAmount": 1639.11,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-05",
+          "totalAmount": -13.71,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-06",
+          "totalAmount": -102.2,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-07",
+          "totalAmount": -12.92,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-08",
+          "totalAmount": -180.45,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-09",
+          "totalAmount": -53.66,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-10",
+          "totalAmount": -70.6,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-11",
+          "totalAmount": 98.46,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-12",
+          "totalAmount": -14.3,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-13",
+          "totalAmount": -29.730000000000004,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-14",
+          "totalAmount": -83.9,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-15",
+          "totalAmount": -20.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-16",
+          "totalAmount": -39.400000000000006,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-17",
+          "totalAmount": -7.77,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-18",
+          "totalAmount": -55.239999999999995,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-19",
+          "totalAmount": -16.900000000000002,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-20",
+          "totalAmount": -25.93,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-21",
+          "totalAmount": 383.69000000000005,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-22",
+          "totalAmount": 0.8199999999997,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-23",
+          "totalAmount": -47.739999999999995,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-24",
+          "totalAmount": -98.95,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-25",
+          "totalAmount": -22.01,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-26",
+          "totalAmount": -8.1,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-27",
+          "totalAmount": -15.46,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-28",
+          "totalAmount": -14.23,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-29",
+          "totalAmount": -476.17,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-30",
+          "totalAmount": -58.99,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-08-31",
+          "totalAmount": -68.81,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-01",
+          "totalAmount": -811.32,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-02",
+          "totalAmount": -41.17,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-03",
+          "totalAmount": -6.25,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-04",
+          "totalAmount": -13.53,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-05",
+          "totalAmount": -4.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-06",
+          "totalAmount": -20.81,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-07",
+          "totalAmount": -48.86,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-08",
+          "totalAmount": -33.23,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-09",
+          "totalAmount": -13.1,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-10",
+          "totalAmount": -11.18,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-11",
+          "totalAmount": -4.99,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-12",
+          "totalAmount": -21.57,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-13",
+          "totalAmount": -38.45,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-14",
+          "totalAmount": -15.15,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-15",
+          "totalAmount": -7.529999999999999,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-16",
+          "totalAmount": -18.72,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-17",
+          "totalAmount": -18.94,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-18",
+          "totalAmount": -806.46,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-20",
+          "totalAmount": -18.49,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-21",
+          "totalAmount": -77.66,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-22",
+          "totalAmount": -6.45,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-23",
+          "totalAmount": 450.82,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-24",
+          "totalAmount": -14.08,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-25",
+          "totalAmount": 2253.43,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-26",
+          "totalAmount": -7.18,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-27",
+          "totalAmount": -141.53,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-28",
+          "totalAmount": -46.89,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-29",
+          "totalAmount": -16.71,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-09-30",
+          "totalAmount": -1.0,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-01",
+          "totalAmount": -951.62,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-02",
+          "totalAmount": -98.28,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-03",
+          "totalAmount": -151.32,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-04",
+          "totalAmount": -52.129999999999995,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-05",
+          "totalAmount": -7.6000000000000005,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-06",
+          "totalAmount": -64.6,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-07",
+          "totalAmount": -103.5,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-08",
+          "totalAmount": -70.17,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-09",
+          "totalAmount": -33.41,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-10",
+          "totalAmount": -30.39,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-11",
+          "totalAmount": -22.32,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-12",
+          "totalAmount": -12.06,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-13",
+          "totalAmount": -6.54,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-14",
+          "totalAmount": -26.18,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-15",
+          "totalAmount": -80.37,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-17",
+          "totalAmount": -4.4,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-18",
+          "totalAmount": -74.95,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-19",
+          "totalAmount": -13.739999999999998,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-20",
+          "totalAmount": -24.13,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-21",
+          "totalAmount": -28.67,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-22",
+          "totalAmount": -12.99,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-23",
+          "totalAmount": -16.81,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-24",
+          "totalAmount": 3100.29,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-25",
+          "totalAmount": -49.25,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-26",
+          "totalAmount": -47.81,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-27",
+          "totalAmount": -119.73,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-28",
+          "totalAmount": -55.54,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-29",
+          "totalAmount": -15.98,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-30",
+          "totalAmount": -8.67,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-10-31",
+          "totalAmount": -37.92,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-01",
+          "totalAmount": -795.53,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-02",
+          "totalAmount": -326.77000000000004,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-04",
+          "totalAmount": -5.13,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-05",
+          "totalAmount": -32.9,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-06",
+          "totalAmount": -4.59,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-07",
+          "totalAmount": -43.730000000000004,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-08",
+          "totalAmount": -23.96,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-09",
+          "totalAmount": -22.84,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-10",
+          "totalAmount": -6.99,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-11",
+          "totalAmount": 24.950000000000017,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-12",
+          "totalAmount": -30.709999999999997,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-13",
+          "totalAmount": -57.24,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-14",
+          "totalAmount": -37.98,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-15",
+          "totalAmount": -5.93,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-16",
+          "totalAmount": -8.42,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-17",
+          "totalAmount": -33.56,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-18",
+          "totalAmount": -3.95,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-19",
+          "totalAmount": -10.8,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-20",
+          "totalAmount": -163.22,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-21",
+          "totalAmount": -6.25,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-22",
+          "totalAmount": -20.68,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-23",
+          "totalAmount": -48.12,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-24",
+          "totalAmount": 333.66,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-25",
+          "totalAmount": 2429.38,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-26",
+          "totalAmount": -15.02,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-27",
+          "totalAmount": -103.96000000000001,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-28",
+          "totalAmount": -15.35,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-29",
+          "totalAmount": -174.32000000000002,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-30",
+          "totalAmount": -120.44,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-12-01",
+          "totalAmount": -1101.17,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-12-02",
+          "totalAmount": 2200.83999999999999,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-12-03",
+          "totalAmount": -2.93,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-12-05",
+          "totalAmount": -24.49,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-12-06",
+          "totalAmount": -10.04,
+          "categoryAmounts": [],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        }
+      ],
+      "referenceData": []
+    },
+    "updatedAt": 1765096223
+  },
+  {
+    "graphConfiguration": {
+      "id": "3d18c717-b1cb-413b-936d-6d19607febfb",
+      "graphCreationStatus": "CREATED",
+      "customTitle": "Supermarket burndown for March",
       "requestType": "BURNDOWN",
       "customGraphSettings": {
         "dataSettings": {
@@ -2921,35 +6001,35 @@
         "filterSettings": {
           "allExpenses": false,
           "includedCategories": [
-            "Bills & Subscriptions"
+            "Supermarket"
           ]
         },
         "dataSettings": {
-          "time": "LAST_MONTH",
-          "customMonth": ""
+          "time": "CUSTOM",
+          "customMonth": "2025-08"
         }
       },
-      "updatedAt": 1761811852
+      "updatedAt": 1765096061
     },
     "graphData": {
       "data": [
         {
           "date": "1",
-          "totalAmount": 780.02,
+          "totalAmount": 16.5,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "2",
-          "totalAmount": 2.99,
+          "totalAmount": 0.0,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "3",
-          "totalAmount": 0.0,
+          "totalAmount": 34.71,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
@@ -2963,14 +6043,14 @@
         },
         {
           "date": "5",
-          "totalAmount": 0.0,
+          "totalAmount": 13.71,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "6",
-          "totalAmount": 0.0,
+          "totalAmount": 2.2,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
@@ -2991,21 +6071,21 @@
         },
         {
           "date": "9",
-          "totalAmount": 0.0,
+          "totalAmount": 19.21,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "10",
-          "totalAmount": 0.0,
+          "totalAmount": 0.88,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "11",
-          "totalAmount": 15.5,
+          "totalAmount": 11.51,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
@@ -3019,21 +6099,21 @@
         },
         {
           "date": "13",
-          "totalAmount": 0.0,
+          "totalAmount": 7.880000000000001,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "14",
-          "totalAmount": 21.23,
+          "totalAmount": 0.0,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "15",
-          "totalAmount": 21.99,
+          "totalAmount": 0.0,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
@@ -3047,35 +6127,35 @@
         },
         {
           "date": "17",
-          "totalAmount": 0.0,
+          "totalAmount": 1.77,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "18",
-          "totalAmount": 15.0,
+          "totalAmount": 12.84,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "19",
-          "totalAmount": 0.0,
+          "totalAmount": 16.900000000000002,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "20",
-          "totalAmount": 16.99,
+          "totalAmount": 11.94,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "21",
-          "totalAmount": 0.0,
+          "totalAmount": 6.779999999999999,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
@@ -3096,35 +6176,35 @@
         },
         {
           "date": "24",
-          "totalAmount": 0.0,
+          "totalAmount": 6.2,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "25",
-          "totalAmount": 0.0,
+          "totalAmount": 22.01,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "26",
-          "totalAmount": 0.0,
+          "totalAmount": 8.1,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "27",
-          "totalAmount": 0.0,
+          "totalAmount": 15.46,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "28",
-          "totalAmount": 32.33,
+          "totalAmount": 12.73,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
@@ -3139,6 +6219,13 @@
         {
           "date": "30",
           "totalAmount": 0.0,
+          "categoryAmounts": null,
+          "incomeBankAccountAmounts": null,
+          "incomeSourceAmounts": null
+        },
+        {
+          "date": "31",
+          "totalAmount": 26.24,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
@@ -3147,252 +6234,255 @@
       "referenceData": [
         {
           "date": "1",
-          "totalAmount": 650.03,
+          "totalAmount": 9.30076923076923,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "2",
-          "totalAmount": 132.86541666666653,
+          "totalAmount": 10.544230769230769,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "3",
-          "totalAmount": 0.6666666666666666,
+          "totalAmount": 10.527692307692309,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "4",
-          "totalAmount": 0.0,
+          "totalAmount": 9.787692307692307,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "5",
-          "totalAmount": 0.0,
+          "totalAmount": 6.921153846153844,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "6",
-          "totalAmount": 2.74875,
+          "totalAmount": 11.134615384615385,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "7",
-          "totalAmount": 4.164999999999999,
+          "totalAmount": 10.616923076923078,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "8",
-          "totalAmount": 28.680000000000003,
+          "totalAmount": 9.525384615384615,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "9",
-          "totalAmount": 15.4425,
+          "totalAmount": 11.10307692307692,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "10",
-          "totalAmount": 10.649583333333332,
+          "totalAmount": 6.116923076923077,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "11",
-          "totalAmount": 4.451666666666667,
+          "totalAmount": 11.958846153846157,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "12",
-          "totalAmount": 16.310833333333335,
+          "totalAmount": 8.875384615384615,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "13",
-          "totalAmount": 19.712083333333332,
+          "totalAmount": 11.204615384615384,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "14",
-          "totalAmount": 22.095000000000002,
+          "totalAmount": 8.308076923076923,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "15",
-          "totalAmount": 7.409999999999999,
+          "totalAmount": 13.723846153846155,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "16",
-          "totalAmount": 6.024583333333333,
+          "totalAmount": 6.66576923076923,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "17",
-          "totalAmount": 4.480416666666667,
+          "totalAmount": 7.288461538461538,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "18",
-          "totalAmount": 6.322083333333334,
+          "totalAmount": 7.964230769230772,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "19",
-          "totalAmount": 0.0,
+          "totalAmount": 8.910384615384613,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "20",
-          "totalAmount": 17.073333333333338,
+          "totalAmount": 11.378076923076922,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "21",
-          "totalAmount": 0.0,
+          "totalAmount": 8.010384615384615,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "22",
-          "totalAmount": 0.7083333333333334,
+          "totalAmount": 7.383846153846155,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "23",
-          "totalAmount": 2.2758333333333334,
+          "totalAmount": 9.907692307692306,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "24",
-          "totalAmount": 1.6645833333333335,
+          "totalAmount": 4.231538461538461,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "25",
-          "totalAmount": 48.627916666666664,
+          "totalAmount": 9.080769230769231,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "26",
-          "totalAmount": 0.5,
+          "totalAmount": 8.039230769230768,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "27",
-          "totalAmount": 7.41125,
+          "totalAmount": 7.748846153846155,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "28",
-          "totalAmount": 4.516666666666667,
+          "totalAmount": 10.367692307692305,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "29",
-          "totalAmount": 1.3133333333333332,
+          "totalAmount": 10.65230769230769,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "30",
-          "totalAmount": 0.5,
+          "totalAmount": 6.811538461538462,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         },
         {
           "date": "31",
-          "totalAmount": 0.5,
+          "totalAmount": 5.686923076923078,
           "categoryAmounts": null,
           "incomeBankAccountAmounts": null,
           "incomeSourceAmounts": null
         }
       ]
     },
-    "updatedAt": 1761811852
+    "updatedAt": 1765096061
   },
   {
     "graphConfiguration": {
-      "id": "c7954f9d-b6e4-4c3c-b075-ddbc99d491a9",
+      "id": "58d626c3-2458-4688-958a-1fd3625efc9b",
       "graphCreationStatus": "CREATED",
-      "customTitle": "Example custom title",
+      "customTitle": "Supermarket vs Food out expenses over one month",
       "requestType": "CUSTOM_GRAPH",
       "customGraphSettings": {
         "dataSettings": {
-          "source": "INCOMES",
-          "time": "LAST_YEAR",
-          "customStartDate": "",
-          "customEndDate": ""
+          "source": "EXPENSES",
+          "time": "CUSTOM",
+          "customStartDate": "2025-11-01",
+          "customEndDate": "2025-12-01"
         },
         "filterSettings": {
-          "allExpenses": true,
-          "includedCategories": [],
+          "allExpenses": false,
+          "includedCategories": [
+            "Supermarket",
+            "Food Out"
+          ],
           "allIncomes": true,
           "includedIncomeBankAccounts": [],
           "includedIncomeSources": []
         },
         "visualizationSettings": {
-          "type": "BAR",
-          "groupByTime": "MONTH",
-          "groupByCategory": false,
+          "type": "LINE",
+          "groupByTime": "DAY",
+          "groupByCategory": true,
           "groupByIncomeBankAccounts": false,
-          "groupByIncomeSources": true,
-          "cumulative": false
+          "groupByIncomeSources": false,
+          "cumulative": true
         }
       },
       "burndownSettings": {
@@ -3409,519 +6499,591 @@
           "customMonth": ""
         }
       },
-      "updatedAt": 1761924979
+      "updatedAt": 1765096989
     },
     "graphData": {
       "data": [
         {
-          "date": "2025-01-07",
-          "totalAmount": 201.66,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
+          "date": "2025-11-01",
+          "totalAmount": 15.53,
+          "categoryAmounts": [
             {
-              "incomeBankAccount": "Capital One",
-              "amount": 201.66
+              "category": "Supermarket",
+              "amount": 15.53
             }
           ],
-          "incomeSourceAmounts": [
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-02",
+          "totalAmount": 23.77,
+          "categoryAmounts": [
             {
-              "incomeSource": "Capital One",
-              "amount": 114.3
+              "category": "Supermarket",
+              "amount": 5.72
             },
             {
-              "incomeSource": "AdvanceCare",
-              "amount": 87.36
-            }
-          ]
-        },
-        {
-          "date": "2025-01-08",
-          "totalAmount": 11.0,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Citibank",
-              "amount": 11.0
+              "category": "Food Out",
+              "amount": 18.05
             }
           ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Selling",
-              "amount": 11.0
-            }
-          ]
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
         },
         {
-          "date": "2025-01-09",
-          "totalAmount": 82.0,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
+          "date": "2025-11-04",
+          "totalAmount": 5.13,
+          "categoryAmounts": [
             {
-              "incomeBankAccount": "Citibank",
-              "amount": 82.0
+              "category": "Supermarket",
+              "amount": 5.13
             }
           ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Selling",
-              "amount": 82.0
-            }
-          ]
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
         },
         {
-          "date": "2025-01-24",
-          "totalAmount": 3198.3999999999996,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
+          "date": "2025-11-05",
+          "totalAmount": 32.9,
+          "categoryAmounts": [
             {
-              "incomeBankAccount": "Coverflex Meal",
-              "amount": 211.2
+              "category": "Supermarket",
+              "amount": 32.9
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-06",
+          "totalAmount": 4.59,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 4.59
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-07",
+          "totalAmount": 6.74,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 6.74
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-08",
+          "totalAmount": 21.96,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 21.96
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-09",
+          "totalAmount": 16.59,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 16.59
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-10",
+          "totalAmount": 6.99,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 6.99
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-12",
+          "totalAmount": 30.709999999999997,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 30.709999999999997
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-13",
+          "totalAmount": 27.89,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 27.89
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-15",
+          "totalAmount": 5.93,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 5.93
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-16",
+          "totalAmount": 8.42,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 8.42
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-17",
+          "totalAmount": 18.56,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 18.56
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-18",
+          "totalAmount": 3.95,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 3.95
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-19",
+          "totalAmount": 10.8,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 10.8
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-20",
+          "totalAmount": 12.66,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 12.66
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-22",
+          "totalAmount": 20.68,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 20.68
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-23",
+          "totalAmount": 6.77,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 6.77
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-24",
+          "totalAmount": 1.7,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 1.7
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-25",
+          "totalAmount": 7.94,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 7.94
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-26",
+          "totalAmount": 15.02,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 15.02
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-27",
+          "totalAmount": 1.34,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 1.34
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-28",
+          "totalAmount": 15.35,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 15.35
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-29",
+          "totalAmount": 53.85,
+          "categoryAmounts": [
+            {
+              "category": "Food Out",
+              "amount": 53.85
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-11-30",
+          "totalAmount": 81.64999999999999,
+          "categoryAmounts": [
+            {
+              "category": "Supermarket",
+              "amount": 5.65
             },
             {
-              "incomeBankAccount": "Citibank",
-              "amount": 2778.87
-            },
-            {
-              "incomeBankAccount": "Coverflex Benefits",
-              "amount": 208.33
+              "category": "Food Out",
+              "amount": 76.0
             }
           ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Google",
-              "amount": 3198.3999999999996
-            }
-          ]
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
         },
         {
-          "date": "2025-02-24",
-          "totalAmount": 400.33000000000004,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
+          "date": "2025-12-01",
+          "totalAmount": 36.7,
+          "categoryAmounts": [
             {
-              "incomeBankAccount": "Coverflex Meal",
-              "amount": 192.0
-            },
-            {
-              "incomeBankAccount": "Coverflex Benefits",
-              "amount": 208.33
+              "category": "Food Out",
+              "amount": 36.7
             }
           ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Google",
-              "amount": 400.33000000000004
-            }
-          ]
-        },
-        {
-          "date": "2025-02-25",
-          "totalAmount": 2455.56,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Citibank",
-              "amount": 2455.56
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Google",
-              "amount": 2455.56
-            }
-          ]
-        },
-        {
-          "date": "2025-03-04",
-          "totalAmount": 8.1,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Citibank",
-              "amount": 8.1
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Bizum",
-              "amount": 8.1
-            }
-          ]
-        },
-        {
-          "date": "2025-03-13",
-          "totalAmount": 410.47,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Coverflex Meal",
-              "amount": 193.8
-            },
-            {
-              "incomeBankAccount": "Coverflex Benefits",
-              "amount": 216.67
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Google",
-              "amount": 410.47
-            }
-          ]
-        },
-        {
-          "date": "2025-03-25",
-          "totalAmount": 4590.57,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Capital One",
-              "amount": 4590.57
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Google",
-              "amount": 4590.57
-            }
-          ]
-        },
-        {
-          "date": "2025-04-10",
-          "totalAmount": 162.0,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Capital One",
-              "amount": 162.0
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Capital One",
-              "amount": 162.0
-            }
-          ]
-        },
-        {
-          "date": "2025-04-24",
-          "totalAmount": 3221.5899999999997,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Coverflex Meal",
-              "amount": 163.2
-            },
-            {
-              "incomeBankAccount": "Citibank",
-              "amount": 2.6
-            },
-            {
-              "incomeBankAccount": "Coverflex Benefits",
-              "amount": 216.67
-            },
-            {
-              "incomeBankAccount": "Capital One",
-              "amount": 2839.12
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Bizum",
-              "amount": 2.6
-            },
-            {
-              "incomeSource": "Google",
-              "amount": 3218.99
-            }
-          ]
-        },
-        {
-          "date": "2025-05-13",
-          "totalAmount": 56.7,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Capital One",
-              "amount": 56.7
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Capital One",
-              "amount": 56.7
-            }
-          ]
-        },
-        {
-          "date": "2025-05-23",
-          "totalAmount": 2791.78,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Capital One",
-              "amount": 2791.78
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Google",
-              "amount": 2791.78
-            }
-          ]
-        },
-        {
-          "date": "2025-05-24",
-          "totalAmount": 349.27,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Coverflex Meal",
-              "amount": 132.6
-            },
-            {
-              "incomeBankAccount": "Coverflex Benefits",
-              "amount": 216.67
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Google",
-              "amount": 349.27
-            }
-          ]
-        },
-        {
-          "date": "2025-06-12",
-          "totalAmount": 216.0,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Capital One",
-              "amount": 216.0
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Capital One",
-              "amount": 216.0
-            }
-          ]
-        },
-        {
-          "date": "2025-06-24",
-          "totalAmount": 410.47,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Coverflex Meal",
-              "amount": 193.8
-            },
-            {
-              "incomeBankAccount": "Coverflex Benefits",
-              "amount": 216.67
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Google",
-              "amount": 410.47
-            }
-          ]
-        },
-        {
-          "date": "2025-06-25",
-          "totalAmount": 4494.51,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Capital One",
-              "amount": 4494.51
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Google",
-              "amount": 4494.51
-            }
-          ]
-        },
-        {
-          "date": "2025-07-24",
-          "totalAmount": 2979.64,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Capital One",
-              "amount": 2979.64
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Google",
-              "amount": 2979.64
-            }
-          ]
-        },
-        {
-          "date": "2025-07-28",
-          "totalAmount": 451.27,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Coverflex Meal",
-              "amount": 234.6
-            },
-            {
-              "incomeBankAccount": "Coverflex Benefits",
-              "amount": 216.67
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Google",
-              "amount": 451.27
-            }
-          ]
-        },
-        {
-          "date": "2025-08-04",
-          "totalAmount": 1639.11,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Capital One",
-              "amount": 1639.11
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "IRS",
-              "amount": 1639.11
-            }
-          ]
-        },
-        {
-          "date": "2025-08-11",
-          "totalAmount": 126.0,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Capital One",
-              "amount": 126.0
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Capital One",
-              "amount": 126.0
-            }
-          ]
-        },
-        {
-          "date": "2025-08-21",
-          "totalAmount": 410.47,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Coverflex Meal",
-              "amount": 193.8
-            },
-            {
-              "incomeBankAccount": "Coverflex Benefits",
-              "amount": 216.67
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Google",
-              "amount": 410.47
-            }
-          ]
-        },
-        {
-          "date": "2025-08-22",
-          "totalAmount": 2771.68,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Capital One",
-              "amount": 2771.68
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Google",
-              "amount": 2771.68
-            }
-          ]
-        },
-        {
-          "date": "2025-09-23",
-          "totalAmount": 466.06,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Coverflex Meal",
-              "amount": 224.4
-            },
-            {
-              "incomeBankAccount": "Coverflex Benefits",
-              "amount": 241.66
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Google",
-              "amount": 466.06
-            }
-          ]
-        },
-        {
-          "date": "2025-09-25",
-          "totalAmount": 4721.72,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Capital One",
-              "amount": 4721.72
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Google",
-              "amount": 4721.72
-            }
-          ]
-        },
-        {
-          "date": "2025-10-24",
-          "totalAmount": 3633.24,
-          "categoryAmounts": [],
-          "incomeBankAccountAmounts": [
-            {
-              "incomeBankAccount": "Coverflex Meal",
-              "amount": 234.6
-            },
-            {
-              "incomeBankAccount": "Coverflex Benefits",
-              "amount": 241.66
-            },
-            {
-              "incomeBankAccount": "Capital One",
-              "amount": 3156.98
-            }
-          ],
-          "incomeSourceAmounts": [
-            {
-              "incomeSource": "Google",
-              "amount": 3633.24
-            }
-          ]
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
         }
       ],
       "referenceData": []
     },
-    "updatedAt": 1761841484
+    "updatedAt": 1764596253
+  },
+  {
+    "graphConfiguration": {
+      "id": "cf3a9c29-add5-4d34-8605-6de099453e8e",
+      "graphCreationStatus": "CREATED",
+      "customTitle": "Coffee expenses on vacation",
+      "requestType": "CUSTOM_GRAPH",
+      "customGraphSettings": {
+        "dataSettings": {
+          "source": "EXPENSES",
+          "time": "CUSTOM",
+          "customStartDate": "2025-05-01",
+          "customEndDate": "2025-05-30"
+        },
+        "filterSettings": {
+          "allExpenses": false,
+          "includedCategories": [
+            "Coffee"
+          ],
+          "allIncomes": true,
+          "includedIncomeBankAccounts": [],
+          "includedIncomeSources": []
+        },
+        "visualizationSettings": {
+          "type": "LINE",
+          "groupByTime": "DAY",
+          "groupByCategory": false,
+          "groupByIncomeBankAccounts": false,
+          "groupByIncomeSources": false,
+          "cumulative": true
+        }
+      },
+      "burndownSettings": {
+        "referenceSettings": {
+          "type": "TOTAL_AVERAGE",
+          "customMonth": ""
+        },
+        "filterSettings": {
+          "allExpenses": true,
+          "includedCategories": []
+        },
+        "dataSettings": {
+          "time": "LAST_MONTH",
+          "customMonth": ""
+        }
+      },
+      "updatedAt": 1764139028
+    },
+    "graphData": {
+      "data": [
+        {
+          "date": "2025-05-01",
+          "totalAmount": 2.0,
+          "categoryAmounts": [
+            {
+              "category": "Coffee",
+              "amount": 2.0
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-03",
+          "totalAmount": 13.9,
+          "categoryAmounts": [
+            {
+              "category": "Coffee",
+              "amount": 13.9
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-10",
+          "totalAmount": 1.4,
+          "categoryAmounts": [
+            {
+              "category": "Coffee",
+              "amount": 1.4
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-12",
+          "totalAmount": 1.8,
+          "categoryAmounts": [
+            {
+              "category": "Coffee",
+              "amount": 1.8
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-16",
+          "totalAmount": 2.3,
+          "categoryAmounts": [
+            {
+              "category": "Coffee",
+              "amount": 2.3
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-17",
+          "totalAmount": 9.3,
+          "categoryAmounts": [
+            {
+              "category": "Coffee",
+              "amount": 9.3
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-18",
+          "totalAmount": 4.5,
+          "categoryAmounts": [
+            {
+              "category": "Coffee",
+              "amount": 4.5
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-19",
+          "totalAmount": 4.5,
+          "categoryAmounts": [
+            {
+              "category": "Coffee",
+              "amount": 4.5
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-20",
+          "totalAmount": 6.8,
+          "categoryAmounts": [
+            {
+              "category": "Coffee",
+              "amount": 6.8
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-21",
+          "totalAmount": 5.3,
+          "categoryAmounts": [
+            {
+              "category": "Coffee",
+              "amount": 5.3
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-22",
+          "totalAmount": 3.8,
+          "categoryAmounts": [
+            {
+              "category": "Coffee",
+              "amount": 3.8
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-23",
+          "totalAmount": 4.5,
+          "categoryAmounts": [
+            {
+              "category": "Coffee",
+              "amount": 4.5
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-24",
+          "totalAmount": 3.2,
+          "categoryAmounts": [
+            {
+              "category": "Coffee",
+              "amount": 3.2
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-25",
+          "totalAmount": 9.4,
+          "categoryAmounts": [
+            {
+              "category": "Coffee",
+              "amount": 9.4
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-26",
+          "totalAmount": 4.2,
+          "categoryAmounts": [
+            {
+              "category": "Coffee",
+              "amount": 4.2
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        },
+        {
+          "date": "2025-05-27",
+          "totalAmount": 4.95,
+          "categoryAmounts": [
+            {
+              "category": "Coffee",
+              "amount": 4.95
+            }
+          ],
+          "incomeBankAccountAmounts": [],
+          "incomeSourceAmounts": []
+        }
+      ],
+      "referenceData": []
+    },
+    "updatedAt": 1764138964
   }
 ]
