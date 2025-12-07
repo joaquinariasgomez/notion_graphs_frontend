@@ -30,11 +30,10 @@ function LandingPageFooter() {
         </div>
 
         <div className='footer__section'>
-          <h3>Company</h3>
+          <h3>Contact</h3>
           <ul>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#blog">Blog</a></li>
+            <li><a href="mailto:notionwallet@gmail.com">notionwallet@gmail.com</a></li>
+            {/* <li><a href='https://www.instagram.com/notionwallet' target='_blank' rel='noopener noreferrer'>Instagram</a></li> */}
           </ul>
         </div>
 
