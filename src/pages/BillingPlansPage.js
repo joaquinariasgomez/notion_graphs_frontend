@@ -40,6 +40,7 @@ function BillingPlansPage() {
       const priceId = billingCycle === 'monthly'
         ? BillingConstants.StripeMonthlyPlusPriceId
         : BillingConstants.StripeYearlyPlusPriceId;
+      console.log("Price id: ", priceId);
 
       const apiResponse = await createStripeCheckoutSession(userJWTCookie, priceId);
       if (apiResponse && apiResponse.checkoutUrl) {
