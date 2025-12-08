@@ -24,6 +24,7 @@ function LandingPageFooter() {
           <h3>Product</h3>
           <ul>
             <li><a href="/#features">Features</a></li>
+            <li><a href="/#demo">How it works (demo)</a></li>
             <li><a href="/#how-connection-works">How to connect to Notion</a></li>
             <li><a href="/#pricing">Pricing</a></li>
           </ul>

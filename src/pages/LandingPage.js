@@ -12,6 +12,7 @@ import HowConnectionWorksSection from '../components/HowConnectionWorksSection';
 import PricingSection from '../components/PricingSection';
 import { useGlobalStateValue } from '../context/GlobalStateProvider';
 import { actionTypes } from '../context/globalReducer';
+import DemoVideoSection from '../DemoVideoSection';
 
 function LandingPage() {
 
@@ -136,6 +137,7 @@ function LandingPage() {
           </LandingPageCarrousel>
         </main >
         <FeaturesSection />
+        <DemoVideoSection />
         <HowConnectionWorksSection />
         <PricingSection />
         <LandingPageFooter />
