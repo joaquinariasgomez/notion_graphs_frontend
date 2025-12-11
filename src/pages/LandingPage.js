@@ -118,14 +118,14 @@ function LandingPage() {
                   <span>Access your dashboard</span>
                 </button>
               ) : (
-                <>
-                  <button className="login-button-2" onClick={handleGoToLoginPage}>
+                <div className='landing-page-login-button'>
+                  <button className="dashboard-button" onClick={handleGoToLoginPage}>
                     <span>Login</span>
                   </button>
                   <div className='small-subtext'>
                     <p>No signup required</p>
                   </div>
-                </>
+                </div>
               )}
             </div>
 
