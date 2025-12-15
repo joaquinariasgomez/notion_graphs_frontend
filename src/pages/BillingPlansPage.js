@@ -12,7 +12,7 @@ function BillingPlansPage() {
   // Context
   const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
 
-  const [isCreatingStripeCheckoutPage, setIsCreatingStripeCheckoutPage] = useState(false);
+  const [processingPriceId, setProcessingPriceId] = useState(null);
   const [currentPlan, setCurrentPlan] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [billingPeriod, setBillingPeriod] = useState('monthly'); // 'monthly' or 'yearly'
@@ -36,7 +36,7 @@ function BillingPlansPage() {
 
   const handleUpgrade = async (priceId) => {
     try {
-      setIsCreatingStripeCheckoutPage(true);
+      setProcessingPriceId(priceId);
       const apiResponse = await createStripeCheckoutSession(userJWTCookie, priceId);
       if (apiResponse && apiResponse.checkoutUrl) {
         // Redirect to Stripe Checkout page
@@ -48,7 +48,7 @@ function BillingPlansPage() {
       console.error('Error creating checkout session:', error);
       alert('Failed to initiate upgrade. Please try again.');
     } finally {
-      setIsCreatingStripeCheckoutPage(false);
+      setProcessingPriceId(null);
     }
   };
 
@@ -177,9 +177,9 @@ function BillingPlansPage() {
         <button
           className={`cta-button primary ${isCurrentPlan ? 'current-plan' : ''}`}
           onClick={isCurrentPlan ? undefined : () => handleUpgrade(plan.priceId)}
-          disabled={isCurrentPlan || isCreatingStripeCheckoutPage || plan.billingPlan === BillingPlan.FREE}
+          disabled={isCurrentPlan || processingPriceId !== null || plan.billingPlan === BillingPlan.FREE}
         >
-          {isCreatingStripeCheckoutPage && !isCurrentPlan ? 'Processing...' : (isCurrentPlan ? 'Your current plan' : plan.cta)}
+          {processingPriceId === plan.priceId ? 'Processing...' : (isCurrentPlan ? 'Your current plan' : plan.cta)}
         </button>
         {plan.trialInfo && !isCurrentPlan && (
           <p className="trial-info">{plan.trialInfo}</p>
