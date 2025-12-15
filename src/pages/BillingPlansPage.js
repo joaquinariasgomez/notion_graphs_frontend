@@ -12,7 +12,6 @@ function BillingPlansPage() {
   // Context
   const [{ userJWTCookie }, dispatch] = useGlobalStateValue();
 
-  const [billingCycle, setBillingCycle] = useState('monthly'); // 'monthly' or 'yearly'
   const [isCreatingStripeCheckoutPage, setIsCreatingStripeCheckoutPage] = useState(false);
   const [currentPlan, setCurrentPlan] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -34,13 +33,9 @@ function BillingPlansPage() {
     }
   };
 
-  const handleUpgrade = async () => {
+  const handleUpgrade = async (priceId) => {
     try {
       setIsCreatingStripeCheckoutPage(true);
-      const priceId = billingCycle === 'monthly'
-        ? BillingConstants.StripeMonthlyPlusPriceId
-        : BillingConstants.StripeYearlyPlusPriceId;
-
       const apiResponse = await createStripeCheckoutSession(userJWTCookie, priceId);
       if (apiResponse && apiResponse.checkoutUrl) {
         // Redirect to Stripe Checkout page
@@ -67,7 +62,6 @@ function BillingPlansPage() {
       name: 'Notion Wallet Free',
       billingPlan: BillingPlan.FREE,
       price: '0',
-      period: 'month',
       features: [
         { text: '📊\u00A0\u00A0Up to 3 charts in your dashboard' },
         { text: '📊\u00A0\u00A0Up to 20 chart creations' },
@@ -81,8 +75,28 @@ function BillingPlansPage() {
     {
       name: 'Notion Wallet Plus',
       billingPlan: BillingPlan.PLUS,
-      price: billingCycle === 'monthly' ? '4.99' : '49.90',
-      period: billingCycle === 'monthly' ? 'month' : 'year',
+      oldPrice: '49.90',
+      price: '25',
+      features: [
+        { text: '📊\u00A0\u00A0<i>Up to 50</i> charts in your dashboard' },
+        { text: '📊\u00A0\u00A0<i>Unlimited</i> chart creations' },
+        { text: '🔄\u00A0\u00A0<i>Unlimited</i> chart updates' },
+        { text: '📈\u00A0\u00A0Show statistics (average, standard deviation) in your charts' },
+        { text: '⚙️\u00A0\u00A0Advanced chart customization' },
+        { text: '🔥\u00A0\u00A0Burndown charts' },
+        { text: '✉️\u00A0\u00A0Priority email support' },
+        // TODO JOAQUIN: add Coming soon section
+      ],
+      isSuggested: false,
+      cta: 'Upgrade to Plus',
+      trialInfo: '7-day free trial · Cancel anytime',
+      priceId: BillingConstants.StripeYearlyPlusPriceId
+    },
+    {
+      name: 'Notion Wallet Plus',
+      billingPlan: BillingPlan.PLUS,
+      oldPrice: '79.90',
+      price: '47',
       features: [
         { text: '📊\u00A0\u00A0<i>Up to 50</i> charts in your dashboard' },
         { text: '📊\u00A0\u00A0<i>Unlimited</i> chart creations' },
@@ -95,8 +109,8 @@ function BillingPlansPage() {
       ],
       isSuggested: true,
       cta: 'Upgrade to Plus',
-      savings: billingCycle === 'yearly' ? 'Save €9.98 / year' : null,
-      trialInfo: '7-day free trial · Cancel anytime'
+      trialInfo: '7-day free trial · Cancel anytime',
+      priceId: BillingConstants.StripeLifetimePlusPriceId
     }
   ];
 
@@ -133,22 +147,6 @@ function BillingPlansPage() {
           <p>Choose the plan that fits your needs. Upgrade or cancel anytime.</p>
         </div>
 
-        <div className="billing-toggle">
-          <button
-            className={billingCycle === 'monthly' ? 'active' : ''}
-            onClick={() => setBillingCycle('monthly')}
-          >
-            Monthly
-          </button>
-          <button
-            className={billingCycle === 'yearly' ? 'active' : ''}
-            onClick={() => setBillingCycle('yearly')}
-          >
-            Yearly
-            <span className="savings-badge">Save 17%</span>
-          </button>
-        </div>
-
         <div className="pricing-grid">
           {plans.map((plan, index) => {
             const isCurrentPlan = currentPlan === plan.billingPlan;
@@ -163,16 +161,20 @@ function BillingPlansPage() {
                 <div className="pricing-card-header">
                   <h3>{plan.name}</h3>
                   <div className="price">
+                    {plan.oldPrice && (
+                      <span className="old-price">€{plan.oldPrice}</span>
+                    )}
                     <span className="currency">€</span>
                     <span className="amount">{plan.price}</span>
-                    <span className="period">/{plan.period}</span>
                   </div>
-                  {plan.savings && <div className="savings-text">{plan.savings}</div>}
+                  {plan.price !== '0' && (
+                    <p className="one-time-payment">One-time payment. No subscription</p>
+                  )}
                 </div>
 
                 <button
                   className={`cta-button primary ${isCurrentPlan ? 'current-plan' : ''}`}
-                  onClick={isCurrentPlan ? undefined : handleUpgrade}
+                  onClick={isCurrentPlan ? undefined : () => handleUpgrade(plan.priceId)}
                   disabled={isCurrentPlan || isCreatingStripeCheckoutPage || plan.billingPlan === BillingPlan.FREE}
                 >
                   {isCreatingStripeCheckoutPage && !isCurrentPlan ? 'Processing...' : (isCurrentPlan ? 'Your current plan' : plan.cta)}

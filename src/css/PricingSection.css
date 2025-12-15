@@ -47,60 +47,18 @@
   margin: 0;
 }
 
-.billing-toggle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 48px;
-  background-color: #f0f2f5;
-  border-radius: 38px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 6px;
-  padding-right: 6px;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.billing-toggle button {
-  padding: 10px 24px;
-  border: none;
-  background: transparent;
-  border-radius: 38px;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--text-light);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.billing-toggle button.active {
-  background-color: white;
-  color: var(--text-color);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.savings-badge {
-  font-size: 0.75rem;
-  padding: 2px 8px;
-  background: linear-gradient(135deg, #1E8E3E 0%, #15692E 100%);
-  color: white;
-  border-radius: 6px;
-  font-weight: 600;
-}
-
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 32px;
   margin-bottom: 40px;
 }
 
+@media (max-width: 1100px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
 @media (max-width: 768px) {
   .pricing-grid {
@@ -172,16 +130,19 @@
   margin: 0 4px;
 }
 
-.period {
-  font-size: 1rem;
-  color: var(--text-light);
+.old-price {
+  font-size: 1.25rem;
   font-weight: 500;
+  color: #999;
+  text-decoration: line-through;
+  margin-right: 8px;
 }
 
-.savings-text {
-  font-size: 1.1rem;
-  color: #1E8E3E;
-  font-weight: 600;
+.one-time-payment {
+  font-size: 1rem;
+  color: var(--text-light);
+  margin: 18px 0 0 0;
+  text-align: center;
 }
 
 .trial-info {
@@ -292,18 +253,6 @@
 
   .pricing-header p {
     font-size: 1rem;
-  }
-
-  .billing-toggle {
-    margin-bottom: 32px;
-    width: 100%;
-  }
-
-  .billing-toggle button {
-    flex: 1;
-    justify-content: center;
-    padding: 10px 16px;
-    font-size: 0.875rem;
   }
 
   .savings-badge {

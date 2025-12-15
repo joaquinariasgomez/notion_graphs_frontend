@@ -4,7 +4,6 @@ import { createStripeAccountSession, createStripeCheckoutSession, createStripeCu
 import { FaSyncAlt } from 'react-icons/fa';
 import { BillingPlan, getBillingPlanDisplayName } from "../../../utils/BillingPlanEnum";
 import { actionTypes } from "../../../context/globalReducer";
-import BillingConstants from "../../../BillingConstants";
 import { useNavigate } from "react-router-dom";
 
 // Java's Integer.MAX_VALUE constant
