@@ -165,3 +165,9 @@ export async function deleteAccount(jwtToken) {
   const response = deleteWithJWTToken(url, jwtToken);
   return (await response).data;
 }
+
+export async function registerValue(jwtToken, request) {
+  const url = Config.BackendWidgetsConnectionURL + "/register-value";
+  const response = postWithJWTToken(url, request, jwtToken);
+  return (await response).data;
+}

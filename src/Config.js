@@ -4,7 +4,8 @@ const Config = {
   BackendGraphsURL: process.env.REACT_APP_BACKEND_GRAPHS_URL,
   BackendWalletConnectionURL: process.env.REACT_APP_BACKEND_WALLETCONNECTION_URL,
   BackendBillingConnectionURL: process.env.REACT_APP_BACKEND_BILLING_URL,
-  BackendAccountConnectionURL: process.env.REACT_APP_BACKEND_ACCOUNT_URL
+  BackendAccountConnectionURL: process.env.REACT_APP_BACKEND_ACCOUNT_URL,
+  BackendWidgetsConnectionURL: process.env.REACT_APP_BACKEND_WIDGETS_URL
 }
 
 export default Config;
