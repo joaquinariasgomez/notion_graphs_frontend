@@ -3,7 +3,7 @@
     "graphConfiguration": {
       "id": "2323f084-9ed1-4269-b848-6ca8dc2e9613",
       "graphCreationStatus": "CREATED",
-      "customTitle": "Expenses from January to June",
+      "customTitle": "Expenses by category",
       "requestType": "CUSTOM_GRAPH",
       "customGraphSettings": {
         "dataSettings": {
@@ -2493,7 +2493,7 @@
     "graphConfiguration": {
       "id": "7aebeccb-fc8b-461e-bd48-d1dd55587d36",
       "graphCreationStatus": "CREATED",
-      "customTitle": "Expenses burndown for August",
+      "customTitle": "Expenses burndown",
       "requestType": "BURNDOWN",
       "customGraphSettings": {
         "dataSettings": {
@@ -2980,7 +2980,7 @@
     "graphConfiguration": {
       "id": "8552a98e-e130-4ef7-81c5-9523c39da95f",
       "graphCreationStatus": "CREATED",
-      "customTitle": "Cumulative incomes in 2025",
+      "customTitle": "Cumulative incomes for last year",
       "requestType": "CUSTOM_GRAPH",
       "customGraphSettings": {
         "dataSettings": {
@@ -3648,7 +3648,7 @@
     "graphConfiguration": {
       "id": "a3721523-9403-4d0d-80c5-5d48e0e0cf13",
       "graphCreationStatus": "CREATED",
-      "customTitle": "Savings in 2025",
+      "customTitle": "Savings for last year",
       "requestType": "CUSTOM_GRAPH",
       "customGraphSettings": {
         "dataSettings": {
@@ -5968,7 +5968,7 @@
     "graphConfiguration": {
       "id": "3d18c717-b1cb-413b-936d-6d19607febfb",
       "graphCreationStatus": "CREATED",
-      "customTitle": "Supermarket burndown for March",
+      "customTitle": "Expenses burndown for a specific category",
       "requestType": "BURNDOWN",
       "customGraphSettings": {
         "dataSettings": {
@@ -6457,7 +6457,7 @@
     "graphConfiguration": {
       "id": "58d626c3-2458-4688-958a-1fd3625efc9b",
       "graphCreationStatus": "CREATED",
-      "customTitle": "Supermarket vs Food out expenses over one month",
+      "customTitle": "Compare multiple expense categories over one month",
       "requestType": "CUSTOM_GRAPH",
       "customGraphSettings": {
         "dataSettings": {
@@ -6844,7 +6844,7 @@
     "graphConfiguration": {
       "id": "cf3a9c29-add5-4d34-8605-6de099453e8e",
       "graphCreationStatus": "CREATED",
-      "customTitle": "Coffee expenses on vacation",
+      "customTitle": "Cumulative expenses over a time range",
       "requestType": "CUSTOM_GRAPH",
       "customGraphSettings": {
         "dataSettings": {

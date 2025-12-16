@@ -333,7 +333,8 @@
   height: var(--toggle-ball-size);
   width: var(--toggle-ball-size);
   left: 4px;
-  bottom: 4px;
+  top: 50%;
+  transform: translateY(-50%);
   background-color: white;
   transition: .4s;
   border-radius: 50%;
@@ -344,7 +345,7 @@ input:checked+.slider {
 }
 
 input:checked+.slider:before {
-  transform: translateX(22px);
+  transform: translateY(-50%) translateX(22px);
 }
 
 /* Styles for when the dropdown is open (when it has the 'is-open' class) */
