@@ -271,17 +271,17 @@ main .title>p {
 }
 
 .dashboard-button {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   color: var(--text-color);
 
   display: inline-flex;
   align-items: center;
-  padding: 12px 26px;
+  padding: 16px 36px;
 
   border: 2px solid var(--matteblack-color);
   background-color: #f9f9f9;
-  border-radius: 8px;
+  border-radius: 10px;
 
   cursor: pointer;
   transition: all 0.2s ease-in-out;
