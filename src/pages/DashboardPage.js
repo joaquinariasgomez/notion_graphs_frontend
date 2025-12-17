@@ -8,6 +8,7 @@ import { checkIntegrationConnection, getBillingGraphCount, getBillingPlan } from
 import { useGlobalStateValue } from '../context/GlobalStateProvider';
 import { actionTypes, BOX_TYPES } from '../context/globalReducer';
 import GetPlusButton from '../components/GetPlusButton';
+import RegisterValueButtons from '../components/RegisterValueButtons';
 
 function DashboardPage() {
 
@@ -112,6 +113,7 @@ function DashboardPage() {
       </div>
       <div className='dashboard__body'>
         {!integrationConnectionLoading && !templateConnectedToIntegrationData?.hasTemplateConnectedToIntegration && renderNotConnectedToIntegrationWarning()}
+        {!integrationConnectionLoading && templateConnectedToIntegrationData.hasTemplateConnectedToIntegration && <RegisterValueButtons />}
         <DashboardGraphs />
       </div>
     </div>

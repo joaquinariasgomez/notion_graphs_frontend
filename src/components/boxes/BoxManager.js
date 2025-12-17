@@ -8,6 +8,7 @@ import BillingLimitErrorBox from "./BillingLimitErrorBox";
 import ClientErrorBox from "./ClientErrorBox";
 import UpdateGraphConfigurationBox from "./UpdateGraphConfigurationBox";
 import { actionTypes, BOX_TYPES } from "../../context/globalReducer";
+import RegisterValueBox from "./RegisterValueBox";
 
 export default function BoxManager() {
 
@@ -117,6 +118,13 @@ export default function BoxManager() {
       case BOX_TYPES.UPDATE_GRAPH:
         return (
           <UpdateGraphConfigurationBox />
+        );
+
+      case BOX_TYPES.REGISTER_VALUE:
+        return (
+          <RegisterValueBox
+            valueType={activeBox.data?.valueType}
+          />
         );
 
       default:
