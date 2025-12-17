@@ -1,0 +1,305 @@
+:root {
+  --darkbutton-color: rgb(99, 99, 99);
+  --darkbutton-hover-color: rgb(236, 236, 236);
+  --textp-color: rgb(105, 105, 105);
+}
+
+.registervaluebox__container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 320px;
+  max-width: 90vw;
+  border-radius: 10px;
+  background-color: white;
+  animation: zoom_100 0.2s ease forwards;
+  z-index: 998;
+}
+
+.registervaluebox__container>h1 {
+  position: absolute;
+  top: 20px;
+  left: 25px;
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  color: var(--matteblack-color);
+}
+
+.registervaluebox__cancelbutton {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 35px;
+  height: 35px;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 0;
+  color: var(--darkbutton-color);
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  transition: background-color 0.25s ease-out;
+}
+
+.registervaluebox__cancelbutton:hover {
+  cursor: pointer;
+  background-color: var(--darkbutton-hover-color);
+}
+
+.registervaluebox__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 68px;
+  padding: 0 25px 25px 25px;
+}
+
+.registervaluebox__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.registervaluebox__inputgroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.registervaluebox__inputgroup>label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--matteblack-color);
+}
+
+.registervaluebox__inputgroup>input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--matteblack-color);
+  font-family: "Inter", sans-serif;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.registervaluebox__inputgroup>input:focus {
+  border-color: var(--matteblack-color);
+  box-shadow: 0 0 0 3px rgba(40, 40, 43, 0.1);
+}
+
+.registervaluebox__inputgroup>input::placeholder {
+  color: #909090;
+}
+
+/* Amount input specific styles */
+.registervaluebox__inputgroup>input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.registervaluebox__inputgroup>input[type="number"]::-webkit-outer-spin-button,
+.registervaluebox__inputgroup>input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Select container */
+.registervaluebox__selectcontainer {
+  width: 100%;
+}
+
+/* Optional date section */
+.registervaluebox__dategroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.registervaluebox__dategroup>label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--matteblack-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.registervaluebox__dategroup>label>span {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--textp-color);
+}
+
+.registervaluebox__datetoggle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.registervaluebox__datetoggle>button {
+  padding: 10px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--textp-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.registervaluebox__datetoggle>button:hover {
+  border-color: #c0c0c0;
+  background-color: #f9f9f9;
+}
+
+.registervaluebox__datetoggle>button.selected {
+  border-color: var(--matteblack-color);
+  color: var(--matteblack-color);
+  font-weight: 600;
+}
+
+.registervaluebox__datepicker {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+/* Actions row */
+.registervaluebox__actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 10px;
+  gap: 15px;
+}
+
+.registervaluebox__button {
+  height: 44px;
+  border-style: solid;
+  border-radius: 12px;
+  border-width: 3px;
+  font-weight: 600;
+  font-size: 15px;
+  color: white;
+  padding: 0px 20px;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.registervaluebox__button:hover {
+  cursor: pointer;
+}
+
+.registervaluebox__button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  color: var(--matteblack-color);
+  background-color: white;
+}
+
+.registervaluebox__button.submit {
+  border-color: var(--matteblack-color);
+  background-color: var(--matteblack-color);
+}
+
+.registervaluebox__button.submit:disabled {
+  background-color: white;
+}
+
+.registervaluebox__button.submit:hover:not(:disabled) {
+  animation: changecolorblack 0.25s ease forwards;
+}
+
+.registervaluebox__button.cancel {
+  color: var(--matteblack-color);
+  border-color: var(--matteblack-color);
+  background-color: white;
+}
+
+.registervaluebox__button.cancel:hover {
+  animation: changecolorblack_opposite 0.25s ease forwards;
+}
+
+@keyframes zoom_100 {
+  0% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0.5, 0.5);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1, 1);
+  }
+}
+
+@keyframes changecolorblack {
+  0% {
+    color: white;
+    background-color: var(--matteblack-color);
+  }
+
+  100% {
+    color: var(--matteblack-color);
+    background-color: white;
+  }
+}
+
+@keyframes changecolorblack_opposite {
+  0% {
+    color: var(--matteblack-color);
+    background-color: white;
+  }
+
+  100% {
+    color: white;
+    background-color: var(--matteblack-color);
+  }
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .registervaluebox__container {
+    min-width: unset;
+    width: 95vw;
+  }
+
+  .registervaluebox__content {
+    padding: 0 20px 20px 20px;
+  }
+
+  .registervaluebox__datetoggle {
+    flex-wrap: wrap;
+  }
+
+  .registervaluebox__datetoggle>button {
+    flex: 1;
+    min-width: 100px;
+  }
+
+  .registervaluebox__actions {
+    flex-direction: column;
+  }
+
+  .registervaluebox__button {
+    width: 100%;
+  }
+}
