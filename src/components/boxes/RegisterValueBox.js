@@ -94,8 +94,8 @@ export default function RegisterValueBox({ valueType }) {
     }
   }
 
-  const getSelectOptionsFromCategories = () => {
-    return categories.map(element => {
+  const getSelectOptionsFromDatabase = (database) => {
+    return database.map(element => {
       return { value: element, label: element };
     });
   }
@@ -112,6 +112,14 @@ export default function RegisterValueBox({ valueType }) {
 
   const handleCategoryChange = (selectedOption) => {
     setCategory(selectedOption);
+  }
+
+  const handleBankAccountChange = (selectedOption) => {
+    setIncomeBankAccount(selectedOption);
+  }
+
+  const handleIncomeSourceChange = (selectedOption) => {
+    setIncomeSource(selectedOption);
   }
 
   const handleAmountChange = (e) => {
@@ -172,12 +180,112 @@ export default function RegisterValueBox({ valueType }) {
     return isExpense ? 'Register Expense' : 'Register Income';
   }
 
-  const getCategoryLabel = () => {
-    return isExpense ? 'Category' : 'Source';
-  }
-
-  const getCategoryPlaceholder = () => {
-    return isExpense ? 'Select a category...' : 'Select a source...';
+  const renderSelectors = () => {
+    if (isExpense) {
+      return (
+        <div className='registervaluebox__inputgroup'>
+          <label>Category</label>
+          <div className='registervaluebox__selectcontainer'>
+            {categoriesLoading ? (
+              <div style={{ display: 'flex', justifyContent: 'center', padding: '12px' }}>
+                <SyncLoader size={8} color='#909090' />
+              </div>
+            ) : (
+              <Select
+                theme={(theme) => ({
+                  ...theme,
+                  borderRadius: 8,
+                  colors: {
+                    ...theme.colors,
+                    primary25: 'lightgray',
+                    primary50: 'gray',
+                    primary: 'black'
+                  }
+                })}
+                options={getSelectOptionsFromDatabase(categories)}
+                menuPlacement="auto"
+                menuPosition="fixed"
+                styles={customStyleForSelectPlacement}
+                menuPortalTarget={document.body}
+                value={category}
+                onChange={handleCategoryChange}
+                placeholder='Select a category...'
+                isClearable
+              />
+            )}
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <>
+          <div className='registervaluebox__inputgroup'>
+            <label>Bank Account</label>
+            <div className='registervaluebox__selectcontainer'>
+              {incomesBankAccountsLoading ? (
+                <div style={{ display: 'flex', justifyContent: 'center', padding: '12px' }}>
+                  <SyncLoader size={8} color='#909090' />
+                </div>
+              ) : (
+                <Select
+                  theme={(theme) => ({
+                    ...theme,
+                    borderRadius: 8,
+                    colors: {
+                      ...theme.colors,
+                      primary25: 'lightgray',
+                      primary50: 'gray',
+                      primary: 'black'
+                    }
+                  })}
+                  options={getSelectOptionsFromDatabase(incomesBankAccounts)}
+                  menuPlacement="auto"
+                  menuPosition="fixed"
+                  styles={customStyleForSelectPlacement}
+                  menuPortalTarget={document.body}
+                  value={incomeBankAccount}
+                  onChange={handleBankAccountChange}
+                  placeholder='Select a bank account...'
+                  isClearable
+                />
+              )}
+            </div>
+          </div>
+          <div className='registervaluebox__inputgroup'>
+            <label>Income Source</label>
+            <div className='registervaluebox__selectcontainer'>
+              {incomesSourcesLoading ? (
+                <div style={{ display: 'flex', justifyContent: 'center', padding: '12px' }}>
+                  <SyncLoader size={8} color='#909090' />
+                </div>
+              ) : (
+                <Select
+                  theme={(theme) => ({
+                    ...theme,
+                    borderRadius: 8,
+                    colors: {
+                      ...theme.colors,
+                      primary25: 'lightgray',
+                      primary50: 'gray',
+                      primary: 'black'
+                    }
+                  })}
+                  options={getSelectOptionsFromDatabase(incomesSources)}
+                  menuPlacement="auto"
+                  menuPosition="fixed"
+                  styles={customStyleForSelectPlacement}
+                  menuPortalTarget={document.body}
+                  value={incomeSource}
+                  onChange={handleIncomeSourceChange}
+                  placeholder='Select an income source...'
+                  isClearable
+                />
+              )}
+            </div>
+          </div>
+        </>
+      );
+    }
   }
 
   return (
@@ -201,39 +309,8 @@ export default function RegisterValueBox({ valueType }) {
               />
             </div>
 
-            {/* Category Select */}
-            <div className='registervaluebox__inputgroup'>
-              <label>{getCategoryLabel()}</label>
-              <div className='registervaluebox__selectcontainer'>
-                {categoriesLoading ? (
-                  <div style={{ display: 'flex', justifyContent: 'center', padding: '12px' }}>
-                    <SyncLoader size={8} color='#909090' />
-                  </div>
-                ) : (
-                  <Select
-                    theme={(theme) => ({
-                      ...theme,
-                      borderRadius: 8,
-                      colors: {
-                        ...theme.colors,
-                        primary25: 'lightgray',
-                        primary50: 'gray',
-                        primary: 'black'
-                      }
-                    })}
-                    options={getSelectOptionsFromCategories()}
-                    menuPlacement="auto"
-                    menuPosition="fixed"
-                    styles={customStyleForSelectPlacement}
-                    menuPortalTarget={document.body}
-                    value={category}
-                    onChange={handleCategoryChange}
-                    placeholder={getCategoryPlaceholder()}
-                    isClearable
-                  />
-                )}
-              </div>
-            </div>
+            {/* Selector dropdowns - Category or bank account / income source */}
+            {renderSelectors()}
 
             {/* Amount Input */}
             <div className='registervaluebox__inputgroup'>
@@ -250,7 +327,7 @@ export default function RegisterValueBox({ valueType }) {
             {/* Optional Date Picker */}
             <div className='registervaluebox__dategroup'>
               <label>
-                Date <span>(optional)</span>
+                Date
               </label>
               <div className='registervaluebox__datetoggle'>
                 <button
