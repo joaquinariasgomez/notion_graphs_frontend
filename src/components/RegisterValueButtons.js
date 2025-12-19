@@ -1,5 +1,7 @@
 import { actionTypes, BOX_TYPES } from "../context/globalReducer";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 export default function RegisterValueButtons({ }) {
 
@@ -28,11 +30,13 @@ export default function RegisterValueButtons({ }) {
 
   return (
     <div className="register_value__buttons">
-      <button className="register_expense__button" onClick={showRegisterExpenseBox}>
-
+      <button className="register_value__button" onClick={showRegisterExpenseBox}>
+        <ArrowDownwardIcon />
+        <p>Register expense</p>
       </button>
-      <button className="register_expense__button" onClick={showRegisterIncomeBox}>
-
+      <button className="register_value__button" onClick={showRegisterIncomeBox}>
+        <ArrowUpwardIcon />
+        <p>Register income</p>
       </button>
     </div>
   );

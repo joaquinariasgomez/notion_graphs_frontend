@@ -47,6 +47,12 @@ function BillingLimitErrorBox({ onClose, limitType }) {
                     description: 'In order to create burndown charts, you must upgrade your subscription to Notion Wallet Plus.',
                     icon: '🔥'
                 };
+            case 'MAXIMUM_REGISTER_VALUE_COUNT':
+                return {
+                    title: 'Register finances limit reached',
+                    description: 'In order to continue registering your finances, you must upgrade your subscription to Notion Wallet Plus.',
+                    icon: '📝'
+                };
             default:
                 return {
                     title: 'Billing limit reached',

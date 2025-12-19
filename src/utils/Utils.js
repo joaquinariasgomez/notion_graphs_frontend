@@ -42,10 +42,41 @@ export const customStyleForSelectPlacement = {
     ...provided,
     padding: '2px 4px', // Keep it consistent with the clear indicator
   }),
-  control: (provided, state) => ({
+};
+
+// Style for RegisterValueBox selects - with smaller selected value text
+export const registerValueSelectStyle = {
+  control: (provided) => ({
     ...provided,
-    // ... other control styles
-    alignItems: 'flex-start', // Align items to the top
+    fontFamily: '"Inter", sans-serif',
+    fontSize: '14px',
+  }),
+  menu: (provided) => ({
+    ...provided,
+    zIndex: 9999,
+    fontFamily: '"Inter", sans-serif',
+    fontSize: '14px'
+  }),
+  menuPortal: (provided) => ({
+    ...provided,
+    zIndex: 9999,
+    fontFamily: '"Inter", sans-serif',
+    fontSize: '14px'
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    fontFamily: '"Inter", sans-serif',
+    fontSize: '14px'
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    fontSize: '14px',
+    fontFamily: '"Inter", sans-serif',
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    fontSize: '14px',
+    fontFamily: '"Inter", sans-serif',
   }),
 };
 

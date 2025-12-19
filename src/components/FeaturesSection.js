@@ -1,5 +1,5 @@
 import '../css/FeaturesSection.css';
-import { HiChartBar, HiSparkles, HiShieldCheck, HiLightningBolt } from 'react-icons/hi';
+import { HiChartBar, HiSparkles, HiPencilAlt, HiLightningBolt } from 'react-icons/hi';
 
 function FeaturesSection() {
 
@@ -20,9 +20,9 @@ function FeaturesSection() {
       description: 'Customize time ranges, filter by categories, and display statistics. Make every chart perfectly match your needs.'
     },
     {
-      icon: <HiShieldCheck />,
-      title: 'Privacy First',
-      description: 'Your financial data stays secure. We never store your data or credit card information.'
+      icon: <HiPencilAlt />,
+      title: 'Quick Finance Entry',
+      description: 'Register expenses and incomes directly from your dashboard. No need to open Notion—track your finances in seconds.'
     }
   ];
 

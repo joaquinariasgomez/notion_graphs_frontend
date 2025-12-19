@@ -75,7 +75,7 @@
 }
 
 .registervaluebox__inputgroup>label {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--matteblack-color);
 }
@@ -127,7 +127,7 @@
 }
 
 .registervaluebox__dategroup>label {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--matteblack-color);
   display: flex;
@@ -150,14 +150,16 @@
 
 .registervaluebox__datetoggle>button {
   padding: 10px 16px;
-  border: 2px solid #e0e0e0;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #e0e0e0;
   border-radius: 8px;
   background-color: white;
   font-size: 14px;
   font-weight: 500;
   color: var(--textp-color);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .registervaluebox__datetoggle>button:hover {
@@ -165,10 +167,24 @@
   background-color: #f9f9f9;
 }
 
+.registervaluebox__datetoggle>button:active {
+  background-color: rgb(222, 222, 222);
+  border-color: rgb(222, 222, 222);
+}
+
 .registervaluebox__datetoggle>button.selected {
   border-color: var(--matteblack-color);
   color: var(--matteblack-color);
   font-weight: 600;
+}
+
+.registervaluebox__datetoggle>button.selected:hover {
+  border-color: var(--matteblack-color);
+}
+
+.registervaluebox__datetoggle>button.selected:active {
+  background-color: rgb(222, 222, 222);
+  border-color: var(--matteblack-color);
 }
 
 .registervaluebox__datepicker {

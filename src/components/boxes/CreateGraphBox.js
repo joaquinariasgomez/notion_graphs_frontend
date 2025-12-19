@@ -74,10 +74,6 @@ export default function CreateGraphBox() {
     }
   });
 
-  // useEffect(() => {
-  //   console.log("Joaquin: ", graphConfiguration);
-  // }, [graphConfiguration]);
-
   useEffect(() => {
     fetchExpensesCategories();
     fetchIncomesBankAccounts();

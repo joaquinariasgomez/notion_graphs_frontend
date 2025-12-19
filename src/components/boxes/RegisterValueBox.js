@@ -8,7 +8,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import ClipLoader from 'react-spinners/ClipLoader';
 import SyncLoader from "react-spinners/SyncLoader";
-import { customStyleForSelectPlacement } from '../../utils/Utils';
+import { registerValueSelectStyle } from '../../utils/Utils';
 import { getExpensesCategories, getIncomesBankaccounts, getIncomesSources, registerValue } from '../../api/RequestUtils';
 
 export default function RegisterValueBox({ valueType }) {
@@ -205,7 +205,7 @@ export default function RegisterValueBox({ valueType }) {
                 options={getSelectOptionsFromDatabase(categories)}
                 menuPlacement="auto"
                 menuPosition="fixed"
-                styles={customStyleForSelectPlacement}
+                styles={registerValueSelectStyle}
                 menuPortalTarget={document.body}
                 value={category}
                 onChange={handleCategoryChange}
@@ -241,7 +241,7 @@ export default function RegisterValueBox({ valueType }) {
                   options={getSelectOptionsFromDatabase(incomesBankAccounts)}
                   menuPlacement="auto"
                   menuPosition="fixed"
-                  styles={customStyleForSelectPlacement}
+                  styles={registerValueSelectStyle}
                   menuPortalTarget={document.body}
                   value={incomeBankAccount}
                   onChange={handleBankAccountChange}
@@ -273,7 +273,7 @@ export default function RegisterValueBox({ valueType }) {
                   options={getSelectOptionsFromDatabase(incomesSources)}
                   menuPlacement="auto"
                   menuPosition="fixed"
-                  styles={customStyleForSelectPlacement}
+                  styles={registerValueSelectStyle}
                   menuPortalTarget={document.body}
                   value={incomeSource}
                   onChange={handleIncomeSourceChange}
@@ -324,7 +324,7 @@ export default function RegisterValueBox({ valueType }) {
               />
             </div>
 
-            {/* Optional Date Picker */}
+            {/* Date Picker */}
             <div className='registervaluebox__dategroup'>
               <label>
                 Date

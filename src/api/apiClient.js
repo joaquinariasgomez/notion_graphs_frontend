@@ -21,7 +21,7 @@ apiClient.interceptors.response.use(
             if (error.response.status === 400) {
                 // Check if this is a billing limit error
                 const responseData = error.response.data;
-                const billingLimitErrors = ['MAXIMUM_GRAPH_COUNT', 'MAXIMUM_GRAPH_LIST', 'MAXIMUM_GRAPH_REFRESH_COUNT', 'BURNDOWN_GRAPH_NOT_ALLOWED'];
+                const billingLimitErrors = ['MAXIMUM_GRAPH_COUNT', 'MAXIMUM_GRAPH_LIST', 'MAXIMUM_GRAPH_REFRESH_COUNT', 'BURNDOWN_GRAPH_NOT_ALLOWED', 'MAXIMUM_REGISTER_VALUE_COUNT'];
 
                 if (typeof responseData === 'string' && billingLimitErrors.includes(responseData)) {
                     // This is a billing limit error
