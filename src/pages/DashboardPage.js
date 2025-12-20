@@ -16,11 +16,22 @@ function DashboardPage() {
   const [{ userJWTCookie, templateConnectedToIntegrationData, billingGraphCountData, billingPlan }, dispatch] = useGlobalStateValue();
 
   const [integrationConnectionLoading, setIntegrationConnectionLoading] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     fetchIntegrationConnection();
     fetchBillingGraphCount();
     fetchBillingPlan();
+  }, []);
+
+  // Handle scroll to shrink header
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // TODO JOAQUIN: show a warning if your billing resources are getting full
@@ -106,7 +117,7 @@ function DashboardPage() {
   return (
     <div className="dashboard__page">
       <BoxManager />
-      <div className="dashboard__header">
+      <div className={`dashboard__header ${isScrolled ? 'scrolled' : ''}`}>
         <CreateGraphButton />
         <GetPlusButton billingPlan={billingPlan} />
         <UserCicleButton />
