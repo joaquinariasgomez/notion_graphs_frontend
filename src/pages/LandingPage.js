@@ -10,6 +10,7 @@ import mockCharts from '../components/LandingPageCarrouselCharts.json';
 import FeaturesSection from '../components/FeaturesSection';
 import HowConnectionWorksSection from '../components/HowConnectionWorksSection';
 import PricingSection from '../components/PricingSection';
+import TestimonialsSection from '../components/TestimonialsSection';
 import { useGlobalStateValue } from '../context/GlobalStateProvider';
 import { actionTypes } from '../context/globalReducer';
 import DemoVideoSection from '../DemoVideoSection';
@@ -140,6 +141,7 @@ function LandingPage() {
         <DemoVideoSection />
         <HowConnectionWorksSection />
         <PricingSection />
+        <TestimonialsSection />
         <LandingPageFooter />
       </div >
     </div >
