@@ -53,8 +53,10 @@
 
 .testimonial-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(74, 144, 226, 0.15);
-  border-color: #4A90E2;
+  /* box-shadow: 0 12px 32px rgba(74, 144, 226, 0.15); */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  /* border-color: #4A90E2; */
+  border-color: #d0d0d0;
 }
 
 .testimonial-source {
@@ -75,6 +77,11 @@
   width: 20px;
   height: 20px;
   object-fit: contain;
+}
+
+.testimonial-source .source-icon-img--small {
+  width: 14px;
+  height: 14px;
 }
 
 /* Reddit source */
@@ -121,7 +128,7 @@
 .testimonial-author {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
 }
 
 .testimonial-avatar {
@@ -138,6 +145,14 @@
   flex-shrink: 0;
 }
 
+.testimonial-avatar-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
 .testimonial-info {
   display: flex;
   flex-direction: column;
@@ -147,12 +162,7 @@
 .testimonial-name {
   font-weight: 600;
   color: var(--text-color);
-  font-size: 0.9375rem;
-}
-
-.testimonial-role {
-  color: var(--text-light);
-  font-size: 0.875rem;
+  font-size: 0.9rem;
 }
 
 /* Mobile Responsive */
@@ -198,7 +208,20 @@
     font-size: 16px;
   }
 
-  .testimonial-source {
+  .testimonial-avatar-img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .testimonial-author {
+    gap: 10px;
+  }
+
+  .testimonial-name {
+    font-size: 0.8rem;
+  }
+
+  .tetim .testimonial-source {
     padding: 4px 8px;
     font-size: 0.7rem;
   }
@@ -211,6 +234,11 @@
     width: 18px;
     height: 18px;
   }
+
+  .testimonial-source .source-icon-img--small {
+    width: 12px;
+    height: 12px;
+  }
 }
 
 /* Tablet adjustments */
@@ -221,5 +249,50 @@
 
   .testimonials-grid {
     column-gap: 20px;
+  }
+}
+
+/* Product Hunt Review CTA */
+.producthunt-review-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  gap: 20px;
+}
+
+.producthunt-review-cta>p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-light);
+  text-align: center;
+}
+
+.producthunt-review-cta>a {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.producthunt-review-cta>a:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.producthunt-review-cta>a:active {
+  transform: scale(0.98);
+}
+
+.producthunt-review-cta>a>img {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .producthunt-review-cta {
+    margin-top: 30px;
+  }
+
+  .producthunt-review-cta>p {
+    font-size: 1rem;
+    padding: 0 10px;
   }
 }

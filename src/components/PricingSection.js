@@ -154,7 +154,7 @@ function PricingSection() {
       <div className='pricing-container'>
         <div className='pricing-header'>
           <h2>Pricing</h2>
-          <p>Choose the plan that fits your needs. Start free, upgrade or cancel anytime.</p>
+          <p>Choose the plan that fits your needs. Start free, upgrade or cancel anytime</p>
         </div>
 
         <div className='pricing-grid'>
@@ -203,7 +203,7 @@ function PricingSection() {
         </div>
 
         <div className='pricing-footer'>
-          <p>All plans include secure Notion integration and data privacy. For subscription plans, cancel anytime.</p>
+          <p>All plans include secure Notion integration and data privacy. For subscription plans, cancel anytime</p>
         </div>
       </div>
     </section>

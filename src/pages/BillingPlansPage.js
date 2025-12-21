@@ -226,7 +226,7 @@ function BillingPlansPage() {
 
         <div className="pricing-header">
           <h2>Upgrade Your Plan</h2>
-          <p>Choose the plan that fits your needs. Upgrade or cancel anytime.</p>
+          <p>Choose the plan that fits your needs. Upgrade or cancel anytime</p>
         </div>
 
         <div className="pricing-grid">
@@ -236,7 +236,7 @@ function BillingPlansPage() {
         </div>
 
         <div className="pricing-footer">
-          <p>All plans include secure Notion integration and data privacy. Cancel anytime.</p>
+          <p>All plans include secure Notion integration and data privacy. Cancel anytime</p>
         </div>
       </div>
     </div>

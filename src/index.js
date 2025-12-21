@@ -18,6 +18,7 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfServicePage from './pages/TermsOfServicePage';
 import ProtectedRoute from './components/ProtectedRoute';
 import SessionManager from './components/SessionManager';
+import CookieConsentBanner from './components/CookieConsentBanner';
 import { GlobalStateProvider } from './context/GlobalStateProvider';
 import globalReducer, { initialState } from './context/globalReducer';
 
@@ -29,6 +30,7 @@ root.render(
   >
     <BrowserRouter>
       <SessionManager>
+        <CookieConsentBanner />
         <Routes>
           {/* Route for the landing page */}
           <Route

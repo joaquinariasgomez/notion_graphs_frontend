@@ -28,14 +28,29 @@
     -->
   <title>Notion Wallet</title>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-71N5GHSTRR"></script>
+  <!-- Google Analytics - Only loads after user consent -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
 
-    gtag('config', 'G-71N5GHSTRR');
+    // Function to initialize GA (called from React after consent)
+    window.initializeGoogleAnalytics = function () {
+      if (window.gaInitialized) return;
+
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-71N5GHSTRR';
+      document.head.appendChild(script);
+
+      gtag('js', new Date());
+      gtag('config', 'G-71N5GHSTRR');
+      window.gaInitialized = true;
+    };
+
+    // Check if user already consented (from previous visit)
+    if (localStorage.getItem('cookieConsent') === 'accepted') {
+      window.initializeGoogleAnalytics();
+    }
   </script>
 </head>
 

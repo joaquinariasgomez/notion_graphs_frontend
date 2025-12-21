@@ -7,55 +7,46 @@ function TestimonialsSection() {
     reddit: { icon: <FaRedditAlien />, label: 'Reddit', className: 'source-reddit' },
     twitter: { icon: <FaTwitter />, label: 'Twitter', className: 'source-twitter' },
     producthunt: { icon: <FaProductHunt />, label: 'Product Hunt', className: 'source-producthunt' },
-    notion: { icon: <img src="/Notion_community_icon.png" alt="Notion Community" className="source-icon-img" />, label: 'Notion Community', className: 'source-notion' }
+    notionCircleCommunity: { icon: <img src="/Notion_community_icon.png" alt="Notion Community" className="source-icon-img" />, label: 'Notion Community', className: 'source-notion' },
+    notionTemplates: { icon: <img src="/notion_logo.png" alt="Notion Templates" className="source-icon-img source-icon-img--small" />, label: 'Notion Templates', className: 'source-notion' }
   };
 
   const testimonials = [
     {
+      name: 'Lionel Lakson',
       quote: 'NotionWallet is a smart and elegant way to turn existing Notion data into meaningful financial insights.',
+      profilePic: '/lionel_lakson_profile_pic.jpeg',
       source: 'reddit'
     },
     {
-      name: 'Sarah M.',
-      role: 'Freelance Designer',
-      quote: 'NotionWallet completely changed how I track my finances. The Notion integration is seamless, and the charts are beautiful. I finally have visibility into my spending patterns!',
-      avatar: 'S',
-      source: 'reddit'
+      name: "Thais Gutiérrez",
+      quote: 'Ayuda mucho a organizar mis gastos, consumos, ingresos y extras.',
+      avatar: 'T',
+      source: 'notionTemplates'
     },
     {
-      name: 'Carlos R.',
-      role: 'Small Business Owner',
-      quote: 'Game-changer for my business finances!',
-      avatar: 'C',
-      source: 'notion'
+      name: "Benny Builds It",
+      quote: 'Great effort, looks impressive. The advanced chart options do look interesting. Notion users in general love the ability to use Notion to consolidate many tools and apps directly into their Notion workspace.',
+      profilePic: '/benny_builds_it_profile_pic.jpeg',
+      source: 'notionCircleCommunity'
     },
     {
-      name: 'Emily T.',
-      role: 'Product Manager',
-      quote: 'Love how everything syncs automatically with my Notion workspace. The customization options are fantastic—I can see exactly what I need without any clutter.',
-      avatar: 'E',
-      source: 'producthunt'
+      name: "Juan Alejandro",
+      quote: 'Es increíble las cantidades de formas y cosas que puedes hacer aqui, y estoy feliz de descubrirla.',
+      avatar: 'J',
+      source: 'notionTemplates'
     },
     {
-      name: 'Michael K.',
-      role: 'Software Engineer',
+      name: 'Michael K',
       quote: 'Finally, a tool that works the way I think. The burndown charts are perfect for tracking my monthly budget goals.',
       avatar: 'M',
       source: 'reddit'
     },
     {
-      name: 'Ana L.',
-      role: 'Content Creator',
-      quote: 'So intuitive! Been using it for 3 months and I\'ve never had better control over my expenses. The quick entry feature means I actually log everything now instead of forgetting. Highly recommend to anyone who already uses Notion for their life organization.',
-      avatar: 'A',
-      source: 'twitter'
-    },
-    {
-      name: 'David P.',
-      role: 'Startup Founder',
+      name: 'David P  ',
       quote: 'Clean interface, powerful features. Exactly what I needed.',
       avatar: 'D',
-      source: 'notion'
+      source: 'notionTemplates'
     }
   ];
 
@@ -75,12 +66,19 @@ function TestimonialsSection() {
               </blockquote>
               <div className='testimonial-footer'>
                 <div className='testimonial-author'>
-                  <div className='testimonial-avatar'>
-                    {testimonial.avatar}
-                  </div>
+                  {testimonial.profilePic ? (
+                    <img
+                      src={testimonial.profilePic}
+                      alt={testimonial.name}
+                      className='testimonial-avatar-img'
+                    />
+                  ) : (
+                    <div className='testimonial-avatar'>
+                      {testimonial.avatar}
+                    </div>
+                  )}
                   <div className='testimonial-info'>
                     <span className='testimonial-name'>{testimonial.name}</span>
-                    <span className='testimonial-role'>{testimonial.role}</span>
                   </div>
                 </div>
                 <div className={`testimonial-source ${sourceIcons[testimonial.source].className}`}>
@@ -90,6 +88,22 @@ function TestimonialsSection() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className='producthunt-review-cta'>
+          <p>Want to be in this wall? We'd love to hear from you!</p>
+          <a
+            href="https://www.producthunt.com/products/notion-wallet/reviews/new?utm_source=badge-product_review&utm_medium=badge&utm_source=badge-notion-wallet"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=1135377&theme=light"
+              alt="Notion Wallet - Control your digital wallet by using your Notion data | Product Hunt"
+              width="250"
+              height="54"
+            />
+          </a>
         </div>
       </div>
     </section>
