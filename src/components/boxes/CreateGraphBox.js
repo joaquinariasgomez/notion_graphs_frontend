@@ -38,7 +38,7 @@ export default function CreateGraphBox() {
     customGraphSettings: {
       dataSettings: {
         source: 'EXPENSES',   // 'EXPENSES', 'INCOMES', 'SAVINGS'
-        time: 'LAST_WEEK',    // 'LAST_WEEK', 'LAST_MONTH', 'LAST_YEAR', 'CUSTOM'
+        time: 'NO_TIME',    // 'NO_TIME', 'LAST_WEEK', 'LAST_MONTH', 'LAST_YEAR', 'CUSTOM'
         customStartDate: '',
         customEndDate: ''
       },

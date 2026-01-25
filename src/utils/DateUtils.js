@@ -1,7 +1,7 @@
 import { endOfMonth, endOfWeek, endOfYear, format, parse, startOfMonth, startOfWeek, startOfYear } from "date-fns";
 import { enUS } from 'date-fns/locale';
 
-export function getInitialDayFromSettings(graphConfiguration) {
+export function getInitialDayFromSettings(graphConfiguration, graphData) {
   const { dataSettings } = graphConfiguration.customGraphSettings;
   const { customStartDate: startDate, time: configTime } = dataSettings;
 
@@ -14,12 +14,14 @@ export function getInitialDayFromSettings(graphConfiguration) {
       return getFirstDayOfCurrentYear();
     case "CUSTOM":
       return fromDateString(startDate);
+    case "NO_TIME":
+      return getInitialDayFromGraphData(graphData);
     default:
       return fromDateString(startDate);
   }
 }
 
-export function getLastDayFromSettings(graphConfiguration) {
+export function getLastDayFromSettings(graphConfiguration, graphData) {
   const { dataSettings } = graphConfiguration.customGraphSettings;
   const { customEndDate: endDate, time: configTime } = dataSettings;
 
@@ -30,9 +32,29 @@ export function getLastDayFromSettings(graphConfiguration) {
       return getCurrentDay();
     case "CUSTOM":
       return fromDateString(endDate);
+    case "NO_TIME":
+      return getLastDayFromGraphData(graphData);
     default:
       return fromDateString(endDate);
   }
+}
+
+export function getInitialDayFromGraphData(graphData) {
+  if (!graphData?.data || graphData.data.length === 0) {
+    return null;
+  }
+
+  const dates = graphData.data.map(item => fromDateString(item.date));
+  return new Date(Math.min(...dates));
+}
+
+export function getLastDayFromGraphData(graphData) {
+  if (!graphData?.data || graphData.data.length === 0) {
+    return null;
+  }
+
+  const dates = graphData.data.map(item => fromDateString(item.date));
+  return new Date(Math.max(...dates));
 }
 
 export function fromDateString(dateString) {

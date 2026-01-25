@@ -81,13 +81,13 @@ export function processGroupedGraphData(graphConfiguration, graphData) {
   switch (groupByTime) {
     default:
     case "DAY":
-      return processGroupedDataGroupByDay(graphConfiguration, labels, datasets, dataMap);
+      return processGroupedDataGroupByDay(graphConfiguration, graphData, labels, datasets, dataMap);
     case "WEEK":
-      return processGroupedDataGroupByWeek(graphConfiguration, labels, datasets, dataMap);
+      return processGroupedDataGroupByWeek(graphConfiguration, graphData, labels, datasets, dataMap);
     case "MONTH":
-      return processGroupedDataGroupByMonth(graphConfiguration, labels, datasets, dataMap);
+      return processGroupedDataGroupByMonth(graphConfiguration, graphData, labels, datasets, dataMap);
     case "YEAR":
-      return processGroupedDataGroupByYear(graphConfiguration, labels, datasets, dataMap);
+      return processGroupedDataGroupByYear(graphConfiguration, graphData, labels, datasets, dataMap);
   }
 }
 
@@ -254,6 +254,8 @@ function timeToText(time, graphConfiguration) {
       const customStartDate = graphConfiguration.customGraphSettings.dataSettings.customStartDate;
       const customEndDate = graphConfiguration.customGraphSettings.dataSettings.customEndDate;
       return '(' + customStartDate + ' to ' + customEndDate + ')';
+    case 'NO_TIME':
+      return '';
   }
 }
 
@@ -265,8 +267,8 @@ function processDataGroupByDay(graphConfiguration, graphData) {
   const isCumulative = graphConfiguration.customGraphSettings.visualizationSettings.cumulative;
   var cumulativeValue = 0;
 
-  const firstDate = getInitialDayFromSettings(graphConfiguration);
-  const lastDate = getLastDayFromSettings(graphConfiguration);
+  const firstDate = getInitialDayFromSettings(graphConfiguration, graphData);
+  const lastDate = getLastDayFromSettings(graphConfiguration, graphData);
   let currentDate = firstDate;
 
   while (currentDate <= lastDate) {
@@ -294,8 +296,8 @@ function processDataGroupByWeek(graphConfiguration, graphData) {
   const isCumulative = graphConfiguration.customGraphSettings.visualizationSettings.cumulative;
   var cumulativeValue = 0;
 
-  const firstDate = getInitialDayFromSettings(graphConfiguration);
-  const lastDate = getLastDayFromSettings(graphConfiguration);
+  const firstDate = getInitialDayFromSettings(graphConfiguration, graphData);
+  const lastDate = getLastDayFromSettings(graphConfiguration, graphData);
   let currentDate = firstDate;
 
   while (currentDate <= lastDate) {
@@ -339,8 +341,8 @@ function processDataGroupByMonth(graphConfiguration, graphData) {
   const isCumulative = graphConfiguration.customGraphSettings.visualizationSettings.cumulative;
   var cumulativeValue = 0;
 
-  const firstDate = getInitialDayFromSettings(graphConfiguration);
-  const lastDate = getLastDayFromSettings(graphConfiguration);
+  const firstDate = getInitialDayFromSettings(graphConfiguration, graphData);
+  const lastDate = getLastDayFromSettings(graphConfiguration, graphData);
   let currentDate = firstDate;
   while (currentDate <= lastDate) {
     const monthStart = getFirstDayOfMonthForDate(currentDate);
@@ -383,8 +385,8 @@ function processDataGroupByYear(graphConfiguration, graphData) {
   const isCumulative = graphConfiguration.customGraphSettings.visualizationSettings.cumulative;
   var cumulativeValue = 0;
 
-  const firstDate = getInitialDayFromSettings(graphConfiguration);
-  const lastDate = getLastDayFromSettings(graphConfiguration);
+  const firstDate = getInitialDayFromSettings(graphConfiguration, graphData);
+  const lastDate = getLastDayFromSettings(graphConfiguration, graphData);
   let currentDate = firstDate;
 
   while (currentDate <= lastDate) {
@@ -419,11 +421,11 @@ function processDataGroupByYear(graphConfiguration, graphData) {
   return { dates, values };
 }
 
-function processGroupedDataGroupByDay(graphConfiguration, labels, datasets, dataMap) {
+function processGroupedDataGroupByDay(graphConfiguration, graphData, labels, datasets, dataMap) {
   const isCumulative = graphConfiguration.customGraphSettings.visualizationSettings.cumulative;
   const cumulativesPerCategory = new Map();
-  const firstDate = getInitialDayFromSettings(graphConfiguration);
-  const lastDate = getLastDayFromSettings(graphConfiguration);
+  const firstDate = getInitialDayFromSettings(graphConfiguration, graphData);
+  const lastDate = getLastDayFromSettings(graphConfiguration, graphData);
   let currentDate = firstDate;
   while (currentDate <= lastDate) {
     labels.push(formatToString(currentDate));
@@ -452,11 +454,11 @@ function processGroupedDataGroupByDay(graphConfiguration, labels, datasets, data
   return { labels, datasets };
 }
 
-function processGroupedDataGroupByWeek(graphConfiguration, labels, datasets, dataMap) {
+function processGroupedDataGroupByWeek(graphConfiguration, graphData, labels, datasets, dataMap) {
   const isCumulative = graphConfiguration.customGraphSettings.visualizationSettings.cumulative;
   const cumulativesPerCategory = new Map();
-  const firstDate = getInitialDayFromSettings(graphConfiguration);
-  const lastDate = getLastDayFromSettings(graphConfiguration);
+  const firstDate = getInitialDayFromSettings(graphConfiguration, graphData);
+  const lastDate = getLastDayFromSettings(graphConfiguration, graphData);
   let currentDate = firstDate;
   while (currentDate <= lastDate) {
     const weekStart = getFirstDayOfWeekForDate(currentDate);
@@ -506,11 +508,11 @@ function processGroupedDataGroupByWeek(graphConfiguration, labels, datasets, dat
   return { labels, datasets };
 }
 
-function processGroupedDataGroupByMonth(graphConfiguration, labels, datasets, dataMap) {
+function processGroupedDataGroupByMonth(graphConfiguration, graphData, labels, datasets, dataMap) {
   const isCumulative = graphConfiguration.customGraphSettings.visualizationSettings.cumulative;
   const cumulativesPerCategory = new Map();
-  const firstDate = getInitialDayFromSettings(graphConfiguration);
-  const lastDate = getLastDayFromSettings(graphConfiguration);
+  const firstDate = getInitialDayFromSettings(graphConfiguration, graphData);
+  const lastDate = getLastDayFromSettings(graphConfiguration, graphData);
   let currentDate = firstDate;
   while (currentDate <= lastDate) {
     const monthStart = getFirstDayOfMonthForDate(currentDate);
@@ -560,11 +562,11 @@ function processGroupedDataGroupByMonth(graphConfiguration, labels, datasets, da
   return { labels, datasets };
 }
 
-function processGroupedDataGroupByYear(graphConfiguration, labels, datasets, dataMap) {
+function processGroupedDataGroupByYear(graphConfiguration, graphData, labels, datasets, dataMap) {
   const isCumulative = graphConfiguration.customGraphSettings.visualizationSettings.cumulative;
   const cumulativesPerCategory = new Map();
-  const firstDate = getInitialDayFromSettings(graphConfiguration);
-  const lastDate = getLastDayFromSettings(graphConfiguration);
+  const firstDate = getInitialDayFromSettings(graphConfiguration, graphData);
+  const lastDate = getLastDayFromSettings(graphConfiguration, graphData);
   let currentDate = firstDate;
   while (currentDate <= lastDate) {
     const yearStart = getFirstDayOfYearForDate(currentDate);

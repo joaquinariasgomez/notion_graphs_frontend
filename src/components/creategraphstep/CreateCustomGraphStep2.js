@@ -94,29 +94,30 @@ export default function CreateCustomGraphStep2({ graphConfiguration, onUpdateGra
   }
 
   const renderTimeButtons = () => {
+    const currentTime = graphConfiguration.customGraphSettings.dataSettings.time;
     return (
       <div className='creategraphbox__step__bigbuttons'>
         <button
-          className={`${graphConfiguration.customGraphSettings.dataSettings.time === 'LAST_WEEK' ? 'selected' : 'not_selected'} small`}
-          onClick={() => handleSelectedTime('LAST_WEEK')}
+          className={`${currentTime === 'LAST_WEEK' ? 'selected' : 'not_selected'} small`}
+          onClick={() => handleSelectedTime(currentTime === 'LAST_WEEK' ? 'NO_TIME' : 'LAST_WEEK')}
         >
           <p>Last week</p>
         </button>
         <button
-          className={`${graphConfiguration.customGraphSettings.dataSettings.time === 'LAST_MONTH' ? 'selected' : 'not_selected'} small`}
-          onClick={() => handleSelectedTime('LAST_MONTH')}
+          className={`${currentTime === 'LAST_MONTH' ? 'selected' : 'not_selected'} small`}
+          onClick={() => handleSelectedTime(currentTime === 'LAST_MONTH' ? 'NO_TIME' : 'LAST_MONTH')}
         >
           <p>Last month</p>
         </button>
         <button
-          className={`${graphConfiguration.customGraphSettings.dataSettings.time === 'LAST_YEAR' ? 'selected' : 'not_selected'} small`}
-          onClick={() => handleSelectedTime('LAST_YEAR')}
+          className={`${currentTime === 'LAST_YEAR' ? 'selected' : 'not_selected'} small`}
+          onClick={() => handleSelectedTime(currentTime === 'LAST_YEAR' ? 'NO_TIME' : 'LAST_YEAR')}
         >
           <p>Last year</p>
         </button>
         <button
-          className={`${graphConfiguration.customGraphSettings.dataSettings.time === 'CUSTOM' ? 'selected' : 'not_selected'} small`}
-          onClick={() => handleSelectedTime('CUSTOM')}
+          className={`${currentTime === 'CUSTOM' ? 'selected' : 'not_selected'} small`}
+          onClick={() => handleSelectedTime(currentTime === 'CUSTOM' ? 'NO_TIME' : 'CUSTOM')}
         >
           <p>Custom time</p>
         </button>
