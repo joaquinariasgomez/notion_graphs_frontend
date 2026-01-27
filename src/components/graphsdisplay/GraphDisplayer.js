@@ -3,6 +3,7 @@ import BarGraph from "./BarGraph";
 import MultiLineGraph from "./MultiLineGraph";
 import MultiBarGraph from "./MultiBarGraph";
 import BurndownGraph from "./BurndownGraph";
+import HeatmapGraph from "./HeatmapGraph";
 
 
 export default function GraphDisplayer({ graphConfiguration, graphData, showLegend, showAverages, showStandardDeviation, showTitle }) {
@@ -10,6 +11,9 @@ export default function GraphDisplayer({ graphConfiguration, graphData, showLege
   const renderCustomGraph = () => {
     const type = graphConfiguration.customGraphSettings.visualizationSettings.type;
     const isGrouped = graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory === true || graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeBankAccounts === true || graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeSources === true;
+    return (
+      <HeatmapGraph />
+    );
     switch (type) {
       case 'LINE':
         if (isGrouped) {
