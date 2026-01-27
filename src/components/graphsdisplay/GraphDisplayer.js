@@ -12,7 +12,7 @@ export default function GraphDisplayer({ graphConfiguration, graphData, showLege
     const type = graphConfiguration.customGraphSettings.visualizationSettings.type;
     const isGrouped = graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory === true || graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeBankAccounts === true || graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeSources === true;
     return (
-      <HeatmapGraph />
+      <HeatmapGraph graphConfiguration={graphConfiguration} graphData={graphData} />
     );
     switch (type) {
       case 'LINE':
