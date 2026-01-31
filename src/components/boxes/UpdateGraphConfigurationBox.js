@@ -325,6 +325,12 @@ export default function UpdateGraphConfigurationBox() {
         >
           {renderBarChartText()}
         </button>
+        <button
+          className={`${editingGraphConfiguration.customGraphSettings.visualizationSettings.type === 'HEAT' ? 'selected' : 'not_selected'} small`}
+          onClick={() => handleSelectedVisualizationType('HEAT')}
+        >
+          {renderHeatChartText()}
+        </button>
       </div>
     );
   }
@@ -351,6 +357,12 @@ export default function UpdateGraphConfigurationBox() {
         <p>Bar chart</p>
       );
     }
+  }
+
+  const renderHeatChartText = () => {
+    return (
+      <p>Heat chart</p>
+    );
   }
 
   const renderGroupByTimeButtons = () => {

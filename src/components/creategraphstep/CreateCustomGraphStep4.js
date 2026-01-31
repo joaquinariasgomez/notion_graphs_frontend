@@ -221,6 +221,12 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
         }
     }
 
+    const renderHeatChartText = () => {
+        return (
+            <p>Heat chart</p>
+        );
+    }
+
     const renderVisualizationButtons = () => {
         return (
             <div className='creategraphbox__step__bigbuttons'>
@@ -235,6 +241,12 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
                     onClick={() => handleSelectedVisualizationType('BAR')}
                 >
                     {renderBarChartText()}
+                </button>
+                <button
+                    className={`${graphConfiguration.customGraphSettings.visualizationSettings.type === 'HEAT' ? 'selected' : 'not_selected'} small`}
+                    onClick={() => handleSelectedVisualizationType('HEAT')}
+                >
+                    {renderHeatChartText()}
                 </button>
             </div>
         );

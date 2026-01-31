@@ -45,7 +45,7 @@ export default function HeatmapGraph({ graphConfiguration, graphData, showTitle 
       domain: {
         type: 'month',
         padding: [10, 10, 10, 10],
-        gutter: 10, // Space between months
+        gutter: 5, // Space between months
         label: {
           position: 'top',
           textAlign: 'middle',
@@ -71,7 +71,7 @@ export default function HeatmapGraph({ graphConfiguration, graphData, showTitle 
           Tooltip,
           {
             text: (date, value, dayjsDate) => {
-              return `€ ${(value ?? 0).toFixed(2)}`;
+              return `€ ${(value ?? 0).toFixed(2)} on ${dayjsDate.format('dddd')}`;
             },
           },
         ],
@@ -96,11 +96,6 @@ export default function HeatmapGraph({ graphConfiguration, graphData, showTitle 
       <div
         ref={containerRef}
         className='heatmapchart'
-      // style={{
-      //   width: '100%',
-      //   overflowX: 'auto',
-      //   overflowY: 'hidden'
-      // }}
       ></div>
     </div>
   );

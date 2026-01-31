@@ -50,7 +50,7 @@ export default function CreateGraphBox() {
         includedIncomeSources: [],      // For source = 'INCOMES', and taken into consideration when allIncomes = false. When this is filled, includedIncomeBankAccounts is put to []
       },
       visualizationSettings: {
-        type: 'LINE',         // 'LINE', 'BAR', depending on the prev configuration we might want to default to BAR or LINE
+        type: 'LINE',         // 'LINE', 'BAR', 'HEAT' depending on the prev configuration we might want to default to BAR or LINE
         groupByTime: 'DAY',       // 'DAY', 'WEEK', 'MONTH', 'YEAR'
         groupByCategory: false,           // For source = 'EXPENSES'
         groupByIncomeBankAccounts: false, // For source = 'INCOMES'
