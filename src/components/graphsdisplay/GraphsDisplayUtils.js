@@ -616,6 +616,31 @@ function processGroupedDataGroupByYear(graphConfiguration, graphData, labels, da
   return { labels, datasets };
 }
 
+/**
+ * Calculates heatmap configuration data from graphConfiguration and graphData.
+ * 
+ * @param {object} graphConfiguration - Contains date range settings.
+ * @param {object} graphData - Contains the data array with date and totalAmount.
+ * @returns {{startDate: Date, numberOfMonths: number, maxValue: number}}
+ */
+export function calculateHeatmapData(graphConfiguration, graphData) {
+  if (!graphData?.data || graphData.data.length === 0) {
+    return { startDate: new Date(), numberOfMonths: 1, maxValue: 100 };
+  }
+
+  const firstDate = getInitialDayFromSettings(graphConfiguration, graphData);
+  const lastDate = getLastDayFromSettings(graphConfiguration, graphData);
+
+  // Calculate number of months between dates
+  const numberOfMonths = (lastDate.getFullYear() - firstDate.getFullYear()) * 12
+    + (lastDate.getMonth() - firstDate.getMonth()) + 1;
+
+  // Find max value for color scale
+  const maxValue = Math.max(...graphData.data.map(d => d.totalAmount), 1);
+
+  return { startDate: firstDate, numberOfMonths, maxValue };
+}
+
 function applyColorToDatasets(datasets, graphConfiguration) {
   const type = graphConfiguration.customGraphSettings.visualizationSettings.type;
   const colorPalette = [
