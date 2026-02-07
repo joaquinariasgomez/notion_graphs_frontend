@@ -26,7 +26,7 @@ export default function DashboardGraphs({ }) {
     const [grabbedGraphConfigId, setGrabbedGraphConfigId] = useState(null);
     const [hasNextPage, setHasNextPage] = useState(false);
     const [nextCursor, setNextCursor] = useState(null);
-    const [filters, setFilters] = useState({ chartType: null, timeRange: 'NO_TIME' });
+    const [filters, setFilters] = useState({ chartType: null, timeRange: null });
 
     useEffect(() => {
         fetchGraphConfigurations();

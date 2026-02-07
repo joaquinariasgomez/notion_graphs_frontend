@@ -7,14 +7,15 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const CHART_TYPES = [
-  { id: 'expenses', label: 'Expenses', icon: TrendingDownRoundedIcon },
-  { id: 'incomes', label: 'Incomes', icon: AttachMoneyRoundedIcon },
-  { id: 'savings', label: 'Savings', icon: TrendingUpRoundedIcon },
-  { id: 'burndown', label: 'Burndown', icon: LocalFireDepartmentIcon },
+  { id: 'EXPENSES', label: 'Expenses', icon: TrendingDownRoundedIcon },
+  { id: 'INCOMES', label: 'Incomes', icon: AttachMoneyRoundedIcon },
+  { id: 'SAVINGS', label: 'Savings', icon: TrendingUpRoundedIcon },
+  { id: 'BURNDOWN', label: 'Burndown', icon: LocalFireDepartmentIcon },
 ];
 
+// TODO: add "NO_TIME" to the time options, which would show charts with no time filter
 const TIME_OPTIONS = [
-  { value: 'NO_TIME', label: 'All time' },
+  { value: 'ALL_TIME', label: 'All time' },
   { value: 'LAST_WEEK', label: 'Last week' },
   { value: 'LAST_MONTH', label: 'Last month' },
   { value: 'LAST_YEAR', label: 'Last year' },
@@ -23,7 +24,7 @@ const TIME_OPTIONS = [
 
 export default function DashboardFilters({ onFiltersChange }) {
   const [selectedType, setSelectedType] = useState(null);
-  const [selectedTime, setSelectedTime] = useState('NO_TIME');
+  const [selectedTime, setSelectedTime] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleTypeToggle = (typeId) => {
@@ -37,7 +38,7 @@ export default function DashboardFilters({ onFiltersChange }) {
   };
 
   const handleTimeChange = (event) => {
-    const newTime = event.target.value;
+    const newTime = event.target.value === "ALL_TIME" ? null : event.target.value;
     setSelectedTime(newTime);
     onFiltersChange?.({
       chartType: selectedType,
@@ -47,19 +48,19 @@ export default function DashboardFilters({ onFiltersChange }) {
 
   const clearAllFilters = () => {
     setSelectedType(null);
-    setSelectedTime('NO_TIME');
+    setSelectedTime(null);
     onFiltersChange?.({
       chartType: null,
-      timeRange: 'NO_TIME'
+      timeRange: null
     });
   };
 
-  const hasActiveFilters = selectedType !== null || selectedTime !== 'NO_TIME';
+  const hasActiveFilters = selectedType !== null || selectedTime !== null;
 
   const getActiveFiltersCount = () => {
     let count = 0;
     if (selectedType !== null) count++;
-    if (selectedTime !== 'NO_TIME') count++;
+    if (selectedTime !== null) count++;
     return count;
   };
 
