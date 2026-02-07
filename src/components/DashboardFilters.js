@@ -106,7 +106,7 @@ export default function DashboardFilters({ onFiltersChange }) {
             <span className="dashboard__filters__label">Time range</span>
             <select
               className="dashboard__filters__select"
-              value={selectedTime}
+              value={selectedTime ?? 'ALL_TIME'}
               onChange={handleTimeChange}
             >
               {TIME_OPTIONS.map(({ value, label }) => (
