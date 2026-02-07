@@ -77,14 +77,29 @@ export async function getIncomesSources(jwtToken) {
   return (await response).data;
 }
 
-export async function getGraphs(jwtToken) {
-  const url = Config.BackendGraphsURL;
+function buildQueryString(params) {
+  const urlParams = new URLSearchParams();
+
+  if (params) {
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== null && value !== undefined) {
+        urlParams.append(key, value);
+      }
+    });
+  }
+
+  const queryString = urlParams.toString();
+  return queryString ? `?${queryString}` : '';
+}
+
+export async function getGraphs(jwtToken, filters) {
+  const url = Config.BackendGraphsURL + buildQueryString(filters);
   const response = getWithJWTToken(url, jwtToken);
   return (await response).data;
 }
 
-export async function getMoreGraphs(jwtToken, nextCursor) {
-  const url = Config.BackendGraphsURL + "?cursor=" + nextCursor;
+export async function getMoreGraphs(jwtToken, filters, nextCursor) {
+  const url = Config.BackendGraphsURL + buildQueryString({ ...filters, cursor: nextCursor });
   const response = getWithJWTToken(url, jwtToken);
   return (await response).data;
 }

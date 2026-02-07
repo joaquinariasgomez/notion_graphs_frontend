@@ -13,6 +13,7 @@ import {
 } from "@dnd-kit/sortable";
 import GraphBox from "./GraphBox";
 import SkeletonGraphBox from "./SkeletonGraphBox";
+import DashboardFilters from "./DashboardFilters";
 import { actionTypes } from "../context/globalReducer";
 
 export default function DashboardGraphs({ }) {
@@ -25,15 +26,16 @@ export default function DashboardGraphs({ }) {
     const [grabbedGraphConfigId, setGrabbedGraphConfigId] = useState(null);
     const [hasNextPage, setHasNextPage] = useState(false);
     const [nextCursor, setNextCursor] = useState(null);
+    const [filters, setFilters] = useState({ chartType: null, timeRange: 'NO_TIME' });
 
     useEffect(() => {
         fetchGraphConfigurations();
     }, []);
 
-    const fetchGraphConfigurations = async () => {
+    const fetchGraphConfigurations = async (filtersToUse = filters) => {
         try {
             setGraphsLoading(true);
-            const apiResponse = await getGraphs(userJWTCookie);
+            const apiResponse = await getGraphs(userJWTCookie, filtersToUse);
             if (apiResponse) {
                 dispatch({
                     type: actionTypes.SET_GRAPHS,
@@ -52,7 +54,7 @@ export default function DashboardGraphs({ }) {
     const loadMoreGraphs = async () => {
         try {
             setMoreGraphsLoading(true);
-            const apiResponse = await getMoreGraphs(userJWTCookie, nextCursor);
+            const apiResponse = await getMoreGraphs(userJWTCookie, filters, nextCursor);
             if (apiResponse) {
                 // This logic removes the already present graphs that might have been created before hitting 
                 // the "load more" button
@@ -148,56 +150,58 @@ export default function DashboardGraphs({ }) {
 
     const grabbedGraph = grabbedGraphConfigId ? graphs.find(g => g.graphConfiguration.id === grabbedGraphConfigId) : null;
 
-    // Render skeleton loading state
-    if (graphsLoading) {
-        return (
-            <div className="dashboard__graphs">
+    const handleFiltersChange = (newFilters) => {
+        setFilters(newFilters);
+        fetchGraphConfigurations(newFilters);
+    };
+
+    return (
+        <div className="dashboard__graphs">
+            <DashboardFilters onFiltersChange={handleFiltersChange} />
+            {graphsLoading && (
                 <div className="graphsgrid">
                     {[...Array(6)].map((_, index) => (
                         <SkeletonGraphBox key={`skeleton-${index}`} />
                     ))}
                 </div>
-            </div>
-        );
-    }
-
-    return (
-        <div className="dashboard__graphs">
+            )}
             {!graphsLoading && graphs.length === 0 && (
                 <div className="empty-state-images">
                     {renderCreateYourFirstGraphPicture()}
                     {renderYourSettingsAreHerePicture()}
                 </div>
             )}
-            <DndContext
-                collisionDetection={closestCenter}
-                onDragStart={handleDragStart}
-                onDragEnd={handleDragEnd}
-            >
-                <div className="graphsgrid">
-                    <SortableContext
-                        items={graphs.map(g => g.graphConfiguration.id)}
-                        strategy={rectSortingStrategy}
-                    >
-                        {graphs.map((graph) => (
-                            <GraphBox key={graph.graphConfiguration.id} graph={graph} />
-                        ))}
-                    </SortableContext>
-                    {moreGraphsLoading && (
-                        <>
-                            {[...Array(3)].map((_, index) => (
-                                <SkeletonGraphBox key={`skeleton-more-${index}`} />
+            {!graphsLoading && graphs.length > 0 && (
+                <DndContext
+                    collisionDetection={closestCenter}
+                    onDragStart={handleDragStart}
+                    onDragEnd={handleDragEnd}
+                >
+                    <div className="graphsgrid">
+                        <SortableContext
+                            items={graphs.map(g => g.graphConfiguration.id)}
+                            strategy={rectSortingStrategy}
+                        >
+                            {graphs.map((graph) => (
+                                <GraphBox key={graph.graphConfiguration.id} graph={graph} />
                             ))}
-                        </>
-                    )}
-                    {renderLoadMoreGraphsButton()}
-                </div>
-                <DragOverlay>
-                    {grabbedGraph ? (
-                        <GraphBox graph={grabbedGraph} />
-                    ) : null}
-                </DragOverlay>
-            </DndContext>
+                        </SortableContext>
+                        {moreGraphsLoading && (
+                            <>
+                                {[...Array(3)].map((_, index) => (
+                                    <SkeletonGraphBox key={`skeleton-more-${index}`} />
+                                ))}
+                            </>
+                        )}
+                        {renderLoadMoreGraphsButton()}
+                    </div>
+                    <DragOverlay>
+                        {grabbedGraph ? (
+                            <GraphBox graph={grabbedGraph} />
+                        ) : null}
+                    </DragOverlay>
+                </DndContext>
+            )}
         </div>
     );
 }
