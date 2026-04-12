@@ -14,6 +14,7 @@ import {
 import GraphBox from "./GraphBox";
 import SkeletonGraphBox from "./SkeletonGraphBox";
 import DashboardFilters from "./DashboardFilters";
+import DashboardWidgets from "./DashboardWidgets";
 import { actionTypes } from "../context/globalReducer";
 
 export default function DashboardGraphs({ }) {
@@ -30,7 +31,7 @@ export default function DashboardGraphs({ }) {
 
     useEffect(() => {
         fetchGraphConfigurations();
-        testFetchMoneyStatsChart();
+        //testFetchMoneyStatsChart();
     }, []);
 
     const fetchGraphConfigurations = async (filtersToUse = filters) => {
@@ -171,6 +172,7 @@ export default function DashboardGraphs({ }) {
 
     return (
         <div className="dashboard__graphs">
+            <DashboardWidgets />
             <DashboardFilters onFiltersChange={handleFiltersChange} />
             {graphsLoading && (
                 <div className="graphsgrid">
