@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
-import { getGraphs, getMoreGraphs, reorderGraph } from "../api/RequestUtils";
+import { getGraphs, getMoneyStatsChart, getMoreGraphs, reorderGraph } from "../api/RequestUtils";
 import {
     DndContext,
     closestCenter,
@@ -30,6 +30,7 @@ export default function DashboardGraphs({ }) {
 
     useEffect(() => {
         fetchGraphConfigurations();
+        testFetchMoneyStatsChart();
     }, []);
 
     const fetchGraphConfigurations = async (filtersToUse = filters) => {
@@ -48,6 +49,15 @@ export default function DashboardGraphs({ }) {
 
         } finally {
             setGraphsLoading(false);
+        }
+    }
+
+    const testFetchMoneyStatsChart = async () => {
+        try {
+            const apiResponse = await getMoneyStatsChart(userJWTCookie, "2026-02-14", "2026-02-22");
+            console.log(apiResponse);
+        } catch (error) {
+            console.log(error);
         }
     }
 

@@ -186,3 +186,9 @@ export async function registerValue(jwtToken, request) {
   const response = postWithJWTToken(url, request, jwtToken);
   return (await response).data;
 }
+
+export async function getMoneyStatsChart(jwtToken, fromDate, toDate) {
+  const url = Config.BackendWidgetsConnectionURL + "/moneystats/chart?fromDate=" + fromDate + "&toDate=" + toDate;
+  const response = getWithJWTToken(url, jwtToken);
+  return (await response).data;
+}
