@@ -27,7 +27,7 @@ export default function HeatmapGraph({ graphConfiguration, graphData, showTitle 
       verticalOrientation: false,
       range: numberOfMonths,
       date: {
-        start: startDate,
+        start: new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), 12, 0, 0),
         locale: { weekStart: 1 }, // 0 = Sunday, 1 = Monday
       },
       data: {
