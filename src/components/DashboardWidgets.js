@@ -32,6 +32,8 @@ ChartJS.register(
 
 const DATE_WINDOW_DAYS = 30;
 
+// TODO JOAQUIN: la grafica debe mostrar los ultimos dias siempre cuando se carguen los dias anteriores.
+// tambien, se debe agrupar por mes si el numero de dias es superior a un valor
 export default function DashboardWidgets() {
   const [{ userJWTCookie }] = useGlobalStateValue();
 
