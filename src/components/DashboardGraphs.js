@@ -54,7 +54,11 @@ export default function DashboardGraphs({ }) {
 
     const testFetchMoneyStatsChart = async () => {
         try {
-            const apiResponse = await getMoneyStatsChart(userJWTCookie, "2026-02-14", "2026-02-22");
+            // "hasNextPage" means that we have previous expenses prior to "startDate".
+            // This request will always be made with "endDate" equal to today.
+            // Depending on the amount of data that we receive, which are grouped by days, we will display
+            // the chart with a line chart in a day by day or month by month grouping.
+            const apiResponse = await getMoneyStatsChart(userJWTCookie, "2026-02-15", "2026-04-11");
             console.log(apiResponse);
         } catch (error) {
             console.log(error);
