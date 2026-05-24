@@ -192,3 +192,15 @@ export async function getMoneyStatsChart(jwtToken, fromDate, toDate) {
   const response = getWithJWTToken(url, jwtToken);
   return (await response).data;
 }
+
+export async function getMoneyStats(jwtToken) {
+  const url = Config.BackendWidgetsConnectionURL + "/moneystats";
+  const response = getWithJWTToken(url, jwtToken);
+  return (await response).data;
+}
+
+export async function syncTotalMoney(jwtToken, totalMoney) {
+  const url = Config.BackendWidgetsConnectionURL + "/moneystats?totalMoney=" + totalMoney;
+  const response = putWithJWTToken(url, null, jwtToken);
+  return (await response).data;
+}

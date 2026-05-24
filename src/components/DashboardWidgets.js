@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
-import { getMoneyStatsChart } from "../api/RequestUtils";
+import { getMoneyStats, getMoneyStatsChart, syncTotalMoney } from "../api/RequestUtils";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -35,7 +35,6 @@ ChartJS.register(
 const DATE_WINDOW_DAYS = 30;
 const WEEKLY_THRESHOLD_DAYS = 90;
 const MONTHLY_THRESHOLD_DAYS = 365;
-const CURRENT_TOTAL = 100000;
 const WEEK_OPTIONS = { weekStartsOn: 1 };
 const TIME_UNIT_BY_AGGREGATION = { daily: 'day', weekly: 'week', monthly: 'month' };
 
@@ -70,6 +69,15 @@ export default function DashboardWidgets() {
   const [hasNextPage, setHasNextPage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [loadedFromDate, setLoadedFromDate] = useState(initialPreviousDate);
+  const [totalMoney, setTotalMoney] = useState(null);
+  const [totalMoneyInput, setTotalMoneyInput] = useState('');
+  const [isSyncing, setIsSyncing] = useState(false);
+
+  useEffect(() => {
+    if (totalMoney != null) {
+      setTotalMoneyInput(totalMoney.toFixed(2));
+    }
+  }, [totalMoney]);
 
   useEffect(() => {
     fetchInitialData();
@@ -78,16 +86,36 @@ export default function DashboardWidgets() {
   const fetchInitialData = async () => {
     try {
       setIsLoading(true);
-      const response = await getMoneyStatsChart(userJWTCookie, initialPreviousDate, initialCurrentDate);
-      if (response) {
-        const sortedData = [...response.data].sort((a, b) => a.date.localeCompare(b.date));
+      const [chartResponse, statsResponse] = await Promise.all([
+        getMoneyStatsChart(userJWTCookie, initialPreviousDate, initialCurrentDate),
+        getMoneyStats(userJWTCookie),
+      ]);
+      if (chartResponse) {
+        const sortedData = [...chartResponse.data].sort((a, b) => a.date.localeCompare(b.date));
         setAllData(sortedData);
-        setHasNextPage(response.hasNextPage);
+        setHasNextPage(chartResponse.hasNextPage);
+      }
+      if (statsResponse?.totalMoney != null) {
+        setTotalMoney(statsResponse.totalMoney);
       }
     } catch (error) {
 
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleSyncTotalMoney = async () => {
+    const parsed = parseFloat(totalMoneyInput);
+    if (!Number.isFinite(parsed) || parsed === totalMoney) return;
+    try {
+      setIsSyncing(true);
+      await syncTotalMoney(userJWTCookie, parsed);
+      setTotalMoney(parsed);
+    } catch (error) {
+
+    } finally {
+      setIsSyncing(false);
     }
   };
 
@@ -128,9 +156,11 @@ export default function DashboardWidgets() {
   const subtitleText = `${granularityLabel} · ${rangeLabel}`;
 
   // Reconstructs the balance at the end of each day in the loaded window,
-  // anchoring the final day to CURRENT_TOTAL and walking backwards via the
-  // daily deltas (amount = income - expenses for that day).
+  // anchoring the final day to the customer's current total and walking
+  // backwards via the daily deltas (amount = income - expenses for that day).
   const buildBalanceData = () => {
+    if (totalMoney == null) return [];
+
     const amountByDate = new Map(allData.map(item => [item.date, item.amount]));
 
     const daily = [];
@@ -142,7 +172,7 @@ export default function DashboardWidgets() {
     }
 
     const finalDelta = daily.length > 0 ? daily[daily.length - 1].y : 0;
-    const offset = CURRENT_TOTAL - finalDelta;
+    const offset = totalMoney - finalDelta;
     for (const point of daily) {
       point.y += offset;
     }
@@ -235,9 +265,38 @@ export default function DashboardWidgets() {
     }
   };
 
+  const parsedInput = parseFloat(totalMoneyInput);
+  const isInputValid = Number.isFinite(parsedInput);
+  const isDirty = isInputValid && totalMoney != null && parsedInput.toFixed(2) !== totalMoney.toFixed(2);
+
   return (
     <div className="dashboard__widgets">
       <div className="widget__moneystats">
+        <div className="widget__moneystats__header">
+          <label className="widget__moneystats__total-input-group">
+            <input
+              type="number"
+              step="0.01"
+              inputMode="decimal"
+              className="widget__moneystats__total-input"
+              value={totalMoneyInput}
+              onChange={(e) => setTotalMoneyInput(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') handleSyncTotalMoney(); }}
+              disabled={totalMoney == null || isSyncing}
+              placeholder="0.00"
+              aria-label="Current total money"
+            />
+            <span className="widget__moneystats__total-currency" aria-hidden="true">€</span>
+          </label>
+          <button
+            className="widget__moneystats__sync-button"
+            onClick={handleSyncTotalMoney}
+            disabled={!isDirty || isSyncing}
+            aria-label={isSyncing ? 'Syncing total money' : 'Sync total money'}
+          >
+            {isSyncing ? 'Syncing…' : 'Sync'}
+          </button>
+        </div>
         <div className="widget__moneystats__chart-wrapper">
           {hasNextPage && (
             <button
