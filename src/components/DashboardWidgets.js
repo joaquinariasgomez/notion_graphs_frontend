@@ -9,13 +9,14 @@ import {
   PointElement,
   LineElement,
   Title,
+  SubTitle,
   Tooltip,
   Legend,
   Filler,
   TimeScale
 } from 'chart.js';
 import 'chartjs-adapter-date-fns';
-import { subDays } from 'date-fns';
+import { addDays, differenceInDays, isSameMonth, isSameWeek, subDays } from 'date-fns';
 import { formatToString, fromDateString } from "../utils/DateUtils";
 
 ChartJS.register(
@@ -25,15 +26,40 @@ ChartJS.register(
   PointElement,
   LineElement,
   Title,
+  SubTitle,
   Tooltip,
   Legend,
   Filler
 );
 
 const DATE_WINDOW_DAYS = 30;
+const WEEKLY_THRESHOLD_DAYS = 90;
+const MONTHLY_THRESHOLD_DAYS = 365;
+const CURRENT_TOTAL = 100000;
+const WEEK_OPTIONS = { weekStartsOn: 1 };
+const TIME_UNIT_BY_AGGREGATION = { daily: 'day', weekly: 'week', monthly: 'month' };
 
-// TODO JOAQUIN: la grafica debe mostrar los ultimos dias siempre cuando se carguen los dias anteriores.
-// tambien, se debe agrupar por mes si el numero de dias es superior a un valor
+const isSamePeriod = (a, b, aggregation) => {
+  if (aggregation === 'weekly') return isSameWeek(a, b, WEEK_OPTIONS);
+  if (aggregation === 'monthly') return isSameMonth(a, b);
+  return false;
+};
+
+const currencyFormatter = new Intl.NumberFormat('es-ES', {
+  style: 'currency',
+  currency: 'EUR',
+  maximumFractionDigits: 0,
+});
+
+const buildGradientFill = (context) => {
+  const { ctx, chartArea } = context.chart;
+  if (!chartArea) return 'rgba(54, 162, 235, 0.15)';
+  const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+  gradient.addColorStop(0, 'rgba(54, 162, 235, 0.35)');
+  gradient.addColorStop(1, 'rgba(54, 162, 235, 0)');
+  return gradient;
+};
+
 export default function DashboardWidgets() {
   const [{ userJWTCookie }] = useGlobalStateValue();
 
@@ -85,24 +111,71 @@ export default function DashboardWidgets() {
     }
   };
 
-  const buildCumulativeData = () => {
-    let cumulative = 0;
-    return allData.map(item => {
-      cumulative += item.amount;
-      return { x: item.date, y: cumulative };
-    });
+  const startDate = fromDateString(loadedFromDate);
+  const endDate = fromDateString(initialCurrentDate);
+  const spanDays = differenceInDays(endDate, startDate);
+  const aggregation = spanDays > MONTHLY_THRESHOLD_DAYS
+    ? 'monthly'
+    : spanDays > WEEKLY_THRESHOLD_DAYS ? 'weekly' : 'daily';
+
+  const granularityLabel = aggregation.charAt(0).toUpperCase() + aggregation.slice(1);
+  const rangeLabel = (() => {
+    if (spanDays <= 90) return `Last ${spanDays} days`;
+    const months = Math.round(spanDays / 30);
+    if (months < 24) return `Last ${months} months`;
+    return `Last ${Math.round(months / 12)} years`;
+  })();
+  const subtitleText = `${granularityLabel} · ${rangeLabel}`;
+
+  // Reconstructs the balance at the end of each day in the loaded window,
+  // anchoring the final day to CURRENT_TOTAL and walking backwards via the
+  // daily deltas (amount = income - expenses for that day).
+  const buildBalanceData = () => {
+    const amountByDate = new Map(allData.map(item => [item.date, item.amount]));
+
+    const daily = [];
+    let runningDelta = 0;
+    for (let date = startDate; date <= endDate; date = addDays(date, 1)) {
+      const dateString = formatToString(date);
+      runningDelta += amountByDate.get(dateString) ?? 0;
+      daily.push({ x: dateString, y: runningDelta, date });
+    }
+
+    const finalDelta = daily.length > 0 ? daily[daily.length - 1].y : 0;
+    const offset = CURRENT_TOTAL - finalDelta;
+    for (const point of daily) {
+      point.y += offset;
+    }
+
+    if (aggregation === 'daily') {
+      return daily.map(({ x, y }) => ({ x, y }));
+    }
+
+    // Keep only the last point of each period so the balance reflects the
+    // value at the end of that week/month.
+    return daily
+      .filter((point, i) => {
+        const next = daily[i + 1];
+        return !next || !isSamePeriod(point.date, next.date, aggregation);
+      })
+      .map(({ x, y }) => ({ x, y }));
   };
 
   const chartData = {
     datasets: [
       {
-        label: 'Cumulative Expenses',
-        data: buildCumulativeData(),
-        fill: 'origin',
+        label: 'Balance',
+        data: buildBalanceData(),
+        fill: 'start',
         borderColor: 'rgb(54, 162, 235)',
-        backgroundColor: 'rgba(54, 162, 235, 0.3)',
-        tension: 0.0,
-        pointRadius: 3
+        backgroundColor: buildGradientFill,
+        borderWidth: 2,
+        tension: 0.25,
+        pointRadius: 2,
+        pointHoverRadius: 5,
+        pointBackgroundColor: 'rgb(54, 162, 235)',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 1
       }
     ]
   };
@@ -112,10 +185,24 @@ export default function DashboardWidgets() {
     maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
-      tooltip: { enabled: true },
+      tooltip: {
+        enabled: true,
+        callbacks: {
+          label: (ctx) => currencyFormatter.format(ctx.parsed.y)
+        }
+      },
       title: {
         display: true,
-        text: 'Money evolution'
+        text: 'Money evolution',
+        font: { size: 14, weight: '600' },
+        padding: { top: 4, bottom: 2 }
+      },
+      subtitle: {
+        display: true,
+        text: subtitleText,
+        font: { size: 11, weight: '400' },
+        color: 'rgba(0, 0, 0, 0.55)',
+        padding: { bottom: 12 }
       }
     },
     interaction: {
@@ -126,15 +213,24 @@ export default function DashboardWidgets() {
       x: {
         type: 'time',
         time: {
-          unit: 'day',
+          unit: TIME_UNIT_BY_AGGREGATION[aggregation],
           tooltipFormat: 'MMM d, yyyy'
         },
+        grid: { display: false },
         ticks: {
-          font: { size: 11 }
+          font: { size: 11 },
+          color: 'rgba(0, 0, 0, 0.55)'
         }
       },
       y: {
-        beginAtZero: true
+        beginAtZero: false,
+        border: { display: false },
+        grid: { color: 'rgba(0, 0, 0, 0.06)' },
+        ticks: {
+          font: { size: 11 },
+          color: 'rgba(0, 0, 0, 0.55)',
+          callback: (value) => currencyFormatter.format(value)
+        }
       }
     }
   };
@@ -148,9 +244,10 @@ export default function DashboardWidgets() {
               className="widget__moneystats__prev-button"
               onClick={loadPreviousDays}
               disabled={isLoading}
-              title="Load previous days"
+              aria-label={isLoading ? 'Loading earlier days' : 'Load earlier days'}
+              title="Load earlier days"
             >
-              ←
+              <span aria-hidden="true">←</span>
             </button>
           )}
           <div className="widget__moneystats__chart">
