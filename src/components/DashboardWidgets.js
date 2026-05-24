@@ -155,6 +155,18 @@ export default function DashboardWidgets() {
   })();
   const subtitleText = `${granularityLabel} · ${rangeLabel}`;
 
+  const windowChange = (() => {
+    if (totalMoney == null) return null;
+    const total = allData
+      .filter(item => item.date >= loadedFromDate && item.date <= initialCurrentDate)
+      .reduce((sum, item) => sum + item.amount, 0);
+    const initial = totalMoney - total;
+    const direction = total > 0 ? 'up' : total < 0 ? 'down' : 'flat';
+    const pct = initial !== 0 ? (total / initial) * 100 : null;
+    return { absolute: total, pct, direction };
+  })();
+  const changeArrow = { up: '↑', down: '↓', flat: '→' };
+
   // Reconstructs the balance at the end of each day in the loaded window,
   // anchoring the final day to the customer's current total and walking
   // backwards via the daily deltas (amount = income - expenses for that day).
@@ -221,19 +233,8 @@ export default function DashboardWidgets() {
           label: (ctx) => currencyFormatter.format(ctx.parsed.y)
         }
       },
-      title: {
-        display: true,
-        text: 'Money evolution',
-        font: { size: 14, weight: '600' },
-        padding: { top: 4, bottom: 2 }
-      },
-      subtitle: {
-        display: true,
-        text: subtitleText,
-        font: { size: 11, weight: '400' },
-        color: 'rgba(0, 0, 0, 0.55)',
-        padding: { bottom: 12 }
-      }
+      title: { display: false },
+      subtitle: { display: false }
     },
     interaction: {
       mode: 'index',
@@ -272,7 +273,25 @@ export default function DashboardWidgets() {
   return (
     <div className="dashboard__widgets">
       <div className="widget__moneystats">
-        <div className="widget__moneystats__header">
+        <div className="widget__moneystats__heading">
+          <h3 className="widget__moneystats__title">Money evolution</h3>
+          <div className="widget__moneystats__subtitle">
+            <span>{subtitleText}</span>
+            {windowChange && (
+              <span className={`widget__moneystats__change widget__moneystats__change--${windowChange.direction}`}>
+                <span aria-hidden="true">{changeArrow[windowChange.direction]}</span>
+                <span>
+                  {windowChange.absolute >= 0 ? '+' : '−'}
+                  {currencyFormatter.format(Math.abs(windowChange.absolute))}
+                  {windowChange.pct !== null && (
+                    <> ({windowChange.pct >= 0 ? '+' : '−'}{Math.abs(windowChange.pct).toFixed(2)}%)</>
+                  )}
+                </span>
+              </span>
+            )}
+          </div>
+        </div>
+        <div className="widget__moneystats__controls">
           <label className="widget__moneystats__total-input-group">
             <input
               type="number"
