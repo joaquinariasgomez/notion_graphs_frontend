@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
 import { getMoneyStats, getMoneyStatsChart, syncTotalMoney } from "../api/RequestUtils";
 import { Line } from "react-chartjs-2";
+import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
+import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -72,6 +74,7 @@ export default function DashboardWidgets() {
   const [totalMoney, setTotalMoney] = useState(null);
   const [totalMoneyInput, setTotalMoneyInput] = useState('');
   const [isSyncing, setIsSyncing] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(true);
 
   useEffect(() => {
     if (totalMoney != null) {
@@ -272,7 +275,16 @@ export default function DashboardWidgets() {
 
   return (
     <div className="dashboard__widgets">
-      <div className="widget__moneystats">
+      <div className={`widget__moneystats ${isMinimized ? 'minimized' : ''}`}>
+        <button
+          className="widget__moneystats__minimize-toggle"
+          onClick={() => setIsMinimized(prev => !prev)}
+          aria-label={isMinimized ? 'Expand money evolution widget' : 'Minimize money evolution widget'}
+          aria-expanded={!isMinimized}
+          title={isMinimized ? 'Expand widget' : 'Minimize widget'}
+        >
+          {isMinimized ? <VisibilityOffRoundedIcon /> : <VisibilityRoundedIcon />}
+        </button>
         <div className="widget__moneystats__heading">
           <h3 className="widget__moneystats__title">Money evolution</h3>
           <div className="widget__moneystats__subtitle">

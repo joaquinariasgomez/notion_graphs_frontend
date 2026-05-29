@@ -74,6 +74,51 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  transition: height 0.3s ease, gap 0.3s ease;
+  overflow: hidden;
+}
+
+.widget__moneystats.minimized {
+  height: auto;
+  gap: 0;
+}
+
+.widget__moneystats.minimized .widget__moneystats__controls,
+.widget__moneystats.minimized .widget__moneystats__chart-wrapper {
+  display: none;
+}
+
+.widget__moneystats__minimize-toggle {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.widget__moneystats__minimize-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--matteblack-color);
+}
+
+.widget__moneystats__minimize-toggle:focus-visible {
+  outline: 2px solid rgb(54, 162, 235);
+  outline-offset: 2px;
+}
+
+.widget__moneystats__minimize-toggle svg {
+  width: 24px;
+  height: 24px;
 }
 
 .widget__moneystats__heading {
@@ -89,7 +134,15 @@
   .widget__moneystats__heading {
     align-items: flex-start;
     text-align: left;
+    padding-left: 44px;
     padding-right: 220px;
+  }
+
+  .widget__moneystats.minimized .widget__moneystats__heading {
+    align-items: center;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
