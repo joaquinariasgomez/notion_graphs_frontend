@@ -193,6 +193,47 @@
   gap: 10px;
 }
 
+.widget__moneystats__experiment-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px dashed rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.widget__moneystats__experiment-button:hover:not(:disabled) {
+  background-color: rgba(255, 152, 0, 0.1);
+  border-color: rgba(255, 152, 0, 0.5);
+  color: rgb(207, 110, 0);
+}
+
+.widget__moneystats__experiment-button:active:not(:disabled) {
+  background-color: rgba(255, 152, 0, 0.2);
+}
+
+.widget__moneystats__experiment-button:focus-visible {
+  outline: 2px solid rgb(54, 162, 235);
+  outline-offset: 2px;
+}
+
+.widget__moneystats__experiment-button:disabled {
+  cursor: progress;
+  opacity: 0.55;
+  animation: widget__moneystats__prev-button-pulse 1.4s ease-in-out infinite;
+}
+
+.widget__moneystats__experiment-button svg {
+  width: 16px;
+  height: 16px;
+}
+
 .widget__moneystats__total-input-group {
   display: inline-flex;
   align-items: center;

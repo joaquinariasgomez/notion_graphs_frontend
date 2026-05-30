@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
-import { getMoneyStats, getMoneyStatsChart, syncTotalMoney } from "../api/RequestUtils";
+import { getMoneyStats, getMoneyStatsChart, syncTotalMoney, triggerExperimentJob } from "../api/RequestUtils";
 import { Line } from "react-chartjs-2";
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
+import ScienceRoundedIcon from '@mui/icons-material/ScienceRounded';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -75,6 +76,7 @@ export default function DashboardWidgets() {
   const [totalMoneyInput, setTotalMoneyInput] = useState('');
   const [isSyncing, setIsSyncing] = useState(false);
   const [isMinimized, setIsMinimized] = useState(true);
+  const [isTriggeringExperiment, setIsTriggeringExperiment] = useState(false);
 
   useEffect(() => {
     if (totalMoney != null) {
@@ -105,6 +107,17 @@ export default function DashboardWidgets() {
 
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleTriggerExperiment = async () => {
+    try {
+      setIsTriggeringExperiment(true);
+      await triggerExperimentJob(userJWTCookie);
+    } catch (error) {
+
+    } finally {
+      setIsTriggeringExperiment(false);
     }
   };
 
@@ -304,6 +317,15 @@ export default function DashboardWidgets() {
           </div>
         </div>
         <div className="widget__moneystats__controls">
+          <button
+            className="widget__moneystats__experiment-button"
+            onClick={handleTriggerExperiment}
+            disabled={isTriggeringExperiment}
+            aria-label={isTriggeringExperiment ? 'Triggering experiment job' : 'Trigger experiment job'}
+            title="Trigger experiment job (admin only)"
+          >
+            <ScienceRoundedIcon />
+          </button>
           <label className="widget__moneystats__total-input-group">
             <input
               type="number"

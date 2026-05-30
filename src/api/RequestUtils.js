@@ -204,3 +204,9 @@ export async function syncTotalMoney(jwtToken, totalMoney) {
   const response = putWithJWTToken(url, null, jwtToken);
   return (await response).data;
 }
+
+export async function triggerExperimentJob(jwtToken) {
+  const url = Config.BackendWidgetsConnectionURL + "/moneystats/experiment";
+  const response = postWithJWTToken(url, null, jwtToken);
+  return (await response).data;
+}
