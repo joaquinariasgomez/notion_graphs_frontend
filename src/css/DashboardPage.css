@@ -135,7 +135,7 @@
     align-items: flex-start;
     text-align: left;
     padding-left: 44px;
-    padding-right: 220px;
+    padding-right: 260px;
   }
 
   .widget__moneystats.minimized .widget__moneystats__heading {
@@ -143,6 +143,21 @@
     text-align: center;
     padding-left: 0;
     padding-right: 0;
+  }
+
+  .widget__moneystats__chart-wrapper .widget__moneystats__prev-button {
+    display: none;
+  }
+
+  .widget__moneystats .widget__moneystats__controls .widget__moneystats__prev-button {
+    display: flex;
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .widget__moneystats .widget__moneystats__chart-wrapper {
+    gap: 0;
   }
 }
 
@@ -191,6 +206,10 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.widget__moneystats__controls .widget__moneystats__prev-button {
+  display: none;
 }
 
 .widget__moneystats__experiment-button {

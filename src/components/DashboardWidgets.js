@@ -317,7 +317,18 @@ export default function DashboardWidgets() {
           </div>
         </div>
         <div className="widget__moneystats__controls">
-          <button
+          {hasNextPage && (
+            <button
+              className="widget__moneystats__prev-button"
+              onClick={loadPreviousDays}
+              disabled={isLoading}
+              aria-label={isLoading ? 'Loading earlier days' : 'Load earlier days'}
+              title="Load earlier days"
+            >
+              <span aria-hidden="true">←</span>
+            </button>
+          )}
+          {/* <button
             className="widget__moneystats__experiment-button"
             onClick={handleTriggerExperiment}
             disabled={isTriggeringExperiment}
@@ -325,7 +336,7 @@ export default function DashboardWidgets() {
             title="Trigger experiment job (admin only)"
           >
             <ScienceRoundedIcon />
-          </button>
+          </button> */}
           <label className="widget__moneystats__total-input-group">
             <input
               type="number"
