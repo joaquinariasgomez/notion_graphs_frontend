@@ -155,6 +155,14 @@ export default function DashboardWidgets() {
     }
   };
 
+  const resetView = () => {
+    setAllData(prev => prev.filter(item => item.date >= initialPreviousDate));
+    setLoadedFromDate(initialPreviousDate);
+    setHasNextPage(true);
+  };
+
+  const hasLoadedEarlier = loadedFromDate < initialPreviousDate;
+
   const startDate = fromDateString(loadedFromDate);
   const endDate = fromDateString(initialCurrentDate);
   const spanDays = differenceInDays(endDate, startDate);
@@ -317,17 +325,6 @@ export default function DashboardWidgets() {
           </div>
         </div>
         <div className="widget__moneystats__controls">
-          {hasNextPage && (
-            <button
-              className="widget__moneystats__prev-button"
-              onClick={loadPreviousDays}
-              disabled={isLoading}
-              aria-label={isLoading ? 'Loading earlier days' : 'Load earlier days'}
-              title="Load earlier days"
-            >
-              <span aria-hidden="true">←</span>
-            </button>
-          )}
           {/* <button
             className="widget__moneystats__experiment-button"
             onClick={handleTriggerExperiment}
@@ -362,21 +359,38 @@ export default function DashboardWidgets() {
           </button>
         </div>
         <div className="widget__moneystats__chart-wrapper">
-          {hasNextPage && (
-            <button
-              className="widget__moneystats__prev-button"
-              onClick={loadPreviousDays}
-              disabled={isLoading}
-              aria-label={isLoading ? 'Loading earlier days' : 'Load earlier days'}
-              title="Load earlier days"
-            >
-              <span aria-hidden="true">←</span>
-            </button>
-          )}
           <div className="widget__moneystats__chart">
             <Line options={options} data={chartData} />
           </div>
         </div>
+        {(hasNextPage || hasLoadedEarlier) && (
+          <div className="widget__moneystats__earlier-row">
+            {hasNextPage && (
+              <button
+                type="button"
+                className="widget__moneystats__earlier-button"
+                onClick={loadPreviousDays}
+                disabled={isLoading}
+                aria-label={isLoading ? 'Loading earlier days' : 'Load earlier days'}
+                title="Load earlier days"
+              >
+                <span aria-hidden="true">←</span> Earlier
+              </button>
+            )}
+            {hasLoadedEarlier && (
+              <button
+                type="button"
+                className="widget__moneystats__reset-button"
+                onClick={resetView}
+                disabled={isLoading}
+                aria-label="Reset to last 30 days"
+                title="Reset to last 30 days"
+              >
+                Reset
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

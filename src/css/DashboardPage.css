@@ -70,7 +70,7 @@
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  height: 360px;
+  height: 420px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -84,8 +84,73 @@
 }
 
 .widget__moneystats.minimized .widget__moneystats__controls,
-.widget__moneystats.minimized .widget__moneystats__chart-wrapper {
+.widget__moneystats.minimized .widget__moneystats__chart-wrapper,
+.widget__moneystats.minimized .widget__moneystats__earlier-row {
   display: none;
+}
+
+.widget__moneystats__earlier-row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.widget__moneystats__earlier-button {
+  padding: 4px 12px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background-color: transparent;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgb(54, 162, 235);
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.widget__moneystats__earlier-button:hover:not(:disabled) {
+  background-color: rgba(54, 162, 235, 0.08);
+  border-color: rgba(54, 162, 235, 0.2);
+}
+
+.widget__moneystats__earlier-button:focus-visible {
+  outline: 2px solid rgb(54, 162, 235);
+  outline-offset: 2px;
+}
+
+.widget__moneystats__earlier-button:disabled {
+  cursor: progress;
+  opacity: 0.55;
+}
+
+.widget__moneystats__reset-button {
+  padding: 4px 12px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background-color: transparent;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.widget__moneystats__reset-button:hover:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: var(--matteblack-color);
+}
+
+.widget__moneystats__reset-button:focus-visible {
+  outline: 2px solid rgb(54, 162, 235);
+  outline-offset: 2px;
+}
+
+.widget__moneystats__reset-button:disabled {
+  cursor: progress;
+  opacity: 0.55;
 }
 
 .widget__moneystats__minimize-toggle {
@@ -400,8 +465,15 @@
 }
 
 @keyframes widget__moneystats__prev-button-pulse {
-  0%, 100% { opacity: 0.55; }
-  50% { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 .widget__moneystats__chart {
