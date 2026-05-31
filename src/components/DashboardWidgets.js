@@ -182,7 +182,7 @@ export default function DashboardWidgets() {
   const windowChange = (() => {
     if (totalMoney == null) return null;
     const total = allData
-      .filter(item => item.date >= loadedFromDate && item.date <= initialCurrentDate)
+      .filter(item => item.date > loadedFromDate && item.date <= initialCurrentDate)
       .reduce((sum, item) => sum + item.amount, 0);
     const initial = totalMoney - total;
     const direction = total > 0 ? 'up' : total < 0 ? 'down' : 'flat';
