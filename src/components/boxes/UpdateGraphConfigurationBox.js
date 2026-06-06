@@ -192,6 +192,7 @@ export default function UpdateGraphConfigurationBox() {
   }
 
   const handleClickEditCustomTitle = () => {
+    setTemporalCustomTitle(renderCustomTitleText());
     setIsEditingCustomTitle(true);
   }
 

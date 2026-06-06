@@ -14,6 +14,7 @@ import {
 import GraphBox from "./GraphBox";
 import SkeletonGraphBox from "./SkeletonGraphBox";
 import DashboardFilters from "./DashboardFilters";
+import DashboardSearch from "./DashboardSearch";
 import DashboardWidgets from "./DashboardWidgets";
 import { actionTypes } from "../context/globalReducer";
 
@@ -27,11 +28,10 @@ export default function DashboardGraphs({ }) {
     const [grabbedGraphConfigId, setGrabbedGraphConfigId] = useState(null);
     const [hasNextPage, setHasNextPage] = useState(false);
     const [nextCursor, setNextCursor] = useState(null);
-    const [filters, setFilters] = useState({ chartType: null, timeRange: null });
+    const [filters, setFilters] = useState({ chartType: null, timeRange: null, startsWith: null });
 
     useEffect(() => {
         fetchGraphConfigurations();
-        //testFetchMoneyStatsChart();
     }, []);
 
     const fetchGraphConfigurations = async (filtersToUse = filters) => {
@@ -50,19 +50,6 @@ export default function DashboardGraphs({ }) {
 
         } finally {
             setGraphsLoading(false);
-        }
-    }
-
-    const testFetchMoneyStatsChart = async () => {
-        try {
-            // "hasNextPage" means that we have previous expenses prior to "startDate".
-            // This request will always be made with "endDate" equal to today.
-            // Depending on the amount of data that we receive, which are grouped by days, we will display
-            // the chart with a line chart in a day by day or month by month grouping.
-            const apiResponse = await getMoneyStatsChart(userJWTCookie, "2026-02-15", "2026-04-11");
-            console.log(apiResponse);
-        } catch (error) {
-            console.log(error);
         }
     }
 
@@ -166,14 +153,24 @@ export default function DashboardGraphs({ }) {
     const grabbedGraph = grabbedGraphConfigId ? graphs.find(g => g.graphConfiguration.id === grabbedGraphConfigId) : null;
 
     const handleFiltersChange = (newFilters) => {
-        setFilters(newFilters);
-        fetchGraphConfigurations(newFilters);
+        const mergedFilters = { ...newFilters, startsWith: filters.startsWith };
+        setFilters(mergedFilters);
+        fetchGraphConfigurations(mergedFilters);
+    };
+
+    const handleSearchChange = (value) => {
+        const mergedFilters = { ...filters, startsWith: value };
+        setFilters(mergedFilters);
+        fetchGraphConfigurations(mergedFilters);
     };
 
     return (
         <div className="dashboard__graphs">
             <DashboardWidgets />
-            <DashboardFilters onFiltersChange={handleFiltersChange} />
+            <div className="dashboard__search-filters-row">
+                <DashboardFilters onFiltersChange={handleFiltersChange} />
+                <DashboardSearch onSearchChange={handleSearchChange} />
+            </div>
             {graphsLoading && (
                 <div className="graphsgrid">
                     {[...Array(6)].map((_, index) => (
