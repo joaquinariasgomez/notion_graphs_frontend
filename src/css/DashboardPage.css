@@ -1203,6 +1203,7 @@ input:checked+.slider:before {
   font-weight: 600;
   color: #6d6d6d;
   text-align: left;
+  margin-bottom: 5px;
 }
 
 .graphbox__info__value {
