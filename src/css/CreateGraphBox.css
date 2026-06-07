@@ -147,6 +147,19 @@
   margin: 0;
 }
 
+.creategraphbox__step__bigbuttons.scrollable {
+  overflow-x: auto;
+  justify-content: flex-start;
+}
+
+.creategraphbox__step__bigbuttons.scrollable > button {
+  flex-shrink: 0;
+}
+
+.creategraphbox__step__bigbuttons.scrollable > button.small {
+  width: calc((100% - 40px) / 3);
+}
+
 .creategraphbox__step__bigbuttons.vertical {
   flex-direction: column;
 }

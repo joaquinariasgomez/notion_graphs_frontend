@@ -726,6 +726,7 @@
 .dashboard__search.open {
   border-color: var(--matteblack-color);
   padding-left: 12px;
+  border-width: 2px;
 }
 
 .dashboard__search__input {
@@ -1123,6 +1124,93 @@ input:checked+.slider:before {
   transform: translateY(0);
   visibility: visible;
   pointer-events: auto;
+}
+
+/* ---- Info button ---- */
+.graphbox__info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  position: relative;
+  background-color: transparent;
+}
+
+.graphbox__info:hover {
+  cursor: pointer;
+  background-color: rgb(244, 244, 244);
+}
+
+/* ---- Info popover ---- */
+.graphbox__info__container {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 12px 14px;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 100;
+  border: 1px solid #dbdbdb;
+  gap: 4px;
+
+  /* Hidden by default with animation */
+  opacity: 0;
+  transform: translateY(-10px);
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out, visibility 0.2s;
+}
+
+.graphbox__info__container.is-open {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.graphbox__info__section-title {
+  margin: 6px 0 2px 0;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #b0b0b0;
+  text-align: left;
+}
+
+.graphbox__info__section-title:first-child {
+  margin-top: 0;
+}
+
+.graphbox__info__row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1px;
+  margin-bottom: 2px;
+}
+
+.graphbox__info__label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6d6d6d;
+  text-align: left;
+}
+
+.graphbox__info__value {
+  font-size: 13px;
+  font-weight: 400;
+  color: #1a1a1a;
+  word-break: break-word;
+  text-align: left;
 }
 
 .graphbox__updateconfig {
@@ -1554,12 +1642,19 @@ input:checked+.slider:before {
   }
 
   .graphbox__refresh,
+  .graphbox__info,
   .graphbox__more_settings,
   .graphbox__updateconfig,
   .graphbox__delete {
     padding: 3px;
     width: 26px;
     height: 26px;
+  }
+
+  .graphbox__info__container {
+    width: 190px;
+    padding: 10px 12px;
+    font-size: 12px;
   }
 
   .graphbox__drag-handle {

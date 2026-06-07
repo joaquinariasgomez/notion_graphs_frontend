@@ -5,10 +5,11 @@ import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CachedIcon from '@mui/icons-material/Cached';
 import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { useEffect, useRef, useState } from "react";
 import GraphDisplayer from "./graphsdisplay/GraphDisplayer";
 import SyncLoader from "react-spinners/SyncLoader";
-import { getGraphTitle, getGraphTitleFromConfiguration } from "./graphsdisplay/GraphsDisplayUtils";
+import { getGraphTitle, getGraphTitleFromConfiguration, getGraphPeriodInfo, getGraphFilterInfo } from "./graphsdisplay/GraphsDisplayUtils";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
 import { actionTypes, BOX_TYPES } from "../context/globalReducer";
 import { deleteGraph, refreshGraph } from "../api/RequestUtils";
@@ -38,6 +39,9 @@ export default function GraphBox({ graph }) {
     const [showMoreOptions, setShowMoreOptions] = useState(false);
     const showMoreOptionsRef = useRef(null);
     const moreSettingsButtonRef = useRef(null);
+    const [showInfo, setShowInfo] = useState(false);
+    const infoPopupRef = useRef(null);
+    const infoButtonRef = useRef(null);
     const [showLegend, setShowLegend] = useState(true);
     const [showAverages, setShowAverages] = useState(false);
     const [showStandardDeviation, setShowStandardDeviation] = useState(false);
@@ -53,6 +57,18 @@ export default function GraphBox({ graph }) {
             document.removeEventListener('mousedown', handleOutsideClick);
         }
     }, [showMoreOptions]);
+
+    useEffect(() => {
+        const handleOutsideClick = (event) => {
+            if (showInfo && infoPopupRef.current && !infoPopupRef.current.contains(event.target) && infoButtonRef.current && !infoButtonRef.current.contains(event.target)) {
+                handleCloseShowInfo();
+            }
+        }
+        document.addEventListener('mousedown', handleOutsideClick);
+        return () => {
+            document.removeEventListener('mousedown', handleOutsideClick);
+        }
+    }, [showInfo]);
 
     const handleClickUpdateGraphConfiguration = (graph) => {
         dispatch({
@@ -71,6 +87,14 @@ export default function GraphBox({ graph }) {
 
     const handleCloseShowMoreOptions = () => {
         setShowMoreOptions(false);
+    }
+
+    const handleClickShowInfo = () => {
+        setShowInfo(!showInfo);
+    }
+
+    const handleCloseShowInfo = () => {
+        setShowInfo(false);
     }
 
     const handleRefreshGraph = async (graph) => {
@@ -123,7 +147,9 @@ export default function GraphBox({ graph }) {
     }
 
     const renderMoreOptionsButton = (graph) => {
-        if (!isBurndownGraph(graph)) {
+        // Wont show for heat charts or burndown charts
+        const isHeatChart = graph.graphConfiguration.requestType === 'CUSTOM_GRAPH' && graph.graphConfiguration.customGraphSettings.visualizationSettings.type === 'HEAT';
+        if (!isBurndownGraph(graph) && !isHeatChart) {
             return (
                 <button ref={moreSettingsButtonRef} className="graphbox__more_settings" title="Options" onClick={handleClickShowMoreOptions} >
                     <MoreHorizIcon style={{ color: '#6d6d6d' }} fontSize="small" />
@@ -221,6 +247,67 @@ export default function GraphBox({ graph }) {
         }
     }
 
+    const renderShowAvgAndStdDropdowns = () => {
+        // Wont show these options for Heat or Frequency charts
+        const isHeatChart = graph.graphConfiguration.requestType === 'CUSTOM_GRAPH' && graph.graphConfiguration.customGraphSettings.visualizationSettings.type === 'HEAT';
+        const isFrequencyChart = graph.graphConfiguration.requestType === 'CUSTOM_GRAPH' && graph.graphConfiguration.customGraphSettings.visualizationSettings.type === 'FREQUENCY';
+        if (!isHeatChart && !isFrequencyChart) {
+            return (
+                <>
+                    <div className="dropdown-item">
+                        <p>Show average</p>
+                        <label className="toggle-switch">
+                            <input
+                                type="checkbox"
+                                checked={showAverages}
+                                onChange={handleToggleShowAverages}
+                            />
+                            <span className="slider"></span>
+                        </label>
+                    </div>
+                    <div className="dropdown-item">
+                        <p>Show standard deviation</p>
+                        <label className="toggle-switch">
+                            <input
+                                type="checkbox"
+                                checked={showStandardDeviation}
+                                onChange={handleToggleShowStandardDeviation}
+                            />
+                            <span className="slider"></span>
+                        </label>
+                    </div>
+                </>
+            );
+        }
+    }
+
+    const renderInfoMenu = () => {
+        const periodInfo = getGraphPeriodInfo(graph.graphConfiguration);
+        const filterInfo = getGraphFilterInfo(graph.graphConfiguration);
+        return (
+            <div
+                ref={infoPopupRef}
+                className={`graphbox__info__container ${showInfo ? 'is-open' : ''}`}
+                onClick={e => e.stopPropagation()}
+            >
+                <p className="graphbox__info__section-title">Time period</p>
+                {periodInfo.map(({ label, value }) => (
+                    <div key={label} className="graphbox__info__row">
+                        <span className="graphbox__info__label">{label}</span>
+                        <span className="graphbox__info__value">{value}</span>
+                    </div>
+                ))}
+                <p className="graphbox__info__section-title">Filters</p>
+                {filterInfo.map(({ label, values }) => (
+                    <div key={label} className="graphbox__info__row">
+                        <span className="graphbox__info__label">{label}</span>
+                        <span className="graphbox__info__value">{values.join(', ')}</span>
+                    </div>
+                ))}
+            </div>
+        );
+    }
+
     const renderMoreOptionsMenu = () => {
         return (
             <div
@@ -229,28 +316,7 @@ export default function GraphBox({ graph }) {
                 onClick={e => e.stopPropagation()}
             >
                 {renderShowLegendDropdown()}
-                <div className="dropdown-item">
-                    <p>Show average</p>
-                    <label className="toggle-switch">
-                        <input
-                            type="checkbox"
-                            checked={showAverages}
-                            onChange={handleToggleShowAverages}
-                        />
-                        <span className="slider"></span>
-                    </label>
-                </div>
-                <div className="dropdown-item">
-                    <p>Show standard deviation</p>
-                    <label className="toggle-switch">
-                        <input
-                            type="checkbox"
-                            checked={showStandardDeviation}
-                            onChange={handleToggleShowStandardDeviation}
-                        />
-                        <span className="slider"></span>
-                    </label>
-                </div>
+                {renderShowAvgAndStdDropdowns()}
             </div>
         );
     }
@@ -269,6 +335,10 @@ export default function GraphBox({ graph }) {
                 <div className="graphbox__updatedAt" title="Last graph update">
                     <p>{getRelativeTimeFromTimestamp(graph.updatedAt)}</p>
                 </div>
+                <button ref={infoButtonRef} className="graphbox__info" title="Chart info" onClick={handleClickShowInfo}>
+                    <InfoOutlinedIcon style={{ color: '#6d6d6d' }} fontSize="small" />
+                    {renderInfoMenu()}
+                </button>
                 <button className="graphbox__refresh" title="Refresh graph" onClick={() => handleRefreshGraph(graph)} disabled={isRefreshing}>
                     <FaSyncAlt className={`graph-refresh-button__icon ${isRefreshing ? 'spinning' : ''}`} />
                 </button>

@@ -58,19 +58,32 @@ export default function UpdateGraphConfigurationBox() {
   }
 
   const handleSelectedVisualizationType = (type) => {
-    const newEditingGraphConfiguration = {
-      ...editingGraphConfiguration,
-      customGraphSettings: {
-        ...editingGraphConfiguration.customGraphSettings,
-        visualizationSettings: {
-          ...editingGraphConfiguration.customGraphSettings.visualizationSettings,
-          type: type
-        }
+    const vis = editingGraphConfiguration.customGraphSettings.visualizationSettings;
+    const source = editingGraphConfiguration.customGraphSettings.dataSettings.source;
+    const isGrouped = vis.groupByCategory || vis.groupByIncomeBankAccounts || vis.groupByIncomeSources;
+
+    let groupingOverride = {};
+    if (type === 'FREQUENCY' && !isGrouped) {
+      if (source === 'INCOMES') {
+        groupingOverride = { groupByIncomeBankAccounts: true };
+      } else {
+        groupingOverride = { groupByCategory: true };
       }
     }
+
     dispatch({
       type: actionTypes.SET_EDITING_GRAPH_CONFIGURATION,
-      value: newEditingGraphConfiguration
+      value: {
+        ...editingGraphConfiguration,
+        customGraphSettings: {
+          ...editingGraphConfiguration.customGraphSettings,
+          visualizationSettings: {
+            ...vis,
+            type: type,
+            ...groupingOverride
+          }
+        }
+      }
     });
   }
 
@@ -94,6 +107,7 @@ export default function UpdateGraphConfigurationBox() {
   const handleSelectedGroupByIncomeBankAccountsCategory = () => {
     let newEditingGraphConfiguration;
     if (editingGraphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeBankAccounts === true) {
+      if (editingGraphConfiguration.customGraphSettings.visualizationSettings.type === 'FREQUENCY') return;
       newEditingGraphConfiguration = {
         ...editingGraphConfiguration,
         customGraphSettings: {
@@ -126,6 +140,7 @@ export default function UpdateGraphConfigurationBox() {
   const handleSelectedGroupByIncomeSourcesCategory = () => {
     let newEditingGraphConfiguration;
     if (editingGraphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeSources === true) {
+      if (editingGraphConfiguration.customGraphSettings.visualizationSettings.type === 'FREQUENCY') return;
       newEditingGraphConfiguration = {
         ...editingGraphConfiguration,
         customGraphSettings: {
@@ -156,6 +171,7 @@ export default function UpdateGraphConfigurationBox() {
   }
 
   const handleSelectedGroupByCategory = () => {
+    if (editingGraphConfiguration.customGraphSettings.visualizationSettings.groupByCategory && editingGraphConfiguration.customGraphSettings.visualizationSettings.type === 'FREQUENCY') return;
     const newValue = !editingGraphConfiguration.customGraphSettings.visualizationSettings.groupByCategory;
     const newEditingGraphConfiguration = {
       ...editingGraphConfiguration,
@@ -313,7 +329,7 @@ export default function UpdateGraphConfigurationBox() {
 
   const renderVisualizationButtons = () => {
     return (
-      <div className='creategraphbox__step__bigbuttons'>
+      <div className='creategraphbox__step__bigbuttons scrollable'>
         <button
           className={`${editingGraphConfiguration.customGraphSettings.visualizationSettings.type === 'LINE' ? 'selected' : 'not_selected'} small`}
           onClick={() => handleSelectedVisualizationType('LINE')}
@@ -331,6 +347,12 @@ export default function UpdateGraphConfigurationBox() {
           onClick={() => handleSelectedVisualizationType('HEAT')}
         >
           {renderHeatChartText()}
+        </button>
+        <button
+          className={`${editingGraphConfiguration.customGraphSettings.visualizationSettings.type === 'FREQUENCY' ? 'selected' : 'not_selected'} small`}
+          onClick={() => handleSelectedVisualizationType('FREQUENCY')}
+        >
+          {renderFrequencyChartText()}
         </button>
       </div>
     );
@@ -366,9 +388,15 @@ export default function UpdateGraphConfigurationBox() {
     );
   }
 
+  const renderFrequencyChartText = () => {
+    return (
+      <p>Frequency chart</p>
+    );
+  }
+
   const renderGroupByTimeButtons = () => {
     return (
-      <div className='creategraphbox__step__bigbuttons'>
+      <div className='creategraphbox__step__bigbuttons scrollable'>
         <button
           className={`${editingGraphConfiguration.customGraphSettings.visualizationSettings.groupByTime === 'DAY' ? 'selected' : 'not_selected'} small`}
           onClick={() => handleSelectedGroupByTime('DAY')}

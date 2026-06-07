@@ -205,6 +205,78 @@ export function getGraphTitleFromConfiguration(graphConfiguration) {
   return graphTitle;
 }
 
+// Returns a standalone human-readable label for a CUSTOM_GRAPH time setting.
+// Intentionally separate from timeToText() which returns title-suffix phrasing.
+function periodText(time, customStartDate, customEndDate) {
+  switch (time) {
+    default:
+    case 'LAST_WEEK':
+      return 'Last week';
+    case 'LAST_MONTH':
+      return 'Last month';
+    case 'LAST_YEAR':
+      return 'Last year';
+    case 'CUSTOM':
+      return (customStartDate || '') + ' to ' + (customEndDate || '');
+    case 'NO_TIME':
+      return 'All time';
+  }
+}
+
+// Returns an array of { label, value } rows describing the chart's time boundaries.
+export function getGraphPeriodInfo(graphConfiguration) {
+  if (graphConfiguration.requestType === 'CUSTOM_GRAPH') {
+    const ds = graphConfiguration.customGraphSettings.dataSettings;
+    return [{ label: 'Period', value: periodText(ds.time, ds.customStartDate, ds.customEndDate) }];
+  }
+  // BURNDOWN — show both data and reference period
+  const b = graphConfiguration.burndownSettings;
+  return [
+    { label: 'Data period', value: burndownTimeToText(b.dataSettings.time, b.dataSettings.customMonth) },
+    { label: 'Reference', value: referenceTypeToText(b.referenceSettings.type, b.referenceSettings.customMonth) },
+  ];
+}
+
+// Returns an array of { label, values: string[] } rows describing active filters.
+export function getGraphFilterInfo(graphConfiguration) {
+  if (graphConfiguration.requestType === 'CUSTOM_GRAPH') {
+    const fs = graphConfiguration.customGraphSettings.filterSettings;
+    const source = graphConfiguration.customGraphSettings.dataSettings.source;
+    const rows = [];
+    if (source === 'EXPENSES' || source === 'SAVINGS') {
+      rows.push({
+        label: 'Categories',
+        values: (fs.allExpenses || !fs.includedCategories?.length)
+          ? ['All categories']
+          : fs.includedCategories,
+      });
+    }
+    if (source === 'INCOMES' || source === 'SAVINGS') {
+      rows.push({
+        label: 'Bank accounts',
+        values: (fs.allIncomes || !fs.includedIncomeBankAccounts?.length)
+          ? ['All bank accounts']
+          : fs.includedIncomeBankAccounts,
+      });
+      rows.push({
+        label: 'Income sources',
+        values: (fs.allIncomes || !fs.includedIncomeSources?.length)
+          ? ['All income sources']
+          : fs.includedIncomeSources,
+      });
+    }
+    return rows;
+  }
+  // BURNDOWN
+  const fs = graphConfiguration.burndownSettings.filterSettings;
+  return [{
+    label: 'Categories',
+    values: (fs.allExpenses || !fs.includedCategories?.length)
+      ? ['All categories']
+      : fs.includedCategories,
+  }];
+}
+
 function sourceToText(source) {
   switch (source) {
     default:
@@ -641,20 +713,22 @@ export function calculateHeatmapData(graphConfiguration, graphData) {
   return { startDate: firstDate, numberOfMonths, maxValue };
 }
 
+export const COLOR_PALETTE = [
+  'rgb(54, 162, 235)',      // Blue
+  'rgb(255, 99, 132)',      // Red
+  'rgb(75, 192, 192)',      // Teal
+  'rgb(255, 205, 86)',      // Yellow
+  'rgb(153, 102, 255)',     // Purple
+  'rgb(255, 159, 64)',      // Orange
+  'rgb(201, 203, 207)',     // Grey
+  'rgb(230, 100, 100)',     // Light Red
+  'rgb(100, 230, 100)',     // Light Green
+  'rgb(100, 100, 230)',     // Light Blue
+];
+
 function applyColorToDatasets(datasets, graphConfiguration) {
   const type = graphConfiguration.customGraphSettings.visualizationSettings.type;
-  const colorPalette = [
-    'rgb(54, 162, 235)',      // Blue
-    'rgb(255, 99, 132)',      // Red
-    'rgb(75, 192, 192)',      // Teal
-    'rgb(255, 205, 86)',      // Yellow
-    'rgb(153, 102, 255)',     // Purple
-    'rgb(255, 159, 64)',      // Orange
-    'rgb(201, 203, 207)',     // Grey
-    'rgb(230, 100, 100)',     // Light Red
-    'rgb(100, 230, 100)',     // Light Green
-    'rgb(100, 100, 230)',     // Light Blue
-  ];
+  const colorPalette = COLOR_PALETTE;
   datasets.forEach((dataset, index) => {
     const solidColor = colorPalette[index % colorPalette.length];
     const transparentColor = solidColor.replace('rgb', 'rgba').replace(')', ', 0.3)');
@@ -673,4 +747,65 @@ function applyColorToDatasets(datasets, graphConfiguration) {
     dataset.pointHitRadius = 10;
   });
   return datasets;
+}
+
+/**
+ * Processes raw graph data for the Frequency (Bubble) chart.
+ * Returns one aggregated entry per category / bank account / income source:
+ *   { label, count, totalAmount, avgAmount }
+ *
+ * Each entry maps to one bubble:  x = count,  y = totalAmount,  r = f(avgAmount)
+ *
+ * Non-grouped fallback: if no candidate array carries a `count` field, produces a
+ * single entry for the whole dataset with count = 0.
+ */
+export function processFrequencyGraphData(graphConfiguration, graphData) {
+  if (!graphData?.data || graphData.data.length === 0) return [];
+
+  const vis = graphConfiguration.customGraphSettings.visualizationSettings;
+
+  // Respect the same grouping flags as processGroupedGraphData
+  const CANDIDATES = [
+    { arrayKey: 'categoryAmounts',          labelKey: 'category',          active: vis.groupByCategory },
+    { arrayKey: 'incomeBankAccountAmounts', labelKey: 'incomeBankAccount', active: vis.groupByIncomeBankAccounts },
+    { arrayKey: 'incomeSourceAmounts',      labelKey: 'incomeSource',      active: vis.groupByIncomeSources },
+  ];
+
+  // Use the config-selected array; fall back to data-driven detection if none is flagged
+  const match =
+    CANDIDATES.find(c => c.active) ||
+    CANDIDATES.find(({ arrayKey }) =>
+      graphData.data.some(d => (d[arrayKey] || []).some(entry => entry.count != null))
+    );
+
+  if (match) {
+    const { arrayKey, labelKey } = match;
+    const groupMap = new Map();
+
+    graphData.data.forEach(d => {
+      (d[arrayKey] || []).forEach(entry => {
+        const label = entry[labelKey];
+        const count = entry.count ?? 0;
+        const amount = entry.amount ?? 0;
+        if (!groupMap.has(label)) groupMap.set(label, { count: 0, totalAmount: 0 });
+        const acc = groupMap.get(label);
+        acc.count += count;
+        acc.totalAmount += amount;
+      });
+    });
+
+    return Array.from(groupMap.entries())
+      .map(([label, { count, totalAmount }]) => ({
+        label,
+        count,
+        totalAmount,
+        avgAmount: count > 0 ? totalAmount / count : 0,
+      }))
+      .sort((a, b) => b.totalAmount - a.totalAmount);
+  }
+
+  // Non-grouped fallback — one bubble for the whole dataset, no count available
+  const totalAmount = graphData.data.reduce((sum, d) => sum + (d.totalAmount ?? 0), 0);
+  const graphTitle = getGraphTitleFromConfiguration(graphConfiguration);
+  return [{ label: graphTitle, count: 0, totalAmount, avgAmount: 0 }];
 }

@@ -4,6 +4,7 @@ import MultiLineGraph from "./MultiLineGraph";
 import MultiBarGraph from "./MultiBarGraph";
 import BurndownGraph from "./BurndownGraph";
 import HeatmapGraph from "./HeatmapGraph";
+import FrequencyGraph from "./FrequencyGraph";
 
 
 export default function GraphDisplayer({ graphConfiguration, graphData, showLegend, showAverages, showStandardDeviation, showTitle }) {
@@ -36,6 +37,10 @@ export default function GraphDisplayer({ graphConfiguration, graphData, showLege
       case 'HEAT':
         return (
           <HeatmapGraph graphConfiguration={graphConfiguration} graphData={graphData} showTitle={showTitle} />
+        );
+      case 'FREQUENCY':
+        return (
+          <FrequencyGraph graphConfiguration={graphConfiguration} graphData={graphData} showLegend={showLegend} showTitle={showTitle} />
         );
       default:
         return (<></>);

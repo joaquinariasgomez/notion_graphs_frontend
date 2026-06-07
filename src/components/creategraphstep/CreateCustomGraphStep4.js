@@ -71,12 +71,27 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
     }
 
     const handleSelectedVisualizationType = (type) => {
+        const vis = graphConfiguration.customGraphSettings.visualizationSettings;
+        const source = graphConfiguration.customGraphSettings.dataSettings.source;
+        const isGrouped = vis.groupByCategory || vis.groupByIncomeBankAccounts || vis.groupByIncomeSources;
+
+        let groupingOverride = {};
+        if (type === 'FREQUENCY' && !isGrouped) {
+            if (source === 'INCOMES') {
+                groupingOverride = { groupByIncomeBankAccounts: true };
+            } else {
+                groupingOverride = { groupByCategory: true };
+                setIsGroupByCategory(true);
+            }
+        }
+
         onUpdateGraphConfig({
             customGraphSettings: {
                 ...graphConfiguration.customGraphSettings,
                 visualizationSettings: {
-                    ...graphConfiguration.customGraphSettings.visualizationSettings,
-                    type: type
+                    ...vis,
+                    type: type,
+                    ...groupingOverride
                 }
             }
         })
@@ -96,6 +111,7 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
 
     const handleSelectedGroupByIncomeBankAccountsCategory = () => {
         if (graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeBankAccounts === true) {
+            if (graphConfiguration.customGraphSettings.visualizationSettings.type === 'FREQUENCY') return;
             onUpdateGraphConfig({
                 customGraphSettings: {
                     ...graphConfiguration.customGraphSettings,
@@ -121,6 +137,7 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
 
     const handleSelectedGroupByIncomeSourcesCategory = () => {
         if (graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeSources === true) {
+            if (graphConfiguration.customGraphSettings.visualizationSettings.type === 'FREQUENCY') return;
             onUpdateGraphConfig({
                 customGraphSettings: {
                     ...graphConfiguration.customGraphSettings,
@@ -145,6 +162,7 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
     }
 
     const handleSelectedGroupByCategory = () => {
+        if (isGroupByCategory && graphConfiguration.customGraphSettings.visualizationSettings.type === 'FREQUENCY') return;
         var newValue = !isGroupByCategory;
         setIsGroupByCategory(newValue);
         onUpdateGraphConfig({
@@ -227,9 +245,15 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
         );
     }
 
+    const renderFrequencyChartText = () => {
+        return (
+            <p>Frequency chart</p>
+        );
+    }
+
     const renderVisualizationButtons = () => {
         return (
-            <div className='creategraphbox__step__bigbuttons'>
+            <div className='creategraphbox__step__bigbuttons scrollable'>
                 <button
                     className={`${graphConfiguration.customGraphSettings.visualizationSettings.type === 'LINE' ? 'selected' : 'not_selected'} small`}
                     onClick={() => handleSelectedVisualizationType('LINE')}
@@ -248,13 +272,19 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
                 >
                     {renderHeatChartText()}
                 </button>
+                <button
+                    className={`${graphConfiguration.customGraphSettings.visualizationSettings.type === 'FREQUENCY' ? 'selected' : 'not_selected'} small`}
+                    onClick={() => handleSelectedVisualizationType('FREQUENCY')}
+                >
+                    {renderFrequencyChartText()}
+                </button>
             </div>
         );
     }
 
     const renderGroupByTimeButtons = () => {
         return (
-            <div className='creategraphbox__step__bigbuttons'>
+            <div className='creategraphbox__step__bigbuttons scrollable'>
                 <button
                     className={`${graphConfiguration.customGraphSettings.visualizationSettings.groupByTime === 'DAY' ? 'selected' : 'not_selected'} small`}
                     onClick={() => handleSelectedGroupByTime('DAY')}
