@@ -5,8 +5,10 @@ import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CachedIcon from '@mui/icons-material/Cached';
 import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
+import InsightsRoundedIcon from '@mui/icons-material/InsightsRounded';
 import { useEffect, useRef, useState } from "react";
 import GraphDisplayer from "./graphsdisplay/GraphDisplayer";
+import InsightsPanel from "./graphsdisplay/InsightsPanel";
 import SyncLoader from "react-spinners/SyncLoader";
 import { getGraphTitle, getGraphTitleFromConfiguration } from "./graphsdisplay/GraphsDisplayUtils";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
@@ -41,6 +43,7 @@ export default function GraphBox({ graph }) {
     const [showLegend, setShowLegend] = useState(true);
     const [showAverages, setShowAverages] = useState(false);
     const [showStandardDeviation, setShowStandardDeviation] = useState(false);
+    const [showInsights, setShowInsights] = useState(false);
 
     useEffect(() => {
         const handleOutsideClick = (event) => {
@@ -143,11 +146,30 @@ export default function GraphBox({ graph }) {
         }
     }
 
+    // TODO: gate on billingPlan for premium users when ready
+    const renderInsightsButton = (graph) => {
+        const status = graph.graphConfiguration.graphCreationStatus;
+        const isAvailable = !isBurndownGraph(graph) && (status === 'CREATED' || status === 'UPDATING');
+        if (!isAvailable) return null;
+        return (
+            <button
+                className={`graphbox__insights ${showInsights ? 'active' : ''}`}
+                title={showInsights ? 'Show chart' : 'Show insights'}
+                onClick={() => setShowInsights(prev => !prev)}
+            >
+                <InsightsRoundedIcon style={{ color: showInsights ? '#4A90E2' : '#6d6d6d' }} fontSize="small" />
+            </button>
+        );
+    }
+
     const renderGraph = (graph) => {
         const graphCreationStatus = graph.graphConfiguration.graphCreationStatus;
         switch (graphCreationStatus) {
             case "UPDATING":
             case "CREATED":
+                if (showInsights) {
+                    return <InsightsPanel graphConfiguration={graph.graphConfiguration} graphData={graph.graphData} />;
+                }
                 return (
                     <GraphDisplayer graphConfiguration={graph.graphConfiguration} graphData={graph.graphData} showLegend={showLegend} showAverages={showAverages} showStandardDeviation={showStandardDeviation} showTitle={true} />
                 );
@@ -272,6 +294,7 @@ export default function GraphBox({ graph }) {
                 <button className="graphbox__refresh" title="Refresh graph" onClick={() => handleRefreshGraph(graph)} disabled={isRefreshing}>
                     <FaSyncAlt className={`graph-refresh-button__icon ${isRefreshing ? 'spinning' : ''}`} />
                 </button>
+                {renderInsightsButton(graph)}
                 {renderMoreOptionsButton(graph)}
                 {renderUpdateConfigButton(graph)}
                 <button className="graphbox__delete" title="Delete" onClick={() => handleDeleteGraph(graph)}>
