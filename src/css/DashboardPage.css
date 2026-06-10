@@ -913,6 +913,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  min-width: 0;
   padding: 10px;
   border: 1px solid lightgray;
   border-radius: 10px;
@@ -1293,6 +1294,7 @@ input:checked+.slider:before {
 
 .graphbox__graph {
   flex-grow: 1;
+  min-width: 0;
   /* border: 1px solid violet; */
 }
 
@@ -1470,7 +1472,7 @@ input:checked+.slider:before {
   }
 
   .graphsgrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 20px;
   }
 
@@ -1770,7 +1772,7 @@ input:checked+.slider:before {
 /* Tablets and medium screens */
 @media (min-width: 481px) and (max-width: 768px) {
   .graphsgrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
