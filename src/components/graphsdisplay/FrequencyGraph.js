@@ -62,6 +62,9 @@ export default function FrequencyGraph({ graphConfiguration, graphData, showLege
   const options = {
     animation: true,
     maintainAspectRatio: false,
+    layout: {
+      padding: { right: MAX_R, top: MAX_R },
+    },
     plugins: {
       legend: {
         display: showLegend,
@@ -82,6 +85,7 @@ export default function FrequencyGraph({ graphConfiguration, graphData, showLege
               `Transactions: ${group.count}`,
               `Total: ${formatCurrency(group.totalAmount)}`,
               `Avg per transaction: ${formatCurrency(group.avgAmount)}`,
+              `Median transaction: ${formatCurrency(group.medianAmount)}`,
             ];
           },
         },

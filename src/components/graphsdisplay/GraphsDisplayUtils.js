@@ -749,6 +749,13 @@ function applyColorToDatasets(datasets, graphConfiguration) {
   return datasets;
 }
 
+function computeMedian(sortedValues) {
+  const n = sortedValues.length;
+  if (n === 0) return 0;
+  const mid = Math.floor(n / 2);
+  return n % 2 !== 0 ? sortedValues[mid] : (sortedValues[mid - 1] + sortedValues[mid]) / 2;
+}
+
 /**
  * Processes raw graph data for the Frequency (Bubble) chart.
  * Returns one aggregated entry per category / bank account / income source:
@@ -766,9 +773,9 @@ export function processFrequencyGraphData(graphConfiguration, graphData) {
 
   // Respect the same grouping flags as processGroupedGraphData
   const CANDIDATES = [
-    { arrayKey: 'categoryAmounts',          labelKey: 'category',          active: vis.groupByCategory },
+    { arrayKey: 'categoryAmounts', labelKey: 'category', active: vis.groupByCategory },
     { arrayKey: 'incomeBankAccountAmounts', labelKey: 'incomeBankAccount', active: vis.groupByIncomeBankAccounts },
-    { arrayKey: 'incomeSourceAmounts',      labelKey: 'incomeSource',      active: vis.groupByIncomeSources },
+    { arrayKey: 'incomeSourceAmounts', labelKey: 'incomeSource', active: vis.groupByIncomeSources },
   ];
 
   // Use the config-selected array; fall back to data-driven detection if none is flagged
@@ -787,25 +794,30 @@ export function processFrequencyGraphData(graphConfiguration, graphData) {
         const label = entry[labelKey];
         const count = entry.count ?? 0;
         const amount = entry.amount ?? 0;
-        if (!groupMap.has(label)) groupMap.set(label, { count: 0, totalAmount: 0 });
+        if (!groupMap.has(label)) groupMap.set(label, { count: 0, totalAmount: 0, txAmounts: [] });
         const acc = groupMap.get(label);
         acc.count += count;
         acc.totalAmount += amount;
+        if (count > 0) acc.txAmounts.push(amount / count);
       });
     });
 
     return Array.from(groupMap.entries())
-      .map(([label, { count, totalAmount }]) => ({
-        label,
-        count,
-        totalAmount,
-        avgAmount: count > 0 ? totalAmount / count : 0,
-      }))
+      .map(([label, { count, totalAmount, txAmounts }]) => {
+        const sorted = [...txAmounts].sort((a, b) => a - b);
+        return {
+          label,
+          count,
+          totalAmount,
+          avgAmount: count > 0 ? totalAmount / count : 0,
+          medianAmount: computeMedian(sorted),
+        };
+      })
       .sort((a, b) => b.totalAmount - a.totalAmount);
   }
 
   // Non-grouped fallback — one bubble for the whole dataset, no count available
   const totalAmount = graphData.data.reduce((sum, d) => sum + (d.totalAmount ?? 0), 0);
   const graphTitle = getGraphTitleFromConfiguration(graphConfiguration);
-  return [{ label: graphTitle, count: 0, totalAmount, avgAmount: 0 }];
+  return [{ label: graphTitle, count: 0, totalAmount, avgAmount: 0, medianAmount: 0 }];
 }

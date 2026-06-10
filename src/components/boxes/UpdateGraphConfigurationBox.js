@@ -348,12 +348,13 @@ export default function UpdateGraphConfigurationBox() {
         >
           {renderHeatChartText()}
         </button>
-        <button
-          className={`${editingGraphConfiguration.customGraphSettings.visualizationSettings.type === 'FREQUENCY' ? 'selected' : 'not_selected'} small`}
-          onClick={() => handleSelectedVisualizationType('FREQUENCY')}
-        >
-          {renderFrequencyChartText()}
-        </button>
+        {editingGraphConfiguration.customGraphSettings.dataSettings.source !== 'SAVINGS' && (
+          <button
+            className={`${editingGraphConfiguration.customGraphSettings.visualizationSettings.type === 'FREQUENCY' ? 'selected' : 'not_selected'} small`}
+            onClick={() => handleSelectedVisualizationType('FREQUENCY')}
+          >
+            {renderFrequencyChartText()}
+          </button>)}
       </div>
     );
   }

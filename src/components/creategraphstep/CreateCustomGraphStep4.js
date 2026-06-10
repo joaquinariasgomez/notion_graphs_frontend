@@ -272,12 +272,14 @@ export default function CreateCustomGraphStep4({ graphConfiguration, onUpdateGra
                 >
                     {renderHeatChartText()}
                 </button>
-                <button
-                    className={`${graphConfiguration.customGraphSettings.visualizationSettings.type === 'FREQUENCY' ? 'selected' : 'not_selected'} small`}
-                    onClick={() => handleSelectedVisualizationType('FREQUENCY')}
-                >
-                    {renderFrequencyChartText()}
-                </button>
+                {graphConfiguration.customGraphSettings.dataSettings.source !== 'SAVINGS' && (
+                    <button
+                        className={`${graphConfiguration.customGraphSettings.visualizationSettings.type === 'FREQUENCY' ? 'selected' : 'not_selected'} small`}
+                        onClick={() => handleSelectedVisualizationType('FREQUENCY')}
+                    >
+                        {renderFrequencyChartText()}
+                    </button>
+                )}
             </div>
         );
     }
