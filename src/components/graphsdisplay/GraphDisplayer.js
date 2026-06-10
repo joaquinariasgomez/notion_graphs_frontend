@@ -5,9 +5,10 @@ import MultiBarGraph from "./MultiBarGraph";
 import BurndownGraph from "./BurndownGraph";
 import HeatmapGraph from "./HeatmapGraph";
 import FrequencyGraph from "./FrequencyGraph";
+import FrequencyBarGraph from "./FrequencyBarGraph";
 
 
-export default function GraphDisplayer({ graphConfiguration, graphData, showLegend, showAverages, showStandardDeviation, showTitle }) {
+export default function GraphDisplayer({ graphConfiguration, graphData, showLegend, showAverages, showStandardDeviation, showTitle, frequencyView = 'BUBBLE' }) {
 
   const renderCustomGraph = () => {
     const type = graphConfiguration.customGraphSettings.visualizationSettings.type;
@@ -39,9 +40,15 @@ export default function GraphDisplayer({ graphConfiguration, graphData, showLege
           <HeatmapGraph graphConfiguration={graphConfiguration} graphData={graphData} showTitle={showTitle} />
         );
       case 'FREQUENCY':
-        return (
-          <FrequencyGraph graphConfiguration={graphConfiguration} graphData={graphData} showLegend={showLegend} showTitle={showTitle} />
-        );
+        if (frequencyView === 'BAR') {
+          return (
+            <FrequencyBarGraph graphConfiguration={graphConfiguration} graphData={graphData} showLegend={showLegend} showTitle={showTitle} />
+          );
+        } else {
+          return (
+            <FrequencyGraph graphConfiguration={graphConfiguration} graphData={graphData} showLegend={showLegend} showTitle={showTitle} />
+          );
+        }
       default:
         return (<></>);
     }

@@ -6,6 +6,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CachedIcon from '@mui/icons-material/Cached';
 import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import BubbleChartIcon from '@mui/icons-material/BubbleChart';
 import { useEffect, useRef, useState } from "react";
 import GraphDisplayer from "./graphsdisplay/GraphDisplayer";
 import SyncLoader from "react-spinners/SyncLoader";
@@ -45,6 +47,7 @@ export default function GraphBox({ graph }) {
     const [showLegend, setShowLegend] = useState(true);
     const [showAverages, setShowAverages] = useState(false);
     const [showStandardDeviation, setShowStandardDeviation] = useState(false);
+    const [frequencyView, setFrequencyView] = useState('BUBBLE');
 
     useEffect(() => {
         const handleOutsideClick = (event) => {
@@ -142,6 +145,10 @@ export default function GraphBox({ graph }) {
         setShowStandardDeviation(!showStandardDeviation);
     }
 
+    const handleToggleFrequencyView = () => {
+        setFrequencyView(prev => (prev === 'BUBBLE' ? 'BAR' : 'BUBBLE'));
+    }
+
     const isBurndownGraph = (graph) => {
         return graph.graphConfiguration.requestType === 'BURNDOWN';
     }
@@ -154,6 +161,20 @@ export default function GraphBox({ graph }) {
                 <button ref={moreSettingsButtonRef} className="graphbox__more_settings" title="Options" onClick={handleClickShowMoreOptions} >
                     <MoreHorizIcon style={{ color: '#6d6d6d' }} fontSize="small" />
                     {renderMoreOptionsMenu()}
+                </button>
+            );
+        }
+    }
+
+    const renderFrequencyViewToggleButton = (graph) => {
+        const isFrequencyChart = graph.graphConfiguration.requestType === 'CUSTOM_GRAPH' && graph.graphConfiguration.customGraphSettings.visualizationSettings.type === 'FREQUENCY';
+        if (isFrequencyChart) {
+            const switchingToBar = frequencyView === 'BUBBLE';
+            return (
+                <button className="graphbox__refresh" title={switchingToBar ? 'Switch to bar view' : 'Switch to bubble view'} onClick={handleToggleFrequencyView}>
+                    {switchingToBar
+                        ? <BarChartIcon style={{ color: '#6d6d6d' }} fontSize="small" />
+                        : <BubbleChartIcon style={{ color: '#6d6d6d' }} fontSize="small" />}
                 </button>
             );
         }
@@ -175,7 +196,7 @@ export default function GraphBox({ graph }) {
             case "UPDATING":
             case "CREATED":
                 return (
-                    <GraphDisplayer graphConfiguration={graph.graphConfiguration} graphData={graph.graphData} showLegend={showLegend} showAverages={showAverages} showStandardDeviation={showStandardDeviation} showTitle={true} />
+                    <GraphDisplayer graphConfiguration={graph.graphConfiguration} graphData={graph.graphData} showLegend={showLegend} showAverages={showAverages} showStandardDeviation={showStandardDeviation} showTitle={true} frequencyView={frequencyView} />
                 );
             case "PENDING":
                 return (
@@ -342,6 +363,7 @@ export default function GraphBox({ graph }) {
                 <button className="graphbox__refresh" title="Refresh graph" onClick={() => handleRefreshGraph(graph)} disabled={isRefreshing}>
                     <FaSyncAlt className={`graph-refresh-button__icon ${isRefreshing ? 'spinning' : ''}`} />
                 </button>
+                {renderFrequencyViewToggleButton(graph)}
                 {renderMoreOptionsButton(graph)}
                 {renderUpdateConfigButton(graph)}
                 <button className="graphbox__delete" title="Delete" onClick={() => handleDeleteGraph(graph)}>

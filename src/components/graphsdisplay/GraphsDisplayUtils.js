@@ -36,7 +36,7 @@ export function processContinuousGraphData(graphConfiguration, graphData) {
    * @param {object} graphData - Contains the sparse data array.
    * @returns {{labels: string[], datasets: object[]}} - An object with complete dates and values.
    */
-export function processGroupedGraphData(graphConfiguration, graphData) {
+export function processGroupedGraphData(graphConfiguration, graphData, valueField = 'amount') {
   const groupByTime = graphConfiguration.customGraphSettings.visualizationSettings.groupByTime;
   const groupByCategory = graphConfiguration.customGraphSettings.visualizationSettings.groupByCategory;
   const groupByIncomeBankAccounts = graphConfiguration.customGraphSettings.visualizationSettings.groupByIncomeBankAccounts;
@@ -56,17 +56,17 @@ export function processGroupedGraphData(graphConfiguration, graphData) {
     if (groupByCategory) {
       categoryAmounts.forEach(categoryEntry => {
         categories.add(categoryEntry.category);
-        dataMap.get(date).set(categoryEntry.category, categoryEntry.amount);
+        dataMap.get(date).set(categoryEntry.category, categoryEntry[valueField]);
       });
     } else if (groupByIncomeBankAccounts) {
       incomeBankAccountAmounts.forEach(incomeBankAccountEntry => {
         categories.add(incomeBankAccountEntry.incomeBankAccount);
-        dataMap.get(date).set(incomeBankAccountEntry.incomeBankAccount, incomeBankAccountEntry.amount);
+        dataMap.get(date).set(incomeBankAccountEntry.incomeBankAccount, incomeBankAccountEntry[valueField]);
       });
     } else if (groupByIncomeSources) {
       incomeSourceAmounts.forEach(incomeSourceEntry => {
         categories.add(incomeSourceEntry.incomeSource);
-        dataMap.get(date).set(incomeSourceEntry.incomeSource, incomeSourceEntry.amount);
+        dataMap.get(date).set(incomeSourceEntry.incomeSource, incomeSourceEntry[valueField]);
       });
     }
   });
@@ -89,6 +89,15 @@ export function processGroupedGraphData(graphConfiguration, graphData) {
     case "YEAR":
       return processGroupedDataGroupByYear(graphConfiguration, graphData, labels, datasets, dataMap);
   }
+}
+
+/**
+ * Processes grouped graph data using transaction counts instead of amounts.
+ * Returns { labels, datasets } bucketed by groupByTime, with cumulative applied
+ * when configured. Reuses processGroupedGraphData's time-bucketing and cumulative logic.
+ */
+export function processGroupedCountData(graphConfiguration, graphData) {
+  return processGroupedGraphData(graphConfiguration, graphData, 'count');
 }
 
 export function computeAverage(values) {

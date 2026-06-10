@@ -63,7 +63,7 @@ export default function FrequencyGraph({ graphConfiguration, graphData, showLege
     animation: true,
     maintainAspectRatio: false,
     layout: {
-      padding: { right: MAX_R, top: MAX_R },
+      padding: { right: MAX_R },
     },
     plugins: {
       legend: {
@@ -110,6 +110,7 @@ export default function FrequencyGraph({ graphConfiguration, graphData, showLege
       },
       y: {
         beginAtZero: true,
+        grace: '15%', // Headroom so the topmost bubble (radius up to MAX_R) isn't clipped
         title: {
           display: true,
           text: 'Total spend (€)',
