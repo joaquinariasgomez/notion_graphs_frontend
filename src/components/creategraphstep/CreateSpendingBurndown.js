@@ -11,6 +11,8 @@ import { createGraph } from '../../api/RequestUtils';
 import { useGlobalStateValue } from '../../context/GlobalStateProvider';
 import { actionTypes } from '../../context/globalReducer';
 
+const RESOLUTION_VALUES = ['DAILY', 'WEEKLY', 'MONTHLY'];
+
 const VALID_REFERENCE = {
   MONTHLY: ['TOTAL_AVERAGE', 'LAST_YEAR_AVERAGE', 'BEST_MONTH', 'CUSTOM_MONTH'],
   YEARLY: ['BEST_YEAR', 'CUSTOM_YEAR'],
@@ -192,6 +194,19 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
         dataSettings: {
           ...graphConfiguration.burndownSettings.dataSettings,
           customYear: customYear
+        }
+      }
+    });
+  }
+
+  const handleSelectedResolution = (resolution) => {
+    const bs = graphConfiguration.burndownSettings;
+    onUpdateGraphConfig({
+      burndownSettings: {
+        ...bs,
+        visualizationSettings: {
+          ...(bs.visualizationSettings ?? {}),
+          resolution
         }
       }
     });
@@ -406,6 +421,23 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
     );
   }
 
+  const renderResolutionButtons = () => {
+    const currentResolution = graphConfiguration.burndownSettings?.visualizationSettings?.resolution ?? 'WEEKLY';
+    return (
+      <div className='creategraphbox__step__bigbuttons scrollable'>
+        {RESOLUTION_VALUES.map((value) => (
+          <button
+            key={value}
+            className={`${currentResolution === value ? 'selected' : 'not_selected'} small`}
+            onClick={() => handleSelectedResolution(value)}
+          >
+            <p>{value.charAt(0) + value.slice(1).toLowerCase()}</p>
+          </button>
+        ))}
+      </div>
+    );
+  }
+
   const renderFilterByCategoryButton = () => {
     if (expensesCategoriesLoading) {
       return (
@@ -478,6 +510,12 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
           {graphConfiguration.burndownSettings.dataSettings.time === 'CUSTOM_MONTH' && renderTimeMonthPicker()}
           {graphConfiguration.burndownSettings.dataSettings.time === 'CUSTOM_YEAR' && renderTimeYearPicker()}
         </div>
+        {graphConfiguration.burndownSettings.type === 'YEARLY' && (
+          <div className='creategraphbox__stepgraycontainer'>
+            <h2>Resolution</h2>
+            {renderResolutionButtons()}
+          </div>
+        )}
       </div>
       <div className='creategraphbox__arrows'>
         <button className='creategraphbox__button back' onClick={gotoBack} disabled={false}>
