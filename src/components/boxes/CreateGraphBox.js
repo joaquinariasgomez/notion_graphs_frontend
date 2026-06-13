@@ -75,7 +75,7 @@ export default function CreateGraphBox() {
         customYear: 0       // e.g. 2025
       },
       visualizationSettings: {
-        resolution: 'DAILY' // 'DAILY', 'WEEKLY', 'MONTHLY'
+        resolution: 'WEEKLY' // 'DAILY', 'WEEKLY', 'MONTHLY'
       }
     }
   });
