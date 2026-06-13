@@ -59,17 +59,23 @@ export default function CreateGraphBox() {
       }
     },
     burndownSettings: {
+      type: 'MONTHLY',        // 'MONTHLY', 'YEARLY'
       referenceSettings: {
-        type: 'TOTAL_AVERAGE', // 'TOTAL_AVERAGE', 'LAST_YEAR_AVERAGE', 'BEST_MONTH', 'CUSTOM'
-        customMonth: ''
+        type: 'TOTAL_AVERAGE', // 'TOTAL_AVERAGE', 'LAST_YEAR_AVERAGE', 'BEST_MONTH', 'CUSTOM_MONTH', 'BEST_YEAR', 'CUSTOM_YEAR'
+        customMonth: '',
+        customYear: 0         // e.g. 2025
       },
       filterSettings: {
         allExpenses: true,
         includedCategories: []
       },
       dataSettings: {
-        time: 'LAST_MONTH', // 'LAST_MONTH', 'CUSTOM'
-        customMonth: ''
+        time: 'LAST_MONTH', // 'LAST_MONTH', 'CUSTOM_MONTH', 'LAST_YEAR', 'CUSTOM_YEAR'
+        customMonth: '',
+        customYear: 0       // e.g. 2025
+      },
+      visualizationSettings: {
+        resolution: 'DAILY' // 'DAILY', 'WEEKLY', 'MONTHLY'
       }
     }
   });
