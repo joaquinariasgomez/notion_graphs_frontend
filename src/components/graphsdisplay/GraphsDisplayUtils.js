@@ -205,11 +205,18 @@ export function getGraphTitleFromConfiguration(graphConfiguration) {
     }
   } else {
     // Burndown
+    const burndownType = graphConfiguration.burndownSettings.type;
     const referenceType = graphConfiguration.burndownSettings.referenceSettings.type;
     const referenceCustomMonth = graphConfiguration.burndownSettings.referenceSettings.customMonth;
+    const referenceCustomYear = graphConfiguration.burndownSettings.referenceSettings.customYear;
     const burndownTime = graphConfiguration.burndownSettings.dataSettings.time;
     const burndownCustomMonth = graphConfiguration.burndownSettings.dataSettings.customMonth;
-    graphTitle += 'Burndown - ' + burndownTimeToText(burndownTime, burndownCustomMonth) + " data - " + referenceTypeToText(referenceType, referenceCustomMonth) + " reference";
+    const burndownCustomYear = graphConfiguration.burndownSettings.dataSettings.customYear;
+    if (burndownType === 'MONTHLY') {
+      graphTitle += 'Burndown - ' + burndownTimeToText(burndownTime, burndownCustomMonth, null) + " data - " + referenceTypeToText(referenceType, referenceCustomMonth, null) + " reference";
+    } else {
+      graphTitle += 'Burndown - ' + burndownTimeToText(burndownTime, null, burndownCustomYear) + " data - " + referenceTypeToText(referenceType, null, referenceCustomYear) + " reference";
+    }
   }
   return graphTitle;
 }
@@ -241,8 +248,8 @@ export function getGraphPeriodInfo(graphConfiguration) {
   // BURNDOWN — show both data and reference period
   const b = graphConfiguration.burndownSettings;
   return [
-    { label: 'Data period', value: burndownTimeToText(b.dataSettings.time, b.dataSettings.customMonth) },
-    { label: 'Reference', value: referenceTypeToText(b.referenceSettings.type, b.referenceSettings.customMonth) },
+    { label: 'Data period', value: burndownTimeToText(b.dataSettings.time, b.dataSettings.customMonth, b.dataSettings.customYear) },
+    { label: 'Reference', value: referenceTypeToText(b.referenceSettings.type, b.referenceSettings.customMonth, b.referenceSettings.customYear) },
   ];
 }
 
@@ -298,7 +305,7 @@ function sourceToText(source) {
   }
 }
 
-function referenceTypeToText(referenceType, customMonth) {
+function referenceTypeToText(referenceType, customMonth, customYear) {
   switch (referenceType) {
     default:
     case 'TOTAL_AVERAGE':
@@ -307,18 +314,26 @@ function referenceTypeToText(referenceType, customMonth) {
       return "Last year average";
     case 'BEST_MONTH':
       return "Best month";
-    case 'CUSTOM':
+    case 'CUSTOM_MONTH':
       return customMonth;
+    case 'BEST_YEAR':
+      return "Best year";
+    case 'CUSTOM_YEAR':
+      return String(customYear);
   }
 }
 
-function burndownTimeToText(time, customMonth) {
+function burndownTimeToText(time, customMonth, customYear) {
   switch (time) {
     default:
     case 'LAST_MONTH':
       return "Last month";
-    case 'CUSTOM':
+    case 'CUSTOM_MONTH':
       return customMonth;
+    case 'LAST_YEAR':
+      return "Last year";
+    case 'CUSTOM_YEAR':
+      return String(customYear);
   }
 }
 

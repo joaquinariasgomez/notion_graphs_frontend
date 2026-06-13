@@ -8,7 +8,7 @@ import FrequencyGraph from "./FrequencyGraph";
 import FrequencyBarGraph from "./FrequencyBarGraph";
 
 
-export default function GraphDisplayer({ graphConfiguration, graphData, showLegend, showAverages, showStandardDeviation, showTitle, frequencyView = 'BUBBLE' }) {
+export default function GraphDisplayer({ graphConfiguration, graphData, showLegend, showAverages, showStandardDeviation, showTitle, frequencyView = 'BUBBLE', burndownResolution = 'DAILY' }) {
 
   const renderCustomGraph = () => {
     const type = graphConfiguration.customGraphSettings.visualizationSettings.type;
@@ -55,7 +55,7 @@ export default function GraphDisplayer({ graphConfiguration, graphData, showLege
   }
 
   const renderBurndownGraph = () => {
-    return <BurndownGraph graphConfiguration={graphConfiguration} graphData={graphData} showTitle={showTitle} />;
+    return <BurndownGraph graphConfiguration={graphConfiguration} graphData={graphData} showTitle={showTitle} resolution={burndownResolution} />;
   }
 
   const renderGraph = () => {

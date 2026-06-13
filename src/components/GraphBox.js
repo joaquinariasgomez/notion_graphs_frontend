@@ -14,7 +14,8 @@ import SyncLoader from "react-spinners/SyncLoader";
 import { getGraphTitle, getGraphTitleFromConfiguration, getGraphPeriodInfo, getGraphFilterInfo } from "./graphsdisplay/GraphsDisplayUtils";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
 import { actionTypes, BOX_TYPES } from "../context/globalReducer";
-import { deleteGraph, refreshGraph } from "../api/RequestUtils";
+import { deleteGraph, refreshGraph, updateGraphConfiguration } from "../api/RequestUtils";
+import Slider from '@mui/material/Slider';
 import { getRelativeTimeFromTimestamp } from "../utils/DateUtils";
 import { FaSyncAlt } from 'react-icons/fa';
 
@@ -44,6 +45,12 @@ export default function GraphBox({ graph }) {
     const [showInfo, setShowInfo] = useState(false);
     const infoPopupRef = useRef(null);
     const infoButtonRef = useRef(null);
+    const [showResolution, setShowResolution] = useState(false);
+    const resolutionPopupRef = useRef(null);
+    const resolutionButtonRef = useRef(null);
+    const [resolution, setResolution] = useState(
+        graph.graphConfiguration.burndownSettings?.visualizationSettings?.resolution ?? 'DAILY'
+    );
     const [showLegend, setShowLegend] = useState(true);
     const [showAverages, setShowAverages] = useState(false);
     const [showStandardDeviation, setShowStandardDeviation] = useState(false);
@@ -73,6 +80,18 @@ export default function GraphBox({ graph }) {
         }
     }, [showInfo]);
 
+    useEffect(() => {
+        const handleOutsideClick = (event) => {
+            if (showResolution && resolutionPopupRef.current && !resolutionPopupRef.current.contains(event.target) && resolutionButtonRef.current && !resolutionButtonRef.current.contains(event.target)) {
+                handleCloseShowResolution();
+            }
+        }
+        document.addEventListener('mousedown', handleOutsideClick);
+        return () => {
+            document.removeEventListener('mousedown', handleOutsideClick);
+        }
+    }, [showResolution]);
+
     const handleClickUpdateGraphConfiguration = (graph) => {
         dispatch({
             type: actionTypes.SET_EDITING_GRAPH_CONFIGURATION,
@@ -98,6 +117,43 @@ export default function GraphBox({ graph }) {
 
     const handleCloseShowInfo = () => {
         setShowInfo(false);
+    }
+
+    const RESOLUTION_VALUES = ['DAILY', 'WEEKLY', 'MONTHLY'];
+    const RESOLUTION_MARKS = [
+        { value: 0, label: 'Daily' },
+        { value: 1, label: 'Weekly' },
+        { value: 2, label: 'Monthly' },
+    ];
+
+    const handleClickShowResolution = () => {
+        setShowResolution(!showResolution);
+    }
+
+    const handleCloseShowResolution = () => {
+        setShowResolution(false);
+    }
+
+    const handleSelectedResolution = async (graph, newResolution) => {
+        setResolution(newResolution);
+        const bs = graph.graphConfiguration.burndownSettings;
+        const updatedConfig = {
+            ...graph.graphConfiguration,
+            burndownSettings: {
+                ...bs,
+                visualizationSettings: { ...(bs.visualizationSettings ?? {}), resolution: newResolution },
+            },
+        };
+        const updatedGraph = { ...graph, graphConfiguration: updatedConfig };
+        dispatch({
+            type: actionTypes.UPDATE_GRAPH,
+            payload: { id: graph.graphConfiguration.id, data: updatedGraph }
+        });
+        try {
+            await updateGraphConfiguration(userJWTCookie, graph.graphConfiguration.id, updatedConfig);
+        } catch (error) {
+            // TODO: handle exception
+        }
     }
 
     const handleRefreshGraph = async (graph) => {
@@ -153,6 +209,52 @@ export default function GraphBox({ graph }) {
         return graph.graphConfiguration.requestType === 'BURNDOWN';
     }
 
+    const isYearlyBurndownGraph = (graph) => {
+        return isBurndownGraph(graph) && graph.graphConfiguration.burndownSettings?.type === 'YEARLY';
+    }
+
+    const renderResolutionPopover = (graph) => {
+        const sliderValue = RESOLUTION_VALUES.indexOf(resolution);
+        return (
+            <div
+                ref={resolutionPopupRef}
+                className={`graphbox__resolution__container ${showResolution ? 'is-open' : ''}`}
+                onClick={e => e.stopPropagation()}
+            >
+                <p className="graphbox__resolution__title">Resolution</p>
+                <div className="graphbox__resolution__slider">
+                    <Slider
+                        min={0}
+                        max={2}
+                        step={1}
+                        marks={RESOLUTION_MARKS}
+                        value={sliderValue === -1 ? 0 : sliderValue}
+                        onChange={(_, newValue) => {
+                            setResolution(RESOLUTION_VALUES[newValue]);
+                        }}
+                        onChangeCommitted={(_, newValue) => {
+                            handleSelectedResolution(graph, RESOLUTION_VALUES[newValue]);
+                        }}
+                        sx={{
+                            color: 'var(--matteblack-color, #1a1a1a)',
+                            '& .MuiSlider-markLabel': { fontSize: '11px' },
+                        }}
+                    />
+                </div>
+            </div>
+        );
+    }
+
+    const renderResolutionButton = (graph) => {
+        if (!isYearlyBurndownGraph(graph)) return null;
+        return (
+            <button ref={resolutionButtonRef} className="graphbox__resolution" title="Chart resolution" onClick={handleClickShowResolution}>
+                <MoreVertIcon style={{ color: '#6d6d6d' }} fontSize="small" />
+                {renderResolutionPopover(graph)}
+            </button>
+        );
+    }
+
     const renderMoreOptionsButton = (graph) => {
         // Wont show for heat charts or burndown charts
         const isHeatChart = graph.graphConfiguration.requestType === 'CUSTOM_GRAPH' && graph.graphConfiguration.customGraphSettings.visualizationSettings.type === 'HEAT';
@@ -196,7 +298,7 @@ export default function GraphBox({ graph }) {
             case "UPDATING":
             case "CREATED":
                 return (
-                    <GraphDisplayer graphConfiguration={graph.graphConfiguration} graphData={graph.graphData} showLegend={showLegend} showAverages={showAverages} showStandardDeviation={showStandardDeviation} showTitle={true} frequencyView={frequencyView} />
+                    <GraphDisplayer graphConfiguration={graph.graphConfiguration} graphData={graph.graphData} showLegend={showLegend} showAverages={showAverages} showStandardDeviation={showStandardDeviation} showTitle={true} frequencyView={frequencyView} burndownResolution={resolution} />
                 );
             case "PENDING":
                 return (
@@ -364,6 +466,7 @@ export default function GraphBox({ graph }) {
                     <FaSyncAlt className={`graph-refresh-button__icon ${isRefreshing ? 'spinning' : ''}`} />
                 </button>
                 {renderFrequencyViewToggleButton(graph)}
+                {renderResolutionButton(graph)}
                 {renderMoreOptionsButton(graph)}
                 {renderUpdateConfigButton(graph)}
                 <button className="graphbox__delete" title="Delete" onClick={() => handleDeleteGraph(graph)}>

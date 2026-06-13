@@ -11,6 +11,17 @@ import { createGraph } from '../../api/RequestUtils';
 import { useGlobalStateValue } from '../../context/GlobalStateProvider';
 import { actionTypes } from '../../context/globalReducer';
 
+const VALID_REFERENCE = {
+  MONTHLY: ['TOTAL_AVERAGE', 'LAST_YEAR_AVERAGE', 'BEST_MONTH', 'CUSTOM_MONTH'],
+  YEARLY: ['BEST_YEAR', 'CUSTOM_YEAR'],
+};
+const DEFAULT_REFERENCE = { MONTHLY: 'TOTAL_AVERAGE', YEARLY: 'BEST_YEAR' };
+const VALID_TIME = {
+  MONTHLY: ['LAST_MONTH', 'CUSTOM_MONTH'],
+  YEARLY: ['LAST_YEAR', 'CUSTOM_YEAR'],
+};
+const DEFAULT_TIME = { MONTHLY: 'LAST_MONTH', YEARLY: 'LAST_YEAR' };
+
 export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGraphConfig, gotoBack, expensesCategoriesLoading, expensesCategories }) {
 
   const getSelectOptionsFromDatabase = (database) => {
@@ -36,6 +47,18 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
     setSelectedTimeMonth(date);
     const monthFormatted = format(date, 'yyyy-MM');
     handleSelectedTimeCustomMonth(monthFormatted);
+  }
+
+  // Year picker
+  const [selectedReferenceYear, setSelectedReferenceYear] = useState(new Date());
+  const [selectedTimeYear, setSelectedTimeYear] = useState(new Date());
+  const onReferenceYearChange = (date) => {
+    setSelectedReferenceYear(date);
+    handleSelectedReferenceCustomYear(date.getFullYear());
+  }
+  const onTimeYearChange = (date) => {
+    setSelectedTimeYear(date);
+    handleSelectedTimeCustomYear(date.getFullYear());
   }
 
   const closeCreateGraphBox = () => {
@@ -150,6 +173,47 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
     });
   }
 
+  const handleSelectedReferenceCustomYear = (customYear) => {
+    onUpdateGraphConfig({
+      burndownSettings: {
+        ...graphConfiguration.burndownSettings,
+        referenceSettings: {
+          ...graphConfiguration.burndownSettings.referenceSettings,
+          customYear: customYear
+        }
+      }
+    });
+  }
+
+  const handleSelectedTimeCustomYear = (customYear) => {
+    onUpdateGraphConfig({
+      burndownSettings: {
+        ...graphConfiguration.burndownSettings,
+        dataSettings: {
+          ...graphConfiguration.burndownSettings.dataSettings,
+          customYear: customYear
+        }
+      }
+    });
+  }
+
+  const handleSelectedStrategy = (type) => {
+    const referenceType = VALID_REFERENCE[type].includes(graphConfiguration.burndownSettings.referenceSettings.type)
+      ? graphConfiguration.burndownSettings.referenceSettings.type
+      : DEFAULT_REFERENCE[type];
+    const time = VALID_TIME[type].includes(graphConfiguration.burndownSettings.dataSettings.time)
+      ? graphConfiguration.burndownSettings.dataSettings.time
+      : DEFAULT_TIME[type];
+    onUpdateGraphConfig({
+      burndownSettings: {
+        ...graphConfiguration.burndownSettings,
+        type,
+        referenceSettings: { ...graphConfiguration.burndownSettings.referenceSettings, type: referenceType },
+        dataSettings: { ...graphConfiguration.burndownSettings.dataSettings, time },
+      },
+    });
+  }
+
   const renderReferenceMonthPicker = () => {
     return (
       <div className='customdatepicker'>
@@ -172,6 +236,34 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
           onChange={onTimeMonthChange}
           showMonthYearPicker
           dateFormat="MMMM yyyy" // This format looks better for a month picker
+          inline
+        />
+      </div>
+    );
+  }
+
+  const renderReferenceYearPicker = () => {
+    return (
+      <div className='customdatepicker'>
+        <DatePicker
+          selected={selectedReferenceYear}
+          onChange={onReferenceYearChange}
+          showYearPicker
+          dateFormat="yyyy"
+          inline
+        />
+      </div>
+    );
+  }
+
+  const renderTimeYearPicker = () => {
+    return (
+      <div className='customdatepicker'>
+        <DatePicker
+          selected={selectedTimeYear}
+          onChange={onTimeYearChange}
+          showYearPicker
+          dateFormat="yyyy"
           inline
         />
       </div>
@@ -209,7 +301,44 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
     );
   }
 
+  const renderStrategyButtons = () => {
+    return (
+      <div className='creategraphbox__step__bigbuttons'>
+        <button
+          className={`${graphConfiguration.burndownSettings.type === 'MONTHLY' ? 'selected' : 'not_selected'} small`}
+          onClick={() => handleSelectedStrategy('MONTHLY')}
+        >
+          <p>Monthly</p>
+        </button>
+        <button
+          className={`${graphConfiguration.burndownSettings.type === 'YEARLY' ? 'selected' : 'not_selected'} small`}
+          onClick={() => handleSelectedStrategy('YEARLY')}
+        >
+          <p>Yearly</p>
+        </button>
+      </div>
+    );
+  }
+
   const renderTimeButtons = () => {
+    if (graphConfiguration.burndownSettings.type === 'YEARLY') {
+      return (
+        <div className='creategraphbox__step__bigbuttons'>
+          <button
+            className={`${graphConfiguration.burndownSettings.dataSettings.time === 'LAST_YEAR' ? 'selected' : 'not_selected'} small`}
+            onClick={() => handleSelectedTime('LAST_YEAR')}
+          >
+            <p>Last year</p>
+          </button>
+          <button
+            className={`${graphConfiguration.burndownSettings.dataSettings.time === 'CUSTOM_YEAR' ? 'selected' : 'not_selected'} small`}
+            onClick={() => handleSelectedTime('CUSTOM_YEAR')}
+          >
+            <p>Custom year</p>
+          </button>
+        </div>
+      );
+    }
     return (
       <div className='creategraphbox__step__bigbuttons'>
         <button
@@ -219,8 +348,8 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
           <p>Last month</p>
         </button>
         <button
-          className={`${graphConfiguration.burndownSettings.dataSettings.time === 'CUSTOM' ? 'selected' : 'not_selected'} small`}
-          onClick={() => handleSelectedTime('CUSTOM')}
+          className={`${graphConfiguration.burndownSettings.dataSettings.time === 'CUSTOM_MONTH' ? 'selected' : 'not_selected'} small`}
+          onClick={() => handleSelectedTime('CUSTOM_MONTH')}
         >
           <p>Custom month</p>
         </button>
@@ -229,6 +358,24 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
   }
 
   const renderReferenceButtons = () => {
+    if (graphConfiguration.burndownSettings.type === 'YEARLY') {
+      return (
+        <div className='creategraphbox__step__bigbuttons'>
+          <button
+            className={`${graphConfiguration.burndownSettings.referenceSettings.type === 'BEST_YEAR' ? 'selected' : 'not_selected'} small`}
+            onClick={() => handleSelectedReferenceTime('BEST_YEAR')}
+          >
+            <p>Best year</p>
+          </button>
+          <button
+            className={`${graphConfiguration.burndownSettings.referenceSettings.type === 'CUSTOM_YEAR' ? 'selected' : 'not_selected'} small`}
+            onClick={() => handleSelectedReferenceTime('CUSTOM_YEAR')}
+          >
+            <p>Custom year</p>
+          </button>
+        </div>
+      );
+    }
     return (
       <div className='creategraphbox__step__bigbuttons'>
         <button
@@ -250,8 +397,8 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
           <p>Best month</p>
         </button>
         <button
-          className={`${graphConfiguration.burndownSettings.referenceSettings.type === 'CUSTOM' ? 'selected' : 'not_selected'} small`}
-          onClick={() => handleSelectedReferenceTime('CUSTOM')}
+          className={`${graphConfiguration.burndownSettings.referenceSettings.type === 'CUSTOM_MONTH' ? 'selected' : 'not_selected'} small`}
+          onClick={() => handleSelectedReferenceTime('CUSTOM_MONTH')}
         >
           <p>Custom month</p>
         </button>
@@ -308,10 +455,16 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
     <div className='creategraphbox__stepcontainer'>
       <div className='creategraphbox__stepcontent'>
         <div className='creategraphbox__stepgraycontainer'>
+          <h2>Strategy</h2>
+          <p>Do you want to track your spending month by month or year by year?</p>
+          {renderStrategyButtons()}
+        </div>
+        <div className='creategraphbox__stepgraycontainer'>
           <h2>Reference expenses</h2>
           <p>What data do you want to use as a reference?</p>
           {renderReferenceButtons()}
-          {graphConfiguration.burndownSettings.referenceSettings.type === 'CUSTOM' && renderReferenceMonthPicker()}
+          {graphConfiguration.burndownSettings.referenceSettings.type === 'CUSTOM_MONTH' && renderReferenceMonthPicker()}
+          {graphConfiguration.burndownSettings.referenceSettings.type === 'CUSTOM_YEAR' && renderReferenceYearPicker()}
         </div>
         <div className='creategraphbox__stepgraycontainer'>
           <h2>Filter expenses</h2>
@@ -320,9 +473,10 @@ export default function CreateSpendingBurndown({ graphConfiguration, onUpdateGra
         </div>
         <div className='creategraphbox__stepgraycontainer'>
           <h2>Time</h2>
-          <p>For which month do you want to see your data?</p>
+          <p>{graphConfiguration.burndownSettings.type === 'YEARLY' ? 'For which year do you want to see your data?' : 'For which month do you want to see your data?'}</p>
           {renderTimeButtons()}
-          {graphConfiguration.burndownSettings.dataSettings.time === 'CUSTOM' && renderTimeMonthPicker()}
+          {graphConfiguration.burndownSettings.dataSettings.time === 'CUSTOM_MONTH' && renderTimeMonthPicker()}
+          {graphConfiguration.burndownSettings.dataSettings.time === 'CUSTOM_YEAR' && renderTimeYearPicker()}
         </div>
       </div>
       <div className='creategraphbox__arrows'>
