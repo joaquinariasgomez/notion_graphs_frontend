@@ -5,7 +5,9 @@ const Config = {
   BackendWalletConnectionURL: process.env.REACT_APP_BACKEND_WALLETCONNECTION_URL,
   BackendBillingConnectionURL: process.env.REACT_APP_BACKEND_BILLING_URL,
   BackendAccountConnectionURL: process.env.REACT_APP_BACKEND_ACCOUNT_URL,
-  BackendWidgetsConnectionURL: process.env.REACT_APP_BACKEND_WIDGETS_URL
+  BackendWidgetsConnectionURL: process.env.REACT_APP_BACKEND_WIDGETS_URL,
+  BackendBudgetsURL: process.env.REACT_APP_BACKEND_BUDGETS_URL,
+  UseBudgetsMock: process.env.REACT_APP_USE_BUDGETS_MOCK === 'true'
 }
 
 export default Config;

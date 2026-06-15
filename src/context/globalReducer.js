@@ -24,7 +24,8 @@ export const initialState = {
   billingGraphCountData: null,
   billingPlan: null,
   graphs: [],
-  editingGraphConfiguration: {} // Data for when customer edits a graph's configuration
+  editingGraphConfiguration: {}, // Data for when customer edits a graph's configuration
+  budgets: []
 }
 
 export const actionTypes = {
@@ -40,7 +41,11 @@ export const actionTypes = {
   APPEND_GRAPHS: "APPEND_GRAPHS",
   UPDATE_GRAPH: "UPDATE_GRAPH",
   DELETE_GRAPH: "DELETE_GRAPH",
-  SET_EDITING_GRAPH_CONFIGURATION: "SET_EDITING_GRAPH_CONFIGURATION"
+  SET_EDITING_GRAPH_CONFIGURATION: "SET_EDITING_GRAPH_CONFIGURATION",
+  SET_BUDGETS: "SET_BUDGETS",
+  APPEND_BUDGET: "APPEND_BUDGET",
+  UPDATE_BUDGET: "UPDATE_BUDGET",
+  DELETE_BUDGET: "DELETE_BUDGET"
 }
 
 // Box type constants for better type safety and consistency
@@ -50,6 +55,7 @@ export const BOX_TYPES = {
   UPDATE_GRAPH: "UPDATE_GRAPH",
   UPDATE_BURNDOWN: "UPDATE_BURNDOWN",
   REGISTER_VALUE: "REGISTER_VALUE",
+  CREATE_BUDGET: "CREATE_BUDGET",
   BILLING_LIMIT_ERROR: "BILLING_LIMIT_ERROR",
   UNKNOWN_ERROR: "UNKNOWN_ERROR",
   CLIENT_ERROR: "CLIENT_ERROR"
@@ -147,6 +153,44 @@ const globalReducer = (state, action) => {
         ...state,
         editingGraphConfiguration: action.value
       };
+
+    case actionTypes.SET_BUDGETS:
+      return {
+        ...state,
+        budgets: action.value
+      };
+
+    case actionTypes.APPEND_BUDGET:
+      return {
+        ...state,
+        budgets: [action.value, ...state.budgets]
+      };
+
+    case actionTypes.UPDATE_BUDGET: {
+      // Updates the budget with id "id" by "data"
+      const { id: budgetId, data: budgetData } = action.payload;
+      const updatedBudgets = state.budgets.map((budget) => {
+        if (budget.id === budgetId) {
+          return budgetData;
+        }
+        return budget;
+      });
+
+      return {
+        ...state,
+        budgets: updatedBudgets
+      };
+    }
+
+    case actionTypes.DELETE_BUDGET: {
+      const budgetIdToDelete = action.value;
+      const filteredBudgets = state.budgets.filter((budget) => budget.id !== budgetIdToDelete);
+
+      return {
+        ...state,
+        budgets: filteredBudgets
+      };
+    }
 
     default:
       return state;

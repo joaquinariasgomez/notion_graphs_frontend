@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import BoxManager from '../components/boxes/BoxManager';
 import CreateGraphButton from '../components/CreateGraphButton';
 import DashboardGraphs from '../components/DashboardGraphs';
+import DashboardBudgets from '../components/DashboardBudgets';
 import UserCicleButton from '../components/UserCircleButton';
 import '../css/DashboardPage.css';
 import { checkIntegrationConnection, getBillingGraphCount, getBillingPlan } from '../api/RequestUtils';
@@ -17,6 +18,7 @@ function DashboardPage() {
 
   const [integrationConnectionLoading, setIntegrationConnectionLoading] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeTab, setActiveTab] = useState('expenses');
 
   useEffect(() => {
     fetchIntegrationConnection();
@@ -123,9 +125,28 @@ function DashboardPage() {
         <UserCicleButton />
       </div>
       <div className='dashboard__body'>
-        {!integrationConnectionLoading && !templateConnectedToIntegrationData?.hasTemplateConnectedToIntegration && renderNotConnectedToIntegrationWarning()}
-        {!integrationConnectionLoading && templateConnectedToIntegrationData.hasTemplateConnectedToIntegration && <RegisterValueButtons />}
-        <DashboardGraphs />
+        <div className='dashboard__tabs'>
+          <button
+            className={`dashboard__tab ${activeTab === 'expenses' ? 'selected' : ''}`}
+            onClick={() => setActiveTab('expenses')}
+          >
+            Expenses
+          </button>
+          <button
+            className={`dashboard__tab ${activeTab === 'budgets' ? 'selected' : ''}`}
+            onClick={() => setActiveTab('budgets')}
+          >
+            Budgets
+          </button>
+        </div>
+        {activeTab === 'expenses' && (
+          <>
+            {!integrationConnectionLoading && !templateConnectedToIntegrationData?.hasTemplateConnectedToIntegration && renderNotConnectedToIntegrationWarning()}
+            {!integrationConnectionLoading && templateConnectedToIntegrationData.hasTemplateConnectedToIntegration && <RegisterValueButtons />}
+            <DashboardGraphs />
+          </>
+        )}
+        {activeTab === 'budgets' && <DashboardBudgets />}
       </div>
     </div>
   );

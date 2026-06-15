@@ -10,6 +10,7 @@ import UpdateGraphConfigurationBox from "./UpdateGraphConfigurationBox";
 import UpdateBurndownConfigurationBox from "./UpdateBurndownConfigurationBox";
 import { actionTypes, BOX_TYPES } from "../../context/globalReducer";
 import RegisterValueBox from "./RegisterValueBox";
+import CreateBudgetBox from "./CreateBudgetBox";
 
 export default function BoxManager() {
 
@@ -131,6 +132,11 @@ export default function BoxManager() {
           <RegisterValueBox
             valueType={activeBox.data?.valueType}
           />
+        );
+
+      case BOX_TYPES.CREATE_BUDGET:
+        return (
+          <CreateBudgetBox />
         );
 
       default:

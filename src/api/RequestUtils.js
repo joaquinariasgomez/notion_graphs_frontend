@@ -1,5 +1,12 @@
 import Config from "../Config";
 import apiClient from "./apiClient";
+import {
+  mockAveragesForCategories,
+  mockGetBudgets,
+  mockCreateBudget,
+  mockUpdateBudget,
+  mockDeleteBudget,
+} from "./budgetsMock";
 
 export function delay(time) {
   return new Promise(resolve => setTimeout(resolve, time));
@@ -209,4 +216,55 @@ export async function triggerExperimentJob(jwtToken) {
   const url = Config.BackendWidgetsConnectionURL + "/moneystats/experiment";
   const response = postWithJWTToken(url, null, jwtToken);
   return (await response).data;
+}
+
+export async function getCategoryAverages(jwtToken) {
+  if (Config.UseBudgetsMock) {
+    const categories = await getExpensesCategories(jwtToken);
+    await delay(300);
+    return mockAveragesForCategories(categories);
+  }
+  const url = Config.BackendGraphsURL + "/expenses/averages";
+  const response = getWithJWTToken(url, jwtToken);
+  return (await response).data;
+}
+
+export async function getBudgets(jwtToken) {
+  if (Config.UseBudgetsMock) {
+    await delay(300);
+    return mockGetBudgets();
+  }
+  const url = Config.BackendBudgetsURL;
+  const response = getWithJWTToken(url, jwtToken);
+  return (await response).data;
+}
+
+export async function createBudget(jwtToken, budget) {
+  if (Config.UseBudgetsMock) {
+    await delay(300);
+    return mockCreateBudget(budget);
+  }
+  const url = Config.BackendBudgetsURL;
+  const response = postWithJWTToken(url, budget, jwtToken);
+  return (await response).data;
+}
+
+export async function updateBudget(jwtToken, budgetId, budget) {
+  if (Config.UseBudgetsMock) {
+    await delay(300);
+    return mockUpdateBudget(budgetId, budget);
+  }
+  const url = Config.BackendBudgetsURL + "/" + budgetId;
+  const response = putWithJWTToken(url, budget, jwtToken);
+  return (await response).data;
+}
+
+export async function deleteBudget(jwtToken, budgetId) {
+  if (Config.UseBudgetsMock) {
+    await delay(300);
+    mockDeleteBudget(budgetId);
+    return;
+  }
+  const url = Config.BackendBudgetsURL + "/" + budgetId;
+  await deleteWithJWTToken(url, jwtToken);
 }
