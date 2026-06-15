@@ -2,9 +2,11 @@ import '../css/DashboardBudgets.css';
 import { useEffect, useState } from "react";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
 import { actionTypes, BOX_TYPES } from "../context/globalReducer";
-import { getBudgets } from "../api/RequestUtils";
+import { getBudgets, deleteBudget } from "../api/RequestUtils";
 import SyncLoader from "react-spinners/SyncLoader";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import {
     MONTHS,
     formatEur,
@@ -23,10 +25,23 @@ export default function DashboardBudgets() {
     const [{ userJWTCookie, budgets }, dispatch] = useGlobalStateValue();
 
     const [budgetsLoading, setBudgetsLoading] = useState(true);
+    const [openMenuId, setOpenMenuId] = useState(null);
 
     useEffect(() => {
         fetchBudgets();
     }, []);
+
+    // Close the open options menu when clicking anywhere outside of it.
+    useEffect(() => {
+        if (openMenuId == null) return;
+        const handleOutsideClick = (event) => {
+            if (!event.target.closest('.budgets__menuwrapper')) {
+                setOpenMenuId(null);
+            }
+        };
+        document.addEventListener('mousedown', handleOutsideClick);
+        return () => document.removeEventListener('mousedown', handleOutsideClick);
+    }, [openMenuId]);
 
     const fetchBudgets = async () => {
         try {
@@ -51,6 +66,40 @@ export default function DashboardBudgets() {
             value: { type: BOX_TYPES.CREATE_BUDGET }
         });
     };
+
+    const handleDeleteBudget = (budget) => {
+        setOpenMenuId(null);
+        // Optimistic removal, mirroring how graphs are deleted.
+        dispatch({
+            type: actionTypes.DELETE_BUDGET,
+            value: budget.id
+        });
+        try {
+            deleteBudget(userJWTCookie, budget.id);
+        } catch (error) {
+
+        }
+    };
+
+    const renderCardMenu = (budget) => (
+        <div className='budgets__menuwrapper'>
+            <button
+                className='budgets__menubutton'
+                title='Options'
+                onClick={() => setOpenMenuId(openMenuId === budget.id ? null : budget.id)}
+            >
+                <MoreHorizIcon style={{ color: '#6d6d6d' }} fontSize='small' />
+            </button>
+            {openMenuId === budget.id && (
+                <div className='budgets__menu'>
+                    <button className='budgets__menuitem delete' onClick={() => handleDeleteBudget(budget)}>
+                        <DeleteOutlineRoundedIcon style={{ fontSize: 18 }} />
+                        Delete budget
+                    </button>
+                </div>
+            )}
+        </div>
+    );
 
     // The budget we actively track: the one for the current month, otherwise
     // the nearest upcoming budget.
@@ -101,12 +150,15 @@ export default function DashboardBudgets() {
                             <span>{MONTHS[budget.month - 1]} {budget.year}</span>
                         </div>
                     </div>
-                    {overCount > 0 && (
-                        <span className='budgets__overbadge'>
-                            <span className='budgets__overbadge__dot' />
-                            {overCount} {overCount === 1 ? 'category' : 'categories'} over budget
-                        </span>
-                    )}
+                    <div className='budgets__trackingcard__headerright'>
+                        {overCount > 0 && (
+                            <span className='budgets__overbadge'>
+                                <span className='budgets__overbadge__dot' />
+                                {overCount} {overCount === 1 ? 'category' : 'categories'} over budget
+                            </span>
+                        )}
+                        {renderCardMenu(budget)}
+                    </div>
                 </div>
 
                 <div className='budgets__stats'>
@@ -202,6 +254,7 @@ export default function DashboardBudgets() {
             <div className='budgets__card' key={budget.id}>
                 <div className='budgets__card__header'>
                     <span className={`budgets__badge ${badgeClass}`}>{badgeLabel}</span>
+                    {renderCardMenu(budget)}
                 </div>
                 <div className='budgets__card__name'>{budget.name}</div>
                 <div className='budgets__card__period'>{period}</div>
