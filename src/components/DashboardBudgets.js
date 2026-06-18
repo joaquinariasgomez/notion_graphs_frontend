@@ -7,6 +7,7 @@ import SyncLoader from "react-spinners/SyncLoader";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import {
     MONTHS,
     formatEur,
@@ -68,6 +69,14 @@ export default function DashboardBudgets() {
         });
     };
 
+    const handleEditBudget = (budget) => {
+        setOpenMenuId(null);
+        dispatch({
+            type: actionTypes.SET_ACTIVE_BOX,
+            value: { type: BOX_TYPES.UPDATE_BUDGET, data: { budget } }
+        });
+    };
+
     const handleDeleteBudget = (budget) => {
         setOpenMenuId(null);
         // Optimistic removal, mirroring how graphs are deleted.
@@ -93,6 +102,10 @@ export default function DashboardBudgets() {
             </button>
             {openMenuId === budget.id && (
                 <div className='budgets__menu'>
+                    <button className='budgets__menuitem' onClick={() => handleEditBudget(budget)}>
+                        <EditOutlinedIcon style={{ fontSize: 18 }} />
+                        Edit budget
+                    </button>
                     <button className='budgets__menuitem delete' onClick={() => handleDeleteBudget(budget)}>
                         <DeleteOutlineRoundedIcon style={{ fontSize: 18 }} />
                         Delete budget

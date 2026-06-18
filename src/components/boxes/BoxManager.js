@@ -11,6 +11,7 @@ import UpdateBurndownConfigurationBox from "./UpdateBurndownConfigurationBox";
 import { actionTypes, BOX_TYPES } from "../../context/globalReducer";
 import RegisterValueBox from "./RegisterValueBox";
 import CreateBudgetBox from "./CreateBudgetBox";
+import UpdateBudgetBox from "./UpdateBudgetBox";
 
 export default function BoxManager() {
 
@@ -137,6 +138,11 @@ export default function BoxManager() {
       case BOX_TYPES.CREATE_BUDGET:
         return (
           <CreateBudgetBox />
+        );
+
+      case BOX_TYPES.UPDATE_BUDGET:
+        return (
+          <UpdateBudgetBox budget={activeBox.data?.budget} />
         );
 
       default:

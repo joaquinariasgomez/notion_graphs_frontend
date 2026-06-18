@@ -245,16 +245,15 @@ export async function createBudget(jwtToken, budget) {
   //   return mockCreateBudget(budget);
   // }
   const url = Config.BackendBudgetsURL;
-  console.log("DEBUG JOAQUIN POSTING: ", budget);
   const response = postWithJWTToken(url, budget, jwtToken);
   return (await response).data;
 }
 
 export async function updateBudget(jwtToken, budgetId, budget) {
-  if (Config.UseBudgetsMock) {
-    await delay(300);
-    return mockUpdateBudget(budgetId, budget);
-  }
+  // if (Config.UseBudgetsMock) {
+  //   await delay(300);
+  //   return mockUpdateBudget(budgetId, budget);
+  // }
   const url = Config.BackendBudgetsURL + "/" + budgetId;
   const response = putWithJWTToken(url, budget, jwtToken);
   return (await response).data;
