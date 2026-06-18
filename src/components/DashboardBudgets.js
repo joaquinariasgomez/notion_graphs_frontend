@@ -18,6 +18,7 @@ import {
     getBudgetSpent,
     getSpendBarColor,
 } from "../utils/BudgetUtils";
+import { getRelativeTimeFromTimestamp } from "../utils/DateUtils";
 
 export default function DashboardBudgets() {
 
@@ -128,6 +129,7 @@ export default function DashboardBudgets() {
         const daysLeft = getDaysLeftInMonth(budget);
         const usedPct = total > 0 ? Math.round(spent / total * 100) : 0;
         const elapsedPct = Math.round(getMonthElapsedFraction(budget) * 100);
+        const lastExpenseLabel = getRelativeTimeFromTimestamp(budget.spentUpdatedAt);
 
         const spentByCategoryMap = {};
         (budget.spentByCategory || []).forEach((s) => { spentByCategoryMap[s.category] = s.spent; });
@@ -149,6 +151,9 @@ export default function DashboardBudgets() {
                             <h2>{budget.name}</h2>
                             <span>{MONTHS[budget.month - 1]} {budget.year}</span>
                         </div>
+                        {lastExpenseLabel && (
+                            <div className='budgets__lastexpense'>Last expense {lastExpenseLabel}</div>
+                        )}
                     </div>
                     <div className='budgets__trackingcard__headerright'>
                         {overCount > 0 && (

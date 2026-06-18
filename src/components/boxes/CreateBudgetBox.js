@@ -39,6 +39,13 @@ export default function CreateBudgetBox() {
     const [cap, setCap] = useState('');
     const [values, setValues] = useState({});    // { [category]: number }
     const [included, setIncluded] = useState({}); // { [category]: bool }
+    const [includeExistingExpenses, setIncludeExistingExpenses] = useState(true);
+
+    // The "include existing expenses" option only makes sense for periods that
+    // already have expenses — the current month or a past one, never the future.
+    const selectedPeriod = year * 100 + month;
+    const currentPeriod = now.getFullYear() * 100 + (now.getMonth() + 1);
+    const isCurrentOrPast = selectedPeriod <= currentPeriod;
 
     useEffect(() => {
         fetchData();
@@ -153,10 +160,10 @@ export default function CreateBudgetBox() {
                 name: name.trim(),
                 month,
                 year,
-                cap: capNum,
                 categoryAllocations: categories
                     .filter((category) => isIncluded(category))
                     .map((category) => ({ category, amount: values[category] || 0 })),
+                includeExistingExpenses: isCurrentOrPast ? includeExistingExpenses : false,
             };
             const createdBudget = await createBudget(userJWTCookie, budgetInput);
             if (createdBudget) {
@@ -297,6 +304,24 @@ export default function CreateBudgetBox() {
                                     </div>
                                 </div>
                             </div>
+
+                            {/* Include existing expenses */}
+                            {isCurrentOrPast && (
+                                <div className='createbudgetbox__includeexisting'>
+                                    <div className='createbudgetbox__includeexisting__text'>
+                                        <div className='createbudgetbox__includeexisting__label'>Include existing expenses</div>
+                                        <div className='createbudgetbox__includeexisting__hint'>Count expenses already recorded for this period toward the budget. Turn off to start tracking from zero.</div>
+                                    </div>
+                                    <label className='toggle-switch'>
+                                        <input
+                                            type='checkbox'
+                                            checked={includeExistingExpenses}
+                                            onChange={(e) => setIncludeExistingExpenses(e.target.checked)}
+                                        />
+                                        <span className='slider'></span>
+                                    </label>
+                                </div>
+                            )}
 
                             {/* Monthly cap */}
                             <div className='createbudgetbox__cap'>

@@ -240,11 +240,12 @@ export async function getBudgets(jwtToken) {
 }
 
 export async function createBudget(jwtToken, budget) {
-  if (Config.UseBudgetsMock) {
-    await delay(300);
-    return mockCreateBudget(budget);
-  }
+  // if (Config.UseBudgetsMock) {
+  //   await delay(300);
+  //   return mockCreateBudget(budget);
+  // }
   const url = Config.BackendBudgetsURL;
+  console.log("DEBUG JOAQUIN POSTING: ", budget);
   const response = postWithJWTToken(url, budget, jwtToken);
   return (await response).data;
 }

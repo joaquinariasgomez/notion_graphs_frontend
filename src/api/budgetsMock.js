@@ -49,15 +49,25 @@ function statusOf(month, year, now = new Date()) {
 
 // Build a plausible spent-per-category list for a budget. Upcoming budgets
 // haven't started, so they have no spend yet.
-function buildSpentByCategory(budgetId, month, year, categoryAllocations) {
+function buildSpentByCategory(budgetId, month, year, categoryAllocations, includeExisting) {
   if (statusOf(month, year) === 'upcoming') return [];
   return (categoryAllocations || []).map((allocation) => {
-    const factor = seededFraction(budgetId + ':' + allocation.category, 0.4, 1.15);
+    const factor = includeExisting ? seededFraction(budgetId + ':' + allocation.category, 0.4, 1.15) : 0;
     return {
       category: allocation.category,
       spent: Math.round((allocation.amount || 0) * factor),
     };
   });
+}
+
+// A plausible "last expense" timestamp (epoch seconds). Upcoming budgets have
+// no expenses yet, so they get 0 (the frontend hides the label for 0).
+function buildSpentUpdatedAt(budgetId, month, year, includeExisting) {
+  if (statusOf(month, year) === 'upcoming' || !includeExisting) return 0;
+  const nowSeconds = Math.floor(Date.now() / 1000);
+  // Deterministic: somewhere between 1 minute and 2 hours ago.
+  const offsetSeconds = Math.floor(seededFraction(budgetId + ':updated', 60, 7200));
+  return nowSeconds - offsetSeconds;
 }
 
 // ----- public mock API -----
@@ -77,6 +87,7 @@ export function mockGetBudgets() {
 
 export function mockCreateBudget(input) {
   const id = 'b' + Date.now();
+  const includeExisting = input.includeExistingExpenses !== false;
   const budget = {
     id,
     name: input.name,
@@ -84,7 +95,8 @@ export function mockCreateBudget(input) {
     year: input.year,
     cap: input.cap ?? null,
     categoryAllocations: input.categoryAllocations || [],
-    spentByCategory: buildSpentByCategory(id, input.month, input.year, input.categoryAllocations),
+    spentByCategory: buildSpentByCategory(id, input.month, input.year, input.categoryAllocations, includeExisting),
+    spentUpdatedAt: buildSpentUpdatedAt(id, input.month, input.year, includeExisting),
   };
   const budgets = readBudgets();
   writeBudgets([budget, ...budgets]);
@@ -92,6 +104,7 @@ export function mockCreateBudget(input) {
 }
 
 export function mockUpdateBudget(budgetId, input) {
+  const includeExisting = input.includeExistingExpenses !== false;
   const budgets = readBudgets();
   const updated = budgets.map((budget) => {
     if (budget.id !== budgetId) return budget;
@@ -102,7 +115,8 @@ export function mockUpdateBudget(budgetId, input) {
       year: input.year,
       cap: input.cap ?? null,
       categoryAllocations: input.categoryAllocations || [],
-      spentByCategory: buildSpentByCategory(budgetId, input.month, input.year, input.categoryAllocations),
+      spentByCategory: buildSpentByCategory(budgetId, input.month, input.year, input.categoryAllocations, includeExisting),
+      spentUpdatedAt: buildSpentUpdatedAt(budgetId, input.month, input.year, includeExisting),
     };
   });
   writeBudgets(updated);

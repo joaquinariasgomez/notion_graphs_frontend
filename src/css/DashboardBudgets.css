@@ -139,6 +139,12 @@
   color: rgb(105, 105, 105);
 }
 
+.budgets__lastexpense {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #949494;
+}
+
 .budgets__trackingcard__headerright {
   display: flex;
   align-items: center;
