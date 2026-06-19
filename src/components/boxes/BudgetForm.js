@@ -9,7 +9,7 @@ import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import ClipLoader from 'react-spinners/ClipLoader';
 import SyncLoader from "react-spinners/SyncLoader";
-import { getExpensesCategories, getCategoryAverages } from '../../api/RequestUtils';
+import { getCategoryAverages } from '../../api/RequestUtils';
 import {
     MONTHS,
     formatEur,
@@ -61,14 +61,14 @@ export default function BudgetForm({ mode, initialBudget, onSubmit }) {
     const fetchData = async () => {
         try {
             setDataLoading(true);
-            const [categoriesResponse, averagesResponse] = await Promise.all([
-                getExpensesCategories(userJWTCookie),
-                getCategoryAverages(userJWTCookie),
-            ]);
+            const averagesResponse = await getCategoryAverages(userJWTCookie);
 
-            const categoryList = categoriesResponse || [];
+            // The averages endpoint returns one entry per category, so it also
+            // serves as the source of the category list.
+            const categoryList = [];
             const averagesMap = {};
             (averagesResponse || []).forEach((entry) => {
+                categoryList.push(entry.category);
                 averagesMap[entry.category] = entry.average;
             });
 

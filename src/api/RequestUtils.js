@@ -219,11 +219,11 @@ export async function triggerExperimentJob(jwtToken) {
 }
 
 export async function getCategoryAverages(jwtToken) {
-  if (Config.UseBudgetsMock) {
-    const categories = await getExpensesCategories(jwtToken);
-    await delay(300);
-    return mockAveragesForCategories(categories);
-  }
+  // if (Config.UseBudgetsMock) {
+  //   const categories = await getExpensesCategories(jwtToken);
+  //   await delay(300);
+  //   return mockAveragesForCategories(categories);
+  // }
   const url = Config.BackendGraphsURL + "/expenses/averages";
   const response = getWithJWTToken(url, jwtToken);
   return (await response).data;
