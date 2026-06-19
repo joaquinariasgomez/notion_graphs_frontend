@@ -2,7 +2,8 @@ import '../css/DashboardBudgets.css';
 import { useEffect, useState } from "react";
 import { useGlobalStateValue } from "../context/GlobalStateProvider";
 import { actionTypes, BOX_TYPES } from "../context/globalReducer";
-import { getBudgets, deleteBudget } from "../api/RequestUtils";
+import { getUpcomingBudgets, getClosedBudgets, deleteBudget } from "../api/RequestUtils";
+import BudgetDetails from "./BudgetDetails";
 import SyncLoader from "react-spinners/SyncLoader";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -11,22 +12,21 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import {
     MONTHS,
     formatEur,
-    buildCategoryColorMap,
     getBudgetStatus,
-    getDaysLeftInMonth,
-    getMonthElapsedFraction,
     getBudgetTotal,
     getBudgetSpent,
-    getSpendBarColor,
 } from "../utils/BudgetUtils";
 import { getRelativeTimeFromTimestamp } from "../utils/DateUtils";
 
 export default function DashboardBudgets() {
 
     // Context
-    const [{ userJWTCookie, budgets }, dispatch] = useGlobalStateValue();
+    const [{ userJWTCookie, upcomingBudgets = [], closedBudgets = [] }, dispatch] = useGlobalStateValue();
 
     const [budgetsLoading, setBudgetsLoading] = useState(true);
+    const [moreClosedLoading, setMoreClosedLoading] = useState(false);
+    const [hasNextPage, setHasNextPage] = useState(false);
+    const [nextClosedCursor, setNextClosedCursor] = useState(null);
     const [openMenuId, setOpenMenuId] = useState(null);
 
     useEffect(() => {
@@ -48,12 +48,23 @@ export default function DashboardBudgets() {
     const fetchBudgets = async () => {
         try {
             setBudgetsLoading(true);
-            const apiResponse = await getBudgets(userJWTCookie);
-            if (apiResponse) {
+            const [upcomingResponse, closedResponse] = await Promise.all([
+                getUpcomingBudgets(userJWTCookie),
+                getClosedBudgets(userJWTCookie, null),
+            ]);
+            if (upcomingResponse) {
                 dispatch({
-                    type: actionTypes.SET_BUDGETS,
-                    value: apiResponse.data
+                    type: actionTypes.SET_UPCOMING_BUDGETS,
+                    value: upcomingResponse
                 });
+            }
+            if (closedResponse) {
+                dispatch({
+                    type: actionTypes.SET_CLOSED_BUDGETS,
+                    value: closedResponse.data
+                });
+                setHasNextPage(closedResponse.hasNextPage);
+                setNextClosedCursor(closedResponse.nextCursor);
             }
         } catch (error) {
 
@@ -62,10 +73,40 @@ export default function DashboardBudgets() {
         }
     };
 
+    const loadMoreClosedBudgets = async () => {
+        try {
+            setMoreClosedLoading(true);
+            const closedResponse = await getClosedBudgets(userJWTCookie, nextClosedCursor);
+            if (closedResponse) {
+                // Deduplicate against already-loaded closed budgets in case new ones
+                // were created between the first fetch and this "load more" call.
+                const existingIds = new Set(closedBudgets.map((b) => b.id));
+                const uniqueNew = closedResponse.data.filter((b) => !existingIds.has(b.id));
+                dispatch({
+                    type: actionTypes.APPEND_CLOSED_BUDGETS,
+                    value: uniqueNew
+                });
+                setHasNextPage(closedResponse.hasNextPage);
+                setNextClosedCursor(closedResponse.nextCursor);
+            }
+        } catch (error) {
+
+        } finally {
+            setMoreClosedLoading(false);
+        }
+    };
+
     const openCreateBudgetBox = () => {
         dispatch({
             type: actionTypes.SET_ACTIVE_BOX,
             value: { type: BOX_TYPES.CREATE_BUDGET }
+        });
+    };
+
+    const openBudgetDetails = (budget) => {
+        dispatch({
+            type: actionTypes.SET_ACTIVE_BOX,
+            value: { type: BOX_TYPES.VIEW_BUDGET, data: { budget } }
         });
     };
 
@@ -92,7 +133,7 @@ export default function DashboardBudgets() {
     };
 
     const renderCardMenu = (budget) => (
-        <div className='budgets__menuwrapper'>
+        <div className='budgets__menuwrapper' onClick={(e) => e.stopPropagation()}>
             <button
                 className='budgets__menubutton'
                 title='Options'
@@ -117,31 +158,19 @@ export default function DashboardBudgets() {
 
     // The budget we actively track: the one for the current month, otherwise
     // the nearest upcoming budget.
-    const pickActiveBudget = (allBudgets) => {
-        const tracking = allBudgets.find((b) => getBudgetStatus(b) === 'tracking');
+    const pickActiveBudget = (allUpcoming) => {
+        const tracking = allUpcoming.find((b) => getBudgetStatus(b) === 'tracking');
         if (tracking) return tracking;
 
-        const upcoming = allBudgets
+        const upcoming = allUpcoming
             .filter((b) => getBudgetStatus(b) === 'upcoming')
             .sort((a, b) => (a.year - b.year) || (a.month - b.month));
         return upcoming[0] || null;
     };
 
-    const renderCategoryColorMap = (budget) => {
-        const categories = (budget.categoryAllocations || []).map((a) => a.category);
-        return buildCategoryColorMap(categories);
-    };
-
     const renderTrackingCard = (budget) => {
-        const colorMap = renderCategoryColorMap(budget);
-        const total = getBudgetTotal(budget);
-        const spent = getBudgetSpent(budget);
-        const remaining = total - spent;
         const status = getBudgetStatus(budget);
         const isTracking = status === 'tracking';
-        const daysLeft = getDaysLeftInMonth(budget);
-        const usedPct = total > 0 ? Math.round(spent / total * 100) : 0;
-        const elapsedPct = Math.round(getMonthElapsedFraction(budget) * 100);
         const lastExpenseLabel = getRelativeTimeFromTimestamp(budget.spentUpdatedAt);
 
         const spentByCategoryMap = {};
@@ -179,70 +208,7 @@ export default function DashboardBudgets() {
                     </div>
                 </div>
 
-                <div className='budgets__stats'>
-                    <div className='budgets__stat'>
-                        <div className='budgets__stat__label'>Spent so far</div>
-                        <div className='budgets__stat__value'>
-                            {formatEur(spent)} <span>of {formatEur(total)}</span>
-                        </div>
-                    </div>
-                    <div className='budgets__stat budgets__stat--bordered'>
-                        <div className='budgets__stat__label'>Remaining</div>
-                        <div className={`budgets__stat__value ${remaining >= 0 ? 'positive' : 'negative'}`}>
-                            {formatEur(remaining)}
-                        </div>
-                    </div>
-                    {isTracking && (
-                        <div className='budgets__stat budgets__stat--bordered'>
-                            <div className='budgets__stat__label'>Days left</div>
-                            <div className='budgets__stat__value'>{daysLeft}</div>
-                        </div>
-                    )}
-                </div>
-
-                <div className='budgets__overallbar__wrapper'>
-                    <div className='budgets__overallbar'>
-                        <div
-                            className='budgets__overallbar__fill'
-                            style={{ width: Math.min(100, usedPct) + '%' }}
-                        />
-                    </div>
-                    <div className='budgets__overallbar__legend'>
-                        <span>{usedPct}% of budget used</span>
-                        {isTracking && <span>{elapsedPct}% of month elapsed</span>}
-                    </div>
-                </div>
-
-                <div className='budgets__bycategory'>
-                    <div className='budgets__bycategory__title'>By category</div>
-                    <div className='budgets__bycategory__grid'>
-                        {(budget.categoryAllocations || []).map((allocation) => {
-                            const catSpent = spentByCategoryMap[allocation.category] || 0;
-                            const pct = allocation.amount > 0 ? catSpent / allocation.amount * 100 : 0;
-                            const categoryColor = colorMap[allocation.category];
-                            const barColor = getSpendBarColor(catSpent, allocation.amount, categoryColor);
-                            return (
-                                <div className='budgets__catrow' key={allocation.category}>
-                                    <div className='budgets__catrow__top'>
-                                        <span className='budgets__catrow__name'>
-                                            <span className='budgets__catrow__swatch' style={{ backgroundColor: categoryColor }} />
-                                            {allocation.category}
-                                        </span>
-                                        <span className='budgets__catrow__amount' style={{ color: barColor === categoryColor ? '#666' : barColor }}>
-                                            {formatEur(catSpent)} / {formatEur(allocation.amount)}
-                                        </span>
-                                    </div>
-                                    <div className='budgets__catrow__bar'>
-                                        <div
-                                            className='budgets__catrow__barfill'
-                                            style={{ width: Math.min(100, pct) + '%', backgroundColor: barColor }}
-                                        />
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
+                <BudgetDetails budget={budget} />
             </div>
         );
     };
@@ -269,7 +235,11 @@ export default function DashboardBudgets() {
         }
 
         return (
-            <div className='budgets__card' key={budget.id}>
+            <div
+                className='budgets__card budgets__card--clickable'
+                key={budget.id}
+                onClick={() => openBudgetDetails(budget)}
+            >
                 <div className='budgets__card__header'>
                     <span className={`budgets__badge ${badgeClass}`}>{badgeLabel}</span>
                     {renderCardMenu(budget)}
@@ -280,6 +250,25 @@ export default function DashboardBudgets() {
                 <div className={`budgets__card__meta ${metaClass}`}>{meta}</div>
             </div>
         );
+    };
+
+    const renderLoadMoreClosedButton = () => {
+        if (hasNextPage && !moreClosedLoading) {
+            return (
+                <div className='budgets__loadmore'>
+                    <button onClick={loadMoreClosedBudgets}>
+                        <p>Load more</p>
+                    </button>
+                </div>
+            );
+        }
+        if (moreClosedLoading) {
+            return (
+                <div className='budgets__loadmore'>
+                    <SyncLoader size={8} color='#909090' />
+                </div>
+            );
+        }
     };
 
     const renderHeader = () => (
@@ -306,7 +295,7 @@ export default function DashboardBudgets() {
         );
     }
 
-    if (budgets.length === 0) {
+    if (upcomingBudgets.length === 0 && closedBudgets.length === 0) {
         return (
             <div className='dashboard__budgets'>
                 {renderHeader()}
@@ -318,23 +307,35 @@ export default function DashboardBudgets() {
         );
     }
 
-    const activeBudget = pickActiveBudget(budgets);
-    const otherBudgets = budgets.filter((b) => b !== activeBudget);
+    const activeBudget = pickActiveBudget(upcomingBudgets);
+    const otherUpcoming = upcomingBudgets.filter((b) => b !== activeBudget);
 
     return (
         <div className='dashboard__budgets'>
             {renderHeader()}
             {activeBudget && renderTrackingCard(activeBudget)}
 
-            {otherBudgets.length > 0 && (
+            {otherUpcoming.length > 0 && (
                 <>
                     <div className='budgets__sectionheader'>
-                        <h3>Other budgets</h3>
-                        <span>{otherBudgets.length} {otherBudgets.length === 1 ? 'budget' : 'budgets'}</span>
+                        <h3>Upcoming budgets</h3>
+                        <span>{otherUpcoming.length} {otherUpcoming.length === 1 ? 'budget' : 'budgets'}</span>
+                    </div>
+                    <div className='budgets__grid budgets__grid--capped'>
+                        {otherUpcoming.map((budget) => renderBudgetCard(budget))}
+                    </div>
+                </>
+            )}
+
+            {closedBudgets.length > 0 && (
+                <>
+                    <div className='budgets__sectionheader budgets__sectionheader--spaced'>
+                        <h3>Closed budgets</h3>
                     </div>
                     <div className='budgets__grid'>
-                        {otherBudgets.map((budget) => renderBudgetCard(budget))}
+                        {closedBudgets.map((budget) => renderBudgetCard(budget))}
                     </div>
+                    {renderLoadMoreClosedButton()}
                 </>
             )}
         </div>

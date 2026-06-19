@@ -25,7 +25,8 @@ export const initialState = {
   billingPlan: null,
   graphs: [],
   editingGraphConfiguration: {}, // Data for when customer edits a graph's configuration
-  budgets: []
+  upcomingBudgets: [],
+  closedBudgets: []
 }
 
 export const actionTypes = {
@@ -42,7 +43,9 @@ export const actionTypes = {
   UPDATE_GRAPH: "UPDATE_GRAPH",
   DELETE_GRAPH: "DELETE_GRAPH",
   SET_EDITING_GRAPH_CONFIGURATION: "SET_EDITING_GRAPH_CONFIGURATION",
-  SET_BUDGETS: "SET_BUDGETS",
+  SET_UPCOMING_BUDGETS: "SET_UPCOMING_BUDGETS",
+  SET_CLOSED_BUDGETS: "SET_CLOSED_BUDGETS",
+  APPEND_CLOSED_BUDGETS: "APPEND_CLOSED_BUDGETS",
   APPEND_BUDGET: "APPEND_BUDGET",
   UPDATE_BUDGET: "UPDATE_BUDGET",
   DELETE_BUDGET: "DELETE_BUDGET"
@@ -56,10 +59,18 @@ export const BOX_TYPES = {
   UPDATE_BURNDOWN: "UPDATE_BURNDOWN",
   REGISTER_VALUE: "REGISTER_VALUE",
   CREATE_BUDGET: "CREATE_BUDGET",
+  VIEW_BUDGET: "VIEW_BUDGET",
   UPDATE_BUDGET: "UPDATE_BUDGET",
   BILLING_LIMIT_ERROR: "BILLING_LIMIT_ERROR",
   UNKNOWN_ERROR: "UNKNOWN_ERROR",
   CLIENT_ERROR: "CLIENT_ERROR"
+}
+
+function budgetIsClosed(budget) {
+  const now = new Date();
+  const currentYear = now.getFullYear();
+  const currentMonth = now.getMonth() + 1;
+  return !(budget.year > currentYear || (budget.year === currentYear && budget.month >= currentMonth));
 }
 
 const globalReducer = (state, action) => {
@@ -155,41 +166,52 @@ const globalReducer = (state, action) => {
         editingGraphConfiguration: action.value
       };
 
-    case actionTypes.SET_BUDGETS:
+    case actionTypes.SET_UPCOMING_BUDGETS:
       return {
         ...state,
-        budgets: action.value
+        upcomingBudgets: action.value ?? []
       };
 
-    case actionTypes.APPEND_BUDGET:
+    case actionTypes.SET_CLOSED_BUDGETS:
       return {
         ...state,
-        budgets: [action.value, ...state.budgets]
+        closedBudgets: action.value ?? []
       };
+
+    case actionTypes.APPEND_CLOSED_BUDGETS:
+      return {
+        ...state,
+        closedBudgets: [...state.closedBudgets, ...action.value]
+      };
+
+    case actionTypes.APPEND_BUDGET: {
+      // Route the newly created budget into the correct list based on its date.
+      const isClosed = budgetIsClosed(action.value);
+      return isClosed
+        ? { ...state, closedBudgets: [action.value, ...state.closedBudgets] }
+        : { ...state, upcomingBudgets: [action.value, ...state.upcomingBudgets] };
+    }
 
     case actionTypes.UPDATE_BUDGET: {
-      // Updates the budget with id "id" by "data"
+      // Remove from both lists, then re-insert into the correct one.
+      // This handles the case where an edit changes the month and moves the
+      // budget between the upcoming and closed sections.
       const { id: budgetId, data: budgetData } = action.payload;
-      const updatedBudgets = state.budgets.map((budget) => {
-        if (budget.id === budgetId) {
-          return budgetData;
-        }
-        return budget;
-      });
+      const filteredUpcoming = state.upcomingBudgets.filter((b) => b.id !== budgetId);
+      const filteredClosed = state.closedBudgets.filter((b) => b.id !== budgetId);
+      const isClosed = budgetIsClosed(budgetData);
 
-      return {
-        ...state,
-        budgets: updatedBudgets
-      };
+      return isClosed
+        ? { ...state, upcomingBudgets: filteredUpcoming, closedBudgets: [budgetData, ...filteredClosed] }
+        : { ...state, upcomingBudgets: [budgetData, ...filteredUpcoming], closedBudgets: filteredClosed };
     }
 
     case actionTypes.DELETE_BUDGET: {
       const budgetIdToDelete = action.value;
-      const filteredBudgets = state.budgets.filter((budget) => budget.id !== budgetIdToDelete);
-
       return {
         ...state,
-        budgets: filteredBudgets
+        upcomingBudgets: state.upcomingBudgets.filter((b) => b.id !== budgetIdToDelete),
+        closedBudgets: state.closedBudgets.filter((b) => b.id !== budgetIdToDelete),
       };
     }
 

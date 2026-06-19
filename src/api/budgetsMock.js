@@ -72,6 +72,8 @@ function buildSpentUpdatedAt(budgetId, month, year, includeExisting) {
 
 // ----- public mock API -----
 
+const CLOSED_PAGE_SIZE = 6;
+
 // Derive averages for the user's real categories so the create modal feels
 // real even before the analytics endpoint exists.
 export function mockAveragesForCategories(categories) {
@@ -81,8 +83,31 @@ export function mockAveragesForCategories(categories) {
   });
 }
 
-export function mockGetBudgets() {
-  return { data: readBudgets() };
+// Non-paginated: current-month (tracking) + all upcoming budgets.
+export function mockGetUpcomingBudgets() {
+  const all = readBudgets();
+  const data = all.filter((b) => statusOf(b.month, b.year) !== 'closed');
+  return { data };
+}
+
+// Cursor-paginated: past budgets sorted newest-first.
+// cursor is an integer offset (null → 0).
+export function mockGetClosedBudgets(cursor) {
+  const all = readBudgets();
+  const closed = all
+    .filter((b) => statusOf(b.month, b.year) === 'closed')
+    .sort((a, b) => (b.year - a.year) || (b.month - a.month));
+
+  const offset = cursor ? parseInt(cursor, 10) : 0;
+  const page = closed.slice(offset, offset + CLOSED_PAGE_SIZE);
+  const nextOffset = offset + CLOSED_PAGE_SIZE;
+  const hasNextPage = nextOffset < closed.length;
+
+  return {
+    data: page,
+    hasNextPage,
+    nextCursor: hasNextPage ? String(nextOffset) : null,
+  };
 }
 
 export function mockCreateBudget(input) {

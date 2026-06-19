@@ -1,12 +1,6 @@
 import Config from "../Config";
 import apiClient from "./apiClient";
-import {
-  mockAveragesForCategories,
-  mockGetBudgets,
-  mockCreateBudget,
-  mockUpdateBudget,
-  mockDeleteBudget,
-} from "./budgetsMock";
+import { mockGetUpcomingBudgets, mockGetClosedBudgets } from "./budgetsMock";
 
 export function delay(time) {
   return new Promise(resolve => setTimeout(resolve, time));
@@ -219,52 +213,44 @@ export async function triggerExperimentJob(jwtToken) {
 }
 
 export async function getCategoryAverages(jwtToken) {
-  // if (Config.UseBudgetsMock) {
-  //   const categories = await getExpensesCategories(jwtToken);
-  //   await delay(300);
-  //   return mockAveragesForCategories(categories);
-  // }
   const url = Config.BackendGraphsURL + "/expenses/averages";
   const response = getWithJWTToken(url, jwtToken);
   return (await response).data;
 }
 
-export async function getBudgets(jwtToken) {
-  if (Config.UseBudgetsMock) {
-    await delay(300);
-    return mockGetBudgets();
-  }
-  const url = Config.BackendBudgetsURL;
+export async function getUpcomingBudgets(jwtToken) {
+  // if (Config.UseBudgetsMock) {
+  //   await delay(300);
+  //   return mockGetUpcomingBudgets();
+  // }
+  const url = Config.BackendBudgetsURL + "/upcoming";
+  const response = getWithJWTToken(url, jwtToken);
+  return (await response).data;
+}
+
+export async function getClosedBudgets(jwtToken, cursor) {
+  // if (Config.UseBudgetsMock) {
+  //   await delay(300);
+  //   return mockGetClosedBudgets(cursor);
+  // }
+  const url = Config.BackendBudgetsURL + "/closed" + buildQueryString({ cursor });
   const response = getWithJWTToken(url, jwtToken);
   return (await response).data;
 }
 
 export async function createBudget(jwtToken, budget) {
-  // if (Config.UseBudgetsMock) {
-  //   await delay(300);
-  //   return mockCreateBudget(budget);
-  // }
   const url = Config.BackendBudgetsURL;
   const response = postWithJWTToken(url, budget, jwtToken);
   return (await response).data;
 }
 
 export async function updateBudget(jwtToken, budgetId, budget) {
-  // if (Config.UseBudgetsMock) {
-  //   await delay(300);
-  //   return mockUpdateBudget(budgetId, budget);
-  // }
   const url = Config.BackendBudgetsURL + "/" + budgetId;
   const response = putWithJWTToken(url, budget, jwtToken);
   return (await response).data;
 }
 
 export async function deleteBudget(jwtToken, budgetId) {
-  if (Config.UseBudgetsMock) {
-    await delay(300);
-    mockDeleteBudget(budgetId);
-    return;
-  }
   const url = Config.BackendBudgetsURL + "/" + budgetId;
   await deleteWithJWTToken(url, jwtToken);
 }

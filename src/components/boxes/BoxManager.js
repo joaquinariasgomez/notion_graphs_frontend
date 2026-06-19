@@ -12,6 +12,7 @@ import { actionTypes, BOX_TYPES } from "../../context/globalReducer";
 import RegisterValueBox from "./RegisterValueBox";
 import CreateBudgetBox from "./CreateBudgetBox";
 import UpdateBudgetBox from "./UpdateBudgetBox";
+import ViewBudgetBox from "./ViewBudgetBox";
 
 export default function BoxManager() {
 
@@ -138,6 +139,11 @@ export default function BoxManager() {
       case BOX_TYPES.CREATE_BUDGET:
         return (
           <CreateBudgetBox />
+        );
+
+      case BOX_TYPES.VIEW_BUDGET:
+        return (
+          <ViewBudgetBox budget={activeBox.data?.budget} />
         );
 
       case BOX_TYPES.UPDATE_BUDGET:
