@@ -793,6 +793,13 @@
     grid-template-columns: 1fr;
   }
 
+  /* When the header wraps on mobile the three-dot button ends up on the left.
+     Open the dropdown to the right so it stays on-screen. */
+  .budgets__trackingcard__header .budgets__menu {
+    right: auto;
+    left: 0;
+  }
+
   .budgets__bycategory__grid {
     grid-template-columns: 1fr;
   }
