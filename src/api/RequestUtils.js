@@ -1,6 +1,5 @@
 import Config from "../Config";
 import apiClient from "./apiClient";
-import { mockGetUpcomingBudgets, mockGetClosedBudgets } from "./budgetsMock";
 
 export function delay(time) {
   return new Promise(resolve => setTimeout(resolve, time));
@@ -219,20 +218,12 @@ export async function getCategoryAverages(jwtToken) {
 }
 
 export async function getUpcomingBudgets(jwtToken) {
-  // if (Config.UseBudgetsMock) {
-  //   await delay(300);
-  //   return mockGetUpcomingBudgets();
-  // }
   const url = Config.BackendBudgetsURL + "/upcoming";
   const response = getWithJWTToken(url, jwtToken);
   return (await response).data;
 }
 
 export async function getClosedBudgets(jwtToken, cursor) {
-  // if (Config.UseBudgetsMock) {
-  //   await delay(300);
-  //   return mockGetClosedBudgets(cursor);
-  // }
   const url = Config.BackendBudgetsURL + "/closed" + buildQueryString({ cursor });
   const response = getWithJWTToken(url, jwtToken);
   return (await response).data;

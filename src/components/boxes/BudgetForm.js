@@ -140,6 +140,20 @@ export default function BudgetForm({ mode, initialBudget, onSubmit }) {
         setValues((prev) => ({ ...prev, [category]: Number(value) }));
     };
 
+    const handleValueInputChange = (category, raw) => {
+        const digits = raw.replace(/[^0-9]/g, '');
+        setValues((prev) => ({ ...prev, [category]: digits === '' ? 0 : parseInt(digits, 10) }));
+    };
+
+    const handleValueInputBlur = (category) => {
+        // Only floor at 0 — the user is allowed to enter values above the
+        // slider's derived max (the track will expand to fit).
+        setValues((prev) => ({
+            ...prev,
+            [category]: Math.max(0, prev[category] || 0),
+        }));
+    };
+
     const handleToggleCategory = (category) => {
         setIncluded((prev) => ({ ...prev, [category]: !isIncluded(category) }));
     };
@@ -150,6 +164,15 @@ export default function BudgetForm({ mode, initialBudget, onSubmit }) {
             resetValues[category] = Math.round(averages[category] || 0);
         });
         setValues(resetValues);
+    };
+
+    const allSelected = categories.length > 0 && categories.every((c) => isIncluded(c));
+
+    const handleSelectDeselectAll = () => {
+        const next = !allSelected;
+        const updated = {};
+        categories.forEach((c) => { updated[c] = next; });
+        setIncluded(updated);
     };
 
     const allocated = categories.reduce(
@@ -224,8 +247,11 @@ export default function BudgetForm({ mode, initialBudget, onSubmit }) {
         const value = values[category] || 0;
         const average = averages[category] || 0;
         const { max, step } = deriveSliderBounds(average);
-        const valuePct = max > 0 ? Math.max(0, Math.min(100, value / max * 100)) : 0;
-        const avgPct = max > 0 ? Math.min(100, average / max * 100) : 0;
+        // When the user types a value beyond the derived max, expand the track
+        // so the thumb stays meaningful and draggable.
+        const effectiveMax = Math.max(max, value);
+        const valuePct = effectiveMax > 0 ? Math.max(0, Math.min(100, value / effectiveMax * 100)) : 0;
+        const avgPct = effectiveMax > 0 ? Math.min(100, average / effectiveMax * 100) : 0;
         const color = colorMap[category];
         const fillColor = categoryIncluded ? color : '#D3D3D3';
         const delta = computeAverageDelta(value, average);
@@ -256,7 +282,7 @@ export default function BudgetForm({ mode, initialBudget, onSubmit }) {
                     <input
                         type='range'
                         min={0}
-                        max={max}
+                        max={effectiveMax}
                         step={step}
                         value={value}
                         disabled={!categoryIncluded}
@@ -272,7 +298,18 @@ export default function BudgetForm({ mode, initialBudget, onSubmit }) {
                 <div className='createbudgetbox__catright'>
                     {categoryIncluded ? (
                         <>
-                            <span className='createbudgetbox__catvalue'>{formatEur(value)}</span>
+                            <div className='createbudgetbox__catvaluewrapper'>
+                                <span className='createbudgetbox__catvalue__prefix'>€</span>
+                                <input
+                                    type='text'
+                                    inputMode='numeric'
+                                    className='createbudgetbox__catvalueinput'
+                                    value={value}
+                                    onFocus={(e) => e.target.select()}
+                                    onChange={(e) => handleValueInputChange(category, e.target.value)}
+                                    onBlur={() => handleValueInputBlur(category)}
+                                />
+                            </div>
                             <span className={`createbudgetbox__deltachip ${delta.intent}`}>{delta.label}</span>
                         </>
                     ) : (
@@ -399,10 +436,15 @@ export default function BudgetForm({ mode, initialBudget, onSubmit }) {
                                     <div className='createbudgetbox__catheader__title'>Categories</div>
                                     <div className='createbudgetbox__catheader__subtitle'>Prefilled with your average over the last 6 months.</div>
                                 </div>
-                                <button className='createbudgetbox__linkbutton' onClick={resetToAverages}>
-                                    <RefreshRoundedIcon style={{ fontSize: 15 }} />
-                                    Reset to average
-                                </button>
+                                <div className='createbudgetbox__catheader__actions'>
+                                    <button className='createbudgetbox__linkbutton' onClick={handleSelectDeselectAll}>
+                                        {allSelected ? 'Deselect all' : 'Select all'}
+                                    </button>
+                                    <button className='createbudgetbox__linkbutton' onClick={resetToAverages}>
+                                        <RefreshRoundedIcon style={{ fontSize: 15 }} />
+                                        Reset to average
+                                    </button>
+                                </div>
                             </div>
 
                             {/* Category rows */}

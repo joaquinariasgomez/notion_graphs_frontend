@@ -347,7 +347,7 @@
 
 .createbudgetbox__catrow {
   display: grid;
-  grid-template-columns: 22px 142px 1fr 96px;
+  grid-template-columns: 22px 142px 1fr 88px;
   align-items: center;
   gap: 14px;
   padding: 13px 0;
@@ -424,6 +424,8 @@
 .createbudgetbox__slider {
   -webkit-appearance: none;
   appearance: none;
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 6px;
   border-radius: 9999px;
@@ -443,15 +445,14 @@
   height: 18px;
   border-radius: 50%;
   background: white;
-  border: 1px solid #B7B7B7;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  border: none;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.14), 0 2px 6px rgba(0, 0, 0, 0.18);
   cursor: grab;
 }
 
 .createbudgetbox__slider::-webkit-slider-thumb:active {
   cursor: grabbing;
-  border-color: #0072F0;
-  box-shadow: 0 0 0 4px #D8E8FE;
+  box-shadow: 0 0 0 4px #D8E8FE, 0 1px 4px rgba(0, 0, 0, 0.18);
 }
 
 .createbudgetbox__slider::-moz-range-thumb {
@@ -459,19 +460,22 @@
   height: 18px;
   border-radius: 50%;
   background: white;
-  border: 1px solid #B7B7B7;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  border: none;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.14), 0 2px 6px rgba(0, 0, 0, 0.18);
   cursor: grab;
 }
 
 .createbudgetbox__avgmarker {
   position: absolute;
-  top: 2px;
+  /* Centre the tick on the 6px track. The slidercontainer has 8px vertical
+     padding so the track midpoint is at 8px + 3px = 11px from the top. */
+  top: 50%;
+  transform: translate(-1px, -50%);
+  z-index: 0;
   width: 2px;
-  height: 18px;
+  height: 10px;
   background-color: var(--matteblack-color);
-  opacity: 0.45;
-  transform: translateX(-1px);
+  opacity: 0.35;
   border-radius: 2px;
   pointer-events: none;
 }
@@ -481,12 +485,50 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 4px;
+  min-width: 0;
 }
 
-.createbudgetbox__catvalue {
-  font-size: 15px;
+.createbudgetbox__catvaluewrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 28px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 0 4px;
+  box-sizing: border-box;
+  background-color: white;
+  transition: border-color 0.15s ease;
+}
+
+.createbudgetbox__catvaluewrapper:focus-within {
+  border-color: var(--matteblack-color);
+}
+
+.createbudgetbox__catvalue__prefix {
+  font-size: 12px;
+  color: #949494;
+  flex: none;
+  margin-right: 2px;
+}
+
+.createbudgetbox__catvalueinput {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  font-size: 14px;
   font-weight: 600;
+  font-family: "Inter", sans-serif;
   font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--matteblack-color);
+  background-color: transparent;
+}
+
+.createbudgetbox__catvalueinput:disabled {
+  color: #b0b0b0;
+  cursor: not-allowed;
 }
 
 .createbudgetbox__deltachip {
@@ -599,14 +641,40 @@
   cursor: not-allowed;
 }
 
+/* Allow the text side of the toggle row to shrink so the toggle is never squeezed. */
+.createbudgetbox__includeexisting__text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Keep the toggle a fixed size so it never collapses. */
+.createbudgetbox__includeexisting .toggle-switch {
+  flex: none;
+}
+
+/* Category header action buttons row */
+.createbudgetbox__catheader__actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
 /* ===== Responsive ===== */
 @media only screen and (max-width: 600px) {
+  .createbudgetbox__container {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 0;
+  }
+
   .createbudgetbox__toprow {
     grid-template-columns: 1fr;
   }
 
   .createbudgetbox__catrow {
-    grid-template-columns: 20px 1fr 84px;
+    grid-template-columns: 20px 1fr 96px;
     grid-template-areas:
       "check info right"
       "slider slider slider";
