@@ -53,6 +53,12 @@ function BillingLimitErrorBox({ onClose, limitType }) {
                     description: 'In order to continue registering your finances, you must upgrade your subscription to Notion Wallet Plus.',
                     icon: '📝'
                 };
+            case 'BUDGETS_NOT_SUPPORTED_FOR_FREE_PLAN':
+                return {
+                    title: 'Budgets not available on free plan',
+                    description: 'In order to create and manage budgets, you must upgrade your subscription to Notion Wallet Plus.',
+                    icon: '💰'
+                };
             default:
                 return {
                     title: 'Billing limit reached',
@@ -81,6 +87,7 @@ function BillingLimitErrorBox({ onClose, limitType }) {
                     </p>
                     <ul className="billinglimiterrorbox__benefits">
                         <li>📊 Unlimited chart creations and updates</li>
+                        <li>💰 Budget tracking and management</li>
                         <li>🔥 Burndown charts</li>
                         <li>✉️ Priority email support</li>
                     </ul>
