@@ -16,6 +16,8 @@ import {
     getBudgetStatus,
     getBudgetTotal,
     getBudgetSpent,
+    getBudgetCardStatus,
+    getDaysLeftInMonth,
 } from "../utils/BudgetUtils";
 import { getRelativeTimeFromTimestamp } from "../utils/DateUtils";
 
@@ -28,7 +30,9 @@ export default function DashboardBudgets() {
     const [moreClosedLoading, setMoreClosedLoading] = useState(false);
     const [hasNextPage, setHasNextPage] = useState(false);
     const [nextClosedCursor, setNextClosedCursor] = useState(null);
+    const [trackingSelectedId, setTrackingSelectedId] = useState(null);
     const [openMenuId, setOpenMenuId] = useState(null);
+    const [menuPosition, setMenuPosition] = useState(null);
     const [closedExpanded, setClosedExpanded] = useState(false);
     const [closedTotalCount, setClosedTotalCount] = useState(0);
 
@@ -36,16 +40,29 @@ export default function DashboardBudgets() {
         fetchBudgets();
     }, []);
 
-    // Close the open options menu when clicking anywhere outside of it.
+    // Keep closedTotalCount in sync when a budget is added locally (e.g. after
+    // creation via APPEND_BUDGET). The server-fetched total is set once on load;
+    // this catches any locally-appended items that grow closedBudgets beyond it.
+    useEffect(() => {
+        if (closedBudgets.length > closedTotalCount) {
+            setClosedTotalCount(closedBudgets.length);
+        }
+    }, [closedBudgets.length, closedTotalCount]);
+
+    // Close the open options menu when clicking anywhere outside of it, or on scroll.
     useEffect(() => {
         if (openMenuId == null) return;
-        const handleOutsideClick = (event) => {
-            if (!event.target.closest('.budgets__menuwrapper')) {
-                setOpenMenuId(null);
-            }
+        const closeMenu = (event) => {
+            if (event.type === 'mousedown' && event.target.closest('.budgets__menuwrapper')) return;
+            setOpenMenuId(null);
+            setMenuPosition(null);
         };
-        document.addEventListener('mousedown', handleOutsideClick);
-        return () => document.removeEventListener('mousedown', handleOutsideClick);
+        document.addEventListener('mousedown', closeMenu);
+        document.addEventListener('scroll', closeMenu, true);
+        return () => {
+            document.removeEventListener('mousedown', closeMenu);
+            document.removeEventListener('scroll', closeMenu, true);
+        };
     }, [openMenuId]);
 
     const fetchBudgets = async () => {
@@ -139,17 +156,32 @@ export default function DashboardBudgets() {
         }
     };
 
+    const handleMenuButtonClick = (budget, e) => {
+        e.stopPropagation();
+        if (openMenuId === budget.id) {
+            setOpenMenuId(null);
+            setMenuPosition(null);
+        } else {
+            const rect = e.currentTarget.getBoundingClientRect();
+            setMenuPosition({ top: rect.bottom + 6, right: window.innerWidth - rect.right });
+            setOpenMenuId(budget.id);
+        }
+    };
+
     const renderCardMenu = (budget) => (
         <div className='budgets__menuwrapper' onClick={(e) => e.stopPropagation()}>
             <button
                 className='budgets__menubutton'
                 title='Options'
-                onClick={() => setOpenMenuId(openMenuId === budget.id ? null : budget.id)}
+                onClick={(e) => handleMenuButtonClick(budget, e)}
             >
                 <MoreHorizIcon style={{ color: '#6d6d6d' }} fontSize='small' />
             </button>
-            {openMenuId === budget.id && (
-                <div className='budgets__menu'>
+            {openMenuId === budget.id && menuPosition && (
+                <div
+                    className='budgets__menu'
+                    style={{ position: 'fixed', top: menuPosition.top, right: menuPosition.right, left: 'auto', bottom: 'auto' }}
+                >
                     <button className='budgets__menuitem' onClick={() => handleEditBudget(budget)}>
                         <EditOutlinedIcon style={{ fontSize: 18 }} />
                         Edit budget
@@ -175,27 +207,100 @@ export default function DashboardBudgets() {
         return upcoming[0] || null;
     };
 
-    const renderTrackingCard = (budget) => {
-        const status = getBudgetStatus(budget);
-        const isTracking = status === 'tracking';
+    // Dot color tokens keyed by chip variant — used in the compact overview cards.
+    const DOT_COLORS = {
+        'on-track': { bg: '#15865B', ring: '#EDF8F2' },
+        'warning':  { bg: '#C48900', ring: '#FEF5D3' },
+        'over':     { bg: '#C32D38', ring: '#FEF3F2' },
+        'upcoming': { bg: '#0072F0', ring: '#F4F5FD' },
+    };
+
+    // One compact card per budget in the overview row.
+    const renderOverviewCard = (budget, isSelected, isFallback) => {
+        const total = getBudgetTotal(budget);
+        const spent = getBudgetSpent(budget);
+        const pct = total > 0 ? Math.round(spent / total * 100) : 0;
+        const daysLeft = getDaysLeftInMonth(budget);
+        const barFillColor = spent > total ? '#C32D38' : 'var(--matteblack-color)';
+
+        const { label: chipLabel, variant: chipVariant } = isFallback
+            ? { label: 'Upcoming', variant: 'upcoming' }
+            : getBudgetCardStatus(budget);
+        const dot = DOT_COLORS[chipVariant] || DOT_COLORS['on-track'];
+
+        return (
+            <div
+                key={budget.id}
+                className={`budgets__overviewcard${isSelected ? ' budgets__overviewcard--selected' : ''}`}
+                onClick={() => setTrackingSelectedId(budget.id)}
+            >
+                <div className='budgets__overviewcard__head'>
+                    <div className='budgets__overviewcard__namegroup'>
+                        <span
+                            className='budgets__overviewcard__dot'
+                            style={{ backgroundColor: dot.bg, boxShadow: `0 0 0 3px ${dot.ring}` }}
+                        />
+                        <div>
+                            <div className='budgets__overviewcard__name'>{budget.name}</div>
+                            <div className='budgets__overviewcard__period'>
+                                {MONTHS[budget.month - 1]} {budget.year}
+                            </div>
+                        </div>
+                    </div>
+                    <span className={`budgets__statuschip ${chipVariant}`}>{chipLabel}</span>
+                </div>
+                <div className='budgets__overviewcard__bar'>
+                    <div
+                        className='budgets__overviewcard__barfill'
+                        style={{ width: Math.min(100, pct) + '%', backgroundColor: barFillColor }}
+                    />
+                </div>
+                <div className='budgets__overviewcard__foot'>
+                    <span>{pct}% used</span>
+                    <span>{daysLeft} {daysLeft === 1 ? 'day' : 'days'} left</span>
+                </div>
+            </div>
+        );
+    };
+
+    // Section header + the row of compact overview cards.
+    const renderTrackingSection = (budgets, selectedId, isFallback) => {
+        const n = budgets.length;
+        const countLabel = isFallback
+            ? 'Closest budget'
+            : `${n} ${n === 1 ? 'budget active' : 'budgets active'}`;
+
+        return (
+            <div className='budgets__trackingsection'>
+                <div className='budgets__trackingsection__head'>
+                    <h3>Tracking now</h3>
+                    <span className='budgets__trackingsection__count'>{countLabel}</span>
+                </div>
+                <div className='budgets__overviewrow'>
+                    {budgets.map((b) => renderOverviewCard(b, b.id === selectedId, isFallback))}
+                </div>
+            </div>
+        );
+    };
+
+    // Expanded detail panel for the selected budget.
+    // showEyebrow is true when there is no overview row above to provide context.
+    const renderDetailPanel = (budget, isFallback, showEyebrow) => {
         const lastExpenseLabel = getRelativeTimeFromTimestamp(budget.spentUpdatedAt);
-
-        const spentByCategoryMap = {};
-        (budget.spentByCategory || []).forEach((s) => { spentByCategoryMap[s.category] = s.spent; });
-
-        const overCount = (budget.categoryAllocations || []).filter((a) => {
-            const catSpent = spentByCategoryMap[a.category] || 0;
-            return catSpent > a.amount;
-        }).length;
+        const { label: chipLabel, variant: chipVariant } = isFallback
+            ? { label: 'Upcoming', variant: 'upcoming' }
+            : getBudgetCardStatus(budget);
 
         return (
             <div className='budgets__trackingcard'>
                 <div className='budgets__trackingcard__header'>
                     <div>
-                        <div className='budgets__trackingcard__eyebrow'>
-                            <span className='budgets__dot' />
-                            {isTracking ? 'Tracking now · closest budget' : 'Closest budget'}
-                        </div>
+                        {showEyebrow && (
+                            <div className='budgets__trackingcard__eyebrow'>
+                                <span className='budgets__dot' />
+                                {isFallback ? 'Closest budget' : 'Tracking now'}
+                            </div>
+                        )}
                         <div className='budgets__trackingcard__title'>
                             <h2>{budget.name}</h2>
                             <span>{MONTHS[budget.month - 1]} {budget.year}</span>
@@ -205,16 +310,10 @@ export default function DashboardBudgets() {
                         )}
                     </div>
                     <div className='budgets__trackingcard__headerright'>
-                        {overCount > 0 && (
-                            <span className='budgets__overbadge'>
-                                <span className='budgets__overbadge__dot' />
-                                {overCount} {overCount === 1 ? 'category' : 'categories'} over budget
-                            </span>
-                        )}
+                        <span className={`budgets__statuschip ${chipVariant}`}>{chipLabel}</span>
                         {renderCardMenu(budget)}
                     </div>
                 </div>
-
                 <BudgetDetails budget={budget} />
             </div>
         );
@@ -440,16 +539,33 @@ export default function DashboardBudgets() {
         );
     }
 
-    const activeBudget = pickActiveBudget(upcomingBudgets);
-    const otherUpcoming = upcomingBudgets.filter((b) => b !== activeBudget);
+    // Budgets active in the current month go into the overview row.
+    // When none are tracking, fall back to the nearest upcoming one so the
+    // section still renders (preserving today's behaviour).
+    const trackingBudgets = upcomingBudgets.filter((b) => getBudgetStatus(b) === 'tracking');
+    const isFallback = trackingBudgets.length === 0;
+    const fallbackBudget = isFallback ? pickActiveBudget(upcomingBudgets) : null;
+    const overviewBudgets = isFallback
+        ? (fallbackBudget ? [fallbackBudget] : [])
+        : trackingBudgets;
+
+    // The selected card; self-heals to the first card when the stored id is stale.
+    const selected = overviewBudgets.find((b) => b.id === trackingSelectedId) || overviewBudgets[0] || null;
+
+    // Only show the overview row when there are 2+ tracking budgets to switch between.
+    const showOverviewRow = trackingBudgets.length >= 2;
+
+    // Anything not promoted into the overview row goes to the Upcoming column.
+    const otherUpcoming = upcomingBudgets.filter((b) => !overviewBudgets.includes(b));
     const hasOtherUpcoming = otherUpcoming.length > 0;
-    const hasClosed = closedTotalCount > 0;
+    const hasClosed = closedBudgets.length > 0 || closedTotalCount > 0;
     const showOtherSection = hasOtherUpcoming || hasClosed;
 
     return (
         <div className='dashboard__budgets'>
             {renderHeader()}
-            {activeBudget && renderTrackingCard(activeBudget)}
+            {showOverviewRow && renderTrackingSection(overviewBudgets, selected?.id, false)}
+            {selected && renderDetailPanel(selected, isFallback, !showOverviewRow)}
 
             {showOtherSection && (
                 <div className={`budgets__otherlayout${(!hasOtherUpcoming || !hasClosed) ? ' budgets__otherlayout--single' : ''}`}>

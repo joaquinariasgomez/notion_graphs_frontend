@@ -199,7 +199,7 @@
   border-radius: 10px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   padding: 6px;
-  z-index: 10;
+  z-index: 1000;
 }
 
 .budgets__menuitem {
@@ -795,20 +795,166 @@
   color: #949494;
 }
 
+/* ===== Tracking section — overview row + detail panel ===== */
+.budgets__trackingsection {
+  margin-bottom: 0;
+}
+
+.budgets__trackingsection__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.budgets__trackingsection__head h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.budgets__trackingsection__count {
+  font-size: 13px;
+  color: rgb(105, 105, 105);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Overview row ── */
+.budgets__overviewrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* ── Compact overview card ── */
+.budgets__overviewcard {
+  flex: 1 1 260px;
+  min-width: 240px;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px 18px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.12s ease, background-color 0.12s ease;
+}
+
+.budgets__overviewcard:hover {
+  border-color: #b7b7b7;
+}
+
+.budgets__overviewcard--selected {
+  background-color: #F4F5FD;
+  border-color: #0072F0;
+}
+
+.budgets__overviewcard--selected:hover {
+  border-color: #0072F0;
+}
+
+.budgets__overviewcard__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.budgets__overviewcard__namegroup {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+.budgets__overviewcard__dot {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+}
+
+.budgets__overviewcard__name {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.budgets__overviewcard__period {
+  font-size: 12px;
+  color: rgb(105, 105, 105);
+  margin-top: 1px;
+}
+
+.budgets__overviewcard__bar {
+  height: 6px;
+  background-color: #f2f2f2;
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 14px;
+}
+
+.budgets__overviewcard__barfill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.budgets__overviewcard__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #949494;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Status chip (replaces the old overbadge in the detail header) ── */
+.budgets__statuschip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex: none;
+}
+
+.budgets__statuschip.on-track {
+  background-color: #EDF8F2;
+  color: #15865B;
+}
+
+.budgets__statuschip.warning {
+  background-color: #FEF5D3;
+  color: #925B20;
+}
+
+.budgets__statuschip.over {
+  background-color: #FEF3F2;
+  color: #C32D38;
+}
+
+.budgets__statuschip.upcoming {
+  background-color: #F4F5FD;
+  color: #1264D0;
+}
+
 /* ===== Responsive ===== */
 @media only screen and (max-width: 768px) {
   .budgets__otherlayout {
     grid-template-columns: 1fr;
   }
 
-  /* When the header wraps on mobile the three-dot button ends up on the left.
-     Open the dropdown to the right so it stays on-screen. */
-  .budgets__trackingcard__header .budgets__menu {
-    right: auto;
-    left: 0;
-  }
-
-  .budgets__bycategory__grid {
+.budgets__bycategory__grid {
     grid-template-columns: 1fr;
   }
 

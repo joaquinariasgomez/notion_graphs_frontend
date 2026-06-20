@@ -91,6 +91,26 @@ export function getBudgetSpent(budget) {
   return (budget.spentByCategory || []).reduce((sum, s) => sum + (s.spent || 0), 0);
 }
 
+// Summarise the tracking health of a budget for the compact overview card chip.
+// Returns { label, variant } where variant drives the chip CSS modifier class.
+export function getBudgetCardStatus(budget) {
+    const total = getBudgetTotal(budget);
+    const spent = getBudgetSpent(budget);
+    if (spent > total) {
+        return { label: 'Over budget', variant: 'over' };
+    }
+    const spentMap = {};
+    (budget.spentByCategory || []).forEach((s) => { spentMap[s.category] = s.spent; });
+    const overCount = (budget.categoryAllocations || []).filter(
+        (a) => (spentMap[a.category] || 0) > a.amount
+    ).length;
+    if (overCount > 0) {
+        const plural = overCount === 1 ? '1 category over' : `${overCount} categories over`;
+        return { label: plural, variant: 'warning' };
+    }
+    return { label: 'On track', variant: 'on-track' };
+}
+
 // Color intent for a category progress bar based on spent / budget.
 // >100% over (red), >=85% warning (amber), otherwise the category color.
 export function getSpendBarColor(spent, budget, categoryColor) {
