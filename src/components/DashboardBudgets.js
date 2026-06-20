@@ -9,6 +9,7 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import {
     MONTHS,
     formatEur,
@@ -28,6 +29,8 @@ export default function DashboardBudgets() {
     const [hasNextPage, setHasNextPage] = useState(false);
     const [nextClosedCursor, setNextClosedCursor] = useState(null);
     const [openMenuId, setOpenMenuId] = useState(null);
+    const [closedExpanded, setClosedExpanded] = useState(false);
+    const [closedTotalCount, setClosedTotalCount] = useState(0);
 
     useEffect(() => {
         fetchBudgets();
@@ -65,6 +68,7 @@ export default function DashboardBudgets() {
                 });
                 setHasNextPage(closedResponse.hasNextPage);
                 setNextClosedCursor(closedResponse.nextCursor);
+                setClosedTotalCount(closedResponse.totalCount ?? closedResponse.data.length);
             }
         } catch (error) {
 
@@ -125,6 +129,9 @@ export default function DashboardBudgets() {
             type: actionTypes.DELETE_BUDGET,
             value: budget.id
         });
+        if (getBudgetStatus(budget) === 'closed') {
+            setClosedTotalCount((c) => Math.max(0, c - 1));
+        }
         try {
             deleteBudget(userJWTCookie, budget.id);
         } catch (error) {
@@ -213,63 +220,189 @@ export default function DashboardBudgets() {
         );
     };
 
-    const renderBudgetCard = (budget) => {
-        const status = getBudgetStatus(budget);
+    // ── Upcoming column ──────────────────────────────────────────────────────
+
+    const renderUpcomingRow = (budget) => {
         const total = getBudgetTotal(budget);
         const period = `${MONTHS[budget.month - 1]} ${budget.year}`;
-
-        let badgeLabel, badgeClass, meta, metaClass;
-        if (status === 'closed') {
-            const spent = getBudgetSpent(budget);
-            const under = total - spent;
-            badgeLabel = 'Closed';
-            badgeClass = 'closed';
-            meta = under >= 0 ? `Under by ${formatEur(under)}` : `Over by ${formatEur(-under)}`;
-            metaClass = under >= 0 ? 'positive' : 'negative';
-        } else {
-            badgeLabel = 'Upcoming';
-            badgeClass = 'upcoming';
-            const count = (budget.categoryAllocations || []).length;
-            meta = `${count} ${count === 1 ? 'category' : 'categories'} budgeted`;
-            metaClass = 'muted';
-        }
+        const count = (budget.categoryAllocations || []).length;
+        const meta = `${count} ${count === 1 ? 'category' : 'categories'} budgeted`;
 
         return (
             <div
-                className='budgets__card budgets__card--clickable'
                 key={budget.id}
+                className='budgets__upcomingrow'
                 onClick={() => openBudgetDetails(budget)}
             >
-                <div className='budgets__card__header'>
-                    <span className={`budgets__badge ${badgeClass}`}>{badgeLabel}</span>
-                    {renderCardMenu(budget)}
+                <div className='budgets__upcomingrow__left'>
+                    <div className='budgets__upcomingrow__name'>{budget.name}</div>
+                    <div className='budgets__upcomingrow__sub'>
+                        <span className='budgets__upcomingrow__period'>{period}</span>
+                        <span className='budgets__upcomingrow__meta'>{meta}</span>
+                    </div>
                 </div>
-                <div className='budgets__card__name'>{budget.name}</div>
-                <div className='budgets__card__period'>{period}</div>
-                <div className='budgets__card__total'>{formatEur(total)}</div>
-                <div className={`budgets__card__meta ${metaClass}`}>{meta}</div>
+                <div className='budgets__upcomingrow__right'>
+                    <div className='budgets__upcomingrow__total'>{formatEur(total)}</div>
+                    <div className='budgets__upcomingrow__planned'>planned</div>
+                </div>
+                {renderCardMenu(budget)}
             </div>
         );
     };
 
-    const renderLoadMoreClosedButton = () => {
-        if (hasNextPage && !moreClosedLoading) {
-            return (
-                <div className='budgets__loadmore'>
-                    <button onClick={loadMoreClosedBudgets}>
-                        <p>Load more</p>
-                    </button>
+    const renderUpcomingColumn = (items) => {
+        const n = items.length;
+        return (
+            <div className='budgets__upcomingcard'>
+                <div className='budgets__upcomingcard__header'>
+                    <span className='budgets__upcomingcard__title'>
+                        <span className='budgets__dot budgets__dot--blue' />
+                        Upcoming
+                    </span>
+                    <span className='budgets__upcomingcard__count'>
+                        {n} {n === 1 ? 'budget' : 'budgets'}
+                    </span>
                 </div>
-            );
-        }
-        if (moreClosedLoading) {
-            return (
-                <div className='budgets__loadmore'>
-                    <SyncLoader size={8} color='#909090' />
+                <div className='budgets__upcomingcard__body'>
+                    {items.map(renderUpcomingRow)}
                 </div>
-            );
-        }
+            </div>
+        );
     };
+
+    // ── Closed summary card ──────────────────────────────────────────────────
+
+    const renderClosedSummary = () => {
+        const recent = closedBudgets[0] || null;
+        let recentBlock = null;
+        if (recent) {
+            const total = getBudgetTotal(recent);
+            const spent = getBudgetSpent(recent);
+            const under = total - spent;
+            const recentPeriod = `${MONTHS[recent.month - 1]} ${recent.year}`;
+            const recentMeta = under >= 0
+                ? `Under ${formatEur(under)}`
+                : `Over ${formatEur(-under)}`;
+            const recentMetaClass = under >= 0 ? 'positive' : 'negative';
+
+            recentBlock = (
+                <div className='budgets__closedsummary__recent'>
+                    <div className='budgets__closedsummary__recentlabel'>Most recent</div>
+                    <div className='budgets__closedsummary__recentrow'>
+                        <div className='budgets__closedsummary__recentinfo'>
+                            <div className='budgets__closedsummary__recentname'>{recent.name}</div>
+                            <div className='budgets__closedsummary__recentperiod'>{recentPeriod}</div>
+                        </div>
+                        <span className={`budgets__closedsummary__recentmeta ${recentMetaClass}`}>
+                            {recentMeta}
+                        </span>
+                    </div>
+                </div>
+            );
+        }
+
+        return (
+            <div
+                className={`budgets__closedsummary${closedExpanded ? ' budgets__closedsummary--expanded' : ''}`}
+                onClick={() => setClosedExpanded((v) => !v)}
+                role='button'
+                tabIndex={0}
+                onKeyDown={(e) => e.key === 'Enter' && setClosedExpanded((v) => !v)}
+            >
+                <div className='budgets__closedsummary__top'>
+                    <div>
+                        <div className='budgets__closedsummary__eyebrow'>Closed</div>
+                        <div className='budgets__closedsummary__countrow'>
+                            <span className='budgets__closedsummary__count'>{closedTotalCount}</span>
+                            <span className='budgets__closedsummary__countlabel'>budgets closed</span>
+                        </div>
+                    </div>
+                    <span className={`budgets__closedsummary__chevron${closedExpanded ? ' budgets__closedsummary__chevron--open' : ''}`}>
+                        <KeyboardArrowDownRoundedIcon fontSize='small' />
+                    </span>
+                </div>
+
+                {recentBlock}
+
+                <div className='budgets__closedsummary__togglelabel'>
+                    {closedExpanded ? 'Hide closed budgets' : 'View all closed budgets'}
+                </div>
+            </div>
+        );
+    };
+
+    // ── Closed expanded panel ────────────────────────────────────────────────
+
+    const renderClosedRow = (budget) => {
+        const total = getBudgetTotal(budget);
+        const spent = getBudgetSpent(budget);
+        const under = total - spent;
+        const period = `${MONTHS[budget.month - 1]} ${budget.year}`;
+        const resultLabel = under >= 0
+            ? `Under by ${formatEur(under)}`
+            : `Over by ${formatEur(-under)}`;
+        const resultClass = under >= 0 ? 'positive' : 'negative';
+
+        return (
+            <div
+                key={budget.id}
+                className='budgets__closedrow'
+                onClick={() => openBudgetDetails(budget)}
+            >
+                <span className='budgets__closedrow__name'>{budget.name}</span>
+                <span className='budgets__closedrow__period'>{period}</span>
+                <span className='budgets__closedrow__total'>{formatEur(total)}</span>
+                <span className='budgets__closedrow__result'>
+                    <span className={`budgets__closedrow__pill ${resultClass}`}>{resultLabel}</span>
+                </span>
+                {renderCardMenu(budget)}
+            </div>
+        );
+    };
+
+    const renderClosedPanel = () => {
+        const showing = closedBudgets.length;
+
+        let footer;
+        if (hasNextPage && !moreClosedLoading) {
+            footer = (
+                <button className='budgets__closedpanel__loadmore' onClick={(e) => { e.stopPropagation(); loadMoreClosedBudgets(); }}>
+                    Load more
+                </button>
+            );
+        } else if (moreClosedLoading) {
+            footer = <SyncLoader size={8} color='#909090' />;
+        } else {
+            footer = (
+                <span className='budgets__closedpanel__alldone'>All closed budgets loaded</span>
+            );
+        }
+
+        return (
+            <div className='budgets__closedpanel'>
+                <div className='budgets__closedpanel__head'>
+                    <div className='budgets__closedpanel__headrow'>
+                        <span>Budget</span>
+                        <span>Period</span>
+                        <span className='budgets__closedpanel__headcell--right'>Planned</span>
+                        <span className='budgets__closedpanel__headcell--right'>Result</span>
+                        <span />
+                    </div>
+                </div>
+                <div className='budgets__closedpanel__rows'>
+                    {closedBudgets.map(renderClosedRow)}
+                </div>
+                <div className='budgets__closedpanel__footer'>
+                    <span className='budgets__closedpanel__showing'>
+                        Showing {showing} of {closedTotalCount}
+                    </span>
+                    {footer}
+                </div>
+            </div>
+        );
+    };
+
+    // ── Header ───────────────────────────────────────────────────────────────
 
     const renderHeader = () => (
         <div className='budgets__header'>
@@ -309,35 +442,23 @@ export default function DashboardBudgets() {
 
     const activeBudget = pickActiveBudget(upcomingBudgets);
     const otherUpcoming = upcomingBudgets.filter((b) => b !== activeBudget);
+    const hasOtherUpcoming = otherUpcoming.length > 0;
+    const hasClosed = closedTotalCount > 0;
+    const showOtherSection = hasOtherUpcoming || hasClosed;
 
     return (
         <div className='dashboard__budgets'>
             {renderHeader()}
             {activeBudget && renderTrackingCard(activeBudget)}
 
-            {otherUpcoming.length > 0 && (
-                <>
-                    <div className='budgets__sectionheader'>
-                        <h3>Upcoming budgets</h3>
-                        <span>{otherUpcoming.length} {otherUpcoming.length === 1 ? 'budget' : 'budgets'}</span>
-                    </div>
-                    <div className='budgets__grid budgets__grid--capped'>
-                        {otherUpcoming.map((budget) => renderBudgetCard(budget))}
-                    </div>
-                </>
+            {showOtherSection && (
+                <div className={`budgets__otherlayout${(!hasOtherUpcoming || !hasClosed) ? ' budgets__otherlayout--single' : ''}`}>
+                    {hasOtherUpcoming && renderUpcomingColumn(otherUpcoming)}
+                    {hasClosed && renderClosedSummary()}
+                </div>
             )}
 
-            {closedBudgets.length > 0 && (
-                <>
-                    <div className='budgets__sectionheader budgets__sectionheader--spaced'>
-                        <h3>Closed budgets</h3>
-                    </div>
-                    <div className='budgets__grid'>
-                        {closedBudgets.map((budget) => renderBudgetCard(budget))}
-                    </div>
-                    {renderLoadMoreClosedButton()}
-                </>
-            )}
+            {closedExpanded && renderClosedPanel()}
         </div>
     );
 }
