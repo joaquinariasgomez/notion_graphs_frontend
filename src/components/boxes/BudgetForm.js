@@ -45,6 +45,7 @@ export default function BudgetForm({ mode, initialBudget, onSubmit }) {
     const [year, setYear] = useState(initialBudget?.year || now.getFullYear());
     const [cap, setCap] = useState(initialBudget?.cap != null ? String(initialBudget.cap) : '');
     const [values, setValues] = useState({});    // { [category]: number }
+    const [rawValues, setRawValues] = useState({}); // { [category]: string } — display string while typing
     const [included, setIncluded] = useState({}); // { [category]: bool }
     const [includeExistingExpenses, setIncludeExistingExpenses] = useState(true);
 
@@ -97,9 +98,13 @@ export default function BudgetForm({ mode, initialBudget, onSubmit }) {
                 }
             });
 
+            const initialRawValues = {};
+            mergedCategories.forEach((c) => { initialRawValues[c] = String(initialValues[c] || 0); });
+
             setCategories(mergedCategories);
             setAverages(averagesMap);
             setValues(initialValues);
+            setRawValues(initialRawValues);
             setIncluded(initialIncluded);
         } catch (error) {
 
@@ -137,21 +142,22 @@ export default function BudgetForm({ mode, initialBudget, onSubmit }) {
     };
 
     const handleSliderChange = (category, value) => {
-        setValues((prev) => ({ ...prev, [category]: Number(value) }));
+        const num = Number(value);
+        setValues((prev) => ({ ...prev, [category]: num }));
+        setRawValues((prev) => ({ ...prev, [category]: String(num) }));
     };
 
     const handleValueInputChange = (category, raw) => {
-        const digits = raw.replace(/[^0-9]/g, '');
-        setValues((prev) => ({ ...prev, [category]: digits === '' ? 0 : parseInt(digits, 10) }));
+        const sanitized = raw.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+        setRawValues((prev) => ({ ...prev, [category]: sanitized }));
+        const parsed = sanitized === '' || sanitized === '.' ? 0 : parseFloat(sanitized) || 0;
+        setValues((prev) => ({ ...prev, [category]: parsed }));
     };
 
     const handleValueInputBlur = (category) => {
-        // Only floor at 0 — the user is allowed to enter values above the
-        // slider's derived max (the track will expand to fit).
-        setValues((prev) => ({
-            ...prev,
-            [category]: Math.max(0, prev[category] || 0),
-        }));
+        const normalized = Math.max(0, values[category] || 0);
+        setValues((prev) => ({ ...prev, [category]: normalized }));
+        setRawValues((prev) => ({ ...prev, [category]: String(normalized) }));
     };
 
     const handleToggleCategory = (category) => {
@@ -160,10 +166,14 @@ export default function BudgetForm({ mode, initialBudget, onSubmit }) {
 
     const resetToAverages = () => {
         const resetValues = {};
+        const resetRaw = {};
         categories.forEach((category) => {
-            resetValues[category] = Math.round(averages[category] || 0);
+            const v = Math.round(averages[category] || 0);
+            resetValues[category] = v;
+            resetRaw[category] = String(v);
         });
         setValues(resetValues);
+        setRawValues(resetRaw);
     };
 
     const allSelected = categories.length > 0 && categories.every((c) => isIncluded(c));
@@ -196,6 +206,11 @@ export default function BudgetForm({ mode, initialBudget, onSubmit }) {
             distributed[category] = next;
         });
         setValues(distributed);
+        setRawValues((prev) => {
+            const updated = { ...prev };
+            includedCategories.forEach((c) => { updated[c] = String(distributed[c]); });
+            return updated;
+        });
     };
 
     const canSave = name.trim().length > 0 && allocated > 0;
@@ -302,9 +317,9 @@ export default function BudgetForm({ mode, initialBudget, onSubmit }) {
                                 <span className='createbudgetbox__catvalue__prefix'>€</span>
                                 <input
                                     type='text'
-                                    inputMode='numeric'
+                                    inputMode='decimal'
                                     className='createbudgetbox__catvalueinput'
-                                    value={value}
+                                    value={rawValues[category] ?? String(value)}
                                     onFocus={(e) => e.target.select()}
                                     onChange={(e) => handleValueInputChange(category, e.target.value)}
                                     onBlur={() => handleValueInputBlur(category)}

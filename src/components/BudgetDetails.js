@@ -68,7 +68,9 @@ export default function BudgetDetails({ budget }) {
             <div className='budgets__bycategory'>
                 <div className='budgets__bycategory__title'>By category</div>
                 <div className='budgets__bycategory__grid'>
-                    {(budget.categoryAllocations || []).map((allocation) => {
+                    {[...(budget.categoryAllocations || [])]
+                        .sort((a, b) => (b.amount || 0) - (a.amount || 0))
+                        .map((allocation) => {
                         const catSpent = spentByCategoryMap[allocation.category] || 0;
                         const pct = allocation.amount > 0 ? catSpent / allocation.amount * 100 : 0;
                         const categoryColor = colorMap[allocation.category];
