@@ -10,6 +10,7 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import SyncLoader from "react-spinners/SyncLoader";
 import { registerValueSelectStyle, getCurrentLocation } from '../../utils/Utils';
 import { getExpensesCategories, getIncomesBankaccounts, getIncomesSources, registerValue } from '../../api/RequestUtils';
+import { getTemplatesForValueType } from '../../utils/RegisterTemplates';
 
 export default function RegisterValueBox({ valueType }) {
 
@@ -33,6 +34,9 @@ export default function RegisterValueBox({ valueType }) {
   const [categoriesLoading, setCategoriesLoading] = useState(false);
   const [incomesBankAccountsLoading, setIncomesBankAccountsLoading] = useState(false);
   const [incomesSourcesLoading, setIncomesSourcesLoading] = useState(false);
+
+  // Selected template
+  const [selectedTemplate, setSelectedTemplate] = useState(null);
 
   // Location toggle state
   const [sendLocation, setSendLocation] = useState(true);
@@ -112,6 +116,31 @@ export default function RegisterValueBox({ valueType }) {
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
+  }
+
+  const handleTemplateSelect = (template) => {
+    // Clicking the active template deselects it and clears the pre-filled fields
+    if (selectedTemplate?.id === template.id) {
+      setSelectedTemplate(null);
+      setTitle('');
+      setCategory(null);
+      setIncomeBankAccount(null);
+      setIncomeSource(null);
+      setAmount('');
+      return;
+    }
+
+    setSelectedTemplate(template);
+    setTitle(template.title);
+
+    if (isExpense) {
+      setCategory({ value: template.category, label: template.category });
+    } else {
+      setIncomeBankAccount({ value: template.bankAccount, label: template.bankAccount });
+      setIncomeSource({ value: template.incomeSource, label: template.incomeSource });
+    }
+
+    setAmount(template.amount != null ? String(template.amount) : '');
   }
 
   const handleCategoryChange = (selectedOption) => {
@@ -204,7 +233,7 @@ export default function RegisterValueBox({ valueType }) {
         <div className='registervaluebox__inputgroup'>
           <label>Category</label>
           <div className='registervaluebox__selectcontainer'>
-            {categoriesLoading ? (
+            {categoriesLoading && !selectedTemplate ? (
               <div style={{ display: 'flex', justifyContent: 'center', padding: '12px' }}>
                 <SyncLoader size={8} color='#909090' />
               </div>
@@ -240,7 +269,7 @@ export default function RegisterValueBox({ valueType }) {
           <div className='registervaluebox__inputgroup'>
             <label>Bank Account</label>
             <div className='registervaluebox__selectcontainer'>
-              {incomesBankAccountsLoading ? (
+              {incomesBankAccountsLoading && !selectedTemplate ? (
                 <div style={{ display: 'flex', justifyContent: 'center', padding: '12px' }}>
                   <SyncLoader size={8} color='#909090' />
                 </div>
@@ -272,7 +301,7 @@ export default function RegisterValueBox({ valueType }) {
           <div className='registervaluebox__inputgroup'>
             <label>Income Source</label>
             <div className='registervaluebox__selectcontainer'>
-              {incomesSourcesLoading ? (
+              {incomesSourcesLoading && !selectedTemplate ? (
                 <div style={{ display: 'flex', justifyContent: 'center', padding: '12px' }}>
                   <SyncLoader size={8} color='#909090' />
                 </div>
@@ -335,6 +364,23 @@ export default function RegisterValueBox({ valueType }) {
             {locationError && (
               <span className='registervaluebox__locationerror'>{locationError}</span>
             )}
+
+            {/* Template selector */}
+            <div className='registervaluebox__inputgroup'>
+              <label>Templates</label>
+              <div className='registervaluebox__templates'>
+                {getTemplatesForValueType(valueType).map((template) => (
+                  <button
+                    key={template.id}
+                    className={`registervaluebox__templatechip${selectedTemplate?.id === template.id ? ' selected' : ''}`}
+                    onClick={() => handleTemplateSelect(template)}
+                    type='button'
+                  >
+                    {template.label}
+                  </button>
+                ))}
+              </div>
+            </div>
 
             {/* Title Input */}
             <div className='registervaluebox__inputgroup'>

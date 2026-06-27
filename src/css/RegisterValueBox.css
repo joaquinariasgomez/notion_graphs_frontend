@@ -85,7 +85,7 @@
   padding: 12px 14px;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
-  font-size: 15px;
+  font-size: 16px; /* 16px minimum prevents iOS Safari auto-zoom on focus */
   color: var(--matteblack-color);
   font-family: "Inter", sans-serif;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -291,6 +291,71 @@
   }
 }
 
+/* Template chip row */
+.registervaluebox__templates {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  /* hide scrollbar on webkit but keep it functional */
+  scrollbar-width: thin;
+  scrollbar-color: #d0d0d0 transparent;
+}
+
+.registervaluebox__templates::-webkit-scrollbar {
+  height: 4px;
+}
+
+.registervaluebox__templates::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.registervaluebox__templates::-webkit-scrollbar-thumb {
+  background-color: #d0d0d0;
+  border-radius: 4px;
+}
+
+.registervaluebox__templatechip {
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: 8px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 20px;
+  background-color: white;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
+  color: var(--textp-color);
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.registervaluebox__templatechip:hover {
+  border-color: #c0c0c0;
+  background-color: #f9f9f9;
+}
+
+.registervaluebox__templatechip:active {
+  background-color: rgb(222, 222, 222);
+  border-color: rgb(222, 222, 222);
+}
+
+.registervaluebox__templatechip.selected {
+  border-color: var(--matteblack-color);
+  color: var(--matteblack-color);
+  font-weight: 600;
+}
+
+.registervaluebox__templatechip.selected:hover {
+  border-color: var(--matteblack-color);
+}
+
+.registervaluebox__templatechip.selected:active {
+  background-color: rgb(222, 222, 222);
+  border-color: var(--matteblack-color);
+}
+
 /* Location toggle */
 .registervaluebox__locationtoggle {
   display: flex;
@@ -316,15 +381,34 @@
   margin-top: -8px;
 }
 
-/* Mobile responsive */
+/* Mobile responsive — fullscreen sheet on iPhone */
 @media only screen and (max-width: 600px) {
   .registervaluebox__container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
     min-width: unset;
-    width: 95vw;
+    border-radius: 0;
+    /* Cancel the desktop translate(-50%,-50%) animation end-state */
+    transform: none;
+    animation: none;
   }
 
   .registervaluebox__content {
-    padding: 0 20px 20px 20px;
+    flex: 1;
+    min-height: 0; /* required for a flex child to scroll */
+    overflow-y: auto;
+    width: 100%;
+    padding: 0 22px 32px 22px;
+  }
+
+  .registervaluebox__form {
+    gap: 24px;
   }
 
   .registervaluebox__datetoggle {
