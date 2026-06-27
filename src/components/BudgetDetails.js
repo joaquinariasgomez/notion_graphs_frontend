@@ -7,7 +7,7 @@ import {
     getMonthElapsedFraction,
     getBudgetTotal,
     getBudgetSpent,
-    getSpendBarColor,
+    getCategoryBarView,
 } from '../utils/BudgetUtils';
 
 // Read-only detail body for a budget — shared between the inline tracking card
@@ -72,9 +72,8 @@ export default function BudgetDetails({ budget }) {
                         .sort((a, b) => (b.amount || 0) - (a.amount || 0))
                         .map((allocation) => {
                         const catSpent = spentByCategoryMap[allocation.category] || 0;
-                        const pct = allocation.amount > 0 ? catSpent / allocation.amount * 100 : 0;
                         const categoryColor = colorMap[allocation.category];
-                        const barColor = getSpendBarColor(catSpent, allocation.amount, categoryColor);
+                        const view = getCategoryBarView(catSpent, allocation.amount, categoryColor);
                         return (
                             <div className='budgets__catrow' key={allocation.category}>
                                 <div className='budgets__catrow__top'>
@@ -82,15 +81,16 @@ export default function BudgetDetails({ budget }) {
                                         <span className='budgets__catrow__swatch' style={{ backgroundColor: categoryColor }} />
                                         {allocation.category}
                                     </span>
-                                    <span className='budgets__catrow__amount' style={{ color: barColor === categoryColor ? '#666' : barColor }}>
+                                    <span className='budgets__catrow__amount' style={{ color: view.labelColor }}>
                                         {formatEur(catSpent)} / {formatEur(allocation.amount)}
                                     </span>
                                 </div>
                                 <div className='budgets__catrow__bar'>
-                                    <div
-                                        className='budgets__catrow__barfill'
-                                        style={{ width: Math.min(100, pct) + '%', backgroundColor: barColor }}
-                                    />
+                                    <div className='budgets__catrow__rail' style={view.railStyle}>
+                                        <div className='budgets__catrow__barfill' style={view.fillStyle} />
+                                        <div className='budgets__catrow__barover' style={view.overStyle} />
+                                    </div>
+                                    <div className='budgets__catrow__tick' style={view.tickStyle} />
                                 </div>
                             </div>
                         );

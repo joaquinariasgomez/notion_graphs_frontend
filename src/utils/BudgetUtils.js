@@ -111,12 +111,42 @@ export function getBudgetCardStatus(budget) {
     return { label: 'On track', variant: 'on-track' };
 }
 
-// Color intent for a category progress bar based on spent / budget.
-// >100% over (red), >=85% warning (amber), otherwise the category color.
-export function getSpendBarColor(spent, budget, categoryColor) {
-  if (budget <= 0) return categoryColor;
-  const pct = spent / budget * 100;
-  if (pct > 100) return '#C32D38';
-  if (pct >= 85) return '#C48900';
-  return categoryColor;
+// Fixed-budget-line bar view for a category row.
+// The budget line is always at ANCHOR% of the track; spending fills toward it and
+// overspend spills into a red zone beyond. Returns inline-style objects for the
+// rail, fill, overflow element, tick mark, and label text color.
+const ANCHOR = 78;      // budget line position (% of track width)
+const OVERZONE = 22;    // overflow zone width reserved past the line (%)
+const OVER_FULL = 0.8;  // overspend of +80% fills the entire overflow zone
+
+export function getCategoryBarView(spent, budget, color) {
+  const unbudgeted = budget <= 0 && spent > 0;
+  if (unbudgeted) {
+    return {
+      labelColor: '#C32D38',
+      railStyle: { background: '#FCEBEA' },
+      fillStyle: { inset: 0, backgroundImage: 'repeating-linear-gradient(45deg,#C32D38 0 5px,#E0535C 5px 10px)' },
+      overStyle: { display: 'none' },
+      tickStyle: { left: '0', background: '#C32D38', opacity: 0.7 },
+    };
+  }
+  const trackBg = `linear-gradient(90deg,#E7E7E7 0 ${ANCHOR}%,#FCEBEA ${ANCHOR}% 100%)`;
+  if (budget > 0 && spent > budget) {
+    const overW = Math.min(OVERZONE, (spent - budget) / budget / OVER_FULL * OVERZONE);
+    return {
+      labelColor: '#C32D38',
+      railStyle: { background: trackBg },
+      fillStyle: { width: ANCHOR + '%', background: color },
+      overStyle: { left: ANCHOR + '%', width: overW + '%' },
+      tickStyle: { left: ANCHOR + '%', background: '#0E0E0E', opacity: 0.55, transform: 'translateX(-50%)' },
+    };
+  }
+  const w = budget > 0 ? Math.min(ANCHOR, spent / budget * ANCHOR) : 0;
+  return {
+    labelColor: '#666',
+    railStyle: { background: trackBg },
+    fillStyle: { width: w + '%', background: color },
+    overStyle: { display: 'none' },
+    tickStyle: { left: ANCHOR + '%', background: '#0E0E0E', opacity: 0.5, transform: 'translateX(-50%)' },
+  };
 }

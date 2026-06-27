@@ -366,16 +366,38 @@
 }
 
 .budgets__catrow__bar {
-  height: 6px;
-  background-color: #e7e7e7;
+  position: relative;
+  height: 8px;
+}
+
+.budgets__catrow__rail {
+  position: absolute;
+  inset: 0;
   border-radius: 9999px;
   overflow: hidden;
 }
 
 .budgets__catrow__barfill {
-  height: 100%;
-  border-radius: 9999px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
   transition: width 0.3s ease;
+}
+
+.budgets__catrow__barover {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: #C32D38;
+  transition: width 0.3s ease;
+}
+
+.budgets__catrow__tick {
+  position: absolute;
+  top: -2px;
+  width: 1.5px;
+  height: 12px;
 }
 
 /* ===== Other budgets — two-column layout ===== */
