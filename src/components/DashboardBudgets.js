@@ -163,7 +163,11 @@ export default function DashboardBudgets() {
             setMenuPosition(null);
         } else {
             const rect = e.currentTarget.getBoundingClientRect();
-            setMenuPosition({ top: rect.bottom + 6, right: window.innerWidth - rect.right });
+            const menuMinWidth = 168;
+            const safeMargin = 8;
+            const rightValue = window.innerWidth - rect.right;
+            const safeRight = Math.max(0, Math.min(rightValue, window.innerWidth - menuMinWidth - safeMargin));
+            setMenuPosition({ top: rect.bottom + 6, right: safeRight });
             setOpenMenuId(budget.id);
         }
     };
@@ -240,7 +244,7 @@ export default function DashboardBudgets() {
                             className='budgets__overviewcard__dot'
                             style={{ backgroundColor: dot.bg, boxShadow: `0 0 0 3px ${dot.ring}` }}
                         />
-                        <div>
+                        <div style={{ minWidth: 0, overflow: 'hidden' }}>
                             <div className='budgets__overviewcard__name'>{budget.name}</div>
                             <div className='budgets__overviewcard__period'>
                                 {MONTHS[budget.month - 1]} {budget.year}
