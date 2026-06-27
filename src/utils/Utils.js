@@ -80,6 +80,41 @@ export const registerValueSelectStyle = {
   }),
 };
 
+export async function getCurrentLocation() {
+  // Step 1: Get GPS coordinates from the browser
+  const position = await new Promise((resolve, reject) => {
+    if (!navigator.geolocation) {
+      reject(new Error('Geolocation is not supported by this browser.'));
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(resolve, reject, {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 60000,
+    });
+  });
+
+  const { latitude, longitude } = position.coords;
+
+  // Step 2: Reverse geocode via OpenStreetMap Nominatim (no API key required)
+  const geocodeUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`;
+  const geocodeResponse = await fetch(geocodeUrl, {
+    headers: { 'Accept-Language': 'en' },
+  });
+
+  if (!geocodeResponse.ok) {
+    throw new Error('Failed to fetch location details.');
+  }
+
+  const data = await geocodeResponse.json();
+
+  // Step 3: Map the Nominatim response to our location shape
+  const name = data.name || data.display_name?.split(',')[0]?.trim() || 'Unknown location';
+  const address = data.display_name || 'Unknown address';
+
+  return { name, address, latitude, longitude };
+}
+
 export function renderUserImage(userSessionDetails) {
 
   const pictureUrl = userSessionDetails.pictureUrl;

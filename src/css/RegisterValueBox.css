@@ -291,6 +291,31 @@
   }
 }
 
+/* Location toggle */
+.registervaluebox__locationtoggle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.registervaluebox__locationtoggle .toggle-switch {
+  flex-shrink: 0;
+}
+
+.registervaluebox__locationwarning {
+  font-size: 13px;
+  color: var(--textp-color);
+  line-height: 1.4;
+}
+
+.registervaluebox__locationerror {
+  font-size: 13px;
+  color: #d32f2f;
+  line-height: 1.4;
+  margin-top: -8px;
+}
+
 /* Mobile responsive */
 @media only screen and (max-width: 600px) {
   .registervaluebox__container {

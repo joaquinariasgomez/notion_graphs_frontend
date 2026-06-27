@@ -8,7 +8,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import ClipLoader from 'react-spinners/ClipLoader';
 import SyncLoader from "react-spinners/SyncLoader";
-import { registerValueSelectStyle } from '../../utils/Utils';
+import { registerValueSelectStyle, getCurrentLocation } from '../../utils/Utils';
 import { getExpensesCategories, getIncomesBankaccounts, getIncomesSources, registerValue } from '../../api/RequestUtils';
 
 export default function RegisterValueBox({ valueType }) {
@@ -33,6 +33,10 @@ export default function RegisterValueBox({ valueType }) {
   const [categoriesLoading, setCategoriesLoading] = useState(false);
   const [incomesBankAccountsLoading, setIncomesBankAccountsLoading] = useState(false);
   const [incomesSourcesLoading, setIncomesSourcesLoading] = useState(false);
+
+  // Location toggle state
+  const [sendLocation, setSendLocation] = useState(true);
+  const [locationError, setLocationError] = useState(null);
 
   // Submit state
   const [isRegistering, setIsRegistering] = useState(false);
@@ -154,9 +158,22 @@ export default function RegisterValueBox({ valueType }) {
   const handleSubmit = async () => {
     if (!isFormValid()) return;
 
-    try {
-      setIsRegistering(true);
+    setIsRegistering(true);
+    setLocationError(null);
 
+    // Fetch location before building the request (blocks submit if it fails)
+    let location = null;
+    if (sendLocation) {
+      try {
+        location = await getCurrentLocation();
+      } catch (error) {
+        setLocationError('Could not get your location. Enable location access or turn off the location toggle.');
+        setIsRegistering(false);
+        return;
+      }
+    }
+
+    try {
       const request = {
         valueType: isExpense ? 'EXPENSE' : 'INCOME',
         title: title.trim(),
@@ -164,7 +181,8 @@ export default function RegisterValueBox({ valueType }) {
         incomeBankAccount: incomeBankAccount?.value ?? null,
         incomeSource: incomeSource?.value ?? null,
         amount: parseFloat(amount),
-        date: selectedDate.toISOString().split('T')[0]
+        date: selectedDate.toISOString().split('T')[0],
+        location
       };
 
       await registerValue(userJWTCookie, request);
@@ -298,6 +316,26 @@ export default function RegisterValueBox({ valueType }) {
 
         <div className='registervaluebox__content'>
           <div className='registervaluebox__form'>
+            {/* Location toggle */}
+            <div className='registervaluebox__locationtoggle'>
+              <label className='toggle-switch'>
+                <input
+                  type='checkbox'
+                  checked={sendLocation}
+                  onChange={(e) => { setSendLocation(e.target.checked); setLocationError(null); }}
+                />
+                <span className='slider'></span>
+              </label>
+              <span className='registervaluebox__locationwarning'>
+                {sendLocation
+                  ? `Location will be attached to this ${isExpense ? 'expense' : 'income'}.`
+                  : `Location won't be attached to this ${isExpense ? 'expense' : 'income'}.`}
+              </span>
+            </div>
+            {locationError && (
+              <span className='registervaluebox__locationerror'>{locationError}</span>
+            )}
+
             {/* Title Input */}
             <div className='registervaluebox__inputgroup'>
               <label>Title</label>
