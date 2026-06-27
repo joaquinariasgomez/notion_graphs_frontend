@@ -42,6 +42,11 @@ export const customStyleForSelectPlacement = {
     ...provided,
     padding: '2px 4px', // Keep it consistent with the clear indicator
   }),
+  input: (provided) => ({
+    ...provided,
+    fontSize: '16px', /* 16px minimum prevents iOS Safari auto-zoom on focus */
+    fontFamily: '"Inter", sans-serif',
+  }),
 };
 
 // Style for RegisterValueBox selects - with smaller selected value text
