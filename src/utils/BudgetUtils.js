@@ -119,34 +119,44 @@ const ANCHOR = 78;      // budget line position (% of track width)
 const OVERZONE = 22;    // overflow zone width reserved past the line (%)
 const OVER_FULL = 0.8;  // overspend of +80% fills the entire overflow zone
 
-export function getCategoryBarView(spent, budget, color) {
-  const unbudgeted = budget <= 0 && spent > 0;
-  if (unbudgeted) {
+export function getCategoryBarView(spent, budget, color, anyOver = false) {
+  if (anyOver) {
+    const unbudgeted = budget <= 0 && spent > 0;
+    if (unbudgeted) {
+      return {
+        labelColor: '#C32D38',
+        railStyle: { background: '#FCEBEA' },
+        fillStyle: { inset: 0, backgroundImage: 'repeating-linear-gradient(45deg,#C32D38 0 5px,#E0535C 5px 10px)' },
+        overStyle: { display: 'none' },
+        tickStyle: { left: '0', background: '#C32D38', opacity: 0.7 },
+      };
+    }
+    const trackBg = `linear-gradient(90deg,#E7E7E7 0 ${ANCHOR}%,#FCEBEA ${ANCHOR}% 100%)`;
+    if (budget > 0 && spent > budget) {
+      const overW = Math.min(OVERZONE, (spent - budget) / budget / OVER_FULL * OVERZONE);
+      return {
+        labelColor: '#C32D38',
+        railStyle: { background: trackBg },
+        fillStyle: { width: ANCHOR + '%', background: color },
+        overStyle: { left: ANCHOR + '%', width: overW + '%' },
+        tickStyle: { left: ANCHOR + '%', background: '#0E0E0E', opacity: 0.55, transform: 'translateX(-50%)' },
+      };
+    }
+    const w = budget > 0 ? Math.min(ANCHOR, spent / budget * ANCHOR) : 0;
     return {
-      labelColor: '#C32D38',
-      railStyle: { background: '#FCEBEA' },
-      fillStyle: { inset: 0, backgroundImage: 'repeating-linear-gradient(45deg,#C32D38 0 5px,#E0535C 5px 10px)' },
+      labelColor: '#666',
+      railStyle: { background: '#E7E7E7' },
+      fillStyle: { width: w + '%', background: color },
       overStyle: { display: 'none' },
-      tickStyle: { left: '0', background: '#C32D38', opacity: 0.7 },
+      tickStyle: { left: ANCHOR + '%', background: '#0E0E0E', opacity: 0.5, transform: 'translateX(-50%)' },
     };
   }
-  const trackBg = `linear-gradient(90deg,#E7E7E7 0 ${ANCHOR}%,#FCEBEA ${ANCHOR}% 100%)`;
-  if (budget > 0 && spent > budget) {
-    const overW = Math.min(OVERZONE, (spent - budget) / budget / OVER_FULL * OVERZONE);
-    return {
-      labelColor: '#C32D38',
-      railStyle: { background: trackBg },
-      fillStyle: { width: ANCHOR + '%', background: color },
-      overStyle: { left: ANCHOR + '%', width: overW + '%' },
-      tickStyle: { left: ANCHOR + '%', background: '#0E0E0E', opacity: 0.55, transform: 'translateX(-50%)' },
-    };
-  }
-  const w = budget > 0 ? Math.min(ANCHOR, spent / budget * ANCHOR) : 0;
+  const pct = budget > 0 ? Math.min(100, spent / budget * 100) : 0;
   return {
     labelColor: '#666',
-    railStyle: { background: trackBg },
-    fillStyle: { width: w + '%', background: color },
+    railStyle: { background: '#E7E7E7' },
+    fillStyle: { width: pct + '%', background: color },
     overStyle: { display: 'none' },
-    tickStyle: { left: ANCHOR + '%', background: '#0E0E0E', opacity: 0.5, transform: 'translateX(-50%)' },
+    tickStyle: { display: 'none' },
   };
 }

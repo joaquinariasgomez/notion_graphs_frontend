@@ -29,6 +29,12 @@ export default function BudgetDetails({ budget }) {
     const spentByCategoryMap = {};
     (budget.spentByCategory || []).forEach((s) => { spentByCategoryMap[s.category] = s.spent; });
 
+    const sortedAllocations = [...(budget.categoryAllocations || [])].sort((a, b) => (b.amount || 0) - (a.amount || 0));
+    const anyOver = sortedAllocations.some((a) => {
+        const s = spentByCategoryMap[a.category] || 0;
+        return s > a.amount || (a.amount <= 0 && s > 0);
+    });
+
     return (
         <>
             <div className='budgets__stats'>
@@ -68,12 +74,10 @@ export default function BudgetDetails({ budget }) {
             <div className='budgets__bycategory'>
                 <div className='budgets__bycategory__title'>By category</div>
                 <div className='budgets__bycategory__grid'>
-                    {[...(budget.categoryAllocations || [])]
-                        .sort((a, b) => (b.amount || 0) - (a.amount || 0))
-                        .map((allocation) => {
+                    {sortedAllocations.map((allocation) => {
                         const catSpent = spentByCategoryMap[allocation.category] || 0;
                         const categoryColor = colorMap[allocation.category];
-                        const view = getCategoryBarView(catSpent, allocation.amount, categoryColor);
+                        const view = getCategoryBarView(catSpent, allocation.amount, categoryColor, anyOver);
                         return (
                             <div className='budgets__catrow' key={allocation.category}>
                                 <div className='budgets__catrow__top'>
