@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import BoxManager from '../components/boxes/BoxManager';
 import CreateGraphButton from '../components/CreateGraphButton';
 import DashboardGraphs from '../components/DashboardGraphs';
@@ -16,6 +17,9 @@ function DashboardPage() {
   // Context
   const [{ userJWTCookie, templateConnectedToIntegrationData, billingGraphCountData, billingPlan }, dispatch] = useGlobalStateValue();
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const deepLinkHandledRef = useRef(false);
+
   const [integrationConnectionLoading, setIntegrationConnectionLoading] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState('expenses');
@@ -25,6 +29,34 @@ function DashboardPage() {
     fetchBillingGraphCount();
     fetchBillingPlan();
   }, []);
+
+  // Deep-link: open RegisterValueBox directly when ?register-expense or ?register-income is present
+  useEffect(() => {
+    if (deepLinkHandledRef.current) return;
+    if (integrationConnectionLoading) return;
+    if (!templateConnectedToIntegrationData?.hasTemplateConnectedToIntegration) return;
+
+    let valueType = null;
+    if (searchParams.has('register-expense')) {
+      valueType = 'expense';
+    } else if (searchParams.has('register-income')) {
+      valueType = 'income';
+    }
+    if (!valueType) return;
+
+    deepLinkHandledRef.current = true;
+
+    dispatch({
+      type: actionTypes.SET_ACTIVE_BOX,
+      value: { type: BOX_TYPES.REGISTER_VALUE, data: { valueType } }
+    });
+
+    // Strip the param from the URL so a refresh won't reopen the box
+    const next = new URLSearchParams(searchParams);
+    next.delete('register-expense');
+    next.delete('register-income');
+    setSearchParams(next, { replace: true });
+  }, [integrationConnectionLoading, templateConnectedToIntegrationData, searchParams]);
 
   // Handle scroll to shrink header
   useEffect(() => {

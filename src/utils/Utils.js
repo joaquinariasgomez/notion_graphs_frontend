@@ -78,6 +78,11 @@ export const registerValueSelectStyle = {
     fontSize: '14px',
     fontFamily: '"Inter", sans-serif',
   }),
+  input: (provided) => ({
+    ...provided,
+    fontSize: '16px', /* 16px minimum prevents iOS Safari auto-zoom on focus */
+    fontFamily: '"Inter", sans-serif',
+  }),
 };
 
 export async function getCurrentLocation() {
