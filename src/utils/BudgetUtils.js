@@ -70,9 +70,9 @@ export function getBudgetStatus(budget, now = new Date()) {
 }
 
 // Days remaining in a budget's month (only meaningful while tracking).
-export function getDaysLeftInMonth(budget, now = new Date()) {
+export function getRemainingDaysInMonth(budget, now = new Date()) {
   const lastDay = new Date(budget.year, budget.month, 0).getDate(); // month is 1-12
-  return Math.max(0, lastDay - now.getDate());
+  return Math.max(0, lastDay - now.getDate() + 1);
 }
 
 // Fraction (0-1) of the budget's month that has elapsed.

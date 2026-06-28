@@ -3,7 +3,7 @@ import {
     formatEur,
     buildCategoryColorMap,
     getBudgetStatus,
-    getDaysLeftInMonth,
+    getRemainingDaysInMonth,
     getMonthElapsedFraction,
     getBudgetTotal,
     getBudgetSpent,
@@ -22,7 +22,7 @@ export default function BudgetDetails({ budget }) {
     const remaining = total - spent;
     const status = getBudgetStatus(budget);
     const isTracking = status === 'tracking';
-    const daysLeft = getDaysLeftInMonth(budget);
+    const daysLeft = getRemainingDaysInMonth(budget);
     const usedPct = total > 0 ? Math.round(spent / total * 100) : 0;
     const elapsedPct = Math.round(getMonthElapsedFraction(budget) * 100);
 

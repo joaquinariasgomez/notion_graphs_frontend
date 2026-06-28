@@ -17,7 +17,7 @@ import {
     getBudgetTotal,
     getBudgetSpent,
     getBudgetCardStatus,
-    getDaysLeftInMonth,
+    getRemainingDaysInMonth,
 } from "../utils/BudgetUtils";
 import { getRelativeTimeFromTimestamp } from "../utils/DateUtils";
 
@@ -224,7 +224,7 @@ export default function DashboardBudgets() {
         const total = getBudgetTotal(budget);
         const spent = getBudgetSpent(budget);
         const pct = total > 0 ? Math.round(spent / total * 100) : 0;
-        const daysLeft = getDaysLeftInMonth(budget);
+        const daysLeft = getRemainingDaysInMonth(budget);
         const barFillColor = spent > total ? '#C32D38' : 'var(--matteblack-color)';
 
         const { label: chipLabel, variant: chipVariant } = isFallback
