@@ -13,7 +13,7 @@ export const EXPENSE_TEMPLATES = [
 ];
 
 export const INCOME_TEMPLATES = [
-  { id: 'squarespace', label: 'Squarespace', title: 'Squarespace’s payroll', bankAccount: 'ActivoBank', incomeSource: 'Squrespace', amount: null },
+  { id: 'squarespace', label: 'Squarespace', title: 'Squarespace’s payroll', bankAccount: 'ActivoBank', incomeSource: 'Squarespace', amount: null },
   { id: 'meal', label: 'Meal', title: 'Meal top up', bankAccount: 'Coverflex Meal', incomeSource: 'Squarespace', amount: null },
   { id: 'benefits', label: 'Benefits', title: 'Benefits top up', bankAccount: 'Coverflex Benefits', incomeSource: 'Squarespace', amount: 250 },
 ];
