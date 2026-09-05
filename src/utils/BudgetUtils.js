@@ -88,27 +88,37 @@ export function getBudgetTotal(budget) {
 
 // Total spent across a budget's tracked categories.
 export function getBudgetSpent(budget) {
-  return (budget.spentByCategory || []).reduce((sum, s) => sum + (s.spent || 0), 0);
+  const allocatedCategories = new Set(
+    (budget.categoryAllocations || [])
+      .filter(a => a.amount !== null)
+      .map(a => a.category)
+  );
+
+  return (budget.spentByCategory || []).reduce(
+    (sum, s) =>
+      allocatedCategories.has(s.category)
+        ? sum + (s.spent || 0)
+        : sum,
+    0
+  );
 }
 
 // Summarise the tracking health of a budget for the compact overview card chip.
 // Returns { label, variant } where variant drives the chip CSS modifier class.
 export function getBudgetCardStatus(budget) {
-    const total = getBudgetTotal(budget);
-    const spent = getBudgetSpent(budget);
-    if (spent > total) {
-        return { label: 'Over budget', variant: 'over' };
-    }
-    const spentMap = {};
-    (budget.spentByCategory || []).forEach((s) => { spentMap[s.category] = s.spent; });
-    const overCount = (budget.categoryAllocations || []).filter(
-        (a) => (spentMap[a.category] || 0) > a.amount
-    ).length;
-    if (overCount > 0) {
-        const plural = overCount === 1 ? '1 category over' : `${overCount} categories over`;
-        return { label: plural, variant: 'warning' };
-    }
-    return { label: 'On track', variant: 'on-track' };
+  const total = getBudgetTotal(budget);
+  const spent = getBudgetSpent(budget);
+  if (spent > total) {
+    return { label: 'Over budget', variant: 'over' };
+  }
+  const spentMap = {};
+  (budget.spentByCategory || []).forEach((s) => { spentMap[s.category] = s.spent; });
+  const overCount = (budget.categoryAllocations || []).filter((a) => a.amount !== null && (spentMap[a.category] || 0) > a.amount).length;
+  if (overCount > 0) {
+    const plural = overCount === 1 ? '1 category over' : `${overCount} categories over`;
+    return { label: plural, variant: 'warning' };
+  }
+  return { label: 'On track', variant: 'on-track' };
 }
 
 // Fixed-budget-line bar view for a category row.
