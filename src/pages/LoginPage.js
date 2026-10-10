@@ -14,10 +14,12 @@ function LoginPage() {
   const navigate = useNavigate();
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [showFirstTimeModal, setShowFirstTimeModal] = useState(false);
+  const [loginErrorMessage, setLoginErrorMessage] = useState('');
 
   const handleGoogleLoginSuccess = async (credentialResponse) => {
     try {
       setIsLoggingIn(true);
+      setLoginErrorMessage('');
       const googleTokenBody = JSON.stringify(
         {
           "token": credentialResponse.credential
@@ -41,7 +43,11 @@ function LoginPage() {
         }
       }
     } catch (error) {
-      // TODO JAQUIN: do something
+      if (error.response && error.response.status === 401) {
+        setLoginErrorMessage('Sign ups are currently closed and only reserved for certain accounts.\nPlease contact Customer Support to add you to the waitlist');
+      } else {
+        console.error('Google login failed', error);
+      }
     } finally {
       setIsLoggingIn(false);
     }
@@ -98,6 +104,14 @@ function LoginPage() {
               <p className="login-subtitle">Sign in to access your dashboard</p>
             </div>
 
+            {loginErrorMessage && (
+              <div className="login-error-message" role="alert">
+                {loginErrorMessage.split('\n').map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+              </div>
+            )}
+
             <div className="login-buttons">
               <div className="google-login-wrapper">
                 <GoogleLogin
@@ -131,4 +145,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-
